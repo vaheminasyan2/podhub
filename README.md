@@ -1,3 +1,131 @@
+**Project Title: PodHub - s**ocial Media site for Podcast listeners.
+
+**Team Members:** Curtis, Meri, Vahe, Joseph, Lia, Carson
+
+**Project Description:** Create a Twitter-like site for sharing podcasts/pod episodes.
+
+**General Idea:**
+
+Users share posts containing a description/reason for sharing, a podcast thumbnail image, & standard social media actions (comment, like, share), plus a built-in audio player (which possibly supports comments at specific timestamps).
+
+**Target audience:** General public, podcasts listeners.
+
+**Problem:** People like sharing podcasts but other social media sites are awkward/unfit places to do so.
+
+**Solution to the problem (goal):** A social media site like twitter but focused specifically on podcasts, where sharing podcasts is seamless -- with features designed to promote discovering, discussing, and listening to podcasts without leaving the site.
+
+1.  2.  3.  4.  5.  6.  
+
+**User stories**:
+
+-   US1: As a user, I want to **search** for any podcasts/pod episodes on the site so that I can add it to my favorites, listen to, share with others
+
+-   US2: As a user, I want to **add podcasts/pod episodes to my favorites** so that I can have them in one place
+
+-   US3: As a user, I want to **share** them with other users of the site, so that I can show off the podcasts/pod episodes I listen to
+
+-   US4: As a user, I want to **see** what podcasts/ pod episodes other users listen to, so that I can discover new podcasts/pod episodes from people I follow to
+
+-   US5: As a user, I want to **discuss**/**comment** on post podcast/ pod episode, so that I can share my thoughts and hear what other think about it
+
+-   US6: As a user, I want to **like** posts, so that I can share my impressions
+
+-   US7: As a user, I want to **listen** to the podcast episode not leaving the site, so that I can have one-stop place for sharing and listening podcasts
+
+7.  8.  **Similar sites:** https://overcast.fm https://twitter.com
+
+9.  10. 11. 12. 13. 
+
+**GitHub best practices and** **guidance:**
+
+1.  Checkout the master branch using **git checkout master**
+
+2.  3.  Update your local repo with the latest changes using **git pull origin master** **.**
+
+4.  5.  Create and checkout a new branch using **git checkout -b \<your-branch-name\>**
+
+6.  Always include your initials in your branch name followed by the functionality/feature you're working one, example: **vm-userAuthentication**
+
+7.  Run **git add -A**
+
+8.  Run **git commit -m \"descriptive message here\"**
+
+9.  Push these changes back up to GitHub using **git push origin \<your-branch-name\>**
+
+10. Navigate to your repository in GitHub and click the green button to **\"create a pull request\"**
+
+11. Once code is reviewed by at least one reviewer **"merge** **pull request"**
+
+-   -   
+
+<!-- -->
+
+-   -   -   
+
+**Milestones:**
+
+-   March 16 -- Plan, Design, and Research
+
+-   March 23 -- Ready MVP (Working App!), Mini-Presentation
+
+-   March 30 -- Project Polish, Functionality Push, Final Plan
+
+-   April 6 -- Presentation Time!
+
+**Responsibilities:**
+
+-   Curtis & Vahe: React
+
+-   Meri & Lia: Back End
+
+-   Carson & Joseph: UI and APIs
+
+**Technology used:**
+
+-   Node.js
+
+-   JavaScript
+
+-   React.js
+
+-   jQuery
+
+-   Bootstrap
+
+-   Heroku
+
+-   MySQl
+
+<!-- -->
+
+-   -   
+
+<!-- -->
+
+-   -   -   -   
+
+-   -   -   -   -   -   -   -   -   -   -   -   -   -   
+
+-   -   -   -   -   -   -   
+
+<!-- -->
+
+-   -   
+
+<!-- -->
+
+-   -   -   -   -   -   -   -   -   -   -   
+
+<!-- -->
+
+-   -   -   -
+
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
