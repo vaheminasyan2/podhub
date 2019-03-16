@@ -1,5 +1,5 @@
 # PodHub
-### Social media site for Podcast listeners
+Social media site for Podcast listeners
 
 ## Overview
 **Project Description:** Create a Twitter-like site for sharing podcasts/pod episodes.
