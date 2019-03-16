@@ -28,7 +28,7 @@ Social media site for Podcast listeners
 **Resources and Roles:**
 - [User Stories](https://github.com/vaheminasyan2/podhub/issues/4)
 - [Milestones](https://github.com/vaheminasyan2/podhub/issues/5)
-- [Database structure]()
+- [Data model](client/src/images/dataModel.bmp)
 - [Wireframes]()
 - Contributors: 
   - Curtis & Vahe: React
