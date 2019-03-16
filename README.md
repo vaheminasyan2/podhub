@@ -1,6 +1,7 @@
 # PodHub
 ### Social media site for Podcast listeners
 
+## Overview
 **Project Description:** Create a Twitter-like site for sharing podcasts/pod episodes.
 
 **General Idea:** Users share posts containing a description/reason for sharing, a podcast thumbnail image, & standard social media actions (comment, like, share), plus a built-in audio player (which possibly supports comments at specific timestamps).
@@ -15,7 +16,16 @@
 - https://overcast.fm 
 - https://twitter.com
 
-**User stories**:
+**Technology used:**
+-   Node.js
+-   JavaScript
+-   React.js
+-   jQuery
+-   Bootstrap
+-   Heroku
+-   MySQl
+
+## User Stories
 -   US1: As a user, I want to **search** for any podcasts/pod episodes on the site so that I can add it to my favorites, listen to, share with others
 
 -   US2: As a user, I want to **add podcasts/pod episodes to my favorites** so that I can have them in one place
@@ -30,8 +40,19 @@
 
 -   US7: As a user, I want to **listen** to the podcast episode not leaving the site, so that I can have one-stop place for sharing and listening podcasts
 
-**GitHub best practices and guidance:**
+## Project execution
+**Milestones:**
+-[] March 16 -- Plan, Design, and Research
+-[] March 23 -- Ready MVP (Working App!), Mini-Presentation
+-[] March 30 -- Project Polish, Functionality Push, Final Plan
+-[] April 6 -- Presentation Time!
 
+**Responsibilities:**
+-   Curtis & Vahe: React
+-   Meri & Lia: Back End
+-   Carson & Joseph: UI and APIs
+
+## GitHub best practices and guidance:
 1.  Checkout the master branch using `git checkout master`
 2.  Update your local repo with the latest changes using `git pull origin master`
 3.  Create and checkout a new branch using `git checkout -b \<your-branch-name\>`
@@ -41,33 +62,6 @@
 7.  Push these changes back up to GitHub using `git push origin \<your-branch-name\>`
 8.  Navigate to your repository in GitHub and click the green button to `\"create a pull request\"`
 9. Once code is reviewed by at least one reviewer `"merge** **pull request"`
-
-**Milestones:**
-
-- [] March 16 -- Plan, Design, and Research
-
-- [] March 23 -- Ready MVP (Working App!), Mini-Presentation
-
-- [] March 30 -- Project Polish, Functionality Push, Final Plan
-
-- [] April 6 -- Presentation Time!
-
-**Responsibilities:**
-
--   Curtis & Vahe: React
--   Meri & Lia: Back End
--   Carson & Joseph: UI and APIs
-
-**Technology used:**
-
--   Node.js
--   JavaScript
--   React.js
--   jQuery
--   Bootstrap
--   Heroku
--   MySQl
-
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
