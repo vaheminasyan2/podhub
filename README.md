@@ -25,20 +25,10 @@ Social media site for Podcast listeners
 -   Heroku
 -   MySQl
 
-## User Stories
--   US1: As a user, I want to **search** for any podcasts/pod episodes on the site so that I can add it to my favorites, listen to, share with others
+**User Stories:**
 
--   US2: As a user, I want to **add podcasts/pod episodes to my favorites** so that I can have them in one place
+Click this [link](https://github.com/vaheminasyan2/podhub/issues/4) to view. 
 
--   US3: As a user, I want to **share** them with other users of the site, so that I can show off the podcasts/pod episodes I listen to
-
--   US4: As a user, I want to **see** what podcasts/ pod episodes other users listen to, so that I can discover new podcasts/pod episodes from people I follow to
-
--   US5: As a user, I want to **discuss**/**comment** on post podcast/ pod episode, so that I can share my thoughts and hear what other think about it
-
--   US6: As a user, I want to **like** posts, so that I can share my impressions
-
--   US7: As a user, I want to **listen** to the podcast episode not leaving the site, so that I can have one-stop place for sharing and listening podcasts
 
 ## Project execution
 **Milestones:**
