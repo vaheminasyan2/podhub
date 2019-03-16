@@ -29,7 +29,7 @@ Social media site for Podcast listeners
 - [User Stories](https://github.com/vaheminasyan2/podhub/issues/4)
 - [Milestones](https://github.com/vaheminasyan2/podhub/issues/5)
 - [Data model](client/src/images/dataModel.PNG)
-- [Wireframes]()
+- [Wireframes](https://1drv.ms/p/s!AkMTYKGdBmB89j5d6o3VEjW0GOC_)
 - Contributors: 
   - Curtis & Vahe: React
   - Meri & Lia: Back End
