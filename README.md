@@ -7,16 +7,15 @@
 
 **Target audience:** General public, podcasts listeners.
 
-**Problem:** People like sharing podcasts but other social media sites are awkward/unfit places to do so.
-
-Team Members:** Curtis, Meri, Vahe, Joseph, Lia, Carson
+**Problem:** People like sharing podcasts but other social media sites are awkward/unfit places to do so. There is no such site that combines social sharing aspect with ability to play any podcast episode. 
 
 **Solution:** A social media site like twitter but focused specifically on podcasts, where sharing podcasts is seamless -- with features designed to promote discovering, discussing, and listening to podcasts without leaving the site.
 
-1.  2.  3.  4.  5.  6.  
+**Similar sites:** 
+- https://overcast.fm 
+- https://twitter.com
 
 **User stories**:
-
 -   US1: As a user, I want to **search** for any podcasts/pod episodes on the site so that I can add it to my favorites, listen to, share with others
 
 -   US2: As a user, I want to **add podcasts/pod episodes to my favorites** so that I can have them in one place
@@ -31,97 +30,43 @@ Team Members:** Curtis, Meri, Vahe, Joseph, Lia, Carson
 
 -   US7: As a user, I want to **listen** to the podcast episode not leaving the site, so that I can have one-stop place for sharing and listening podcasts
 
-7.  8.  **Similar sites:** https://overcast.fm https://twitter.com
+**GitHub best practices and guidance:**
 
-9.  10. 11. 12. 13. 
-
-**GitHub best practices and** **guidance:**
-
-1.  Checkout the master branch using **git checkout master**
-
-2.  3.  Update your local repo with the latest changes using **git pull origin master** **.**
-
-4.  5.  Create and checkout a new branch using **git checkout -b \<your-branch-name\>**
-
-6.  Always include your initials in your branch name followed by the functionality/feature you're working one, example: **vm-userAuthentication**
-
-7.  Run **git add -A**
-
-8.  Run **git commit -m \"descriptive message here\"**
-
-9.  Push these changes back up to GitHub using **git push origin \<your-branch-name\>**
-
-10. Navigate to your repository in GitHub and click the green button to **\"create a pull request\"**
-
-11. Once code is reviewed by at least one reviewer **"merge** **pull request"**
-
--   -   
-
-<!-- -->
-
--   -   -   
+1.  Checkout the master branch using `git checkout master`
+2.  Update your local repo with the latest changes using `git pull origin master`
+3.  Create and checkout a new branch using `git checkout -b \<your-branch-name\>`
+4.  Always include your initials in your branch name followed by the functionality/feature you're working one, example: `vm-userAuthentication`
+5.  Run `git add -A`
+6.  Run `git commit -m \"descriptive message here\"`
+7.  Push these changes back up to GitHub using `git push origin \<your-branch-name\>`
+8.  Navigate to your repository in GitHub and click the green button to `\"create a pull request\"`
+9. Once code is reviewed by at least one reviewer `"merge** **pull request"`
 
 **Milestones:**
 
--   March 16 -- Plan, Design, and Research
+- [] March 16 -- Plan, Design, and Research
 
--   March 23 -- Ready MVP (Working App!), Mini-Presentation
+- [] March 23 -- Ready MVP (Working App!), Mini-Presentation
 
--   March 30 -- Project Polish, Functionality Push, Final Plan
+- [] March 30 -- Project Polish, Functionality Push, Final Plan
 
--   April 6 -- Presentation Time!
+- [] April 6 -- Presentation Time!
 
 **Responsibilities:**
 
 -   Curtis & Vahe: React
-
 -   Meri & Lia: Back End
-
 -   Carson & Joseph: UI and APIs
 
 **Technology used:**
 
 -   Node.js
-
 -   JavaScript
-
 -   React.js
-
 -   jQuery
-
 -   Bootstrap
-
 -   Heroku
-
 -   MySQl
-
-<!-- -->
-
--   -   
-
-<!-- -->
-
--   -   -   -   
-
--   -   -   -   -   -   -   -   -   -   -   -   -   -   
-
--   -   -   -   -   -   -   
-
-<!-- -->
-
--   -   
-
-<!-- -->
-
--   -   -   -   -   -   -   -   -   -   -   
-
-<!-- -->
-
--   -   -   -
-
-
-
-
 
 
 
