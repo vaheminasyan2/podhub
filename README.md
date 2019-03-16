@@ -25,22 +25,15 @@ Social media site for Podcast listeners
 -   Heroku
 -   MySQl
 
-**User Stories:**
-
-Click this [link](https://github.com/vaheminasyan2/podhub/issues/4) to view. 
-
-
-## Project execution
-**Milestones:**
--[] March 16 -- Plan, Design, and Research
--[] March 23 -- Ready MVP (Working App!), Mini-Presentation
--[] March 30 -- Project Polish, Functionality Push, Final Plan
--[] April 6 -- Presentation Time!
-
-**Responsibilities:**
--   Curtis & Vahe: React
--   Meri & Lia: Back End
--   Carson & Joseph: UI and APIs
+**Resources and Roles:**
+- [User Stories](https://github.com/vaheminasyan2/podhub/issues/4)
+- [Milestones](https://github.com/vaheminasyan2/podhub/issues/5)
+- [Database structure]()
+- [Wireframes]()
+- Contributors: 
+  - Curtis & Vahe: React
+  - Meri & Lia: Back End
+  - Carson & Joseph: UI and APIs
 
 ## GitHub best practices and guidance:
 1.  Checkout the master branch using `git checkout master`
