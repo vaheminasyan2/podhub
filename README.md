@@ -1,18 +1,17 @@
-**Project Title: PodHub - s**ocial Media site for Podcast listeners.
-
-**Team Members:** Curtis, Meri, Vahe, Joseph, Lia, Carson
+# PodHub
+### Social media site for Podcast listeners
 
 **Project Description:** Create a Twitter-like site for sharing podcasts/pod episodes.
 
-**General Idea:**
-
-Users share posts containing a description/reason for sharing, a podcast thumbnail image, & standard social media actions (comment, like, share), plus a built-in audio player (which possibly supports comments at specific timestamps).
+**General Idea:** Users share posts containing a description/reason for sharing, a podcast thumbnail image, & standard social media actions (comment, like, share), plus a built-in audio player (which possibly supports comments at specific timestamps).
 
 **Target audience:** General public, podcasts listeners.
 
 **Problem:** People like sharing podcasts but other social media sites are awkward/unfit places to do so.
 
-**Solution to the problem (goal):** A social media site like twitter but focused specifically on podcasts, where sharing podcasts is seamless -- with features designed to promote discovering, discussing, and listening to podcasts without leaving the site.
+Team Members:** Curtis, Meri, Vahe, Joseph, Lia, Carson
+
+**Solution:** A social media site like twitter but focused specifically on podcasts, where sharing podcasts is seamless -- with features designed to promote discovering, discussing, and listening to podcasts without leaving the site.
 
 1.  2.  3.  4.  5.  6.  
 
