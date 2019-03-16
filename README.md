@@ -28,7 +28,7 @@ Social media site for Podcast listeners
 **Resources and Roles:**
 - [User Stories](https://github.com/vaheminasyan2/podhub/issues/4)
 - [Milestones](https://github.com/vaheminasyan2/podhub/issues/5)
-- [Data model](client/src/images/dataModel.bmp)
+- [Data model](client/src/images/dataModel.PNG)
 - [Wireframes]()
 - Contributors: 
   - Curtis & Vahe: React
@@ -38,13 +38,13 @@ Social media site for Podcast listeners
 ## GitHub best practices and guidance:
 1.  Checkout the master branch using `git checkout master`
 2.  Update your local repo with the latest changes using `git pull origin master`
-3.  Create and checkout a new branch using `git checkout -b \<your-branch-name\>`
+3.  Create and checkout a new branch using `git checkout -b <your-branch-name>`
 4.  Always include your initials in your branch name followed by the functionality/feature you're working one, example: `vm-userAuthentication`
 5.  Run `git add -A`
-6.  Run `git commit -m \"descriptive message here\"`
+6.  Run `git commit -m "descriptive message here"`
 7.  Push these changes back up to GitHub using `git push origin \<your-branch-name\>`
-8.  Navigate to your repository in GitHub and click the green button to `\"create a pull request\"`
-9. Once code is reviewed by at least one reviewer `"merge** **pull request"`
+8.  Navigate to your repository in GitHub and click the green button to `"create a pull request"`
+9. Once code is reviewed by at least one reviewer `"merge pull request"`
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
