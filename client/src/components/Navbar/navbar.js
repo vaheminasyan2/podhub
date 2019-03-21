@@ -15,6 +15,19 @@ function Navbar() {
 
           <li className="nav-item">
             <Link
+              to="/profile"
+              className={
+                window.location.pathname === "/profile"
+                  ? "nav-link active"
+                  : "nav-link"
+              }
+            >
+              Profile
+            </Link>
+          </li>
+
+          <li className="nav-item">
+            <Link
               to="/"
               className={
                 window.location.pathname === "/" || window.location.pathname === "/home"
@@ -25,17 +38,17 @@ function Navbar() {
               Home
             </Link>
           </li>
-          </ul>
-          
-            <form className="form-inline my-2 my-lg-0 searchUserForm">
-              <input className="form-control mr-sm-2 searchUserInput" type="search" placeholder="Search for an user" aria-label="Search" />
-            </form>
+        </ul>
 
-            <form className="form-inline my-2 my-lg-0 searchPodcastForm">
-              <input className="form-control mr-sm-2 searchPodcastInput" type="search" placeholder="Search for a podcast" aria-label="Search" />
-            </form>
-        
-        
+        <form className="form-inline my-2 my-lg-0 searchUserForm">
+          <input className="form-control mr-sm-2 searchUserInput" type="search" placeholder="Search for an user" aria-label="Search" />
+        </form>
+
+        <form className="form-inline my-2 my-lg-0 searchPodcastForm">
+          <input className="form-control mr-sm-2 searchPodcastInput" type="search" placeholder="Search for a podcast" aria-label="Search" />
+        </form>
+
+
       </div>
     </nav>
   );
