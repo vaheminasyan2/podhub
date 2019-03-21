@@ -4,9 +4,9 @@ import "./style.css";
 function AudioPlayer({ audioLink }) {
     return (
         <div>
-            <audio controls>
-                <source src={audioLink} type="audio/mpeg" />
-                <h2>Your browser doesn't support this audio element.</h2>
+            <audio>
+                <source src={audioLink} type="audio/mpeg">
+                Your browser does not support the audio element.
             </audio>
         </div>
     );
