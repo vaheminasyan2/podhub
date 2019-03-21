@@ -1,7 +1,7 @@
 {
-  "name": "mern",
+  "name": "podHub",
   "version": "1.0.0",
-  "description": "Mern Demo",
+  "description": "podHub",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -22,10 +22,11 @@
     "axios": "^0.18.0",
     "express": "^4.16.3",
     "if-env": "^1.0.4",
-    "mongodb": "^3.1.13",
-    "mongoose": "^5.4.19",
     "react": "^16.8.4",
     "react-router": "^4.3.1",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^4.3.1",
+    "dotenv": "^6.2.0",
+    "mysql2": "^1.6.4",
+    "sequelize": "^4.41.2"
   }
 }

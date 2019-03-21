@@ -8,9 +8,6 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false
       }
     });
-  };
-
-  postLike.associate = function(models) {
     postLike.belongsTo(models.user, {
       foreignKey: {
         allowNull: false
