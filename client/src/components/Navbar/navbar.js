@@ -11,7 +11,21 @@ function Navbar() {
         <span className="navbar-toggler-icon"></span>
       </button>
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div className="navbar-nav">
+        <ul className="navbar-nav mr-auto">
+
+          <li className="nav-item">
+            <Link
+              to="/profile"
+              className={
+                window.location.pathname === "/profile"
+                  ? "nav-link active"
+                  : "nav-link"
+              }
+            >
+              Profile
+            </Link>
+          </li>
+
           <li className="nav-item">
             <Link
               to="/"
@@ -24,7 +38,17 @@ function Navbar() {
               Home
             </Link>
           </li>
-        </div>
+        </ul>
+
+        <form className="form-inline my-2 my-lg-0 searchUserForm">
+          <input className="form-control mr-sm-2 searchUserInput" type="search" placeholder="Search for an user" aria-label="Search" />
+        </form>
+
+        <form className="form-inline my-2 my-lg-0 searchPodcastForm">
+          <input className="form-control mr-sm-2 searchPodcastInput" type="search" placeholder="Search for a podcast" aria-label="Search" />
+        </form>
+
+
       </div>
     </nav>
   );
