@@ -50,18 +50,8 @@ class Home extends Component {
         this.getPosts();
     };
 
-    // Add funtion to cal getPost function on window onload and everytime when there is a new post added or every 2 mins or so
-    //// Code goes here
-
-    /*
-    refreshPosts = () => {
-        //
-
-
-        this.getPosts();
-    };
-
-    */
+    // Add function to call getPost function every time when something is posted or every 2 mins or so
+    
 
     // API request to get the user's and his follower's posts
     getPosts = () => {
