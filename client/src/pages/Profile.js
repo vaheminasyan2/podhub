@@ -166,7 +166,7 @@ class Home extends Component {
                         <Row>
                             Posts:&nbsp; {this.state.posts.length} &nbsp; | &nbsp;
                         Followers:&nbsp;{this.state.followers}&nbsp; | &nbsp;
-                        following:&nbsp;{this.state.following}
+                        Following:&nbsp;{this.state.following}
                         </Row>
                     </div>
                 </div>
