@@ -137,11 +137,15 @@ class Home extends Component {
             );
     };
 
+    handleFavoriteDelete = id => {
+        API.deleteFavorite(id).then(res => this.getFavorites());
+      };
+
 
     render() {
         return (
             <Container >
-                <div className="row userProfile rounded">
+                <div className="row userProfile rounded bg-light">
                     <div className="col-4">
                         <img src={this.state.user[0].userProfileImage} />
                     </div>
@@ -173,7 +177,14 @@ class Home extends Component {
                                     <div className="col p-0">
                                         <p>{favorites.podcastTitle}</p>
                                         <p>{favorites.podcastDescription}</p>
-                                        <a href={favorites.link}>{favorites.link}</a>
+                                        <a href={favorites.link}>{favorites.link}</a> &nbsp;
+                                        
+                                            <button className="btn btn-sm mb-1 btn-light"
+                                              onClick={() => this.handleFavoriteDelete(favorites.id)}
+                                            >
+                                              x
+                                            </button>
+                                          
                                     </div>
                                 </div>
                             ))}

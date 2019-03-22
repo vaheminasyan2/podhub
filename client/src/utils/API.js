@@ -37,4 +37,12 @@ export default {
         return axios.get("/api/getFollowing" + userId);
     },
 
+    getFavorites: function(id) {
+        return axios.get("/api/favorites" + id);
+    },
+
+    handleFavoriteDelete: function(id) {
+        return axios.post("/api/favorites" + id);
+    },
+
 };
