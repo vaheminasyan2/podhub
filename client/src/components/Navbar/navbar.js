@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 
-function Navbar() {
+function Navbar({ userSearch, podcastSearch, handleInputChange, handlePodcastSubmit, handleUserSubmit }) {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-success">
@@ -41,14 +41,40 @@ function Navbar() {
         </ul>
 
         <form className="form-inline my-2 my-lg-0 searchUserForm">
-          <input className="form-control mr-sm-2 searchUserInput" type="search" placeholder="Search for an user" aria-label="Search" />
+          <input className="form-control mr-sm-2 searchUserInput"
+            type="search"
+            placeholder="Search for an user"
+            aria-label="Search"
+            id="usertInput"
+            value={userSearch}
+            onChange={handleInputChange}
+            name="userSearch"
+            required
+          />
         </form>
+        <button type="submit"
+            className="btn btn-dark btn-sm"
+            onClick={handleUserSubmit}>
+            Search
+        </button>
 
         <form className="form-inline my-2 my-lg-0 searchPodcastForm">
-          <input className="form-control mr-sm-2 searchPodcastInput" type="search" placeholder="Search for a podcast" aria-label="Search" />
+          <input className="form-control mr-sm-2 searchPodcastInput"
+            type="search"
+            placeholder="Search for a podcast"
+            aria-label="Search"
+            id="podcastInput"
+            value={podcastSearch}
+            onChange={handleInputChange}
+            name="podcastSearch"
+            required
+          />
         </form>
-
-
+        <button type="submit"
+            className="btn btn-dark btn-sm"
+            onClick={handlePodcastSubmit}>
+            Search
+        </button>
       </div>
     </nav>
   );

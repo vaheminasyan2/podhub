@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Container from "../components/Container/container";
 import Row from "../components/Row/row";
-import Col from "../components/Col/col";
+//import Col from "../components/Col/col";
 import API from "../utils/API";
 import PostCard from "../components/PostCard/postCard";
 
@@ -34,18 +34,22 @@ class Home extends Component {
                 comments: 10,
             },
         ],
-        userId: ""
+        userId: "",
+
     };
 
     // Add funtion to cal getPost function on window onload and everytime when there is a new post added or every 2 mins or so
     //// Code goes here
 
+    /*
     refreshPosts = () => {
         //
 
 
         this.getPosts();
     };
+
+    */
 
     // API request to get the user's and his follower's posts
     getPosts = () => {
@@ -58,10 +62,26 @@ class Home extends Component {
             .catch(() =>
                 this.setState({
                     posts: [],
-                    message: "Please follow someone or post something to see posts"
+                    message: "No podcast found, try again"
                 })
             );
     };
+
+    getPodcast = () => {
+        API.getPodcast(this.state.searchTerm)
+            .then(res => 
+                this.setState({
+                    podcasts: res.data
+                })
+            )
+            .catch(() =>
+                this.setState({
+                    books: [],
+                    message: "We couldn't find book that matched search criteria. Please, try again with different search term."
+                })
+            );
+    };
+
 
     render() {
         return (
