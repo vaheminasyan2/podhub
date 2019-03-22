@@ -46,6 +46,10 @@ class Home extends Component {
 
     };
 
+    componentDidMount() {
+        this.getPosts();
+    };
+
     // Add funtion to cal getPost function on window onload and everytime when there is a new post added or every 2 mins or so
     //// Code goes here
 
@@ -70,26 +74,10 @@ class Home extends Component {
             .catch(() =>
                 this.setState({
                     posts: [],
-                    message: "No podcast found, try again"
+                    message: "No podcast found, please post something or follow someone to see the feeds."
                 })
             );
     };
-
-    getPodcast = () => {
-        API.getPodcast(this.state.searchTerm)
-            .then(res => 
-                this.setState({
-                    podcasts: res.data
-                })
-            )
-            .catch(() =>
-                this.setState({
-                    books: [],
-                    message: "We couldn't find book that matched search criteria. Please, try again with different search term."
-                })
-            );
-    };
-
 
     render() {
         return (
@@ -114,7 +102,7 @@ class Home extends Component {
                             ))}
                         </Container>
                     ) : (
-                            <h2 className="text-center">{this.state.message}</h2>
+                            <h4 className="text-center">{this.state.message}</h4>
                         )}
                 </Row>
             </Container>

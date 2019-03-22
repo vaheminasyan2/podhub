@@ -10,7 +10,7 @@ class Home extends Component {
 
     state = {
         posts: [
-            {   
+            {
                 id: 1,
                 userProfileImage: "<image>",
                 userName: "Vahe Minasyan",
@@ -23,7 +23,8 @@ class Home extends Component {
                 likes: 10,
                 comments: 10,
             },
-            {   id: 2,
+            {
+                id: 2,
                 userProfileImage: "<image>",
                 userName: "John Smith",
                 date: "03/21/2019",
@@ -54,20 +55,28 @@ class Home extends Component {
                 link: "link",
             },
             {
-                id: 2, 
+                id: 2,
                 podcastIcon: "<image>",
                 podcastTitle: "Favorite podcast 2",
                 podcastDescription: "Description",
                 link: "link",
             },
             {
-                id:3,
+                id: 3,
                 podcastIcon: "<image>",
                 podcastTitle: "Favorite podcast 3",
                 podcastDescription: "Description",
                 link: "link",
             }
         ]
+    };
+
+    componentDidMount() {
+        this.getPostsOnlyByUser();
+        this.getFavorites();
+        this.getUserDetails();
+        this.getFollowers();
+        this.getFollowing();
     };
 
     getPostsOnlyByUser = () => {
@@ -80,7 +89,7 @@ class Home extends Component {
             .catch(() =>
                 this.setState({
                     posts: [],
-                    message: "No posts found, post something."
+                    messageNoPodcast: "No posts found, post something."
                 })
             );
     };
@@ -95,7 +104,7 @@ class Home extends Component {
             .catch(() =>
                 this.setState({
                     favorites: [],
-                    message: "No favorites found. Add a podcast to your favorites"
+                    messageNoFav: "No favorites found. Search for a podcast and add it to your favorites."
                 })
             );
     };
@@ -110,7 +119,7 @@ class Home extends Component {
     };
 
     getFollowers = () => {
-        API.getFollowedBy(this.state.userId)
+        API.getFollowers(this.state.userId)
             .then(res =>
                 this.setState({
                     followers: res.data
@@ -139,7 +148,7 @@ class Home extends Component {
 
     handleFavoriteDelete = id => {
         API.deleteFavorite(id).then(res => this.getFavorites());
-      };
+    };
 
 
     render() {
@@ -167,30 +176,32 @@ class Home extends Component {
                     {this.state.favorites.length ? (
                         <Container>
                             {this.state.favorites.map(favorites => (
-                                
+
                                 <div className="row border rounded" key={favorites.id}>
-                                
+
                                     <div className="col-2 p-0">
-                        
+
                                         <img src={favorites.podcastIcon} />
                                     </div>
                                     <div className="col p-0">
                                         <p>{favorites.podcastTitle}</p>
                                         <p>{favorites.podcastDescription}</p>
                                         <a href={favorites.link}>{favorites.link}</a> &nbsp;
-                                        
+
                                             <button className="btn btn-sm mb-1 btn-light"
-                                              onClick={() => this.handleFavoriteDelete(favorites.id)}
-                                            >
-                                              x
+                                            onClick={() => this.handleFavoriteDelete(favorites.id)}
+                                        >
+                                            x
                                             </button>
-                                          
+
                                     </div>
                                 </div>
                             ))}
                         </Container>
                     ) : (
-                            <h2 className="text-center">{this.state.message}</h2>
+                            <div className="col">
+                                <h5 className="text-center">&nbsp;{this.state.messageNoFav}</h5>
+                            </div>
                         )}
                 </div>
                 <Row>
@@ -214,7 +225,9 @@ class Home extends Component {
                             ))}
                         </Container>
                     ) : (
-                            <h2 className="text-center">{this.state.message}</h2>
+                            <div className="col">
+                                <h5 className="text-center">&nbsp;{this.state.messageNoPodcast}</h5>
+                            </div>
                         )}
                 </Row>
             </Container>
