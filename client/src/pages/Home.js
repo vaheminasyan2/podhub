@@ -10,6 +10,7 @@ class Home extends Component {
     state = {
         posts: [
             {
+                id:1,
                 userProfileImage: "<image>",
                 userName: "Vahe Minasyan",
                 date: "03/20/2019",
@@ -22,6 +23,7 @@ class Home extends Component {
                 comments: 10,
             },
             {
+                id:2,
                 userProfileImage: "<image>",
                 userName: "John Smith",
                 date: "03/21/2019",
@@ -34,22 +36,22 @@ class Home extends Component {
                 comments: 10,
             },
         ],
-        userId: "",
+        user:[
+            {
+                name: "John Smith",
+                userProfileImage: "<image>",
+                googleUserId: "1111",
+            },
+        ],
 
     };
 
-    // Add funtion to cal getPost function on window onload and everytime when there is a new post added or every 2 mins or so
-    //// Code goes here
-
-    /*
-    refreshPosts = () => {
-        //
-
-
+    componentDidMount() {
         this.getPosts();
     };
 
-    */
+    // Add function to call getPost function every time when something is posted or every 2 mins or so
+    
 
     // API request to get the user's and his follower's posts
     getPosts = () => {
@@ -62,26 +64,10 @@ class Home extends Component {
             .catch(() =>
                 this.setState({
                     posts: [],
-                    message: "No podcast found, try again"
+                    message: "No podcast found, please post something or follow someone to see the feeds."
                 })
             );
     };
-
-    getPodcast = () => {
-        API.getPodcast(this.state.searchTerm)
-            .then(res => 
-                this.setState({
-                    podcasts: res.data
-                })
-            )
-            .catch(() =>
-                this.setState({
-                    books: [],
-                    message: "We couldn't find book that matched search criteria. Please, try again with different search term."
-                })
-            );
-    };
-
 
     render() {
         return (
@@ -106,7 +92,7 @@ class Home extends Component {
                             ))}
                         </Container>
                     ) : (
-                            <h2 className="text-center">{this.state.message}</h2>
+                            <h4 className="text-center">{this.state.message}</h4>
                         )}
                 </Row>
             </Container>
