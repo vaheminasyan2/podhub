@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Container from "../components/Container";
 import Row from "../components/Row";
-import Col from "../components/Col";
+//import Col from "../components/Col";
 import Episode from "../components/Episode";
 import API from "..utils/API";
 
@@ -13,6 +13,7 @@ class EpisodeList extends Component {
         logo: "",
         episodes: [
             {
+                podcast_id: 1,
                 image="",
                 thumbnail="",
                 title_original="Project 3 Podcast Episode 1",

@@ -7,6 +7,10 @@ export default {
         return axios.get("/api/getPosts", userId);
     },
 
+    getPostsOnlyByUser:function(userId) {
+        return axios.get("/api/getPostsOnlyByUser", userId);
+    },
+
     getUsers: function(user) {
         return axios.get("api/getUsers", user)
     },
@@ -19,6 +23,18 @@ export default {
     // Gets all episodes for a particular podcast
     getEpisodes: function(podcastId) {
         return axios.get("/api/getEpisodes" + podcastId);
-    }
+    },
+
+    getUserDetails: function(userId) {
+        return axios.get("/api/getUserDetails" + userId);
+    },
+
+    getFollowers: function(userId) {
+        return axios.get("/api/getFollowers" + userId);
+    },
+
+    getFollowing: function(userId) {
+        return axios.get("/api/getFollowing" + userId);
+    },
 
 };

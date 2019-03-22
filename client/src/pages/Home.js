@@ -10,6 +10,7 @@ class Home extends Component {
     state = {
         posts: [
             {
+                id:1,
                 userProfileImage: "<image>",
                 userName: "Vahe Minasyan",
                 date: "03/20/2019",
@@ -22,6 +23,7 @@ class Home extends Component {
                 comments: 10,
             },
             {
+                id:2,
                 userProfileImage: "<image>",
                 userName: "John Smith",
                 date: "03/21/2019",
@@ -34,7 +36,13 @@ class Home extends Component {
                 comments: 10,
             },
         ],
-        userId: "",
+        user:[
+            {
+                name: "John Smith",
+                userProfileImage: "<image>",
+                googleUserId: "1111",
+            },
+        ],
 
     };
 
