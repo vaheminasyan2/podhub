@@ -6,4 +6,20 @@
 
 .navbar {
     margin-bottom: 20px;
+
 }
+
+#signOutBtn {
+    margin-left: 10px;
+   
+  }
+
+  #navbarNavAltMarkup{
+    clear: both;
+}
+
+
+.signOutDiv{
+    float:right;
+     
+ }

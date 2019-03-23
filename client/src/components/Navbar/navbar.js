@@ -2,16 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 
-function Navbar({ userSearch, podcastSearch, handleInputChange, handlePodcastSubmit, handleUserSubmit }) {
+function Navbar({ userSearch, podcastSearch, handleInputChange, handlePodcastSubmit, handleUserSubmit, signOut }) {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-success">
-      <Link className="navbarText navbar-brand" to="/">PodHub</Link>
+      <Link className="navbarText navbar-brand" to="/home">PodHub</Link>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <ul className="navbar-nav mr-auto">
+        <ul className="navbar-nav mr-5">
 
           <li className="nav-item">
             <Link
@@ -28,9 +28,9 @@ function Navbar({ userSearch, podcastSearch, handleInputChange, handlePodcastSub
 
           <li className="nav-item">
             <Link
-              to="/"
+              to="/home"
               className={
-                window.location.pathname === "/" || window.location.pathname === "/home"
+                window.location.pathname === "/home"
                   ? "nav-link active"
                   : "nav-link"
               }
@@ -40,7 +40,7 @@ function Navbar({ userSearch, podcastSearch, handleInputChange, handlePodcastSub
           </li>
         </ul>
 
-        <form className="form-inline my-2 my-lg-0 searchUserForm">
+        <form className="form-inline my-2 my-lg-0 ml-5 searchUserForm text-center">
           <input className="form-control mr-sm-2 searchUserInput"
             type="search"
             placeholder="Search for an user"
@@ -53,9 +53,9 @@ function Navbar({ userSearch, podcastSearch, handleInputChange, handlePodcastSub
           />
         </form>
         <button type="submit"
-            className="btn btn-dark btn-sm"
-            onClick={handleUserSubmit}>
-            Search
+          className="btn btn-dark btn-sm"
+          onClick={handleUserSubmit}>
+          Search
         </button>
 
         <form className="form-inline my-2 my-lg-0 searchPodcastForm">
@@ -71,10 +71,21 @@ function Navbar({ userSearch, podcastSearch, handleInputChange, handlePodcastSub
           />
         </form>
         <button type="submit"
-            className="btn btn-dark btn-sm"
-            onClick={handlePodcastSubmit}>
-            Search
+          className="btn btn-dark btn-sm"
+          onClick={handlePodcastSubmit}>
+          Search
         </button>
+
+        <ul className="navbar-nav signOutDiv">
+
+          <li id="loggedInUser">
+            Logged in as</li>
+          <a id="signOutBtn" className="button btn-primary p-1" href="#" onClick={signOut}>
+            <span>Sign Out</span>
+          </a>
+
+        </ul>
+
       </div>
     </nav>
   );
