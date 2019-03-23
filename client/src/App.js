@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar/navbar";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
-import SearchResults from "./pages/SearchResults";
+import SearchResults from "./components/SearchResults/SearchResults";
 import EpisodeList from "./pages/EpisodeList";
 import Container from "./components/Container/container";
 import API from "./utils/API"
@@ -37,12 +37,29 @@ class App extends Component {
     showResults: "hide"
   };
 
+  // When input is changed, update state
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
-      [name]: value
-    });
+      [name]: value,
+    }, () => { this.checkContent() });
   };
+
+  // Check Podcast Search field for text
+  // If text is found, show Search Results 
+  // If empty, hide Search Results
+  checkContent = () => {
+    if (this.state.podcastSearch != "") {
+      this.setState({
+        showResults: "show"
+      })
+    }
+    else {
+      this.setState({
+        showResults: "hide"
+      })
+    }
+  }
 
   getPodcasts = () => {
     API.getPodcasts(this.state.podcastSearch)
