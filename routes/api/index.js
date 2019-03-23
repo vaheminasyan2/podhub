@@ -5,13 +5,13 @@ const postRoutes = require("./postRoute");
 const favoriteRoutes = require("./favoriteRoute");
 
 // User routes
-router.use("/user", userRoutes);
+router.use("/users", userRoutes);
 
 // Post Routes
-router.use("/post", postRoutes);
+router.use("/posts", postRoutes);
 
 // Favorite Routes
-router.use("/fav", favoriteRoutes);
+router.use("/favorites", favoriteRoutes);
 
 // For anything else, render the html page
 router.use(function(req, res) {

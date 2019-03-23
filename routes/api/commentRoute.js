@@ -14,13 +14,15 @@ router.post("/", (req, res) => controller.create(req, res));
  * @param {*} req
  * @param {*} res
  */
-router.get("/update/:id", (req, res) => controller.update(req, res));
+router.update("/:id", (req, res) => controller.update(req, res));
 
 /**
  * Route to remove the existing comment
  * @param {*} req
  * @param {*} res
  */
-router.get("/remove/:id", (req, res) => controller.remove(req, res));
+router.delete("/:id", (req, res) => controller.remove(req, res));
+
+router.get("/:id/likes", (req, res) => controller.getCommentLikes(req, res));
 
 module.exports = router;

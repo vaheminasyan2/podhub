@@ -32,6 +32,16 @@ class UserController {
   remove(req, res) {
     db.user.destroy({ where: req.params }).then(user => res.json(user));
   }
+
+  getPosts(req, res) {
+    db.post.findAll({
+      where: {
+        postedBy: req.params.id
+      }
+    }).then(function(posts){
+      res.json(posts);
+    })
+  }
 }
 
 module.exports = UserController;

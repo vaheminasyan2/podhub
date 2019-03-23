@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path")
 const db = require("./models");
+const routes = require("./routes/");
 
 var app = express();
 var PORT = process.env.PORT || 5000;
@@ -19,6 +20,8 @@ console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === "test") {
   syncOptions.force = true;
 }
+
+app.use(routes);
 
 // Starting the server, syncing our models ------------------------------------/
 db.sequelize.sync(syncOptions).then(function() {
