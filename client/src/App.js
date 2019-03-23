@@ -23,17 +23,17 @@ class App extends Component {
       {
         podcast_id: 1234,
         thumbnail: "https://picsum.photos/200/200",
-        title: "Test Podcast 1"
+        title_original: "Test Podcast 1"
       },
       {
         podcast_id: 1234,
         thumbnail: "https://picsum.photos/200/200",
-        title: "Test Podcast 2"
+        title_original: "Test Podcast 2"
       },
       {
         podcast_id: 1234,
         thumbnail: "https://picsum.photos/200/200",
-        title: "Test Podcast 3"
+        title_original: "Test Podcast 3"
       }
     ],
     showResults: "hide"
@@ -65,32 +65,32 @@ class App extends Component {
 
   getPodcasts = () => {
     API.getPodcasts(this.state.podcastSearch)
-      .then(res =>
+      .then(res => {
         this.setState({
-          podcasts: res.data
+          podcasts: res.data.results
         })
-      )
-      .catch(() =>
+      })
+      .catch((error) => {
         this.setState({
           podcasts: [],
           message: "We couldn't find a match."
         })
-      );
+      });
   };
 
   getUsers = () => {
     API.getUsers(this.state.userSearch)
-      .then(res =>
+      .then(res => {
         this.setState({
           users: res.data
         })
-      )
-      .catch(() =>
+      })
+      .catch((error) => {
         this.setState({
           users: [],
           message: "We couldn't find a match."
         })
-      );
+      });
   };
 
   handleUserSubmit = event => {
