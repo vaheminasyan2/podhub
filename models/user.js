@@ -25,13 +25,15 @@ module.exports = function(sequelize, DataTypes) {
     user.belongsToMany(user, {as: 'children', foreignKey: 'isFollowing', through: 'follow' });
     user.belongsToMany(user, {as: 'parents', foreignKey: 'followedBy', through: 'follow' });
 
-  
+  /*
     user.hasMany(models.post, {
       onDelete: "cascade"
     });
     user.hasMany(models.postLike, {
       onDelete: "cascade"
     });
+
+  */  
   };
 
   return user;

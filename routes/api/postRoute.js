@@ -21,6 +21,16 @@ router.get("/update/:id", (req, res) => controller.update(req, res));
  * @param {*} req
  * @param {*} res
  */
-router.get("/remove/:id", (req, res) => controller.remove(req, res));
+router.delete("/:id", (req, res) => controller.remove(req, res));
+
+
+// get comments
+
+router.get("/:id/comments", (req, res) => controller.getPostComments(req, res));
+
+router.get("/:id/likes", (req, res) => controller.getPostLikes(req, res));
+
+// For test only
+router.get("/:id", (req, res) => res.json("HELLO " + req.params.id));
 
 module.exports = router;

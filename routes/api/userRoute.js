@@ -23,4 +23,6 @@ router.get("/update/:id", (req, res) => controller.update(req, res));
  */
 router.get("/remove/:id", (req, res) => controller.remove(req, res));
 
+router.get("/:id/posts", (req, res) => controller.getPosts(req, res));
+
 module.exports = router;
