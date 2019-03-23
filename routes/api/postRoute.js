@@ -10,6 +10,14 @@ const controller = new PostController();
 router.post("/", (req, res) => controller.create(req, res));
 
 /**
+ * Route to get posts by userId from database
+ * @param {*} req
+ * @param {*} res
+ */
+router.get("/:id", (req, res) => controller.findAll(req, res));
+
+
+/**
  * Route to update the existing post
  * @param {*} req
  * @param {*} res

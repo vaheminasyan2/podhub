@@ -10,6 +10,13 @@ const controller = new FavoriteController();
 router.post("/", (req, res) => controller.create(req, res));
 
 /**
+ * Route to get favorite podcast from database
+ * @param {*} req
+ * @param {*} res
+ */
+router.get("/:id", (req, res) => controller.findAll(req, res));
+
+/**
  * Route to update the existing favorite podcast in database
  * @param {*} req
  * @param {*} res
