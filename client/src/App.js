@@ -8,8 +8,10 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import SearchResults from "./pages/SearchResults";
 import EpisodeList from "./pages/EpisodeList";
+import Login from "./pages/Login";
 import Container from "./components/Container/container";
-import API from "./utils/API"
+import API from "./utils/API";
+
 
 class App extends Component {
 
@@ -102,7 +104,7 @@ class App extends Component {
           />
           <Container>
             <Switch>
-              <Route exact path="/" component={Home} />
+              <Route exact path="/" component={Login} />
               <Route exact path="/home" component={Home} />
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/episodeList" component={EpisodeList} /> {/* Temp Route */}
