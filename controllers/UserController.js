@@ -14,6 +14,17 @@ class UserController {
   }
 
   /**
+   * Get the userDetails by userId from database
+   * @param {*} req
+   * @param {*} res
+   */
+  findAll(req, res) {
+    console.log(req.params.id)
+    db.user.findAll({where: {id: req.params.id}})
+      .then(dbUser => res.json(dbUser));
+  }
+
+  /**
    * Update the user
    * @param {*} req
    * @param {*} res

@@ -10,6 +10,13 @@ const controller = new UserController();
 router.post("/", (req, res) => controller.create(req, res));
 
 /**
+ * Route to get userDetails by userId from database
+ * @param {*} req
+ * @param {*} res
+ */
+router.get("/:id", (req, res) => controller.findAll(req, res));
+
+/**
  * Route to update the existing user
  * @param {*} req
  * @param {*} res

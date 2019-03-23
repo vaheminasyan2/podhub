@@ -14,6 +14,17 @@ class PostController {
   }
 
   /**
+   * Get the posts by userId from database
+   * @param {*} req
+   * @param {*} res
+   */
+  findAll(req, res) {
+    console.log(req.params.id)
+    db.post.findAll({where: {postedBy: req.params.id}})
+      .then(dbPost => res.json(dbPost));
+  }
+
+  /**
    * Update the post in database
    * @param {*} req
    * @param {*} res

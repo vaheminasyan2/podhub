@@ -16,6 +16,17 @@ class FavoriteController {
   }
 
   /**
+   * Get the favorite podcast by userId from database
+   * @param {*} req
+   * @param {*} res
+   */
+  findAll(req, res) {
+    console.log(req.params.id)
+    db.favorite.findAll({where: {userId: req.params.id}})
+      .then(favorite => res.json(favorite));
+  }
+
+  /**
    * Update the favorite podcast in database
    * @param {*} req
    * @param {*} res
