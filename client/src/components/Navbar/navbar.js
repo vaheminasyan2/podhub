@@ -49,6 +49,7 @@ function Navbar({ userSearch, podcastSearch, handleInputChange, handlePodcastSub
             value={userSearch}
             onChange={handleInputChange}
             name="userSearch"
+            autocomplete="off"
             required
           />
         </form>
@@ -67,6 +68,7 @@ function Navbar({ userSearch, podcastSearch, handleInputChange, handlePodcastSub
             value={podcastSearch}
             onChange={handleInputChange}
             name="podcastSearch"
+            autocomplete="off"
             required
           />
         </form>

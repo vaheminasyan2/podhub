@@ -1,0 +1,9 @@
+.podcastLogoSmall {
+    width: 50px;
+    /* position: absolute; */
+}
+
+.podcastTitle {
+    display: inline;
+    margin-left: 10px;
+}

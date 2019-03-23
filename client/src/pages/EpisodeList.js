@@ -6,6 +6,7 @@ import List from "../components/List/list";
 import Episode from "../components/Episode/episode";
 import Image from "../components/Image/image";
 import API from "../utils/API";
+import Podcast from "../components/Podcast/podcast";
 
 
 class EpisodeList extends Component {
@@ -78,6 +79,7 @@ class EpisodeList extends Component {
                 <Image 
                     src={this.state.podcastLogo}
                 />
+                <br/>
                 <Row>
                     {this.state.episodes.length ? (
                         <Container>
