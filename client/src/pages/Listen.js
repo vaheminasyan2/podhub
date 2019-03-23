@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import Container from "../components/Container";
-import Row from "../components/Row";
-import Col from "../components/Col";
-import Episode from "../components/Episode";
-import AudioPlayer from "../components/AudioPlayer";
-import API from "..utils/API";
+import Container from "../components/Container/container";
+import Row from "../components/Row/row";
+import Col from "../components/Col/col";
+import Episode from "../components/Episode/episode";
+import AudioPlayer from "../components/AudioPlayer/audioPlayer";
+import API from "../utils/API";
 
 
 class Listen extends Component {

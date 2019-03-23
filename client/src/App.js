@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar/navbar";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
+import SearchResults from "./pages/SearchResults";
+import EpisodeList from "./pages/EpisodeList";
 import Container from "./components/Container/container";
 import API from "./utils/API"
 
@@ -15,8 +17,24 @@ class App extends Component {
     userSearch: "",
     podcastSearch: "",
     users: [],
-    podcasts: []
-
+    podcasts: [
+      {
+        podcast_id: 1234,
+        thumbnail: "https://picsum.photos/200/200",
+        title: "Test Podcast 1"
+      },
+      {
+        podcast_id: 1234,
+        thumbnail: "https://picsum.photos/200/200",
+        title: "Test Podcast 2"
+      },
+      {
+        podcast_id: 1234,
+        thumbnail: "https://picsum.photos/200/200",
+        title: "Test Podcast 3"
+      }
+    ],
+    showResults: "hide"
   };
 
   handleInputChange = event => {
@@ -41,19 +59,19 @@ class App extends Component {
       );
   };
 
-  getUsers =() => {
+  getUsers = () => {
     API.getUsers(this.state.userSearch)
-    .then(res => 
+      .then(res =>
         this.setState({
-            users: res.data
+          users: res.data
         })
-    )
-    .catch(() =>
+      )
+      .catch(() =>
         this.setState({
-            users: [],
-            message: "We couldn't find a match."
+          users: [],
+          message: "We couldn't find a match."
         })
-    );
+      );
   };
 
   handleUserSubmit = event => {
@@ -78,11 +96,16 @@ class App extends Component {
             podcastSearch={this.podcastSearch}
             handleInputChange={this.handleInputChange}
           />
+          <SearchResults
+            podcasts={this.state.podcasts}
+            show={this.state.showResults}
+          />
           <Container>
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/home" component={Home} />
               <Route exact path="/profile" component={Profile} />
+              <Route exact path="/episodeList" component={EpisodeList} /> {/* Temp Route */}
             </Switch>
           </Container>
         </div>
