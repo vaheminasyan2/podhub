@@ -1,12 +1,23 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./podcast.css";
+import API from "../../utils/API";
 
-function Podcast ({ podcastId, thumbnail, title }) {
+function Podcast ({ podcastId, podcastLogo, thumbnail, title }) {
+
     return (
-        <div className="podcast">
+        
+        <Link to={{
+            pathname: "/episodeList", 
+            state: {
+                podcastId: podcastId,
+                podcastLogo: podcastLogo
+            }
+            }} 
+            className="podcast">
             <span><img className="podcastLogoSmall" src={thumbnail}/></span>
             <span><p className="podcastTitle">{title}</p></span>
-        </div>
+        </Link>
     );
 };
 

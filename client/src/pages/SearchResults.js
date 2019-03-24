@@ -8,14 +8,16 @@ import "./searchResults.css";
 // SEARCH RESULTS PAGE
 
 function SearchResults ({ show, podcasts }) {
-    return(
+    console.log(podcasts);
+    return;
+    return (
             <Container className = {show} >
                 <List>
                     {podcasts.map((podcast) =>
                         <Podcast 
-                          podcastId={podcast.podcastId}
+                          podcastId={podcast.id}
                           thumbnail={podcast.thumbnail}
-                          title={podcast.title}
+                          title={podcast.title_original}
                         />
                     )}
                 </List>

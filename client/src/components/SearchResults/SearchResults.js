@@ -14,11 +14,12 @@ function SearchResults ({ show, podcasts }) {
                 <List>
                     {podcasts.map((podcast) =>
                         <Podcast 
-                          podcastId={podcast.podcastId}
+                          podcastId={podcast.id}
+                          podcastLogo={podcast.image}
                           thumbnail={podcast.thumbnail}
-                          title={podcast.title}
+                          title={podcast.title_original}
                         />
-                    )}
+                    )}                
                 </List>
             </div>
         </Container>

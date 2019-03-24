@@ -20,19 +20,19 @@ class App extends Component {
     users: [],
     podcasts: [
       {
-        podcast_id: 1234,
+        id: "4c7d60abc0594aa183dd54430d93d1cf",
         thumbnail: "https://picsum.photos/200/200",
-        title: "Test Podcast 1"
+        title_original: "Test Podcast 1"
       },
       {
-        podcast_id: 1234,
+        id: "e12c16d5521d40e9be482c9f15ef446f",
         thumbnail: "https://picsum.photos/200/200",
-        title: "Test Podcast 2"
+        title_original: "Test Podcast 2"
       },
       {
-        podcast_id: 1234,
+        id: "4618d25194e34a3d9b1fb5fcbafb7627",
         thumbnail: "https://picsum.photos/200/200",
-        title: "Test Podcast 3"
+        title_original: "Test Podcast 3"
       }
     ],
     showResults: "hide"
@@ -70,8 +70,8 @@ class App extends Component {
         this.setState({
           podcasts: res.data.results
         })
-      })
-      .catch((error) => {        
+      })    
+      .catch((error) => {
         console.log(error);
         this.setState({
           podcasts: [],
@@ -82,17 +82,17 @@ class App extends Component {
 
   getUsers = () => {
     API.getUsers(this.state.userSearch)
-      .then(res =>
+      .then(res => {
         this.setState({
           users: res.data
         })
-      )
-      .catch(() =>
+      })
+      .catch((error) => {
         this.setState({
           users: [],
           message: "We couldn't find a match."
         })
-      );
+      });
   };
 
   handleUserSubmit = event => {
