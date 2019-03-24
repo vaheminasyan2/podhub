@@ -1,5 +1,5 @@
 import React from "react";
-import "./style.css";
+import "./episode.css";
 
 function Episode({ episodeId, name, date, length, description, Button }) {
   return (

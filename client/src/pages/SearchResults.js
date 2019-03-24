@@ -1,28 +1,27 @@
 import React, { Component } from "react";
-import List from "../List/list";
-import Podcast from "../Podcast/podcast";
-import Container from "../Container/container";
+import List from "../components/List/list";
+import Podcast from "../components/Podcast/podcast";
+import Container from "../components/Container/container";
+import API from "../utils/API";
 import "./searchResults.css";
 
-// SEARCH RESULTS COMPONENT
+// SEARCH RESULTS PAGE
 
 function SearchResults ({ show, podcasts }) {
-
+    console.log(podcasts);
+    return;
     return (
-        <Container>
-            <div className={show}>
+            <Container className = {show} >
                 <List>
                     {podcasts.map((podcast) =>
                         <Podcast 
                           podcastId={podcast.id}
-                          podcastLogo={podcast.image}
                           thumbnail={podcast.thumbnail}
                           title={podcast.title_original}
                         />
-                    )}                
+                    )}
                 </List>
-            </div>
-        </Container>
+            </Container>
         )
 };
 

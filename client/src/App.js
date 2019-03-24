@@ -21,17 +21,17 @@ class App extends Component {
     users: [],
     podcasts: [
       {
-        podcast_id: 1234,
+        id: "4c7d60abc0594aa183dd54430d93d1cf",
         thumbnail: "https://picsum.photos/200/200",
         title_original: "Test Podcast 1"
       },
       {
-        podcast_id: 1234,
+        id: "e12c16d5521d40e9be482c9f15ef446f",
         thumbnail: "https://picsum.photos/200/200",
         title_original: "Test Podcast 2"
       },
       {
-        podcast_id: 1234,
+        id: "4618d25194e34a3d9b1fb5fcbafb7627",
         thumbnail: "https://picsum.photos/200/200",
         title_original: "Test Podcast 3"
       }
