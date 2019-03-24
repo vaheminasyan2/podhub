@@ -14,7 +14,7 @@ function Episode({ episodeId, name, date, length, description, Button }) {
           <div className="border rounded">
 
             {/* Episode Description */}
-            <span>{description}<br/></span>
+            <span>{description.replace(/<\/?[^>]+(>|$)/g, "")}<br/></span>
 
             {/* Listen Button */}
             <Button />
