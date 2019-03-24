@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 //import logo from './logo.svg';
 //import logo from './images/logo.svg';
-import './App.css';
+import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar/navbar";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import SearchResults from "./components/SearchResults/SearchResults";
 import EpisodeList from "./pages/EpisodeList";
-import Login from "./pages/Login";
 import Container from "./components/Container/container";
-import API from "./utils/API";
-
+import API from "./utils/API"
+import Login from './pages/Login';
 
 class App extends Component {
 
@@ -40,6 +39,8 @@ class App extends Component {
   };
 
   // When input is changed, update state
+  // this.checkContent is callback function so it executes in real time
+  // Otherwise it will lag behind by one action as setState is asynchronous
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -65,17 +66,18 @@ class App extends Component {
 
   getPodcasts = () => {
     API.getPodcasts(this.state.podcastSearch)
-      .then(res =>
+      .then(res => {
         this.setState({
-          podcasts: res.data
+          podcasts: res.data.results
         })
-      )
-      .catch(() =>
+      })
+      .catch((error) => {        
+        console.log(error);
         this.setState({
           podcasts: [],
           message: "We couldn't find a match."
         })
-      );
+      });
   };
 
   getUsers = () => {
@@ -102,7 +104,6 @@ class App extends Component {
     event.preventDefault();
     this.getPodcasts();
   };
-
 
   render() {
     return (

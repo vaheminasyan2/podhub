@@ -34,8 +34,8 @@ export default {
         return axios.get("/api/getEpisodes", podcastId);
     },
 
-    getUserDetails: function (userId) {
-        return axios.get("/api/getUserDetails", userId);
+    getUserDetails: function (id_token) {
+        return axios.get("/api/users", { params: {id_token}});
     },
 
     getFollowers: function (userId) {

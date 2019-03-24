@@ -1,12 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
+import { GoogleLogout } from 'react-google-login';
 
-function Navbar({ userSearch, podcastSearch, handleInputChange, handlePodcastSubmit, handleUserSubmit }) {
+
+function Navbar({ userSearch, podcastSearch, handleInputChange, handlePodcastSubmit, handleUserSubmit, logout }) {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-success">
-      <Link className="navbarText navbar-brand" to="/home">PodHub</Link>
+      <Link className="navbarText navbar-brand" to="/">PodHub</Link>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
@@ -30,7 +32,7 @@ function Navbar({ userSearch, podcastSearch, handleInputChange, handlePodcastSub
             <Link
               to="/home"
               className={
-             window.location.pathname === "/home"
+                window.location.pathname === "/home"
                   ? "nav-link active"
                   : "nav-link"
               }
@@ -49,16 +51,16 @@ function Navbar({ userSearch, podcastSearch, handleInputChange, handlePodcastSub
             value={userSearch}
             onChange={handleInputChange}
             name="userSearch"
-            autocomplete="off"
+            autoComplete="off"
             required
           />
         </form>
         <button type="submit"
-            className="btn btn-dark btn-sm"
-            onClick={handleUserSubmit}>
-            Search
+          className="btn btn-dark btn-sm"
+          onClick={handleUserSubmit}>
+          Search
         </button>
-
+        <ul className="navbar-nav mr-auto">
         <form className="form-inline my-2 my-lg-0 searchPodcastForm">
           <input className="form-control mr-sm-2 searchPodcastInput"
             type="search"
@@ -68,15 +70,25 @@ function Navbar({ userSearch, podcastSearch, handleInputChange, handlePodcastSub
             value={podcastSearch}
             onChange={handleInputChange}
             name="podcastSearch"
-            autocomplete="off"
+            autoComplete="off"
             required
           />
         </form>
+        
         <button type="submit"
-            className="btn btn-dark btn-sm"
-            onClick={handlePodcastSubmit}>
-            Search
+          className="btn btn-dark btn-sm"
+          onClick={handlePodcastSubmit}>
+          Search
         </button>
+        </ul>
+        
+
+        <GoogleLogout
+          buttonText="Logout"
+          onLogoutSuccess={logout}
+        >
+        </GoogleLogout>
+        
       </div>
     </nav>
   );
