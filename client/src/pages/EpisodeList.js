@@ -42,6 +42,39 @@ class EpisodeList extends Component {
             );
     };
 
+    // Converts date from ms to MM/DD/YYYY format
+    convertDate = (date_ms) => {
+        let date = new Date(date_ms);
+        return `${date.getMonth()+1}/${date.getDay()+1}/${date.getFullYear().toString()}`;
+    }
+
+    convertTime = (time_sec) => {
+        let hours = Math.floor(time_sec / 3600);
+
+        time_sec = time_sec - (hours * 3600);
+
+        let minutes = Math.floor(time_sec / 60);
+        let seconds = time_sec - (minutes * 60);
+
+        let addZeroHours = "";
+        let addZeroMins = "";
+        let addZeroSecs = "";
+
+        if (hours < 10) {
+            addZeroHours = 0;
+        }
+
+        if (minutes < 10) {
+            addZeroMins = 0;
+        }
+
+        if (seconds < 10) {
+            addZeroSecs = 0;
+        }
+
+        return `${addZeroHours}${hours}:${addZeroMins}${minutes}:${addZeroSecs}${seconds}`;
+    }
+
     render() {
         return (
             <Container>
@@ -58,9 +91,9 @@ class EpisodeList extends Component {
                                     <Episode
                                         key={episode.id}
                                         name={episode.title}
-                                        date={episode.pub_date_ms}
-                                        length={episode.audio_length}
-                                        description={episode.description_original}
+                                        date={this.convertDate(episode.pub_date_ms)}
+                                        length={this.convertTime(episode.audio_length)}
+                                        description={episode.description}
                                         Button={() => (
                                             <button
                                                 onClick={() => this.listenToEpisode(episode.id)}

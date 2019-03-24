@@ -6,7 +6,7 @@ import "./searchResults.css";
 
 // SEARCH RESULTS COMPONENT
 
-function SearchResults ({ show, podcasts }) {
+function SearchResults ({ show, podcasts, handler }) {
 
     return (
         <Container>
@@ -18,6 +18,7 @@ function SearchResults ({ show, podcasts }) {
                           podcastLogo={podcast.image}
                           thumbnail={podcast.thumbnail}
                           title={podcast.title_original}
+                          handler={handler}
                         />
                     )}                
                 </List>

@@ -19,23 +19,7 @@ class App extends Component {
     userSearch: "",
     podcastSearch: "",
     users: [],
-    podcasts: [
-      {
-        id: "4c7d60abc0594aa183dd54430d93d1cf",
-        thumbnail: "https://picsum.photos/200/200",
-        title_original: "Test Podcast 1"
-      },
-      {
-        id: "e12c16d5521d40e9be482c9f15ef446f",
-        thumbnail: "https://picsum.photos/200/200",
-        title_original: "Test Podcast 2"
-      },
-      {
-        id: "4618d25194e34a3d9b1fb5fcbafb7627",
-        thumbnail: "https://picsum.photos/200/200",
-        title_original: "Test Podcast 3"
-      }
-    ],
+    podcasts: [],
     showResults: "hide"
   };
 
@@ -55,6 +39,8 @@ class App extends Component {
       this.setState({
         showResults: "show"
       })
+
+      setTimeout(this.getPodcasts(), 1000);
     }
     else {
       this.setState({
@@ -103,6 +89,14 @@ class App extends Component {
     this.getPodcasts();
   };
 
+  // This will be passed down through children as a prop
+  // When a Podcast is clicked from Search Results, it hides search results window
+  // by updating the parent's state
+  handler = () => {
+    this.setState({
+      showResults: "hide"
+    })
+  }
 
   render() {
     return (
@@ -118,6 +112,7 @@ class App extends Component {
           <SearchResults
             podcasts={this.state.podcasts}
             show={this.state.showResults}
+            handler={this.handler}
           />
           <Container>
             <Switch>
