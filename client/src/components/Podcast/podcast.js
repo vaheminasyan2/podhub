@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import "./podcast.css";
 import API from "../../utils/API";
 
+// PODCAST COMPONENT
+
 function Podcast ({ podcastId, podcastLogo, thumbnail, title, handler }) {
 
     return (

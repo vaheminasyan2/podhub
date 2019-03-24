@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import SearchResults from "./components/SearchResults/SearchResults";
 import EpisodeList from "./pages/EpisodeList";
+import Listen from "./pages/Listen";
 import Container from "./components/Container/container";
 import API from "./utils/API"
 import Login from './pages/Login';
@@ -122,6 +123,7 @@ class App extends Component {
               <Route exact path="/home" component={Home} />
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/episodeList" component={EpisodeList} /> {/* Temp Route */}
+              <Route exact path="/listen" component={Listen} /> {/* Temp Route */}
             </Switch>
           </Container>
         </div>

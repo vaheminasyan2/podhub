@@ -35,7 +35,7 @@ export default {
 
         return axios.get(URL, { 'headers': { 'X-RapidAPI-Key': "a063bce4f1msh0a4f44209d57a2fp1225adjsn3f80cc1cf1bb" } })
             .then((response => {
-                console.log(response);
+                // console.log(response);
                 return response;
             }))
             .catch((error) => {

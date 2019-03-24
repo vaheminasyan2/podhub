@@ -1,44 +1,36 @@
 import React, { Component } from "react";
 import Container from "../components/Container/container";
 import Row from "../components/Row/row";
-import Col from "../components/Col/col";
-import Episode from "../components/Episode/episode";
 import AudioPlayer from "../components/AudioPlayer/audioPlayer";
+import ListenView from "../components/ListenView/listenView";
 import API from "../utils/API";
 
+// LISTEN TO PODCAST PAGE
 
 class Listen extends Component {
 
     state = {
-        podcastId: 1234,
-        podcastTitle: "",
-        episodeId: 1234,
-        episodeTitle: "",
-        audioLink: "",
-        summary: "",
-        message: "NA"
+        podcastName: "",
+        episodeId: "",
+        episodeName: "",
+        date: "",
+        length: "",
+        description: "",
+        audioLink: ""
     };
 
-    getAudio = () => {
-        API.getEpisodeById(this.state.episodeId)
-            .then(res =>
-                console.log(res.data)
-
-                // this.setState({
-                //     podcastId: res.data.podcastId,
-                //     podcastTitle: res.data.podcastTitle,
-                //     episodeId: res.data.episodeId,
-                //     episodeTitle: res.data.title,
-                //     audioLink: res.data.link,
-                //     summary: res.data.description
-                // })
-            )
-            .catch(() =>
-                this.setState({
-                    message: "Error: episode could not be loaded."
-                })
-            );
-    };
+    componentDidMount = () => {
+        console.log(this.props);
+        this.setState({
+            podcastLogo: this.props.location.state.podcastLogo,
+            episodeId: this.props.location.state.episodeId,
+            episodeName: this.props.location.state.episodeName,
+            date: this.props.location.state.date,
+            description: this.props.location.state.description,
+            audioLink: this.props.location.state.audioLink
+        }, () => {console.log(this.state)});
+        // console.log(this.state);
+    }
 
     handleShareEpisode = event => {
         event.preventDefault();
@@ -49,24 +41,15 @@ class Listen extends Component {
         return (
             <Container>
                 <Row>
-                    {this.state.episodes.length ? (
-                        <Container>
-                            <Episode
-                                key={episode.podcast_id}
-                                image={episode.image}
-                                thumbnail={episode.thumbnail}
-                                name={episode.title_original}
-                                date={episode.pub_date_ms}
-                                length={episode.audio_length}
-                                description={episode.description_original}
-                            />
-                            <AudioPlayer 
-                                audioLink={this.state.audioLink}
-                            />
-                        </Container>
-                    ) : (
-                        <h2 className="text-center">{this.state.message}</h2>
-                    )}
+                    <ListenView
+                        podcastName={this.state.podcastName}
+                        podcastLogo={this.state.podcastLogo}
+                        episodeId={this.state.episodeId}
+                        episodeName={this.state.episodeName}
+                        date={this.state.date}
+                        description={this.state.description}
+                        audioLink={this.state.audioLink}
+                    />
                 </Row>
             </Container>
         )

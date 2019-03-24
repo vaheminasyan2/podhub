@@ -1,7 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./episode.css";
 
-function Episode({ episodeId, name, date, length, description, Button }) {
+// EPISODE COMPONENT
+
+function Episode({ podcastLogo, episodeId, episodeName, date, length, description, audioLink }) {
   return (
 
     <div className="container rounded-0 border-0 card">
@@ -9,7 +12,7 @@ function Episode({ episodeId, name, date, length, description, Button }) {
         <div className="col">
 
           {/* Name | Date */}
-          <div className="row">{name} &nbsp;|&nbsp; {date} &nbsp;|&nbsp; {length}</div>
+          <div className="row">{episodeName} &nbsp;|&nbsp; {date} &nbsp;|&nbsp; {length}</div>
 
           <div className="border rounded">
 
@@ -17,7 +20,21 @@ function Episode({ episodeId, name, date, length, description, Button }) {
             <span>{description.replace(/<\/?[^>]+(>|$)/g, "")}<br/></span>
 
             {/* Listen Button */}
-            <Button />
+            <Link 
+              to={{
+                pathname: "/listen",
+                state: {
+                  podcastLogo: podcastLogo,
+                  episodeId: episodeId,
+                  episodeName: episodeName,
+                  date: date,
+                  description: description,
+                  audioLink: audioLink
+                }
+              }}
+            >
+            Listen
+            </Link>
         </div>
       </div>
 </div>

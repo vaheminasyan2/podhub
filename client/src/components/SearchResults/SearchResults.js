@@ -14,6 +14,7 @@ function SearchResults ({ show, podcasts, handler }) {
                 <List>
                     {podcasts.map((podcast) =>
                         <Podcast 
+                          key={podcast.id}
                           podcastId={podcast.id}
                           podcastLogo={podcast.image}
                           thumbnail={podcast.thumbnail}

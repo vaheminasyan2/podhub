@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Link } from "react";
 import Container from "../components/Container/container";
 import Row from "../components/Row/row";
 import List from "../components/List/list";
@@ -6,6 +6,8 @@ import List from "../components/List/list";
 import Episode from "../components/Episode/episode";
 import Image from "../components/Image/image";
 import API from "../utils/API";
+
+// EPISODE LIST PAGE
 
 class EpisodeList extends Component {
 
@@ -45,7 +47,7 @@ class EpisodeList extends Component {
     // Converts date from ms to MM/DD/YYYY format
     convertDate = (date_ms) => {
         let date = new Date(date_ms);
-        return `${date.getMonth()+1}/${date.getDay()+1}/${date.getFullYear().toString()}`;
+        return `${date.getMonth() + 1}/${date.getDay() + 1}/${date.getFullYear().toString()}`;
     }
 
     convertTime = (time_sec) => {
@@ -79,29 +81,24 @@ class EpisodeList extends Component {
         return (
             <Container>
                 <h1>Episodes</h1>
-                <Image 
+                <Image
                     src={this.state.podcastLogo}
                 />
-                <br/>
+                <br />
                 <Row>
                     {this.state.episodes.length ? (
                         <Container>
                             <List>
-                                {this.state.episodes.map(episode => (
+                                {this.state.episodes.map(episode => (    
                                     <Episode
                                         key={episode.id}
-                                        name={episode.title}
+                                        podcastLogo={this.state.podcastLogo}
+                                        episodeId={episode.id}
+                                        episodeName={episode.title}
                                         date={this.convertDate(episode.pub_date_ms)}
                                         length={this.convertTime(episode.audio_length)}
                                         description={episode.description}
-                                        Button={() => (
-                                            <button
-                                                onClick={() => this.listenToEpisode(episode.id)}
-                                                className="btn btn-primary btn-sm"
-                                            >
-                                            Listen
-                                            </button>
-                                        )}
+                                        audioLink={episode.audio}
                                     />
                                 ))}
                             </List>
