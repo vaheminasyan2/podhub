@@ -6,13 +6,16 @@
 
 .podcastTitle {
     display: inline;
+    font-size: 12px;
     margin-left: 10px;
 }
 
 .podcast {
     background: lightgray;
     border: 1px solid black;
+    cursor: pointer;
     height: 60px;
     margin-bottom: 5px;
+    overflow: hidden;
     padding: 5px;
 }

@@ -16,7 +16,7 @@ function SearchResults ({ show, podcasts }) {
                         <Podcast 
                           podcastId={podcast.podcastId}
                           thumbnail={podcast.thumbnail}
-                          title={podcast.title}
+                          title={podcast.title_original}
                         />
                     )}
                 </List>
