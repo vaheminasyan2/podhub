@@ -8,6 +8,7 @@
     position: absolute;
     right: 100px;
     width: 200px;
+    z-index: 99;
 }
 
 .hide {

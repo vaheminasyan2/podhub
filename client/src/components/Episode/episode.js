@@ -9,13 +9,12 @@ function Episode({ episodeId, name, date, length, description, Button }) {
         <div className="col">
 
           {/* Name | Date */}
-          <div className="row">{name} &nbsp;|&nbsp; {date}</div>
+          <div className="row">{name} &nbsp;|&nbsp; {date} &nbsp;|&nbsp; {length}</div>
 
           <div className="border rounded">
 
             {/* Episode Description */}
             <span>{description}<br/></span>
-            <span>Length:{length}<br/></span>
 
             {/* Listen Button */}
             <Button />
