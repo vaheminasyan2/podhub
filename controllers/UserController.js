@@ -19,9 +19,36 @@ class UserController {
    * @param {*} res
    */
   findAll(req, res) {
-    console.log(req.params.id)
-    db.user.findAll({where: {id: req.params.id}})
-      .then(dbUser => res.json(dbUser));
+    console.log(req);
+    var newUser = {};
+    axios
+      .get(
+        "https://oauth2.googleapis.com/tokeninfo?id_token=" + {params}
+      )
+      .then(function (response) {
+        res.json(response.data);
+        newUser = {
+          name: response.data.name,
+          email: response.data.email,
+          id: response.data.sub
+        };
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .then(function () {
+        db.users.findOrCreate({
+          where: { id: newUser.id },
+          defaults: {
+            name: newUser.name,
+            email: newUser.email
+          }
+        })
+          .spread(user, created)
+          .then(function (user) {
+            res.end(user);
+          });
+      });
   }
 
   /**
