@@ -5,6 +5,11 @@ import Container from "../Container/container";
 import "./searchResults.css";
 
 // SEARCH RESULTS COMPONENT
+// This component displays the search results for podcasts depending on a user query.
+// This query comes from the Podcast Search box in the Nav Bar.
+// It renders each podcast using the Podcast component.
+// It will appear on the right side of the screen as a floating drop-down menu. 
+// It will only be visible if the user has typed/changed text in the Podcast Search box. 
 
 function SearchResults ({ show, podcasts, handler }) {
 
@@ -14,10 +19,11 @@ function SearchResults ({ show, podcasts, handler }) {
                 <List>
                     {podcasts.map((podcast) =>
                         <Podcast 
+                          key={podcast.id}
                           podcastId={podcast.id}
+                          podcastName={podcast.title_original}
                           podcastLogo={podcast.image}
                           thumbnail={podcast.thumbnail}
-                          title={podcast.title_original}
                           handler={handler}
                         />
                     )}                

@@ -1,27 +1,47 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./episode.css";
 
-function Episode({ episodeId, name, date, length, description, Button }) {
+// EPISODE COMPONENT
+// This component displays the details of an individual episode.
+// It contains a link that will redirect the user to the Listen to Podcast page.
+
+function Episode({ podcastName, podcastLogo, episodeId, episodeName, date, length, description, audioLink }) {
   return (
 
     <div className="container rounded-0 border-0 card">
+      <div className="col">
 
-        <div className="col">
+        {/* Name | Date */}
+        <div className="row">
+          {episodeName} &nbsp;|&nbsp; {date} &nbsp;|&nbsp; {length}
+        </div>
 
-          {/* Name | Date */}
-          <div className="row">{name} &nbsp;|&nbsp; {date} &nbsp;|&nbsp; {length}</div>
+        <div className="border rounded">
 
-          <div className="border rounded">
+          {/* Episode Description */}
+          <span>{description.replace(/<\/?[^>]+(>|$)/g, "")}<br /></span>
 
-            {/* Episode Description */}
-            <span>{description}<br/></span>
-
-            {/* Listen Button */}
-            <Button />
+          {/* Listen Button */}
+          <Link
+            to={{
+              pathname: "/listen",
+              state: {
+                podcastName: podcastName,
+                podcastLogo: podcastLogo,
+                episodeId: episodeId,
+                episodeName: episodeName,
+                date: date,
+                description: description,
+                audioLink: audioLink
+              }
+            }}
+          >
+            Listen
+            </Link>
         </div>
       </div>
-</div>
-
+    </div>
   );
 }
 

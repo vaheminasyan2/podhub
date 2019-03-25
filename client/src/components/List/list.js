@@ -1,6 +1,6 @@
 import React from "react";
 
-// This component exports both the List and ListItem components
+// LIST AND LIST ITEM COMPONENTS
 
 export const List = ({ children }) => (
     <ul className="list-group">

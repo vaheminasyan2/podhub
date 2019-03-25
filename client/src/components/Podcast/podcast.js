@@ -1,9 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./podcast.css";
-import API from "../../utils/API";
 
-function Podcast ({ podcastId, podcastLogo, thumbnail, title, handler }) {
+// PODCAST COMPONENT
+// This component represents an individual Podcast.
+// It contains a link that will redirect the user to the Episode List page.
+// Upon redirecting it will send along information on the Podcast ID, Name, and Logo for use down the line. 
+// It also contains an onClick event handler which is passed down from App.js. This handler hides the Search Results dropdown.
+
+function Podcast ({ podcastId, podcastName, podcastLogo, thumbnail, handler }) {
 
     return (
         
@@ -11,6 +16,7 @@ function Podcast ({ podcastId, podcastLogo, thumbnail, title, handler }) {
             pathname: "/episodeList", 
             state: {
                 podcastId: podcastId,
+                podcastName: podcastName,
                 podcastLogo: podcastLogo
             }
             }} 
@@ -18,7 +24,7 @@ function Podcast ({ podcastId, podcastLogo, thumbnail, title, handler }) {
             onClick={handler}>
             
             <span><img className="podcastLogoSmall" src={thumbnail}/></span>
-            <span><p className="podcastTitle">{title}</p></span>
+            <span><p className="podcastTitle">{podcastName}</p></span>
         </Link>
     );
 };

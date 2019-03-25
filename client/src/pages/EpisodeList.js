@@ -2,30 +2,33 @@ import React, { Component } from "react";
 import Container from "../components/Container/container";
 import Row from "../components/Row/row";
 import List from "../components/List/list";
-// import Col from "../components/Col/col";
 import Episode from "../components/Episode/episode";
 import Image from "../components/Image/image";
 import API from "../utils/API";
+
+// EPISODE LIST PAGE
+// This page displays a list of episodes for a particular podcast.
 
 class EpisodeList extends Component {
 
     state = {
         podcastId: "",
+        podcastName: "",
         podcastLogo: "",
         episodes: []
     };
 
+    // On page load, update State with Podcast ID and Logo url
+    // Then call .getEpisodes
     componentDidMount = () => {
         this.setState({
             podcastId: this.props.location.state.podcastId,
+            podcastName: this.props.location.state.podcastName,
             podcastLogo: this.props.location.state.podcastLogo
         }, () => { this.getEpisodes() });
     }
 
-    handleListRefresh = () => {
-        this.getEpisodes();
-    };
-
+    // Get episodes for podcast by Podcast ID
     getEpisodes = () => {
         API.getEpisodes(this.state.podcastId)
             .then(res =>
@@ -45,9 +48,10 @@ class EpisodeList extends Component {
     // Converts date from ms to MM/DD/YYYY format
     convertDate = (date_ms) => {
         let date = new Date(date_ms);
-        return `${date.getMonth()+1}/${date.getDay()+1}/${date.getFullYear().toString()}`;
+        return `${date.getMonth() + 1}/${date.getDay() + 1}/${date.getFullYear().toString()}`;
     }
 
+    // Converts time from seconds to HH:MM:SS format
     convertTime = (time_sec) => {
         let hours = Math.floor(time_sec / 3600);
 
@@ -79,29 +83,25 @@ class EpisodeList extends Component {
         return (
             <Container>
                 <h1>Episodes</h1>
-                <Image 
+                <Image
                     src={this.state.podcastLogo}
                 />
-                <br/>
+                <br />
                 <Row>
                     {this.state.episodes.length ? (
                         <Container>
                             <List>
-                                {this.state.episodes.map(episode => (
+                                {this.state.episodes.map(episode => (    
                                     <Episode
                                         key={episode.id}
-                                        name={episode.title}
+                                        podcastName={this.state.podcastName}
+                                        podcastLogo={this.state.podcastLogo}
+                                        episodeId={episode.id}
+                                        episodeName={episode.title}
                                         date={this.convertDate(episode.pub_date_ms)}
                                         length={this.convertTime(episode.audio_length)}
                                         description={episode.description}
-                                        Button={() => (
-                                            <button
-                                                onClick={() => this.listenToEpisode(episode.id)}
-                                                className="btn btn-primary btn-sm"
-                                            >
-                                            Listen
-                                            </button>
-                                        )}
+                                        audioLink={episode.audio}
                                     />
                                 ))}
                             </List>
