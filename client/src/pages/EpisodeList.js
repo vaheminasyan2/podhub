@@ -7,6 +7,7 @@ import Image from "../components/Image/image";
 import API from "../utils/API";
 
 // EPISODE LIST PAGE
+// This page displays a list of episodes for a particular podcast.
 
 class EpisodeList extends Component {
 
