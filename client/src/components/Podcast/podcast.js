@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./podcast.css";
-import API from "../../utils/API";
 
 // PODCAST COMPONENT
 // This component represents an individual Podcast.
