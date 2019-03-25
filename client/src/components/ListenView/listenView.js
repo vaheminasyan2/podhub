@@ -2,8 +2,9 @@ import React from "react";
 import Container from "../Container/container";
 import Image from "../Image/image";
 import AudioPlayer from "../AudioPlayer/audioPlayer";
+import "./listenView.css";
 
-function ListenView({ episodeId, podcastName, episodeName, date, podcastLogo, audioLink, description }) {
+function ListenView({ podcastName, podcastLogo, episodeId, episodeName, date, description, audioLink }) {
     return (
         <Container>
             <div>

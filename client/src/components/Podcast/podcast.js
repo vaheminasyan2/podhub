@@ -5,7 +5,7 @@ import API from "../../utils/API";
 
 // PODCAST COMPONENT
 
-function Podcast ({ podcastId, podcastLogo, thumbnail, title, handler }) {
+function Podcast ({ podcastId, podcastName, podcastLogo, thumbnail, handler }) {
 
     return (
         
@@ -13,6 +13,7 @@ function Podcast ({ podcastId, podcastLogo, thumbnail, title, handler }) {
             pathname: "/episodeList", 
             state: {
                 podcastId: podcastId,
+                podcastName: podcastName,
                 podcastLogo: podcastLogo
             }
             }} 
@@ -20,7 +21,7 @@ function Podcast ({ podcastId, podcastLogo, thumbnail, title, handler }) {
             onClick={handler}>
             
             <span><img className="podcastLogoSmall" src={thumbnail}/></span>
-            <span><p className="podcastTitle">{title}</p></span>
+            <span><p className="podcastTitle">{podcastName}</p></span>
         </Link>
     );
 };

@@ -1,8 +1,7 @@
-import React, { Component, Link } from "react";
+import React, { Component } from "react";
 import Container from "../components/Container/container";
 import Row from "../components/Row/row";
 import List from "../components/List/list";
-// import Col from "../components/Col/col";
 import Episode from "../components/Episode/episode";
 import Image from "../components/Image/image";
 import API from "../utils/API";
@@ -13,21 +12,22 @@ class EpisodeList extends Component {
 
     state = {
         podcastId: "",
+        podcastName: "",
         podcastLogo: "",
         episodes: []
     };
 
+    // On page load, update State with Podcast ID and Logo url
+    // Then call .getEpisodes
     componentDidMount = () => {
         this.setState({
             podcastId: this.props.location.state.podcastId,
+            podcastName: this.props.location.state.podcastName,
             podcastLogo: this.props.location.state.podcastLogo
         }, () => { this.getEpisodes() });
     }
 
-    handleListRefresh = () => {
-        this.getEpisodes();
-    };
-
+    // Get episodes for podcast by Podcast ID
     getEpisodes = () => {
         API.getEpisodes(this.state.podcastId)
             .then(res =>
@@ -50,6 +50,7 @@ class EpisodeList extends Component {
         return `${date.getMonth() + 1}/${date.getDay() + 1}/${date.getFullYear().toString()}`;
     }
 
+    // Converts time from seconds to HH:MM:SS format
     convertTime = (time_sec) => {
         let hours = Math.floor(time_sec / 3600);
 
@@ -92,6 +93,7 @@ class EpisodeList extends Component {
                                 {this.state.episodes.map(episode => (    
                                     <Episode
                                         key={episode.id}
+                                        podcastName={this.state.podcastName}
                                         podcastLogo={this.state.podcastLogo}
                                         episodeId={episode.id}
                                         episodeName={episode.title}

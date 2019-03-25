@@ -16,9 +16,9 @@ function SearchResults ({ show, podcasts, handler }) {
                         <Podcast 
                           key={podcast.id}
                           podcastId={podcast.id}
+                          podcastName={podcast.title_original}
                           podcastLogo={podcast.image}
                           thumbnail={podcast.thumbnail}
-                          title={podcast.title_original}
                           handler={handler}
                         />
                     )}                

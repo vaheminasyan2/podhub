@@ -11,10 +11,10 @@ class Listen extends Component {
 
     state = {
         podcastName: "",
+        podcastLogo: "",
         episodeId: "",
         episodeName: "",
         date: "",
-        length: "",
         description: "",
         audioLink: ""
     };
@@ -22,6 +22,7 @@ class Listen extends Component {
     componentDidMount = () => {
         console.log(this.props);
         this.setState({
+            podcastName: this.props.location.state.podcastName,
             podcastLogo: this.props.location.state.podcastLogo,
             episodeId: this.props.location.state.episodeId,
             episodeName: this.props.location.state.episodeName,

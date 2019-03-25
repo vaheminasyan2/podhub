@@ -4,7 +4,7 @@ import "./episode.css";
 
 // EPISODE COMPONENT
 
-function Episode({ podcastLogo, episodeId, episodeName, date, length, description, audioLink }) {
+function Episode({ podcastName, podcastLogo, episodeId, episodeName, date, length, description, audioLink }) {
   return (
 
     <div className="container rounded-0 border-0 card">
@@ -24,6 +24,7 @@ function Episode({ podcastLogo, episodeId, episodeName, date, length, descriptio
               to={{
                 pathname: "/listen",
                 state: {
+                  podcastName: podcastName,
                   podcastLogo: podcastLogo,
                   episodeId: episodeId,
                   episodeName: episodeName,

@@ -122,8 +122,8 @@ class App extends Component {
               <Route exact path="/" component={Login} />
               <Route exact path="/home" component={Home} />
               <Route exact path="/profile" component={Profile} />
-              <Route exact path="/episodeList" component={EpisodeList} /> {/* Temp Route */}
-              <Route exact path="/listen" component={Listen} /> {/* Temp Route */}
+              <Route exact path="/episodeList" component={EpisodeList} />
+              <Route exact path="/listen" component={Listen} />
             </Switch>
           </Container>
         </div>
