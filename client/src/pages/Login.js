@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Container from "../components/Container/container";
-import Row from "../components/Row/row";
-import Col from "../components/Col/col";
+// import Row from "../components/Row/row";
+// import Col from "../components/Col/col";
 import API from "../utils/API";
 import "./Login.css";
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import GoogleLogin from 'react-google-login';
 import {Redirect} from 'react-router-dom';
 
