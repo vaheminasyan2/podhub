@@ -4,6 +4,8 @@ import Image from "../Image/image";
 import AudioPlayer from "../AudioPlayer/audioPlayer";
 import "./listenView.css";
 
+// LISTEN TO PODCAST COMPONENT
+
 function ListenView({ podcastName, podcastLogo, episodeId, episodeName, date, description, audioLink }) {
     return (
         <Container>
