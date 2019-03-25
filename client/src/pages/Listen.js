@@ -1,9 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import Container from "../components/Container/container";
 import Row from "../components/Row/row";
 import ListenView from "../components/ListenView/listenView";
 import Modal from "react-responsive-modal";
+import AudioPlayer from "../components/AudioPlayer/audioPlayer";
 import ShareModal from "../components/ShareModal/shareModal";
+import WindowPortal from "../components/WindowPortal/windowPortal";
 // import API from "../utils/API";
 
 // LISTEN TO PODCAST PAGE
@@ -20,9 +22,10 @@ class Listen extends Component {
         date: "",
         description: "",
         audioLink: "", 
-        showModal: false
+        showModal: false,
+        showPortal: false
     };
-
+        
     componentDidMount = () => {
         this.setState({
             podcastName: this.props.location.state.podcastName,
@@ -62,6 +65,13 @@ class Listen extends Component {
         // Call Share Episode sequence
     }
 
+    togglePortal = event => {
+        event.preventDefault();
+        this.setState({
+            showPortal: !this.state.showPortal
+        }, () => console.log(this.state));
+    }
+
     render() {
         return (
             <Container>
@@ -76,7 +86,24 @@ class Listen extends Component {
                         audioLink={this.state.audioLink}
                     />
                     <button className="btn btn-primary" onClick={this.handleShowModal}>Share</button>
+                    <button className="btn btn-dark" onClick={this.togglePortal}>Open Portal</button>
                 </Row>
+
+                {this.state.showPortal && (
+                    <WindowPortal>
+                        <h4>{this.state.podcastName}</h4>
+                        <p>{this.state.episodeName}</p>
+                        <AudioPlayer
+                            audioLink={this.state.audioLink}
+                        /><br/>
+                        <button  
+                            className="btn btn-primary"
+                            onClick={this.togglePortal}
+                        >
+                        Close
+                        </button>
+                    </WindowPortal>
+                )}
 
                 <Modal open={this.state.showModal} onClose={this.handleCloseModal} center>
                     <ShareModal 
