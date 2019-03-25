@@ -22,7 +22,6 @@ class Listen extends Component {
     };
 
     componentDidMount = () => {
-        console.log(this.props);
         this.setState({
             podcastName: this.props.location.state.podcastName,
             podcastLogo: this.props.location.state.podcastLogo,
@@ -31,8 +30,7 @@ class Listen extends Component {
             date: this.props.location.state.date,
             description: this.props.location.state.description,
             audioLink: this.props.location.state.audioLink
-        }, () => {console.log(this.state)});
-        // console.log(this.state);
+        });
     }
 
     handleShareEpisode = event => {
