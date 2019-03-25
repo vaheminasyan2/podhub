@@ -10,7 +10,7 @@ var PORT = process.env.PORT || 5000;
 // Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static("client/build"));
 
 var syncOptions = { force: false };
 
