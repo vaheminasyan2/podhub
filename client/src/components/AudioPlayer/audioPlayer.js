@@ -6,7 +6,7 @@ import "./audioPlayer.css";
 function AudioPlayer({ audioLink }) {
     return (
         <div>
-            <audio src={audioLink} type="audio/mpeg" controls autoPlay/>
+            <audio src={audioLink} type="audio/mpeg" controls/>
         </div>
     );
 }

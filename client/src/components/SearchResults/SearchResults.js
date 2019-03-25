@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import List from "../List/list";
 import Podcast from "../Podcast/podcast";
 import Container from "../Container/container";

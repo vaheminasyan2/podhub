@@ -23,7 +23,7 @@ function Podcast ({ podcastId, podcastName, podcastLogo, thumbnail, handler }) {
             className="podcast"
             onClick={handler}>
             
-            <span><img className="podcastLogoSmall" src={thumbnail}/></span>
+            <span><img className="podcastLogoSmall" src={thumbnail} alt="Podcast Logo"/></span>
             <span><p className="podcastTitle">{podcastName}</p></span>
         </Link>
     );

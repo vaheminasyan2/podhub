@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import Container from "../components/Container/container";
 import Row from "../components/Row/row";
 import ListenView from "../components/ListenView/listenView";
-import API from "../utils/API";
+import Modal from "react-responsive-modal";
+import ShareModal from "../components/ShareModal/shareModal";
+// import API from "../utils/API";
 
 // LISTEN TO PODCAST PAGE
 // This page allows a user to listen to a podcast.
@@ -17,7 +19,8 @@ class Listen extends Component {
         episodeName: "",
         date: "",
         description: "",
-        audioLink: ""
+        audioLink: "", 
+        showModal: false
     };
 
     componentDidMount = () => {
@@ -32,8 +35,30 @@ class Listen extends Component {
         });
     }
 
+    // Opens the Share Episode modal
+    // Executed upon user clicking "Share" button on page
+    handleShowModal = event => {
+        event.preventDefault();
+        this.setState({
+            showModal: true
+        });
+    }
+
+    // Closes Share Episode modal
+    // Executed upon user clicking "Share" button in modal
+    handleCloseModal = () => {
+        this.setState({
+            showModal: false
+        });
+    }
+
+    // Shares episode as new post on user's profile
+    // Executes when user clicks "Share" in modal
+    // Closes modal
     handleShareEpisode = event => {
         event.preventDefault();
+        this.handleCloseModal();
+        alert("shared");
         // Call Share Episode sequence
     }
 
@@ -50,7 +75,24 @@ class Listen extends Component {
                         description={this.state.description}
                         audioLink={this.state.audioLink}
                     />
+                    <button className="btn btn-primary" onClick={this.handleShowModal}>Share</button>
                 </Row>
+
+                <Modal open={this.state.showModal} onClose={this.handleCloseModal} center>
+                    <ShareModal 
+                        podcastName={this.state.podcastName}
+                        podcastLogo={this.state.podcastLogo}
+                        episodeName={this.state.episodeName}
+                        audioLink={this.state.audioLink}
+                    />
+                    <button 
+                        className="btn btn-primary"
+                        onClick={this.handleShareEpisode}
+                    >
+                    Share
+                    </button>
+                </Modal>
+
             </Container>
         )
     }

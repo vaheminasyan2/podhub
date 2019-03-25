@@ -6,6 +6,8 @@ import API from "../utils/API";
 import PostCard from "../components/PostCard/postCard";
 import "./Profile.css";
 
+// USER PROFILE PAGE
+
 class Home extends Component {
 
     state = {
@@ -156,7 +158,7 @@ class Home extends Component {
             <Container >
                 <div className="row userProfile rounded bg-light">
                     <div className="col-4">
-                        <img src={this.state.user[0].userProfileImage} />
+                        <img src={this.state.user[0].userProfileImage} alt="User" />
                     </div>
 
                     <div className="col-8">
@@ -165,8 +167,8 @@ class Home extends Component {
                         </Row>
                         <Row>
                             Posts:&nbsp; {this.state.posts.length} &nbsp; | &nbsp;
-                        Followers:&nbsp;{this.state.followers}&nbsp; | &nbsp;
-                        Following:&nbsp;{this.state.following}
+                            Followers:&nbsp;{this.state.followers}&nbsp; | &nbsp;
+                            Following:&nbsp;{this.state.following}
                         </Row>
                     </div>
                 </div>
@@ -181,7 +183,7 @@ class Home extends Component {
 
                                     <div className="col-2 p-0">
 
-                                        <img src={favorites.podcastIcon} />
+                                        <img src={favorites.podcastIcon} alt="Podcast Icon" />
                                     </div>
                                     <div className="col p-0">
                                         <p>{favorites.podcastTitle}</p>

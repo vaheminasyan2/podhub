@@ -29,7 +29,7 @@ function ListenView({ podcastName, podcastLogo, episodeId, episodeName, date, de
                 <p>{description.replace(/<\/?[^>]+(>|$)/g, "")}</p>
             </div>
 
-            <button className="btn btn-primary" type="submit">Share</button>
+            {/* <button className="btn btn-primary" type="submit">Share</button> */}
         </Container>
     );
 }

@@ -37,7 +37,7 @@ class App extends Component {
   // If text is found, show Search Results 
   // If empty, hide Search Results
   checkContent = () => {
-    if (this.state.podcastSearch != "") {
+    if (this.state.podcastSearch !== "") {
       this.setState({
         showResults: "show"
       })
