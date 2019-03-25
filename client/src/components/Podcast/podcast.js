@@ -4,6 +4,10 @@ import "./podcast.css";
 import API from "../../utils/API";
 
 // PODCAST COMPONENT
+// This component represents an individual Podcast.
+// It contains a link that will redirect the user to the Episode List page.
+// Upon redirecting it will send along information on the Podcast ID, Name, and Logo for use down the line. 
+// It also contains an onClick event handler which is passed down from App.js. This handler hides the Search Results dropdown.
 
 function Podcast ({ podcastId, podcastName, podcastLogo, thumbnail, handler }) {
 

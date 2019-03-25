@@ -5,6 +5,9 @@ import AudioPlayer from "../AudioPlayer/audioPlayer";
 import "./listenView.css";
 
 // LISTEN TO PODCAST COMPONENT
+// This component represents the Listen to Podcast view that is displayed on the Listen to Podcast page.
+// It displays info such as Podcast Title, Logo, Episode Name, Description, and the Audio Player. 
+// It receives its props from the Episode component.
 
 function ListenView({ podcastName, podcastLogo, episodeId, episodeName, date, description, audioLink }) {
     return (
