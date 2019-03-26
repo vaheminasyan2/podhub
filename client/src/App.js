@@ -59,17 +59,6 @@ class App extends Component {
     }
   }
 
-  debounce = () => {
-    let timer;
-
-    return function() {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        this.getPodcasts();
-      }, 5000);
-    }
-  }
-
   getPodcasts = () => {
     API.getPodcasts(this.state.podcastSearch)
       .then(res => {
