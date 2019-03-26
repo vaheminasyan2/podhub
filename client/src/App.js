@@ -35,7 +35,7 @@ class App extends Component {
     }, () => { 
       let timer;
       clearTimeout(timer);
-      timer = setTimeout(() => this.checkContent(), 750);
+      timer = setTimeout(() => this.checkContent(), 500);
     });
   };
 
