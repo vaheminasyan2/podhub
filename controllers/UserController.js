@@ -14,6 +14,45 @@ class UserController {
   }
 
   /**
+   * Get the isFollowing by userId from database
+   * @param {*} req
+   * @param {*} res
+   */
+  findIsFollowing(req, res) {
+    console.log(req.params.id);
+
+    db.follow
+      .findAll({
+        where: { followedBy: req.params.id }
+      })
+      .then(dbfollow => res.json({ count: dbfollow.length }));
+
+    // db.follow
+    //   .findAll({
+    //     attributes: [
+    //       db.sequelize.fn("COUNT", db.sequelize.col("isFollowing")),
+    //       "isFollowing"
+    //     ],
+    //     where: {
+    //       followedBy: req.params.id
+    //     }
+    //   })
+    //   .then(dbfollow => res.json(dbfollow));
+  }
+
+  /**
+   * Get the isFollowed by userId from database
+   * @param {*} req
+   * @param {*} res
+   */
+  findFollowedBy(req, res) {
+    console.log(req.params.id);
+    db.follow
+      .findAll({ where: { isFollowing: req.params.id } })
+      .then(dbfollow => res.json({ count: dbfollow.length }));
+  }
+
+  /**
    * Get the userDetails by userId from database
    * @param {*} req
    * @param {*} res
@@ -22,10 +61,8 @@ class UserController {
     console.log(req);
     var newUser = {};
     axios
-      .get(
-        "https://oauth2.googleapis.com/tokeninfo?id_token=" + {params}
-      )
-      .then(function (response) {
+      .get("https://oauth2.googleapis.com/tokeninfo?id_token=" + { params })
+      .then(function(response) {
         res.json(response.data);
         newUser = {
           name: response.data.name,
@@ -33,19 +70,20 @@ class UserController {
           id: response.data.sub
         };
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log(error);
       })
-      .then(function () {
-        db.users.findOrCreate({
-          where: { id: newUser.id },
-          defaults: {
-            name: newUser.name,
-            email: newUser.email
-          }
-        })
+      .then(function() {
+        db.users
+          .findOrCreate({
+            where: { id: newUser.id },
+            defaults: {
+              name: newUser.name,
+              email: newUser.email
+            }
+          })
           .spread(user, created)
-          .then(function (user) {
+          .then(function(user) {
             res.end(user);
           });
       });
@@ -72,13 +110,15 @@ class UserController {
   }
 
   getPosts(req, res) {
-    db.post.findAll({
-      where: {
-        postedBy: req.params.id
-      }
-    }).then(function(posts){
-      res.json(posts);
-    })
+    db.post
+      .findAll({
+        where: {
+          postedBy: req.params.id
+        }
+      })
+      .then(function(posts) {
+        res.json(posts);
+      });
   }
 }
 
