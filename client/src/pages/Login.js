@@ -22,8 +22,8 @@ class Login extends Component {
     getUserDetails = () => {
         API.getUserDetails(this.state.id_token)
             .then(res =>
-                //console.log(res),
-                sessionStorage.setItem("userData", res)
+                console.log(res),
+                //sessionStorage.setItem("userData", res)
             )
     };
 

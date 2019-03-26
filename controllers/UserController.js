@@ -25,7 +25,7 @@ class UserController {
       .get(
         "https://oauth2.googleapis.com/tokeninfo?id_token=" + {params}
       )
-      .then(function (response) {
+      .then(response => {
         res.json(response.data);
         newUser = {
           name: response.data.name,
@@ -36,7 +36,7 @@ class UserController {
       .catch(function (error) {
         console.log(error);
       })
-      .then(function () {
+      .then( () => {
         db.users.findOrCreate({
           where: { id: newUser.id },
           defaults: {
