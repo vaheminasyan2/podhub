@@ -50,7 +50,7 @@ class Login extends Component {
                 <div className="header">
                     <div className="googleSignIn">
                         <GoogleLogin
-                            clientId="894965613215-q002ho1pdjsdg42cftph6h9tt66viv3p.apps.googleusercontent.com"
+                            clientId="940323765774-bpnsf77f8vksurn7gbv082gatubu97kl.apps.googleusercontent.com"
                             buttonText="Login"
                             onSuccess={responseGoogle}
                             onFailure={responseGoogle} />
