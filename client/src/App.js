@@ -26,11 +26,17 @@ class App extends Component {
   // When input is changed, update state
   // this.checkContent is callback function so it executes in real time
   // Otherwise it will lag behind by one action as setState is asynchronous
+  // Uses debouncing to delay execution of .checkContent() function
   handleInputChange = event => {
     const { name, value } = event.target;
+    
     this.setState({
       [name]: value,
-    }, () => { this.checkContent() });
+    }, () => { 
+      let timer;
+      clearTimeout(timer);
+      timer = setTimeout(() => this.checkContent(), 500);
+    });
   };
 
   // Check Podcast Search field for text
@@ -38,11 +44,13 @@ class App extends Component {
   // If empty, hide Search Results
   checkContent = () => {
     if (this.state.podcastSearch !== "") {
+
       this.setState({
         showResults: "show"
       })
 
-      setTimeout(this.getPodcasts(), 1000);
+      this.getPodcasts();
+
     }
     else {
       this.setState({

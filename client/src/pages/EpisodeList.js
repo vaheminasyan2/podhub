@@ -3,7 +3,6 @@ import Container from "../components/Container/container";
 import Row from "../components/Row/row";
 import List from "../components/List/list";
 import Episode from "../components/Episode/episode";
-import Image from "../components/Image/image";
 import API from "../utils/API";
 
 // EPISODE LIST PAGE
@@ -79,15 +78,28 @@ class EpisodeList extends Component {
         return `${addZeroHours}${hours}:${addZeroMins}${minutes}:${addZeroSecs}${seconds}`;
     }
 
+    // Adds Podcast to list of User's Favorite Podcasts 
+    addToFavorites = event => {
+        event.preventDefault();
+
+        API.addPodcastToFavorites(this.state.podcastId);
+        alert("Favorited!");
+    }
+
     render() {
         return (
             <Container>
                 <h1>Episodes</h1>
-                <Image
+                <img
                     src={this.state.podcastLogo}
+                    alt="Podcast Logo"
                 />
+                
                 <br />
                 <Row>
+
+                    <button className="btn btn-danger" onClick={this.addToFavorites}>Favorite</button>
+
                     {this.state.episodes.length ? (
                         <Container>
                             <List>

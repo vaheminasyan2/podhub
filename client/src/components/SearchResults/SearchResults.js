@@ -16,18 +16,22 @@ function SearchResults ({ show, podcasts, handler }) {
     return (
         <Container>
             <div className={show}>
-                <List>
-                    {podcasts.map((podcast) =>
-                        <Podcast 
-                          key={podcast.id}
-                          podcastId={podcast.id}
-                          podcastName={podcast.title_original}
-                          podcastLogo={podcast.image}
-                          thumbnail={podcast.thumbnail}
-                          handler={handler}
-                        />
-                    )}                
-                </List>
+                {podcasts.length > 0 ? (
+                    <List>
+                        {podcasts.map((podcast) =>
+                            <Podcast 
+                            key={podcast.id}
+                            podcastId={podcast.id}
+                            podcastName={podcast.title_original}
+                            podcastLogo={podcast.image}
+                            thumbnail={podcast.thumbnail}
+                            handler={handler}
+                            />
+                        )}       
+                    </List>
+                ) : (
+                    <p>No podcasts found.</p>
+                )}
             </div>
         </Container>
         )
