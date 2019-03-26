@@ -78,6 +78,14 @@ class EpisodeList extends Component {
         return `${addZeroHours}${hours}:${addZeroMins}${minutes}:${addZeroSecs}${seconds}`;
     }
 
+    // Adds Podcast to list of User's Favorite Podcasts 
+    addToFavorites = event => {
+        event.preventDefault();
+
+        API.addPodcastToFavorites(this.state.podcastId);
+        alert("Favorited!");
+    }
+
     render() {
         return (
             <Container>
@@ -86,8 +94,12 @@ class EpisodeList extends Component {
                     src={this.state.podcastLogo}
                     alt="Podcast Logo"
                 />
+                
                 <br />
                 <Row>
+
+                    <button className="btn btn-danger" onClick={this.addToFavorites}>Favorite</button>
+
                     {this.state.episodes.length ? (
                         <Container>
                             <List>

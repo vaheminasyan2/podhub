@@ -4,7 +4,7 @@ import Row from "../components/Row/row";
 import Modal from "react-responsive-modal";
 import AudioPlayer from "../components/AudioPlayer/audioPlayer";
 import Portal from "../components/Portal/portal";
-// import API from "../utils/API";
+import API from "../utils/API";
 
 // LISTEN TO PODCAST PAGE
 // This page allows a user to listen to a podcast.
@@ -63,6 +63,14 @@ class Listen extends Component {
         // Call Share Episode sequence
     }
 
+    // Adds this episode to User's list of Favorite Episodes
+    addToFavorites = event => {
+        event.preventDefault();
+        API.addEpisodeToFavorites(this.state.episodeId);
+        alert("Favorited!");
+    }
+
+    // Activates pop-out window with podcast audio
     togglePortal = event => {
         event.preventDefault();
         this.setState({
@@ -97,6 +105,7 @@ class Listen extends Component {
                     </div>
 
                     <button className="btn btn-primary" onClick={this.handleShowModal}>Share</button>
+                    <button className="btn btn-danger" onClick={this.addToFavorites}>Favorite</button>
                     <button className="btn btn-dark" onClick={this.togglePortal}>Open Portal</button>
                 </Row>
 
@@ -116,7 +125,7 @@ class Listen extends Component {
                     </Portal>
                 )}
 
-                <Modal open={this.state.showModal} onClose={this.handleCloseModal} center>
+                <Modal open={this.state.showModal} onClose={this.togglePortal} center>
 
                     <Container>
                         <div>
