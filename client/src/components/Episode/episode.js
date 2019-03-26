@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from "react-router";
 import "./episode.css";
 
-// EPISODE COMPONENT
+// EPISODE COMPONENT 
 // This component displays the details of an individual episode.
 // It contains a link that will redirect the user to the Listen to Podcast page.
 
