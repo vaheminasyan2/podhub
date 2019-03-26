@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router";
 import "./episode.css";
 
 // EPISODE COMPONENT
@@ -23,7 +23,7 @@ function Episode({ podcastName, podcastLogo, episodeId, episodeName, date, lengt
           <span>{description.replace(/<\/?[^>]+(>|$)/g, "")}<br /></span>
 
           {/* Listen Button */}
-          <Link
+          <Redirect
             to={{
               pathname: "/listen",
               state: {
@@ -38,7 +38,7 @@ function Episode({ podcastName, podcastLogo, episodeId, episodeName, date, lengt
             }}
           >
             Listen
-            </Link>
+            </Redirect>
         </div>
       </div>
     </div>
