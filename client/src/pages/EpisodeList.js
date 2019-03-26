@@ -3,7 +3,6 @@ import Container from "../components/Container/container";
 import Row from "../components/Row/row";
 import List from "../components/List/list";
 import Episode from "../components/Episode/episode";
-import Image from "../components/Image/image";
 import API from "../utils/API";
 
 // EPISODE LIST PAGE
@@ -83,8 +82,9 @@ class EpisodeList extends Component {
         return (
             <Container>
                 <h1>Episodes</h1>
-                <Image
+                <img
                     src={this.state.podcastLogo}
+                    alt="Podcast Logo"
                 />
                 <br />
                 <Row>
