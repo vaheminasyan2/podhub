@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import Container from "../components/Container/container";
 import Row from "../components/Row/row";
 import ListenView from "../components/ListenView/listenView";
