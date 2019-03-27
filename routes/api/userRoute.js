@@ -50,6 +50,18 @@ router.get("/update/:id", (req, res) => controller.update(req, res));
  */
 router.get("/remove/:id", (req, res) => controller.remove(req, res));
 
+/**
+ * Get all posts for the user <<--------------User Profile page------------->>
+ * @param {*} req
+ * @param {*} res
+ */
 router.get("/:id/posts", (req, res) => controller.getPosts(req, res));
+
+/**
+ * Get user followings posts <<--------------Home page------------->>
+ * @param {*} req
+ * @param {*} res
+ */
+router.get("/:id/followings/posts", (req, res) => controller.getFollowingsPosts(req, res));
 
 module.exports = router;

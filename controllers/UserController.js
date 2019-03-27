@@ -73,15 +73,14 @@ class UserController {
       .catch(function(error) {
         console.log(error);
       })
-      .then(function() {
-        db.users
-          .findOrCreate({
-            where: { id: newUser.id },
-            defaults: {
-              name: newUser.name,
-              email: newUser.email
-            }
-          })
+      .then( () => {
+        db.users.findOrCreate({
+          where: { id: newUser.id },
+          defaults: {
+            name: newUser.name,
+            email: newUser.email
+          }
+        })
           .spread(user, created)
           .then(function(user) {
             res.end(user);
@@ -109,6 +108,12 @@ class UserController {
     db.user.destroy({ where: req.params }).then(user => res.json(user));
   }
 
+ /**
+   * Get all posts for the user id
+   * @param {*} req
+   * @param {*} res
+   */
+
   getPosts(req, res) {
     db.post
       .findAll({
@@ -120,6 +125,25 @@ class UserController {
         res.json(posts);
       });
   }
-}
 
+  getFollowingsPosts(req, res) {
+
+    /*
+    db.user.findByPk(req.params.id).then(function (user) {
+			if (user === null) {
+				res.status(404).send("Not Found");
+			}
+      res.json(user)
+			/*
+			user.getUsers().then(function (followings) {
+				res.json(followings)
+			}); 
+    });
+    */
+  }
+
+
+
+
+}
 module.exports = UserController;

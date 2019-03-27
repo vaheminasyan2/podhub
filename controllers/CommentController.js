@@ -32,6 +32,22 @@ class CommentController {
   remove(req, res) {
     db.comment.destroy({ where: req.params }).then(comment => res.json(comment));
   }
+
+  /**
+   * get comment likes
+   * @param {*} req
+   * @param {*} res
+   */
+  getCommentLikes(req, res){
+    db.commentLike.findAll({
+      where:
+      {
+        commentId: req.params.id
+      }
+    }).then(function(commentLikes){
+      res.json(commentLikes);
+    })
+  }
 }
 
 module.exports = CommentController;

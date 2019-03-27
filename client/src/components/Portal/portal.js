@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./windowPortal.css";
+import "./portal.css";
 
-// WINDOW PORTAL COMPONENT
+// PORTAL COMPONENT
 // This component is a ReactDOM pop-up window.
 // It is called from the Listen to Podcast page when user clicks "Open Portal".
 // It is a miniature window that contains only Podcast title, Episode title, and audio player.
 
-class WindowPortal extends React.PureComponent {
+class Portal extends React.PureComponent {
     constructor(props) {
         super(props);
         this.containerEl = document.createElement('div');
@@ -29,4 +29,4 @@ class WindowPortal extends React.PureComponent {
     }
 }
 
-export default WindowPortal;
+export default Portal;

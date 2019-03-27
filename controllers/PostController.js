@@ -44,6 +44,7 @@ class PostController {
     db.post.destroy({ where: req.params }).then(post => res.json(post));
   }
 
+  ///// get Post comments
   getPostComments(req, res){
     db.comment.findAll({
       where:
@@ -55,27 +56,19 @@ class PostController {
     })
   }
 
+  ///// get Post likes
   getPostLikes(req, res){
-    db.post.findAll({
+    db.postLike.findAll({
       where:
       {
-        postId: req.body.id
+        postId: req.params.id
       }
-    }).then(function(comments){
-      res.json(comments);
+    }).then(function(postLikest){
+      res.json(postLikest);
     })
   }
 
-  getCommentLikes(req, res){
-    db.post.findAll({
-      where:
-      {
-        postId: req.body.commentid
-      }
-    }).then(function(comments){
-      res.json(comments);
-    })
-  }
+  
 
 }
 

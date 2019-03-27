@@ -1,12 +1,10 @@
-import React from "react";
+import React, { Component } from "react";
 import Container from "../components/Container/container";
 import Row from "../components/Row/row";
-import ListenView from "../components/ListenView/listenView";
 import Modal from "react-responsive-modal";
 import AudioPlayer from "../components/AudioPlayer/audioPlayer";
-import ShareModal from "../components/ShareModal/shareModal";
-import WindowPortal from "../components/WindowPortal/windowPortal";
-// import API from "../utils/API";
+import Portal from "../components/Portal/portal";
+import API from "../utils/API";
 
 // LISTEN TO PODCAST PAGE
 // This page allows a user to listen to a podcast.
@@ -21,11 +19,11 @@ class Listen extends Component {
         episodeName: "",
         date: "",
         description: "",
-        audioLink: "", 
+        audioLink: "",
         showModal: false,
         showPortal: false
     };
-        
+
     componentDidMount = () => {
         this.setState({
             podcastName: this.props.location.state.podcastName,
@@ -65,6 +63,14 @@ class Listen extends Component {
         // Call Share Episode sequence
     }
 
+    // Adds this episode to User's list of Favorite Episodes
+    addToFavorites = event => {
+        event.preventDefault();
+        API.addEpisodeToFavorites(this.state.episodeId);
+        alert("Favorited!");
+    }
+
+    // Activates pop-out window with podcast audio
     togglePortal = event => {
         event.preventDefault();
         this.setState({
@@ -76,48 +82,70 @@ class Listen extends Component {
         return (
             <Container>
                 <Row>
-                    <ListenView
-                        podcastName={this.state.podcastName}
-                        podcastLogo={this.state.podcastLogo}
-                        episodeId={this.state.episodeId}
-                        episodeName={this.state.episodeName}
-                        date={this.state.date}
-                        description={this.state.description}
-                        audioLink={this.state.audioLink}
-                    />
+                    <div>
+                        <h2>{this.state.podcastName}</h2>
+                        <img src={this.state.podcastLogo} alt="Podcast Logo" />
+                    </div>
+                </Row>
+
+                <Row>
+
+                    <div>
+                        <h4>{this.state.episodeName} &nbsp;|&nbsp; {this.state.date}</h4>
+
+                        <AudioPlayer
+                            audioLink={this.state.audioLink}
+                        />
+                    </div>
+                </Row>
+
+                <Row>
+                    <div>
+                        <p>{this.state.description.replace(/<\/?[^>]+(>|$)/g, "")}</p>
+                    </div>
+
                     <button className="btn btn-primary" onClick={this.handleShowModal}>Share</button>
+                    <button className="btn btn-danger" onClick={this.addToFavorites}>Favorite</button>
                     <button className="btn btn-dark" onClick={this.togglePortal}>Open Portal</button>
                 </Row>
 
                 {this.state.showPortal && (
-                    <WindowPortal>
+                    <Portal>
                         <h4>{this.state.podcastName}</h4>
                         <p>{this.state.episodeName}</p>
                         <AudioPlayer
                             audioLink={this.state.audioLink}
-                        /><br/>
-                        <button  
+                        /><br />
+                        <button
                             className="btn btn-primary"
                             onClick={this.togglePortal}
                         >
-                        Close
+                            Close
                         </button>
-                    </WindowPortal>
+                    </Portal>
                 )}
 
-                <Modal open={this.state.showModal} onClose={this.handleCloseModal} center>
-                    <ShareModal 
-                        podcastName={this.state.podcastName}
-                        podcastLogo={this.state.podcastLogo}
-                        episodeName={this.state.episodeName}
-                        audioLink={this.state.audioLink}
-                    />
-                    <button 
-                        className="btn btn-primary"
-                        onClick={this.handleShareEpisode}
-                    >
-                    Share
-                    </button>
+                <Modal open={this.state.showModal} onClose={this.togglePortal} center>
+
+                    <Container>
+                        <div>
+                            <h4>{this.state.podcastName}</h4>
+                            <img src={this.state.podcastLogo} alt="Podcast Logo" />
+                            <p>{this.state.episodeName}</p>
+                        </div>
+
+                        <form>
+                            <input className="userPostInput" placeholder="Enter message"></input>
+                        </form>
+
+                        <button
+                            className="btn btn-primary"
+                            onClick={this.handleShareEpisode}
+                        >
+                            Share
+                        </button>
+                    </Container>
+                    
                 </Modal>
 
             </Container>

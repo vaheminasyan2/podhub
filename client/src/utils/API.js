@@ -64,4 +64,14 @@ export default {
         return axios.post("/api/favorites", id);
     },
 
+    addEpisodeToFavorites: function(episodeId) {
+        // add episode to user's favorite episodes
+        return episodeId;
+    },
+
+    addPodcastToFavorites: function(podcastId) {
+        // add podcast to user's favorite podcasts
+        return podcastId;
+    }
+
 };
