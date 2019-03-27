@@ -23,6 +23,11 @@ router.update("/:id", (req, res) => controller.update(req, res));
  */
 router.delete("/:id", (req, res) => controller.remove(req, res));
 
+/**
+ * Get Comment likes
+ * @param {*} req
+ * @param {*} res
+ */
 router.get("/:id/likes", (req, res) => controller.getCommentLikes(req, res));
 
 module.exports = router;

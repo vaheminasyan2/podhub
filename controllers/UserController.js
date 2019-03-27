@@ -71,6 +71,12 @@ class UserController {
     db.user.destroy({ where: req.params }).then(user => res.json(user));
   }
 
+ /**
+   * Get all posts for the user id
+   * @param {*} req
+   * @param {*} res
+   */
+
   getPosts(req, res) {
     db.post.findAll({
       where: {
@@ -80,6 +86,25 @@ class UserController {
       res.json(posts);
     })
   }
-}
 
+  getFollowingsPosts(req, res) {
+
+    /*
+    db.user.findByPk(req.params.id).then(function (user) {
+			if (user === null) {
+				res.status(404).send("Not Found");
+			}
+      res.json(user)
+			/*
+			user.getUsers().then(function (followings) {
+				res.json(followings)
+			}); 
+    });
+    */
+  }
+
+
+
+
+}
 module.exports = UserController;
