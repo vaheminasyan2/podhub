@@ -7,7 +7,7 @@ const controller = new UserController();
  * @param {*} req
  * @param {*} res
  */
-router.post("/", (req, res) => controller.create(req, res));
+router.post("/:id", (req, res) => controller.create(req, res));
 
 /**
  * Route to get userDetails by userId from database

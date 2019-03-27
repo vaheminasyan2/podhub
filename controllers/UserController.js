@@ -1,4 +1,5 @@
 const db = require(`../models/index.js`);
+const axios = require('axios');
 
 /**
  * Class User Controller
@@ -61,24 +62,28 @@ class UserController {
     console.log(req);
     var newUser = {};
     axios
-      .get("https://oauth2.googleapis.com/tokeninfo?id_token=" + { params })
+      .get("https://oauth2.googleapis.com/tokeninfo?id_token=" + req.params.id )
       .then(function(response) {
         res.json(response.data);
         newUser = {
           name: response.data.name,
           email: response.data.email,
-          id: response.data.sub
+          googleId: response.data.sub,
+          profileImage: response.data.picture
         };
+        console.log(newUser)
       })
       .catch(function(error) {
         console.log(error);
       })
       .then( () => {
-        db.users.findOrCreate({
-          where: { id: newUser.id },
+        db.user.findOrCreate({
+          where: { googleId: newUser.googleId },
           defaults: {
             name: newUser.name,
-            email: newUser.email
+            email: newUser.email,
+            googleId: newUser.googleId,
+            profileImage: newUser.profileImage
           }
         })
           .spread(user, created)

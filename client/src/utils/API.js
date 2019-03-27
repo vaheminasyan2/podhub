@@ -45,7 +45,7 @@ export default {
     },
 
     getUserDetails: function (id_token) {
-        return axios.get("/api/users", { params: {id_token}});
+        return axios.get("/api/users/", id_token);
     },
 
     getFollowers: function (userId) {
