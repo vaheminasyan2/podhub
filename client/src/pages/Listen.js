@@ -22,7 +22,7 @@ class Listen extends Component {
         audioLink: "",
         showModal: false,
         showPortal: false,
-        speed: 1.0
+        speed: 1.0,
     };
 
     componentDidMount = () => {
@@ -79,9 +79,9 @@ class Listen extends Component {
         }, () => console.log(this.state));
     }
 
-    handleClick = () => {
+    handleChange = (event) => {
         this.setState({
-            speed: 2.0
+            speed: event.target.value
         })
     }
 
@@ -104,12 +104,17 @@ class Listen extends Component {
                             audioLink={this.state.audioLink}
                             playbackRate={this.state.speed}
                         />
-                        <button
-                            onClick={this.handleClick}
-                        >
-                            2x speed
-                        </button>
-                        
+                        <input
+                            type="range"
+                            min="1"
+                            max="2.35"
+                            value={this.state.speed}
+                            onChange={this.handleChange}
+                            step=".15"
+                            list="steplist"
+                        />
+                        <label for="steplist">Speed</label>
+
                     </div>
                 </Row>
 
@@ -132,11 +137,16 @@ class Listen extends Component {
                             audioLink={this.state.audioLink}
                             playbackRate={this.state.speed}
                         />
-                        <button
-                            onClick={this.handleClick}
-                        >
-                            2x speed
-                        </button>
+                        <input
+                            type="range"
+                            min="1"
+                            max="2.35"
+                            value={this.state.speed}
+                            onChange={this.handleChange}
+                            step=".15"
+                            list="steplist"
+                        />
+                        <label for="steplist">Speed</label>
 
                         <br />
                         <button
