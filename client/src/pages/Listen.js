@@ -21,7 +21,8 @@ class Listen extends Component {
         description: "",
         audioLink: "",
         showModal: false,
-        showPortal: false
+        showPortal: false,
+        speed: 1.0
     };
 
     componentDidMount = () => {
@@ -78,6 +79,12 @@ class Listen extends Component {
         }, () => console.log(this.state));
     }
 
+    handleClick = () => {
+        this.setState({
+            speed: 2.0
+        })
+    }
+
     render() {
         return (
             <Container>
@@ -95,7 +102,14 @@ class Listen extends Component {
 
                         <AudioPlayer
                             audioLink={this.state.audioLink}
+                            playbackRate={this.state.speed}
                         />
+                        <button
+                            onClick={this.handleClick}
+                        >
+                            2x speed
+                        </button>
+                        
                     </div>
                 </Row>
 
@@ -113,9 +127,18 @@ class Listen extends Component {
                     <Portal>
                         <h4>{this.state.podcastName}</h4>
                         <p>{this.state.episodeName}</p>
+
                         <AudioPlayer
                             audioLink={this.state.audioLink}
-                        /><br />
+                            playbackRate={this.state.speed}
+                        />
+                        <button
+                            onClick={this.handleClick}
+                        >
+                            2x speed
+                        </button>
+
+                        <br />
                         <button
                             className="btn btn-primary"
                             onClick={this.togglePortal}
@@ -145,7 +168,7 @@ class Listen extends Component {
                             Share
                         </button>
                     </Container>
-                    
+
                 </Modal>
 
             </Container>
