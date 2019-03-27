@@ -2,8 +2,8 @@ USE podHub;
 
 INSERT INTO users(googleId, name, email, profileImage, createdAt, updatedAt) 
 VALUES
-("g123", "Pogos", "pogos@gmail.com", now(), now()),
-("g456", "Petros", "petros@gmail.com", now(), now());
+("g123", "Pogos", "pogos@gmail.com"," ", now(), now()),
+("g456", "Petros", "petros@gmail.com"," ", now(), now());
 
 INSERT INTO posts(title, link, details, message, createdAt, updatedAt, postedBy) 
 VALUES
@@ -20,9 +20,18 @@ VALUES
 ("comm1", now(), now(), 2, 1),
 ("comm1", now(), now(), 3, 2);
 
-USE podHub;
-INSERT INTO follow(createdAt, updatedAt, isFollowing, followedBy) 
+INSERT INTO favorites(title,link,imageIcon,details,createdAt,updatedAt,userID)
 VALUES
-(now(), now(), 1, 2),
-(now(), now(), 2, 1);
+("test1","https://www.test1.link"," ","tech talk1",now(), now(),1),
+("test2","https://www.test2.link"," ","tech talk2",now(), now(),1),
+("test3","https://www.test3.link"," ","tech talk3",now(), now(),2);
+
+INSERT INTO follow(isFollowing,followedBy,createdAt,updatedAt)
+VALUES
+(1,2,now(), now()),
+(2,1,now(), now());
+
+
+
+
 
