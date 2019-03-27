@@ -7,17 +7,14 @@ const controller = new UserController();
  * @param {*} req
  * @param {*} res
  */
-router.post("/:id", (req, res) => controller.create(req, res));
+//router.post("/:id", (req, res) => controller.create(req, res));
 
 /**
  * Route to get userDetails by userId from database
  * @param {*} req
  * @param {*} res
  */
-router.get("/:id", (req, res) => {
-    console.log(req.params)
-    controller.findAll(req, res)
-});
+router.get("/:id", (req, res) => {controller.create(req, res)});
 
 /**
  * Route to get isFollowing by userId from database

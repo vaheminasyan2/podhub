@@ -11,7 +11,38 @@ class UserController {
    * @param {*} res
    */
   create(req, res) {
-    db.user.findOrCreate({ where: req.body }).then(user => res.json(user));
+    console.log(req);
+    var newUser = {};
+    axios
+      .get("https://oauth2.googleapis.com/tokeninfo?id_token=" + req.params.id )
+      .then(function(response) {
+        res.json(response.data);
+        newUser = {
+          name: response.data.name,
+          email: response.data.email,
+          googleId: response.data.sub,
+          profileImage: response.data.picture
+        };
+        console.log(newUser)
+      })
+      .catch(function(error) {
+        console.log(error);
+      })
+      .then( () => {
+        db.user.findOrCreate({
+          where: { googleId: newUser.googleId },
+          defaults: {
+            name: newUser.name,
+            email: newUser.email,
+            googleId: newUser.googleId,
+            profileImage: newUser.profileImage
+          }
+        })
+          .spread(user, created)
+          .then(function(user) {
+            res.end(user);
+          });
+      });
   }
 
   /**
@@ -59,38 +90,7 @@ class UserController {
    * @param {*} res
    */
   findAll(req, res) {
-    console.log(req);
-    var newUser = {};
-    axios
-      .get("https://oauth2.googleapis.com/tokeninfo?id_token=" + req.params.id )
-      .then(function(response) {
-        res.json(response.data);
-        newUser = {
-          name: response.data.name,
-          email: response.data.email,
-          googleId: response.data.sub,
-          profileImage: response.data.picture
-        };
-        console.log(newUser)
-      })
-      .catch(function(error) {
-        console.log(error);
-      })
-      .then( () => {
-        db.user.findOrCreate({
-          where: { googleId: newUser.googleId },
-          defaults: {
-            name: newUser.name,
-            email: newUser.email,
-            googleId: newUser.googleId,
-            profileImage: newUser.profileImage
-          }
-        })
-          .spread(user, created)
-          .then(function(user) {
-            res.end(user);
-          });
-      });
+  
   }
 
   /**
