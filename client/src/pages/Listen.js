@@ -113,7 +113,7 @@ class Listen extends Component {
                             step=".15"
                             list="steplist"
                         />
-                        <label for="steplist">Speed</label>
+                        <label htmlFor="steplist">Speed</label>
 
                     </div>
                 </Row>
