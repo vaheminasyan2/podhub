@@ -22,19 +22,17 @@ module.exports = function(sequelize, DataTypes) {
   // Creates associates
   user.associate = function(models) {
 
-    user.belongsToMany(user, {as: 'children', foreignKey: 'isFollowing', through: 'follow' });
-    user.belongsToMany(user, {as: 'parents', foreignKey: 'followedBy', through: 'follow' });
-    
+    user.belongsToMany(user, {as: 'FollowedBy', foreignKey: 'followedBy', through: 'follow' });
+    user.belongsToMany(user, {as: 'IsFollowing', foreignKey: 'isFollowing', through: 'follow' });
 
-  /*
     user.hasMany(models.post, {
-      onDelete: "cascade"
-    });
-    user.hasMany(models.postLike, {
-      onDelete: "cascade"
+      onDelete: "cascade",
+      foreignKey: "postedBy"
     });
 
-  */  
+    user.hasMany(models.favorite, {
+      onDelete: "cascade"
+    });
   };
 
   return user;

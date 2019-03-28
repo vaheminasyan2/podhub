@@ -12,10 +12,8 @@ module.exports = function(sequelize, DataTypes) {
   
     // Creates associates
     comment.associate = function(models) {
-      comment.belongsTo(models.post, {
-        foreignKey: {
-          allowNull: false
-        }
+      comment.hasMany(models.commentLike, {
+        onDelete: "cascade"
       });
 
       comment.belongsTo(models.user, {

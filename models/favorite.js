@@ -17,15 +17,6 @@ module.exports = function(sequelize, DataTypes) {
           allowNull: false
         }
     });
-  
-    // Creates associates
-    favorite.associate = function(models) {
-      favorite.belongsTo(models.user, {
-        foreignKey: {
-          allowNull: false
-        }
-      });
-    };
     
     return favorite;
   };
