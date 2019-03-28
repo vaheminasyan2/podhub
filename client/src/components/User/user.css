@@ -1,0 +1,26 @@
+.user {
+    background: lightgray;
+    border: 1px solid black;
+    cursor: pointer;
+    height: auto;
+    margin-bottom: 5px;
+    overflow: hidden;
+    padding: 5px;
+    width: 400px;
+}
+
+.userImage {
+    margin: 0px;
+    width: 150px;
+}
+
+.userImageSmall {
+    margin: 0px;
+    width: 50px;
+}
+
+.userName {
+    display: inline;
+    font-size: 12px;
+    margin-left: 10px;
+}
