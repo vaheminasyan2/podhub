@@ -3,11 +3,6 @@ module.exports = function(sequelize, DataTypes) {
 
   // Creates associates
   postLike.associate = function(models) {
-    postLike.belongsTo(models.post, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
     postLike.belongsTo(models.user, {
       foreignKey: {
         allowNull: false

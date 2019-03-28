@@ -28,17 +28,13 @@ module.exports = function(sequelize, DataTypes) {
 
   // Creates associates
   post.associate = function(models) {
-    post.belongsTo(models.user, {
-      foreignKey: {
-        name: 'postedBy',
-        allowNull: false
-      }
-    });
- /*   
     post.hasMany(models.comment, {
       onDelete: "cascade"
     });
-  */
+
+    post.hasMany(models.postLike, {
+      onDelete: "cascade"
+    });
   };
 
   return post;
