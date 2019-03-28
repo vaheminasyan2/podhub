@@ -19,8 +19,8 @@ class Login extends Component {
 
     
 
-    getUserDetails = () => {
-        API.getUserDetails(this.state.id_token)
+    getOrCreateUser = () => {
+        API.getOrCreateUser(this.state.id_token)
             .then(res =>
                 console.log(res),
                 //sessionStorage.setItem("userData", res)
@@ -41,7 +41,7 @@ class Login extends Component {
                 redirect: true,
             });
             
-            this.getUserDetails();
+            this.getOrCreateUser();
         }
         
         return (

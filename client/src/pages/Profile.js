@@ -73,13 +73,13 @@ class Home extends Component {
         ]
     };
 
-    // componentDidMount() {
-    //     this.getPostsOnlyByUser();
-    //     this.getFavorites();
-    //     this.getUserDetails();
-    //     this.getFollowers();
-    //     this.getFollowing();
-    // };
+    componentDidMount() {
+        this.getPostsOnlyByUser();
+        this.getFavorites();
+        this.getOrCreateUser();
+        this.getFollowers();
+        this.getFollowing();
+    };
 
     getPostsOnlyByUser = () => {
         API.getPostsOnlyByUser(this.state.userId)
@@ -111,8 +111,8 @@ class Home extends Component {
             );
     };
 
-    getUserDetails = () => {
-        API.getUserDetails(this.state.userId)
+    getOrCreateUser = () => {
+        API.getOrCreateUser(this.state.userId)
             .then(res =>
                 this.setState({
                     user: res.data
