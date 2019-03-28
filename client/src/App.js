@@ -11,7 +11,6 @@ import Login from './pages/Login';
 import UserSearch from "./pages/UserSearch";
 import API from "./utils/API"
 import "./App.css";
-// import UserSearch from './components/UserSearch/userSearch';
 
 class App extends Component {
 
@@ -74,7 +73,7 @@ class App extends Component {
   hidePodcasts = () => {
     this.setState({
       showPodcasts: "hidePodcasts"
-    })
+    });
   }
 
   render() {
@@ -88,9 +87,9 @@ class App extends Component {
           />
 
           <PodcastSearch
-            podcasts={this.state.podcasts}
             show={this.state.showPodcasts}
-            handler={this.hidePodcasts}
+            hide={this.hidePodcasts}
+            podcasts={this.state.podcasts}
           />
 
           <Container>
