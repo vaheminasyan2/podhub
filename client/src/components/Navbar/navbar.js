@@ -62,8 +62,6 @@ function Navbar({ podcastSearch, handleInputChange, logout }) {
           </li>
         </ul>
 
-
-
         <ul className="navbar-nav">
           <form className="form-inline my-2 my-lg-0 searchPodcastForm">
             <input className="form-control mr-sm-2 searchPodcastInput"
@@ -71,10 +69,11 @@ function Navbar({ podcastSearch, handleInputChange, logout }) {
               placeholder="Search for a podcast"
               aria-label="Search"
               id="podcastInput"
-              value={podcastSearch}
-              onChange={handleInputChange}
+              value={podcastSearch}           
               name="podcastSearch"
               autoComplete="off"
+              onChange={handleInputChange}
+              onFocus={handleInputChange}
               required
             />
           </form>

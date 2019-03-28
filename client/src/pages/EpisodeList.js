@@ -25,10 +25,12 @@ class EpisodeList extends Component {
             podcastName: this.props.location.state.podcastName,
             podcastLogo: this.props.location.state.podcastLogo
         }, () => { this.getEpisodes() });
+        
     }
 
     // Get episodes for podcast by Podcast ID
     getEpisodes = () => {
+        console.log(this.props.location.state);
         API.getEpisodes(this.state.podcastId)
             .then(res =>
                 // console.log(res)
@@ -106,6 +108,7 @@ class EpisodeList extends Component {
                                 {this.state.episodes.map(episode => (    
                                     <Episode
                                         key={episode.id}
+                                        podcastId={this.state.podcastId}
                                         podcastName={this.state.podcastName}
                                         podcastLogo={this.state.podcastLogo}
                                         episodeId={episode.id}

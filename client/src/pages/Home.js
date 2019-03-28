@@ -11,7 +11,7 @@ class Home extends Component {
         posts: [
             {
                 id:1,
-                userProfileImage: "<image>",
+                userProfileImage: "https://picsum.photos/200",
                 userName: "Vahe Minasyan",
                 date: "03/20/2019",
                 message: "Checkout this awesome podcast",
@@ -24,7 +24,7 @@ class Home extends Component {
             },
             {
                 id:2,
-                userProfileImage: "<image>",
+                userProfileImage: "https://picsum.photos/200",
                 userName: "John Smith",
                 date: "03/21/2019",
                 message: "Checkout this awesome podcast",
@@ -39,7 +39,7 @@ class Home extends Component {
         user:[
             {
                 name: "John Smith",
-                userProfileImage: "<image>",
+                userProfileImage: "https://picsum.photos/200",
                 googleUserId: "1111",
             },
         ],
