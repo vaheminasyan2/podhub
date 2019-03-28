@@ -7,8 +7,10 @@ const controller = new UserController();
  * @param {*} req
  * @param {*} res
  */
-router.get("/:id", (req, res) => controller.create(req, res));
-
+router.post("/", (req, res) => {
+    console.log("[Route] User : GET", req.query.id_token);
+    controller.getOrCreate(req, res);
+});
 
 /**
  * Route to get isFollowing by userId from database

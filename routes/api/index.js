@@ -3,6 +3,7 @@ const router = require("express").Router();
 const userRoutes = require("./userRoute");
 const postRoutes = require("./postRoute");
 const favoriteRoutes = require("./favoriteRoute");
+const commentRoute = require("./commentRoute");
 
 // User routes
 router.use("/users", userRoutes);
@@ -12,6 +13,9 @@ router.use("/posts", postRoutes);
 
 // Favorite Routes
 router.use("/favorites", favoriteRoutes);
+
+// Favorite Routes
+router.use("/comments", commentRoute);
 
 // For anything else, render the html page
 router.use(function(req, res) {

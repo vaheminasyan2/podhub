@@ -6,46 +6,6 @@ const axios = require('axios');
  */
 class UserController {
   /**
-   * create a new user in database or get userDetails by userId for exisiting user
-   * @param {*} req
-   * @param {*} res
-   */
-  create(req, res) {
-    console.log(req);
-    var newUser = {};
-    axios
-      .get("https://oauth2.googleapis.com/tokeninfo?id_token=" + req.params.id )
-      .then(function(response) {
-        newUser = {
-          name: response.data.name,
-          email: response.data.email,
-          googleId: response.data.sub,
-          profileImage: response.data.picture
-        };
-        res.json(newUser);
-        console.log(newUser)
-      })
-      .catch(function(error) {
-        console.log(error);
-      })
-      .then( () => {
-        db.user.findOrCreate({
-          where: { googleId: newUser.googleId },
-          defaults: {
-            name: newUser.name,
-            email: newUser.email,
-            googleId: newUser.googleId,
-            profileImage: newUser.profileImage
-          }
-        })
-          .spread(user, created)
-          .then(function(newUser) {
-            res.end(newUser);
-          });
-      });
-  }
-
-  /**
    * Get the isFollowing by userId from database
    * @param {*} req
    * @param {*} res
@@ -84,7 +44,42 @@ class UserController {
       .then(dbfollow => res.json({ count: dbfollow.length }));
   }
 
- 
+  /**
+   * Get the userDetails by userId from database
+   * @param {*} req
+   * @param {*} res
+   */
+  getOrCreate(req, res) {
+    var newUser = {};
+    axios
+      .get("https://oauth2.googleapis.com/tokeninfo?id_token=" + req.query.id_token)
+      .then(function(response) {
+        newUser = {
+          name: response.data.name,
+          email: response.data.email,
+          googleId: response.data.sub,
+          profileImage: response.data.picture
+        };
+
+        db.user.findOrCreate({
+          where: { googleId: newUser.googleId },
+          defaults: {
+            name: newUser.name,
+            email: newUser.email,
+            googleId: newUser.googleId,
+            profileImage: newUser.profileImage
+          }
+        })
+        .spread(function(user, created) {
+          res.json(user);
+        });
+      })
+      .catch(function(error) {
+        console.error(error);
+        res.status(400);
+      })
+  }
+
   /**
    * Update the user
    * @param {*} req
@@ -123,6 +118,8 @@ class UserController {
       });
   }
 
+  // Input: UserId
+  // Output: Posts (From All The Followed Users)
   getFollowingsPosts(req, res) {
 
     /*
@@ -141,6 +138,6 @@ class UserController {
 
 
 
-
+  
 }
 module.exports = UserController;
