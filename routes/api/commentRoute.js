@@ -14,7 +14,7 @@ router.post("/", (req, res) => controller.create(req, res));
  * @param {*} req
  * @param {*} res
  */
-router.update("/:id", (req, res) => controller.update(req, res));
+router.put("/:id", (req, res) => controller.update(req, res));
 
 /**
  * Route to remove the existing comment

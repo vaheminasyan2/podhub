@@ -6,15 +6,6 @@ const axios = require('axios');
  */
 class UserController {
   /**
-   * create a new user in database
-   * @param {*} req
-   * @param {*} res
-   */
-  create(req, res) {
-    db.user.findOrCreate({ where: req.body }).then(user => res.json(user));
-  }
-
-  /**
    * Get the isFollowing by userId from database
    * @param {*} req
    * @param {*} res
@@ -58,25 +49,18 @@ class UserController {
    * @param {*} req
    * @param {*} res
    */
-  findAll(req, res) {
-    console.log(req);
+  getOrCreate(req, res) {
     var newUser = {};
     axios
-      .get("https://oauth2.googleapis.com/tokeninfo?id_token=" + req.params.id )
+      .get("https://oauth2.googleapis.com/tokeninfo?id_token=" + req.query.id_token)
       .then(function(response) {
-        res.json(response.data);
         newUser = {
           name: response.data.name,
           email: response.data.email,
           googleId: response.data.sub,
           profileImage: response.data.picture
         };
-        console.log(newUser)
-      })
-      .catch(function(error) {
-        console.log(error);
-      })
-      .then( () => {
+
         db.user.findOrCreate({
           where: { googleId: newUser.googleId },
           defaults: {
@@ -86,11 +70,14 @@ class UserController {
             profileImage: newUser.profileImage
           }
         })
-          .spread(user, created)
-          .then(function(user) {
-            res.end(user);
-          });
-      });
+        .spread(function(user, created) {
+          res.json(user);
+        });
+      })
+      .catch(function(error) {
+        console.error(error);
+        res.status(400);
+      })
   }
 
   /**
@@ -131,6 +118,8 @@ class UserController {
       });
   }
 
+  // Input: UserId
+  // Output: Posts (From All The Followed Users)
   getFollowingsPosts(req, res) {
 
     /*
@@ -149,6 +138,6 @@ class UserController {
 
 
 
-
+  
 }
 module.exports = UserController;

@@ -46,9 +46,9 @@ class Home extends Component {
 
     };
 
-    componentDidMount() {
-        this.getPosts();
-    };
+  //  componentDidMount() {
+    //    this.getPosts();
+  //  };
 
     // Add function to call getPost function every time when something is posted or every 2 mins or so
     
