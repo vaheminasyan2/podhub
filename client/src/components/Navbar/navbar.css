@@ -1,3 +1,9 @@
+.findUsers {
+    margin-left: 5px;
+    margin-top: 5px;
+    width: 120px;
+}
+
 .navbarText {
     font-weight: bold;
     font-size: 20px;
