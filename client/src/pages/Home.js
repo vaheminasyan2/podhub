@@ -46,16 +46,16 @@ class Home extends Component {
 
     };
 
-  //  componentDidMount() {
-    //    this.getPosts();
-  //  };
+    // componentDidMount() {
+    //     this.getPosts();
+    // };
 
     // Add function to call getPost function every time when something is posted or every 2 mins or so
     
 
     // API request to get the user's and his follower's posts
     getPosts = () => {
-        API.getPosts(this.state.userId)
+        API.getPosts(this.state.user.googleUserId)
             .then(res =>
                 this.setState({
                     posts: res.data
@@ -79,12 +79,12 @@ class Home extends Component {
                                 <PostCard
                                     key={post.id}
                                     photo={post.userProfileImage}
-                                    name={post.userName}
-                                    date={post.date}
+                                    name={post.name}
+                                    date={post.createdAt}
                                     message={post.message}
-                                    icon={post.podcastIcon}
-                                    title={post.podcastEpisode}
-                                    description={post.episodeDescription}
+                                    icon={post.imageIcon}
+                                    title={post.title}
+                                    description={post.details}
                                     link={post.link}
                                     likes={post.likes}
                                     comments={post.comments}

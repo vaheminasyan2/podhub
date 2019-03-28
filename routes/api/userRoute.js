@@ -3,7 +3,7 @@ const UserController = require("../../controllers/UserController");
 const controller = new UserController();
 
 /**
- * Route to create a new user in database
+ * Route to create a new user in database or get userDetails by userId for exisiting user
  * @param {*} req
  * @param {*} res
  */
