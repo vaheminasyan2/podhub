@@ -12,6 +12,7 @@ import API from "./utils/API"
 import "./App.css";
 import { Redirect } from 'react-router-dom';
 import { faSleigh } from '@fortawesome/free-solid-svg-icons';
+import Login from './pages/Login';
 // import UserSearch from './components/UserSearch/userSearch';
 
 class App extends Component {
@@ -89,13 +90,15 @@ class App extends Component {
   // sessionStorage.clear()
 
   render() {
-    if (this.state.redirect) {
+    if (this.state.redirect)
+
       return (
-        <Router>
-          <Redirect to={'/'} />
-        </Router>
+      
+          <Switch>
+            <Redirect to={'/'} />
+          </Switch>
+        
       )
-    }
 
     return (
       <Router>
@@ -122,3 +125,7 @@ class App extends Component {
 }
 
 export default App;
+
+{/* <Router>
+<Redirect to={'/home'} />
+</Router> */}
