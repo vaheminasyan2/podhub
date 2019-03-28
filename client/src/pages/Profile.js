@@ -73,13 +73,13 @@ class Home extends Component {
         ]
     };
 
-    componentDidMount() {
-        this.getPostsOnlyByUser();
-        this.getFavorites();
-        this.getOrCreateUser();
-        this.getFollowers();
-        this.getFollowing();
-    };
+    // componentDidMount() {
+    //     this.getPostsOnlyByUser();
+    //     this.getFavorites();
+    //     this.getOrCreateUser();
+    //     this.getFollowers();
+    //     this.getFollowing();
+    // };
 
     getPostsOnlyByUser = () => {
         API.getPostsOnlyByUser(this.state.userId)

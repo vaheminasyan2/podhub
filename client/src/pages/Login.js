@@ -6,7 +6,7 @@ import API from "../utils/API";
 import "./Login.css";
 // import ReactDOM from 'react-dom';
 import GoogleLogin from 'react-google-login';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 
 
@@ -17,33 +17,35 @@ class Login extends Component {
         redirect: false,
     };
 
-    
 
     getOrCreateUser = () => {
         API.getOrCreateUser(this.state.id_token)
-            .then(res =>
-                console.log(res),
-                //sessionStorage.setItem("userData", res)
-            )
+            .then(res => 
+                sessionStorage.setItem("id", res.data.id)
+                //sessionStorage.setItem("name", res.data.name),
+                //sessionStorage.setItem("email", res.data.email),
+                //sessionStorage.setItem("googleId", res.data.googleId),
+                //sessionStorage.setItem("profileImage", res.data.profileImage)          
+                )
     };
 
-
+//
     render() {
 
-        if (this.state.redirect || sessionStorage.getItem('userData')) {
-            return (<Redirect to={'/home'}/>)
+        if (this.state.redirect || sessionStorage.getItem("id")) {
+            return (<Redirect to={'/home'} />)
         }
 
         const responseGoogle = (response) => {
             console.log(response);
-            this.setState ({
+            this.setState({
                 id_token: response.tokenObj.id_token,
                 redirect: true,
             });
-            
+
             this.getOrCreateUser();
         }
-        
+
         return (
 
             <Container>
