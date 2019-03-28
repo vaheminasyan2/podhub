@@ -21,7 +21,8 @@ class Listen extends Component {
         description: "",
         audioLink: "",
         showModal: false,
-        showPortal: false
+        showPortal: false,
+        speed: 1.0,
     };
 
     componentDidMount = () => {
@@ -78,6 +79,12 @@ class Listen extends Component {
         }, () => console.log(this.state));
     }
 
+    handleChange = (event) => {
+        this.setState({
+            speed: event.target.value
+        })
+    }
+
     render() {
         return (
             <Container>
@@ -95,7 +102,19 @@ class Listen extends Component {
 
                         <AudioPlayer
                             audioLink={this.state.audioLink}
+                            playbackRate={this.state.speed}
                         />
+                        <input
+                            type="range"
+                            min="1"
+                            max="2.35"
+                            value={this.state.speed}
+                            onChange={this.handleChange}
+                            step=".15"
+                            list="steplist"
+                        />
+                        <label htmlFor="steplist">Speed</label>
+
                     </div>
                 </Row>
 
@@ -113,9 +132,23 @@ class Listen extends Component {
                     <Portal>
                         <h4>{this.state.podcastName}</h4>
                         <p>{this.state.episodeName}</p>
+
                         <AudioPlayer
                             audioLink={this.state.audioLink}
-                        /><br />
+                            playbackRate={this.state.speed}
+                        />
+                        <input
+                            type="range"
+                            min="1"
+                            max="2.35"
+                            value={this.state.speed}
+                            onChange={this.handleChange}
+                            step=".15"
+                            list="steplist"
+                        />
+                        <label for="steplist">Speed</label>
+
+                        <br />
                         <button
                             className="btn btn-primary"
                             onClick={this.togglePortal}
@@ -145,7 +178,7 @@ class Listen extends Component {
                             Share
                         </button>
                     </Container>
-                    
+
                 </Modal>
 
             </Container>
