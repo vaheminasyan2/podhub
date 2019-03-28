@@ -76,7 +76,7 @@ class Home extends Component {
     componentDidMount() {
         this.getPostsOnlyByUser();
         this.getFavorites();
-        this.getUserDetails();
+        this.getOrCreateUser();
         this.getFollowers();
         this.getFollowing();
     };
@@ -111,8 +111,8 @@ class Home extends Component {
             );
     };
 
-    getUserDetails = () => {
-        API.getUserDetails(this.state.userId)
+    getOrCreateUser = () => {
+        API.getOrCreateUser(this.state.userId)
             .then(res =>
                 this.setState({
                     user: res.data
