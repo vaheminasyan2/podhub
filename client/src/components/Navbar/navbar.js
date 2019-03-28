@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-//import { library } from '@fortawesome/fontawesome-svg-core'
-//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-//import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import "./navbar.css";
 import { GoogleLogout } from 'react-google-login';
 
-// library.add(faSearch);
+library.add(faSearch);
 
 function Navbar({ podcastSearch, handleInputChange, logout }) {
 
@@ -56,7 +56,7 @@ function Navbar({ podcastSearch, handleInputChange, logout }) {
               }}
               className="btn btn-dark btn-sm findUsers"
             >
-              {/* <FontAwesomeIcon icon="search" /> */}
+              <FontAwesomeIcon icon="search" />
               <span>&nbsp; Find Users</span>
             </Link>
           </li>
