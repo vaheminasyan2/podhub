@@ -7,25 +7,25 @@ import "./episode.css";
 // It contains a link that will redirect the user to the Listen to Podcast page.
 
 class Episode extends Component {
-  
+
   constructor(props) {
-    super(props); 
+    super(props);
     this.state = { redirect: false };
   }
 
   listenToEpisode = event => {
     event.preventDefault();
-    
+
     this.setState({
       redirect: true
     });
   }
 
   render() {
-    
+
     if (this.state.redirect) {
-              
-      return ( 
+
+      return (
         <Redirect
           to={{
             pathname: "/listen",
@@ -44,7 +44,7 @@ class Episode extends Component {
       )
 
     }
-    
+
     return (
 
       <div className="container rounded-0 border-0 card">

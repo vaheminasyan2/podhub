@@ -86,15 +86,13 @@ class App extends Component {
   }
 
   render() {
-    if (this.state.redirect)
-
+    if (this.state.redirect) {
       return (
-      
-          <Switch>
-            <Redirect to={'/'} />
-          </Switch>
-        
+        <Switch>
+          <Redirect to={'/'} />
+        </Switch>
       )
+    }
 
     return (
       <Router>
@@ -104,13 +102,13 @@ class App extends Component {
             handleInputChange={this.handleInputChange}
             logout={this.logout}
           />
-      
-         <PodcastSearch
+
+          <PodcastSearch
             show={this.state.showPodcasts}
             hide={this.hidePodcasts}
             podcasts={this.state.podcasts}
-          />  
-      
+          />
+
           <Route exact path="/home" component={Home} />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/episodeList" component={EpisodeList} />

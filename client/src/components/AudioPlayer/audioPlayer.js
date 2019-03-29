@@ -5,8 +5,6 @@ import "./audioPlayer.css";
 
 class AudioPlayer extends Component {
     constructor(props) {
-        console.log("props", props)
-
         super(props);
         this.audioElement = React.createRef();
     }
