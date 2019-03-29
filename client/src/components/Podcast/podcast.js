@@ -8,7 +8,7 @@ import "./podcast.css";
 // Upon redirecting it will send along information on the Podcast ID, Name, and Logo for use down the line. 
 // It also contains an onClick event handler which is passed down from App.js. This handler hides the Search Results dropdown.
 
-function Podcast ({ podcastId, podcastName, podcastLogo, thumbnail, hide }) {
+function Podcast ({ podcastId, podcastName, podcastLogo, thumbnail, handler }) {
 
     return (
         
@@ -20,11 +20,11 @@ function Podcast ({ podcastId, podcastName, podcastLogo, thumbnail, hide }) {
                 podcastLogo: podcastLogo
             }
             }} 
-            className="podcast"
-            onClick={hide}
-        >
-        <span><img className="podcastLogoSmall" src={thumbnail} alt="Podcast Logo"/></span>
-        <span><p className="podcastTitle">{podcastName}</p></span>
+            className="podcast tile is-child notification"
+            onClick={handler}>
+            
+            <img className="podcastLogoSmall" src={thumbnail} alt="Podcast Logo"/>
+            <p className="podcastTitle">{podcastName}</p>
         </Link>
     );
 };
