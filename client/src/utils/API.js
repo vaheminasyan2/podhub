@@ -44,7 +44,7 @@ export default {
                 .then((response => {
                     numEpisodes = response.data.episodes.length;
                     
-                    if (numEpisodes > 0 && episodes.length < 100) {
+                    if (numEpisodes > 0 && episodes.length < 50) {
 
                         pagination = response.data.episodes[numEpisodes-1].pub_date_ms;
                         return request(podcastId, pagination, episodes.concat(response.data.episodes));

@@ -14,7 +14,8 @@ class EpisodeList extends Component {
         podcastId: "",
         podcastName: "",
         podcastLogo: "",
-        episodes: []
+        episodes: [],
+        message: ""
     };
 
     // On page load, update State with Podcast ID and Logo url
@@ -27,6 +28,18 @@ class EpisodeList extends Component {
         }, () => { this.getEpisodes() });
     }
 
+    // Update episode list when new podcast is selected
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.podcastId !== this.props.location.state.podcastId) {
+            this.setState({
+                podcastId: this.props.location.state.podcastId,
+                podcastName: this.props.location.state.podcastName,
+                podcastLogo: this.props.location.state.podcastLogo,
+                episodes: []
+            }, () => {this.getEpisodes() });
+        }
+    }
+
     // Get episodes for podcast by Podcast ID
     // Gets 100 episodes at a time
     getEpisodes = () => {
@@ -34,8 +47,12 @@ class EpisodeList extends Component {
         let numEpisodes = this.state.episodes.length;
 
         if (numEpisodes > 0) {
-            pagination = this.state.episodes[numEpisodes-1].pub_date_ms;
+            pagination = this.state.episodes[numEpisodes - 1].pub_date_ms;
         }
+
+        this.setState({
+            message: "Loading..."
+        });
 
         API.getEpisodes(this.state.podcastId, pagination)
             .then(res => {
@@ -45,7 +62,8 @@ class EpisodeList extends Component {
                 }
 
                 this.setState({
-                    episodes: res
+                    episodes: res,
+                    message: ""
                 })
             })
             .catch(() =>
@@ -59,7 +77,7 @@ class EpisodeList extends Component {
     // Converts date from ms to MM/DD/YYYY format
     convertDate = (date_ms) => {
         let date = new Date(date_ms);
-        return `${date.getMonth() + 1}/${date.getDay() + 1}/${date.getFullYear().toString()}`;
+        return `${date.getMonth() + 1}/${date.getDate() + 1}/${date.getFullYear().toString()}`;
     }
 
     // Converts time from seconds to HH:MM:SS format
@@ -98,15 +116,21 @@ class EpisodeList extends Component {
         alert("Favorited!");
     }
 
+    // Scrolls to top of page
+    scrollToTop = () => {
+        window.scrollTo(0, 0);
+    }
+
     render() {
         return (
             <Container>
                 <h1>Episodes</h1>
+                <h4>{this.state.podcastName}</h4>
                 <img
                     src={this.state.podcastLogo}
                     alt="Podcast Logo"
                 />
-                
+
                 <br />
                 <Row>
 
@@ -115,7 +139,7 @@ class EpisodeList extends Component {
                     {this.state.episodes.length ? (
                         <Container>
                             <List>
-                                {this.state.episodes.map(episode => (    
+                                {this.state.episodes.map(episode => (
                                     <Episode
                                         key={episode.id}
                                         podcastId={this.state.podcastId}
@@ -131,10 +155,19 @@ class EpisodeList extends Component {
                                 ))}
                             </List>
                             <button className="btn btn-dark" onClick={this.getEpisodes}>Load More</button>
+                            <button className="btn btn-light" onClick={this.scrollToTop}>Back to Top</button>
                         </Container>
+
                     ) : (
-                            <h2 className="text-center">{this.state.message}</h2>
+                            this.state.message !== "Loading..." ? (
+                                <h2 className="text-center">No Episodes found.</h2>
+                            ) :
+                                (
+                                    <></>
+                                )
                         )}
+
+                    <h2 className="text-center">{this.state.message}</h2>
                 </Row>
             </Container>
         )
