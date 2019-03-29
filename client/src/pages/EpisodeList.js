@@ -25,19 +25,29 @@ class EpisodeList extends Component {
             podcastName: this.props.location.state.podcastName,
             podcastLogo: this.props.location.state.podcastLogo
         }, () => { this.getEpisodes() });
-        
     }
 
     // Get episodes for podcast by Podcast ID
+    // Gets 100 episodes at a time
     getEpisodes = () => {
-        console.log(this.props.location.state);
-        API.getEpisodes(this.state.podcastId)
-            .then(res =>
-                // console.log(res)
+        let pagination = 0;
+        let numEpisodes = this.state.episodes.length;
+
+        if (numEpisodes > 0) {
+            pagination = this.state.episodes[numEpisodes-1].pub_date_ms;
+        }
+
+        API.getEpisodes(this.state.podcastId, pagination)
+            .then(res => {
+
+                if (numEpisodes > 0) {
+                    res = this.state.episodes.concat(res);
+                }
+
                 this.setState({
-                    episodes: res.data.episodes
+                    episodes: res
                 })
-            )
+            })
             .catch(() =>
                 this.setState({
                     episodes: [],
@@ -120,6 +130,7 @@ class EpisodeList extends Component {
                                     />
                                 ))}
                             </List>
+                            <button className="btn btn-dark" onClick={this.getEpisodes}>Load More</button>
                         </Container>
                     ) : (
                             <h2 className="text-center">{this.state.message}</h2>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Container from "../components/Container/container";
 import List from "../components/List/list";
 import User from "../components/User/user";
-import API from "../utils/API";
+// import API from "../utils/API";
 import "./UserSearch.css";
 
 // USER SEARCH PAGE
