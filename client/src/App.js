@@ -11,7 +11,6 @@ import UserSearch from "./pages/UserSearch";
 import API from "./utils/API"
 import "./App.css";
 import { Redirect } from 'react-router-dom';
-import { faSleigh } from '@fortawesome/free-solid-svg-icons';
 import Login from './pages/Login';
 // import UserSearch from './components/UserSearch/userSearch';
 
@@ -77,7 +76,7 @@ class App extends Component {
   hidePodcasts = () => {
     this.setState({
       showPodcasts: "hidePodcasts"
-    })
+    });
   }
 
   logout = () => {
@@ -108,10 +107,10 @@ class App extends Component {
             handleInputChange={this.handleInputChange}
             logout={this.logout}
           />
-          <PodcastSearch
-            podcasts={this.state.podcasts}
+         <PodcastSearch
             show={this.state.showPodcasts}
-            handler={this.hidePodcasts}
+            hide={this.hidePodcasts}
+            podcasts={this.state.podcasts}
           />
           <Route exact path="/home" component={Home} />
           <Route exact path="/profile" component={Profile} />
@@ -125,7 +124,3 @@ class App extends Component {
 }
 
 export default App;
-
-{/* <Router>
-<Redirect to={'/home'} />
-</Router> */}
