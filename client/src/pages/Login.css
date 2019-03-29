@@ -1,7 +1,8 @@
 .googleSignIn {
     float: right;
+    margin-top: 40px;
 } 
 
 #loginPageTitle{
-    margin-top: 200px;
+    margin-top: 250px;
 }
