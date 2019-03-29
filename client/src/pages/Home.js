@@ -36,7 +36,7 @@ class Home extends Component {
                 comments: 10,
             },
         ],
-        user:[
+        user: [
             {
                 name: "John Smith",
                 userProfileImage: "https://picsum.photos/200",
@@ -51,7 +51,7 @@ class Home extends Component {
     // };
 
     // Add function to call getPost function every time when something is posted or every 2 mins or so
-    
+
 
     // API request to get the user's and his follower's posts
     getPosts = () => {
@@ -77,17 +77,17 @@ class Home extends Component {
                         <Container>
                             {this.state.posts.map(post => (
                                 <PostCard
-                                key={post.id}
-                                photo={post.userProfileImage}
-                                name={post.userName}
-                                date={post.date}
-                                message={post.message}
-                                icon={post.podcastIcon}
-                                title={post.podcastEpisode}
-                                description={post.episodeDescription}
-                                link={post.link}
-                                likes={post.likes}
-                                comments={post.comments}
+                                    key={post.id}
+                                    photo={post.userProfileImage}
+                                    name={post.userName}
+                                    date={post.date}
+                                    message={post.message}
+                                    icon={post.podcastIcon}
+                                    title={post.podcastEpisode}
+                                    description={post.episodeDescription}
+                                    link={post.link}
+                                    likes={post.likes}
+                                    comments={post.comments}
                                 />
                             ))}
                         </Container>
