@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Container from "../components/Container/container";
 import Row from "../components/Row/row";
 import Modal from "react-responsive-modal";
@@ -13,6 +14,7 @@ import API from "../utils/API";
 class Listen extends Component {
 
     state = {
+        podcastId: "",
         podcastName: "",
         podcastLogo: "",
         episodeId: "",
@@ -27,6 +29,7 @@ class Listen extends Component {
 
     componentDidMount = () => {
         this.setState({
+            podcastId: this.props.location.state.podcastId,
             podcastName: this.props.location.state.podcastName,
             podcastLogo: this.props.location.state.podcastLogo,
             episodeId: this.props.location.state.episodeId,
@@ -89,10 +92,19 @@ class Listen extends Component {
         return (
             <Container>
                 <Row>
-                    <div>
-                        <h2>{this.state.podcastName}</h2>
-                        <img src={this.state.podcastLogo} alt="Podcast Logo" />
-                    </div>
+                    <Link
+                        to={{
+                            pathname: "/episodeList",
+                            state: {
+                                podcastId: this.state.podcastId,
+                                podcastName: this.state.podcastName,
+                                podcastLogo: this.state.podcastLogo
+                            }
+                        }}
+                    >
+                        {this.state.podcastName}
+                    </Link>
+                    <img src={this.state.podcastLogo} alt="Podcast Logo" />
                 </Row>
 
                 <Row>

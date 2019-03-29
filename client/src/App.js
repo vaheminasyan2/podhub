@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import Container from "./components/Container/container";
 import Navbar from "./components/Navbar/navbar";
 import PodcastSearch from "./components/PodcastSearch/podcastSearch";
@@ -10,9 +10,8 @@ import Listen from "./pages/Listen";
 import UserSearch from "./pages/UserSearch";
 import API from "./utils/API"
 import "./App.css";
-import { Redirect } from 'react-router-dom';
+
 import Login from './pages/Login';
-// import UserSearch from './components/UserSearch/userSearch';
 
 class App extends Component {
 
@@ -80,13 +79,11 @@ class App extends Component {
   }
 
   logout = () => {
-    sessionStorage.clear()
+    sessionStorage.clear();
     this.setState({
       redirect: true
-    })
+    });
   }
-
-  // sessionStorage.clear()
 
   render() {
     if (this.state.redirect)
@@ -107,11 +104,13 @@ class App extends Component {
             handleInputChange={this.handleInputChange}
             logout={this.logout}
           />
+      
          <PodcastSearch
             show={this.state.showPodcasts}
             hide={this.hidePodcasts}
             podcasts={this.state.podcasts}
-          />
+          />  
+      
           <Route exact path="/home" component={Home} />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/episodeList" component={EpisodeList} />
