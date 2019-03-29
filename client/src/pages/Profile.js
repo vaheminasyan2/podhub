@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import Container from "../components/Container/container";
+import Container from "../components/Container/container";
 import Row from "../components/Row/row";
 //import Col from "../components/Col/col";
 import API from "../utils/API";
@@ -14,7 +14,7 @@ class Home extends Component {
         posts: [
             {
                 id: 1,
-                userProfileImage: "<image>",
+                userProfileImage: "https://picsum.photos/200",
                 userName: "Vahe Minasyan",
                 date: "03/20/2019",
                 message: "Checkout this awesome podcast",
@@ -27,7 +27,7 @@ class Home extends Component {
             },
             {
                 id: 2,
-                userProfileImage: "<image>",
+                userProfileImage: "https://picsum.photos/200",
                 userName: "John Smith",
                 date: "03/21/2019",
                 message: "Checkout this awesome podcast",
@@ -42,7 +42,7 @@ class Home extends Component {
         user: [
             {
                 name: "John Smith",
-                userProfileImage: "<image>",
+                userProfileImage: "https://picsum.photos/300",
                 googleUserId: "1111"
             }
         ],
@@ -51,21 +51,21 @@ class Home extends Component {
         favorites: [
             {
                 id: 1,
-                podcastIcon: "<image>",
+                podcastIcon: "https://picsum.photos/100",
                 podcastTitle: "Favorite podcast 1",
                 podcastDescription: "Description",
                 link: "link",
             },
             {
                 id: 2,
-                podcastIcon: "<image>",
+                podcastIcon: "https://picsum.photos/100",
                 podcastTitle: "Favorite podcast 2",
                 podcastDescription: "Description",
                 link: "link",
             },
             {
                 id: 3,
-                podcastIcon: "<image>",
+                podcastIcon: "https://picsum.photos/100",
                 podcastTitle: "Favorite podcast 3",
                 podcastDescription: "Description",
                 link: "link",
@@ -73,13 +73,13 @@ class Home extends Component {
         ]
     };
 
-    componentDidMount() {
-        this.getPostsOnlyByUser();
-        this.getFavorites();
-        this.getUserDetails();
-        this.getFollowers();
-        this.getFollowing();
-    };
+    // componentDidMount() {
+    //     this.getPostsOnlyByUser();
+    //     this.getFavorites();
+    //     this.getOrCreateUser();
+    //     this.getFollowers();
+    //     this.getFollowing();
+    // };
 
     getPostsOnlyByUser = () => {
         API.getPostsOnlyByUser(this.state.userId)
@@ -111,8 +111,8 @@ class Home extends Component {
             );
     };
 
-    getUserDetails = () => {
-        API.getUserDetails(this.state.userId)
+    getOrCreateUser = () => {
+        API.getOrCreateUser(this.state.userId)
             .then(res =>
                 this.setState({
                     user: res.data
@@ -155,7 +155,7 @@ class Home extends Component {
 
     render() {
         return (
-            <div >
+            <Container >
                 <div className="row userProfile rounded bg-light">
                     <div className="col-4">
                         <img src={this.state.user[0].userProfileImage} alt="User" />
@@ -176,7 +176,7 @@ class Home extends Component {
                 <div className="row favorites rounded">
                     <h4>Favorites: </h4>
                     {this.state.favorites.length ? (
-                        <div>
+                        <Container>
                             {this.state.favorites.map(favorites => (
 
                                 <div className="row border rounded" key={favorites.id}>
@@ -199,7 +199,7 @@ class Home extends Component {
                                     </div>
                                 </div>
                             ))}
-                        </div>
+                        </Container>
                     ) : (
                             <div className="col">
                                 <h5 className="text-center">&nbsp;{this.state.messageNoFav}</h5>
@@ -209,7 +209,7 @@ class Home extends Component {
                 <Row>
                     <h4>Recent posts:</h4>
                     {this.state.posts.length ? (
-                        <div>
+                        <Container>
                             {this.state.posts.map(post => (
                                 <PostCard
                                     key={post.id}
@@ -225,14 +225,14 @@ class Home extends Component {
                                     comments={post.comments}
                                 />
                             ))}
-                        </div>
+                        </Container>
                     ) : (
                             <div className="col">
                                 <h5 className="text-center">&nbsp;{this.state.messageNoPodcast}</h5>
                             </div>
                         )}
                 </Row>
-            </div>
+            </Container>
         )
     }
 }

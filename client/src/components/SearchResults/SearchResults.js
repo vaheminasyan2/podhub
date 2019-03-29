@@ -1,7 +1,7 @@
 import React from "react";
 import List from "../List/list";
 import Podcast from "../Podcast/podcast";
-// import Container from "../Container/container";
+import Container from "../Container/container";
 import "./searchResults.css";
 
 // SEARCH RESULTS COMPONENT
@@ -14,8 +14,8 @@ import "./searchResults.css";
 function SearchResults ({ show, podcasts, handler }) {
 
     return (
-        <div>
-            <div className={`${show} tile is-ancestor`}>
+        <Container>
+            <div className={show}>
                 {podcasts.length > 0 ? (
                     <List>
                         {podcasts.map((podcast) =>
@@ -30,12 +30,10 @@ function SearchResults ({ show, podcasts, handler }) {
                         )}       
                     </List>
                 ) : (
-                    <div className='tile is-parent is-4 is-vertical'>
-                    <p className="notFound">No podcasts found</p>
-                    </div>
+                    <p>No podcasts found.</p>
                 )}
             </div>
-        </div>
+        </Container>
         )
 };
 
