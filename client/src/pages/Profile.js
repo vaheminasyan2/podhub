@@ -18,7 +18,7 @@ class Home extends Component {
                 userName: "Vahe Minasyan",
                 date: "03/20/2019",
                 message: "Checkout this awesome podcast",
-                podcastIcon: "<image>",
+                podcastIcon: "https://picsum.photos/200",
                 podcastEpisode: "Very Bad Wizards Episode 159: You have the right...",
                 episodeDescription: "Description",
                 link: "link",
@@ -31,7 +31,7 @@ class Home extends Component {
                 userName: "John Smith",
                 date: "03/21/2019",
                 message: "Checkout this awesome podcast",
-                podcastIcon: "<image>",
+                podcastIcon: "https://picsum.photos/200",
                 podcastEpisode: "Very Bad Wizards Episode 159: You have the right...",
                 episodeDescription: "Description",
                 link: "link",
@@ -158,7 +158,7 @@ class Home extends Component {
             <Container >
                 <div className="row userProfile rounded bg-light">
                     <div className="col-4">
-                        <img src={this.state.user[0].userProfileImage} alt="User" />
+                        <img src={this.state.user[0].userProfileImage} alt="User" id="userMainProfileImage"/>
                     </div>
 
                     <div className="col-8">
@@ -179,11 +179,11 @@ class Home extends Component {
                         <Container>
                             {this.state.favorites.map(favorites => (
 
-                                <div className="row border rounded" key={favorites.id}>
+                                <div className="row border rounded favorite" key={favorites.id}>
 
                                     <div className="col-2 p-0">
 
-                                        <img src={favorites.podcastIcon} alt="Podcast Icon" />
+                                        <img src={favorites.podcastIcon} alt="Podcast Icon" id="favoriteIcon" />
                                     </div>
                                     <div className="col p-0">
                                         <p>{favorites.podcastTitle}</p>

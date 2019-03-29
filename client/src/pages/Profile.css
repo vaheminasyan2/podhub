@@ -6,3 +6,16 @@
   .favorites{
     margin-bottom: 20px;
   }
+
+  #userMainProfileImage{
+    width: 100px;
+  }
+
+  #favoriteIcon{
+    width: 100px;
+    margin: 10px;
+  }
+
+  .favorite {
+    margin-bottom: 10px;
+  }

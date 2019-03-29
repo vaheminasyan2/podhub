@@ -62,7 +62,7 @@ export default {
     },
 
     getOrCreateUser: function (id_token) {
-        return axios.post("/api/users?id_token=" + id_token);
+        return axios.post("/api/users?id_token="  + id_token);
     },
 
     getFollowers: function (userId) {
