@@ -7,11 +7,19 @@
   right: 0;
 }
 
-img {
-  margin-top: 25px;
-  margin-left: 10px;
+#profileImage {
+  width: 35px;
+  margin: 10px;
 }
 
 .card-body {
   margin-left:25px;
 }
+
+
+
+#podcastIcon{
+  width: 100px;
+  margin: 10px;
+}
+

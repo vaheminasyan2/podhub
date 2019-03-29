@@ -10,12 +10,12 @@ class Home extends Component {
     state = {
         posts: [
             {
-                id:1,
+                id: 1,
                 userProfileImage: "https://picsum.photos/200",
                 userName: "Vahe Minasyan",
                 date: "03/20/2019",
                 message: "Checkout this awesome podcast",
-                podcastIcon: "<image>",
+                podcastIcon: "https://picsum.photos/200",
                 podcastEpisode: "Very Bad Wizards Episode 159: You have the right...",
                 episodeDescription: "Description",
                 link: "link",
@@ -23,12 +23,12 @@ class Home extends Component {
                 comments: 10,
             },
             {
-                id:2,
+                id: 2,
                 userProfileImage: "https://picsum.photos/200",
                 userName: "John Smith",
                 date: "03/21/2019",
                 message: "Checkout this awesome podcast",
-                podcastIcon: "<image>",
+                podcastIcon: "https://picsum.photos/200",
                 podcastEpisode: "Very Bad Wizards Episode 159: You have the right...",
                 episodeDescription: "Description",
                 link: "link",
@@ -36,7 +36,7 @@ class Home extends Component {
                 comments: 10,
             },
         ],
-        user:[
+        user: [
             {
                 name: "John Smith",
                 userProfileImage: "https://picsum.photos/200",
@@ -51,7 +51,7 @@ class Home extends Component {
     // };
 
     // Add function to call getPost function every time when something is posted or every 2 mins or so
-    
+
 
     // API request to get the user's and his follower's posts
     getPosts = () => {
@@ -79,12 +79,12 @@ class Home extends Component {
                                 <PostCard
                                     key={post.id}
                                     photo={post.userProfileImage}
-                                    name={post.name}
-                                    date={post.createdAt}
+                                    name={post.userName}
+                                    date={post.date}
                                     message={post.message}
-                                    icon={post.imageIcon}
-                                    title={post.title}
-                                    description={post.details}
+                                    icon={post.podcastIcon}
+                                    title={post.podcastEpisode}
+                                    description={post.episodeDescription}
                                     link={post.link}
                                     likes={post.likes}
                                     comments={post.comments}

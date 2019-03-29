@@ -20,16 +20,17 @@ class Login extends Component {
 
     getOrCreateUser = () => {
         API.getOrCreateUser(this.state.id_token)
-            .then(res => 
-                sessionStorage.setItem("id", res.data.id)
-                //sessionStorage.setItem("name", res.data.name),
-                //sessionStorage.setItem("email", res.data.email),
-                //sessionStorage.setItem("googleId", res.data.googleId),
-                //sessionStorage.setItem("profileImage", res.data.profileImage)          
-                )
+            .then(res => {
+                this.props.handleUser(res.data)
+            }
+            )
+        this.setState({
+            redirect: true,
+        })
+
     };
 
-//
+    //
     render() {
 
         if (this.state.redirect || sessionStorage.getItem("id")) {
@@ -40,7 +41,6 @@ class Login extends Component {
             console.log(response);
             this.setState({
                 id_token: response.tokenObj.id_token,
-                redirect: true,
             });
 
             this.getOrCreateUser();

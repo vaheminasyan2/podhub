@@ -7,15 +7,15 @@ function Card({ photo, name, date, message, icon, title, description, link, like
   return (
     <div className="container rounded-0 border-top-0 border-left-0 border-right-0 card">
       <div className="row">
-        <div className="col-2">
-          <img src={photo} alt="Poster"/>
+        <div className="col-1">
+          <img id="profileImage" src={photo} alt="Poster"/>
         </div>
         <div className="col">
           <div className="row">{name} &nbsp;|&nbsp; {date}</div>
           <div className="row">{message}</div>
           <div className="row border rounded">
             <div className="col-2 p-0">
-              <img src={icon} alt="Podcast Icon"/>
+              <img id="podcastIcon" src={icon} alt="Podcast Icon"/>
             </div>
             <div className="col p-0">
             <p>{title}</p>
