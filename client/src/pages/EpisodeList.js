@@ -41,7 +41,7 @@ class EpisodeList extends Component {
     }
 
     // Get episodes for podcast by Podcast ID
-    // Gets 100 episodes at a time
+    // Gets 50 episodes at a time
     getEpisodes = () => {
         let pagination = 0;
         let numEpisodes = this.state.episodes.length;
