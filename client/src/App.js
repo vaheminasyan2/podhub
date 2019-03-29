@@ -1,72 +1,65 @@
 import React, { Component } from 'react';
-//import logo from './logo.svg';
-//import logo from './images/logo.svg';
-import "./App.css";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+// import Container from "./components/Container/container";
 import Navbar from "./components/Navbar/navbar";
+import PodcastSearch from "./components/PodcastSearch/podcastSearch";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
-import SearchResults from "./components/SearchResults/SearchResults";
 import EpisodeList from "./pages/EpisodeList";
 import Listen from "./pages/Listen";
-import Container from "./components/Container/container";
+import UserSearch from "./pages/UserSearch";
 import API from "./utils/API"
-import Login from './pages/Login';
-import Footer from './components/Footer/index'
+import "./App.css";
+// import Login from './pages/Login';
 
 class App extends Component {
 
   state = {
-    userSearch: "",
     podcastSearch: "",
-    users: [],
     podcasts: [],
-    showResults: "hide"
+    showPodcasts: "hidePodcasts",
+    redirect: false,
   };
 
-  // When input is changed, update state
-  // this.checkContent is callback function so it executes in real time
-  // Otherwise it will lag behind by one action as setState is asynchronous
-  // Uses debouncing to delay execution of .checkContent() function
+  // Listen for when user enters text into Podcast search fields
   handleInputChange = event => {
     const { name, value } = event.target;
-    
+
     this.setState({
       [name]: value,
-    }, () => { 
+    }, () => {
       let timer;
       clearTimeout(timer);
       timer = setTimeout(() => this.checkContent(), 500);
     });
   };
 
-  // Check Podcast Search field for text
-  // If text is found, show Search Results 
-  // If empty, hide Search Results
+  // Check if Podcast Search input has text and show/hide
   checkContent = () => {
-    if (this.state.podcastSearch !== "") {
 
+    // Show Podcast search results
+    if (this.state.podcastSearch !== "") {
       this.setState({
-        showResults: "show"
-      })
+        showPodcasts: "showPodcasts"
+      });
 
       this.getPodcasts();
-
     }
-    else {
+    else if (this.state.podcastSearch === "") {
       this.setState({
-        showResults: "hide"
-      })
+        showPodcasts: "hidePodcasts"
+      });
     }
   }
 
+  // Search for podcasts by calling API
   getPodcasts = () => {
     API.getPodcasts(this.state.podcastSearch)
       .then(res => {
         this.setState({
           podcasts: res.data.results
         })
-      })    
+      })
       .catch((error) => {
         console.log(error);
         this.setState({
@@ -76,66 +69,52 @@ class App extends Component {
       });
   };
 
-  getUsers = () => {
-    API.getUsers(this.state.userSearch)
-      .then(res => {
-        this.setState({
-          users: res.data
-        })
-      })
-      .catch((error) => {
-        this.setState({
-          users: [],
-          message: "We couldn't find a match."
-        })
-      });
-  };
-
-  handleUserSubmit = event => {
-    event.preventDefault();
-    this.getUsers();
-  };
-
-  handlePodcastSubmit = event => {
-    event.preventDefault();
-    this.getPodcasts();
-  };
-
-  // This will be passed down through children as a prop
-  // When a Podcast is clicked from Search Results, it hides search results window
-  // by updating the parent's state
-  handler = () => {
+  // Passed to children as prop
+  // Hides podcast search results
+  hidePodcasts = () => {
     this.setState({
-      showResults: "hide"
-    })
+      showPodcasts: "hidePodcasts"
+    });
+  }
+
+  logout = () => {
+    sessionStorage.clear();
+    this.setState({
+      redirect: true
+    });
   }
 
   render() {
+    if (this.state.redirect)
+
+      return (
+      
+          <Switch>
+            <Redirect to={'/'} />
+          </Switch>
+        
+      )
+
     return (
       <Router>
-        <div className="wrapper hero is-dark is-fullheight">
+        <div className="wrapper">
           <Navbar
-            handleUserSubmit={this.handleUserSubmit}
-            handlePodcastSubmit={this.handlePodcastSubmit}
-            userSearch={this.state.userSearch}
             podcastSearch={this.podcastSearch}
             handleInputChange={this.handleInputChange}
+            logout={this.logout}
           />
-          <SearchResults
+      
+         <PodcastSearch
+            show={this.state.showPodcasts}
+            hide={this.hidePodcasts}
             podcasts={this.state.podcasts}
-            show={this.state.showResults}
-            handler={this.handler}
-          />
-          <Container>
-            <Switch>
-              <Route exact path="/" component={Login} />
-              <Route exact path="/home" component={Home} />
-              <Route exact path="/profile" component={Profile} />
-              <Route exact path="/episodeList" component={EpisodeList} />
-              <Route exact path="/listen" component={Listen} />
-            </Switch>
-          </Container>
-          <Footer/>
+          />  
+      
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/episodeList" component={EpisodeList} />
+          <Route exact path="/listen" component={Listen} />
+          <Route exact path="/userSearch" component={UserSearch} />
         </div>
       </Router>
     )

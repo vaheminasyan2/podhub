@@ -30,6 +30,7 @@ class Episode extends Component {
           to={{
             pathname: "/listen",
             state: {
+              podcastId: this.props.podcastId,
               podcastName: this.props.podcastName,
               podcastLogo: this.props.podcastLogo,
               episodeId: this.props.episodeId,
