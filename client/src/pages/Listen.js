@@ -98,8 +98,7 @@ class Listen extends Component {
                             state: {
                                 podcastId: this.state.podcastId,
                                 podcastName: this.state.podcastName,
-                                podcastLogo: this.state.podcastLogo,
-                                refresh: false
+                                podcastLogo: this.state.podcastLogo
                             }
                         }}
                     >
