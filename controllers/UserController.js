@@ -71,7 +71,7 @@ class UserController {
           }
         })
         .spread(function(user, created) {
-          res.json(user);
+          res.json(newUser);
         });
       })
       .catch(function(error) {
@@ -121,35 +121,23 @@ class UserController {
   // Input: UserId
   // Output: Posts (From All The Followed Users)
   getFollowingsPosts(req, res) {
-    var promises =[];
-    var a = [];
-    db.user.findByPk(req.params.id).then(function(user) {
-      user.getIsFollowing().then(function(users) {
-        users.forEach(user => {
-          var newPromise = user.getPosts()
-          promises.push(newPromise)
-        });
 
-        Promise.all(promises).then(function(posts) {
-          res.json(posts.flat().sort(function(a, b) {
-            if (a.updatedAt < b.updatedAt) return 1;
-            if (a.updatedAt > b.updatedAt) return -1;
-            return 0;
-          }));
-        }).catch(function(error) {
-          res.status(400);
-        })
-      });
+    /*
+    db.user.findByPk(req.params.id).then(function (user) {
+			if (user === null) {
+				res.status(404).send("Not Found");
+			}
+      res.json(user)
+			/*
+			user.getUsers().then(function (followings) {
+				res.json(followings)
+			}); 
     });
+    */
   }
 
- /* 
-  reverse_compare(a, b) {
-    if (a.updatedAt < b.updatedAt) return 1;
-    if (a.updatedAt > b.updatedAt) return -1;
-    return 0;
-  }
- */ 
+
+
+  
 }
-
 module.exports = UserController;

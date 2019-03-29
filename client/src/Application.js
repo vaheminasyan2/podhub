@@ -12,14 +12,14 @@ class Application extends Component {
   render() {
     return (
       <Router>
-       
+
         <Switch>
           <Route exact path="/" component={Login} />
           <Route path="*" component={App} />
           <Route component= {Error} />
 
         </Switch>
-      
+
       </Router>
     )
 
@@ -27,7 +27,3 @@ class Application extends Component {
 }
 
 export default Application;
-
-
-
-
