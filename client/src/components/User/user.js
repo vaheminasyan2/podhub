@@ -22,7 +22,7 @@ function User ({ userId, userName, userImage, handler }) {
             className="user"
             onClick={handler}>
 
-            <span><img className="userImage" src={userImage} alt="User Image"/></span>
+            <span><img className="userImage" src={userImage} alt="User"/></span>
             <span><p className="userName">{userName}</p></span>
         </Link>
     );
