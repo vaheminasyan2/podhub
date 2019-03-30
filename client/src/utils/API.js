@@ -8,7 +8,7 @@ export default {
     },
 
     getPostsOnlyByUser: function (userId) {
-        return axios.get("/api/getPostsOnlyByUser", userId);
+        return axios.get("/api/posts/getPostsOnlyByUser/"+userId);
     },
 
     getUsers: function (user) {
@@ -71,15 +71,15 @@ export default {
     },
 
     getFollowers: function (userId) {
-        return axios.get("/api/getFollowers", userId);
+        return axios.get("/api/users/followedBy/"+userId);
     },
 
     getFollowing: function (userId) {
-        return axios.get("/api/getFollowing", userId);
+        return axios.get("/api/users/isFollowing/"+userId);
     },
 
     getFavorites: function (id) {
-        return axios.get("/api/favorites", id);
+        return axios.get("/api/favorites/"+id);
     },
 
     handleFavoriteDelete: function (id) {
