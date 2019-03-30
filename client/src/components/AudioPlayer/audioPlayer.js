@@ -74,11 +74,7 @@ class AudioPlayer extends Component {
         const timeline = this.timeline.current;
         // timeline width (adjusted for playhead)
 
-        let timelineWidth = 400;
-        
-        if (timeline && playhead) {
-            timelineWidth = timeline.offsetWidth - playhead.offsetWidth;
-        }
+        let timelineWidth = timeline.offsetWidth - playhead.offsetWidth;
 
         let marginLeft = timelineWidth * (audioElement.currentTime / audioElement.duration);
         let currentTimeMinutes = parseInt(audioElement.currentTime / 60);
@@ -106,11 +102,7 @@ class AudioPlayer extends Component {
         const timeline = this.timeline.current;
         const playhead = this.playhead.current;
         // timeline width (adjusted for playhead)
-        let timelineWidth = 400;
-        
-        if (timeline && playhead) {
-            timelineWidth = timeline.offsetWidth - playhead.offsetWidth;
-        }
+        let timelineWidth = timeline.offsetWidth - playhead.offsetWidth;
 
         if (this.state.mouseOnPlayhead) {
             window.removeEventListener('mousemove', this.movePlayhead, true);
