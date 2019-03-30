@@ -28,6 +28,7 @@ class Listen extends Component {
     };
 
     componentDidMount = () => {
+        
         this.setState({
             podcastId: this.props.location.state.podcastId,
             podcastName: this.props.location.state.podcastName,
@@ -65,6 +66,7 @@ class Listen extends Component {
         this.handleCloseModal();
         alert("shared");
         // Call Share Episode sequence
+        
     }
 
     // Adds this episode to User's list of Favorite Episodes
@@ -90,6 +92,9 @@ class Listen extends Component {
     }
 
     render() {
+        var userId = JSON.parse(localStorage.getItem("user")).id;
+        console.log(userId);
+
         return (
             <Container>
                 <Row>

@@ -76,6 +76,9 @@ class UserSearch extends Component {
         //     )
 
     render() {
+        var userId = JSON.parse(localStorage.getItem("user")).id;
+        console.log(userId);
+
         return (
             <Container>
 
