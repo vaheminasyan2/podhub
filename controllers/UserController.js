@@ -17,7 +17,7 @@ class UserController {
       .findAll({
         where: { followedBy: req.params.id }
       })
-      .then(dbfollow => res.json({ count: dbfollow.length }));
+      .then(dbfollow => res.json([{ count: dbfollow.length }]));
 
     // db.follow
     //   .findAll({
@@ -41,7 +41,8 @@ class UserController {
     console.log(req.params.id);
     db.follow
       .findAll({ where: { isFollowing: req.params.id } })
-      .then(dbfollow => res.json({ count: dbfollow.length }));
+      // .then(dbfollow => res.json({ count: dbfollow.length }));
+      .then(dbfollow => res.json([{ count: dbfollow.length }]));
   }
 
   /**
