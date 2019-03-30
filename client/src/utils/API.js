@@ -8,7 +8,7 @@ export default {
     },
 
     getPostsOnlyByUser: function (userId) {
-        return axios.get("/api/getPostsOnlyByUser", userId);
+        return axios.get("/api/posts/getPostsOnlyByUser/"+userId);
     },
 
     getUsers: function (user) {
@@ -71,15 +71,15 @@ export default {
     },
 
     getFollowers: function (userId) {
-        return axios.get("/api/getFollowers", userId);
+        return axios.get("/api/users/followedBy/"+userId);
     },
 
     getFollowing: function (userId) {
-        return axios.get("/api/getFollowing", userId);
+        return axios.get("/api/users/isFollowing/"+userId);
     },
 
     getFavorites: function (id) {
-        return axios.get("/api/favorites", id);
+        return axios.get("/api/favorites/"+id);
     },
 
     handleFavoriteDelete: function (id) {
@@ -99,6 +99,20 @@ export default {
     getFollowingsPosts: function(userId) {
         // Get all user and user followings posts latest-first 
         return axios.get("/api/users/" + userId + "/followings/posts");
-    }
+    },
 
+    sharePodcast: function(userId, podcastName, podcastLogo, audioLink, description, userMessage) {
+        console.log(arguments);
+
+        let temp = {
+            title: podcastName,
+            link: audioLink,
+            imageIcon: podcastLogo,
+            details: description,
+            message: userMessage,
+            postedBy: userId
+        }
+
+        return axios.post("/api/posts/", temp);
+    }
 };

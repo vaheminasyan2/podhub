@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
             len: [1]
         },
         imageIcon: {
-            type: DataTypes.BLOB
+            type: DataTypes.STRING
         },
         details: {
           type: DataTypes.TEXT,

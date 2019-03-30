@@ -74,8 +74,9 @@ class AudioPlayer extends Component {
         const timeline = this.timeline.current;
         // timeline width (adjusted for playhead)
 
-        let timelineWidth = timeline.offsetWidth - playhead.offsetWidth;
+        if (!audioElement || !timeline || !playhead ) return;
 
+        const timelineWidth = timeline.offsetWidth - playhead.offsetWidth;
         let marginLeft = timelineWidth * (audioElement.currentTime / audioElement.duration);
         let currentTimeMinutes = parseInt(audioElement.currentTime / 60);
         let currentTimeSeconds = parseInt(audioElement.currentTime % 60, 10).toString();
@@ -102,11 +103,12 @@ class AudioPlayer extends Component {
         const timeline = this.timeline.current;
         const playhead = this.playhead.current;
         // timeline width (adjusted for playhead)
-        let timelineWidth = timeline.offsetWidth - playhead.offsetWidth;
 
+        const timelineWidth = timeline.offsetWidth - playhead.offsetWidth;
+        
         if (this.state.mouseOnPlayhead) {
-            window.removeEventListener('mousemove', this.movePlayhead, true);
             audioElement.currentTime = ((event.clientX - timeline.getBoundingClientRect().left) / timelineWidth) * audioElement.duration
+            window.removeEventListener('mousemove', this.movePlayhead, true);
             audioElement.addEventListener('timeupdate', this.timeUpdate, false);
 
         }
@@ -154,13 +156,14 @@ class AudioPlayer extends Component {
     movePlayhead = (event) => {
         const timeline = this.timeline.current;
         const playhead = this.playhead.current;
+        const audioElement = this.audioElement.current;
         // timeline width (adjusted for playhead)
         const timelineWidth = timeline.offsetWidth - playhead.offsetWidth;
 
         const newMargLeft = event.clientX - timeline.getBoundingClientRect().left;
 
-        if (newMargLeft >= 0 && newMargLeft <= timelineWidth) {
-            this.setHeadPosition(newMargLeft);
+        if ((newMargLeft >= (playhead.offsetWidth / 2)) && newMargLeft <= timelineWidth) {
+            this.setHeadPosition(newMargLeft - (playhead.offsetWidth / 2));
         }
         else if (newMargLeft < playhead.offsetWidth) {
             this.setHeadPosition(0);
@@ -168,6 +171,9 @@ class AudioPlayer extends Component {
         else if (newMargLeft > timelineWidth) {
             this.setHeadPosition(timelineWidth)
         }
+        
+        audioElement.currentTime = ((event.clientX - timeline.getBoundingClientRect().left) / timelineWidth) * audioElement.duration;
+
     }
 
 
@@ -224,5 +230,6 @@ class AudioPlayer extends Component {
 }
 
 export default AudioPlayer;
+
 
 
