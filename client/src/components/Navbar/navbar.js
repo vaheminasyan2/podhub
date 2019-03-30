@@ -35,8 +35,8 @@ function Navbar({ podcastSearch, handleInputChange, hidePodcasts, logout }) {
                to="/profile"
                className={
                  window.location.pathname === "/profile"
-                   ? "navbar-item hover nav-link active"
-                   : "navbar-item hover nav-link"
+                   ? "nav-link active"
+                   : "nav-link"
                }
              >
                Profile
@@ -46,8 +46,8 @@ function Navbar({ podcastSearch, handleInputChange, hidePodcasts, logout }) {
               to="/home"
               className={
                 window.location.pathname === "/home"
-                  ? "navbar-item hover nav-link active"
-                  : "navbar-item hover nav-link"
+                  ? "nav-link active"
+                  : "nav-link"
               }
             >
               Home
@@ -57,7 +57,7 @@ function Navbar({ podcastSearch, handleInputChange, hidePodcasts, logout }) {
               to={{
                 pathname: "/userSearch",
               }}
-              className="navbar-item hover findUsers"
+              className="findUsers"
             >
               <FontAwesomeIcon icon="search" />
               <span>&nbsp; Find Users</span>
