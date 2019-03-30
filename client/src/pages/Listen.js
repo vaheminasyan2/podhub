@@ -79,7 +79,8 @@ class Listen extends Component {
         }, () => console.log(this.state));
     }
 
-    handleChange = (event) => {
+    // Adjusts playback speed of AudioPlayer
+    changeSpeed = (event) => {
         this.setState({
             speed: event.target.value
         })
@@ -100,12 +101,12 @@ class Listen extends Component {
                     <div>
                         <h4>{this.state.episodeName} &nbsp;|&nbsp; {this.state.date}</h4>
 
-                        <AudioPlayer
+                        {/* <AudioPlayer
                             audioLink={this.state.audioLink}
                             playbackRate={this.state.speed}
-                            handleChange={this.handleChange}
+                            changeSpeed={this.changeSpeed}
                             initialSpeed={this.state.speed}
-                        />
+                        /> */}
 
                     </div>
                 </Row>
@@ -125,12 +126,12 @@ class Listen extends Component {
                         <h4>{this.state.podcastName}</h4>
                         <p>{this.state.episodeName}</p>
 
-                        <AudioPlayer
+                        {/* <AudioPlayer
                             audioLink={this.state.audioLink}
                             playbackRate={this.state.speed}
-                            handleChange={this.handleChange}
+                            changeSpeed={this.changeSpeed}
                             initialSpeed={this.state.speed}
-                        />
+                        /> */}
 
                         <br />
                         <button

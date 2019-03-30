@@ -27,30 +27,53 @@ class App extends Component {
 
     this.setState({
       [name]: value,
-    }, () => {
-      let timer;
-      clearTimeout(timer);
-      timer = setTimeout(() => this.checkContent(), 500);
-    });
+    }, 
+    
+    this.debounce(() => {
+
+      // Show podcast search results
+      if (this.state.podcastSearch !== "") {
+        this.setState({
+          showPodcasts: "showPodcasts"
+        });
+  
+        // Get podcasts that match user query
+        this.getPodcasts();
+      }
+
+      // Hide podcast search results
+      else if (this.state.podcastSearch === "") {
+        this.setState({
+          showPodcasts: "hidePodcasts"
+        });
+      }
+
+    }, 250));
   };
 
-  // Check if Podcast Search input has text and show/hide
-  checkContent = () => {
-
-    // Show Podcast search results
-    if (this.state.podcastSearch !== "") {
-      this.setState({
-        showPodcasts: "showPodcasts"
-      });
-
-      this.getPodcasts();
-    }
-    else if (this.state.podcastSearch === "") {
-      this.setState({
-        showPodcasts: "hidePodcasts"
-      });
-    }
-  }
+  // Debouncing function
+  // Delays execution of search operation to prevent it from firing too often
+  debounce = (func, wait, immediate) => {
+    var timeout;
+  
+    return function executedFunction() {
+      var context = this;
+      var args = arguments;
+        
+      var later = function() {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+  
+      var callNow = immediate && !timeout;
+    
+      clearTimeout(timeout);
+  
+      timeout = setTimeout(later, wait);
+    
+      if (callNow) func.apply(context, args);
+    };
+  };
 
   // Search for podcasts by calling API
   getPodcasts = () => {
@@ -99,6 +122,7 @@ class App extends Component {
           <Navbar
             podcastSearch={this.podcastSearch}
             handleInputChange={this.handleInputChange}
+            hidePodcasts={this.hidePodcasts}
             logout={this.logout}
           />
 
