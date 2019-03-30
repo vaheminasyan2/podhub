@@ -79,6 +79,7 @@ class Listen extends Component {
         }, () => console.log(this.state));
     }
 
+    // Adjusts playback speed of AudioPlayer
     changeSpeed = (event) => {
         this.setState({
             speed: event.target.value
