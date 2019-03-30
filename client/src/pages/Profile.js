@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Container from "../components/Container/container";
 import Row from "../components/Row/row";
-//import Col from "../components/Col/col";
 import API from "../utils/API";
 import PostCard from "../components/PostCard/postCard";
 import "./Profile.css";
@@ -16,63 +15,6 @@ class Home extends Component {
         following: 0,
         favorites: []
     }
-
-    // state = {
-    //     posts: [
-    //         {
-    //             id: 1,
-    //             userProfileImage: "https://picsum.photos/200",
-    //             userName: "Vahe Minasyan",
-    //             date: "03/20/2019",
-    //             message: "Checkout this awesome podcast",
-    //             podcastIcon: "https://picsum.photos/200",
-    //             podcastEpisode: "Very Bad Wizards Episode 159: You have the right...",
-    //             episodeDescription: "Description",
-    //             link: "link",
-    //             likes: 10,
-    //             comments: 10,
-    //         },
-    //         {
-    //             id: 2,
-    //             userProfileImage: "https://picsum.photos/200",
-    //             userName: "John Smith",
-    //             date: "03/21/2019",
-    //             message: "Checkout this awesome podcast",
-    //             podcastIcon: "https://picsum.photos/200",
-    //             podcastEpisode: "Very Bad Wizards Episode 159: You have the right...",
-    //             episodeDescription: "Description",
-    //             link: "link",
-    //             likes: 10,
-    //             comments: 10,
-    //         },
-    //     ],
-       
-    //     followers: 5,
-    //     following: 10,
-    //     favorites: [
-    //         {
-    //             id: 1,
-    //             podcastIcon: "https://picsum.photos/100",
-    //             podcastTitle: "Favorite podcast 1",
-    //             podcastDescription: "Description",
-    //             link: "link",
-    //         },
-    //         {
-    //             id: 2,
-    //             podcastIcon: "https://picsum.photos/100",
-    //             podcastTitle: "Favorite podcast 2",
-    //             podcastDescription: "Description",
-    //             link: "link",
-    //         },
-    //         {
-    //             id: 3,
-    //             podcastIcon: "https://picsum.photos/100",
-    //             podcastTitle: "Favorite podcast 3",
-    //             podcastDescription: "Description",
-    //             link: "link",
-    //         }
-    //     ]
-    // };
 
     componentDidMount() {
         this.getPostsOnlyByUser();
@@ -92,7 +34,6 @@ class Home extends Component {
                     })
                 }
                 else {
-                    console.log(res.data)
                     this.setState({
                         posts: res.data
                     })
@@ -142,8 +83,6 @@ class Home extends Component {
     getFollowers = () => {
         API.getFollowers(this.props.user.id)
             .then(res =>{
-                console.log(res)
-                console.log(res.data[0].count)
                 this.setState({
                     followers: res.data[0].count
                 })
@@ -158,8 +97,6 @@ class Home extends Component {
     getFollowing = () => {
         API.getFollowing(this.props.user.id)
             .then(res =>{
-                console.log(res)
-                console.log(res.data[0].count)
                 this.setState({
                     following: res.data[0].count
                 })
@@ -174,7 +111,6 @@ class Home extends Component {
     handleFavoriteDelete = id => {
         API.deleteFavorite(id).then(res => this.getFavorites());
     };
-
 
     render() {
         console.log(this.props.user)
