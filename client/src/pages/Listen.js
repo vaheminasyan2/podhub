@@ -145,12 +145,12 @@ class Listen extends Component {
                     <div>
                         <h4>{this.state.episodeName} &nbsp;|&nbsp; {this.state.date}</h4>
 
-                        {/* <AudioPlayer
+                        <AudioPlayer
                             audioLink={this.state.audioLink}
                             playbackRate={this.state.speed}
                             changeSpeed={this.changeSpeed}
                             initialSpeed={this.state.speed}
-                        /> */}
+                        />
 
                     </div>
                 </Row>
