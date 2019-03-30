@@ -13,16 +13,28 @@ class PostController {
     db.post.findOrCreate({ where: req.body }).then(post => res.json(post));
   }
 
+  // /**
+  //  * Get the posts by userId from database
+  //  * @param {*} req
+  //  * @param {*} res
+  //  */
+  // findAll(req, res) {
+  //   console.log(req.params.id)
+  //   db.post.findAll({where: {postedBy: req.params.id}})
+  //     .then(dbPost => res.json(dbPost));
+  // }
+
   /**
    * Get the posts by userId from database
    * @param {*} req
    * @param {*} res
    */
-  findAll(req, res) {
+  getPostByUser(req, res) {
     console.log(req.params.id)
     db.post.findAll({where: {postedBy: req.params.id}})
       .then(dbPost => res.json(dbPost));
   }
+
 
   /**
    * Update the post in database
