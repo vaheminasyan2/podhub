@@ -106,17 +106,25 @@ class App extends React.Component {
 
   logout = () => {
     this.setState({
-      user: []
+      user: [],
+      redirect: true
     });
+    localStorage.clear();
   }
 
   handleUser = (userData) => {
     this.setState({ user: userData })
   }
 
+  componentDidMount(){
+    console.log("mount")
+  }
+
+
   render() {
 
     console.log(this.state.user)
+    console.log(localStorage.getItem("user"))
 
     return (
       <Router>
@@ -151,7 +159,7 @@ class App extends React.Component {
                 <Route exact path="/episodeList" component={EpisodeList} />
                 <Route exact path="/listen" component={Listen} />
                 <Route exact path="/userSearch" component={UserSearch} />
-                <Route component={Error} />
+                {/* <Route component={Error} /> */}
               </Switch>
             </>
           }
