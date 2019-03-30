@@ -179,37 +179,43 @@ class Home extends Component {
     render() {
         console.log(this.props.user)
         return (
-            <Container >
-                <div className="row userProfile rounded bg-light">
-                    <div className="col-4">
+            <Container>
+                <div className="columns userProfile rounded bg-light">
+                    <div className="column is-narrow">
                         <img src={this.props.user.profileImage} alt="User" id="userMainProfileImage"/>
                     </div>
 
-                    <div className="col-8">
+                    <div className="column is-one-quarter">
                         <Row>
-                            <h2>{this.props.user.name}</h2>
+                            <h2 className="hcenter">{this.props.user.name}</h2>
                         </Row>
                         <Row>
+                            <h2 className="hcenter">
                             Posts:&nbsp; {this.state.posts.length} &nbsp; | &nbsp;
                             Followers:&nbsp;{this.state.followers}&nbsp; | &nbsp;
                             Following:&nbsp;{this.state.following}
+                            </h2>
                         </Row>
                     </div>
                 </div>
 
-                <div className="row favorites rounded">
-                    <h4>Favorites: </h4>
+                <Row>
+                    <div className="column is-one-third">
+                    <h2 className="is-size-3">Favorites: </h2>
+                    </div>
+                </Row>
+                <Row>
                     {this.state.favorites.length ? (
-                        <Container>
+                        <div className="column is-full">
                             {this.state.favorites.map(favorites => (
 
-                                <div className="row border rounded favorite" key={favorites.id}>
+                                <div key={favorites.id} className="columns is-mobile">
 
-                                    <div className="col-2 p-0">
+                                    <div className="column is-narrow">
 
-                                        <img src={favorites.podcastIcon} alt="Podcast Icon" id="favoriteIcon" />
+                                        <img src={favorites.podcastIcon} alt="Podcast Icon" id="inherit"/>
                                     </div>
-                                    <div className="col p-0">
+                                    <div className="column">
                                         <p>{favorites.podcastTitle}</p>
                                         <p>{favorites.podcastDescription}</p>
                                         <a href={favorites.link}>{favorites.link}</a> &nbsp;
@@ -223,17 +229,21 @@ class Home extends Component {
                                     </div>
                                 </div>
                             ))}
-                        </Container>
+                        </div>
                     ) : (
                             <div className="col">
                                 <h5 className="text-center">&nbsp;{this.state.messageNoFav}</h5>
                             </div>
                         )}
-                </div>
+                </Row>
                 <Row>
-                    <h4>Recent posts:</h4>
+                <div className="column">
+                    <h2 className="is-size-3">Recent Posts: </h2>
+                    </div>
+                </Row>
+                <Row>
                     {this.state.posts.length ? (
-                        <Container>
+                        <div>
                             {this.state.posts.map(post => (
                                 <PostCard
                                     key={post.id}
@@ -249,7 +259,7 @@ class Home extends Component {
                                     comments={post.comments}
                                 />
                             ))}
-                        </Container>
+                        </div>
                     ) : (
                             <div className="col">
                                 <h5 className="text-center">&nbsp;{this.state.messageNoPodcast}</h5>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-import Container from "./components/Container/container";
+// import Container from "./components/Container/container";
 import Navbar from "./components/Navbar/navbar";
 import PodcastSearch from "./components/PodcastSearch/podcastSearch";
 import Home from "./pages/Home";
@@ -11,7 +11,7 @@ import UserSearch from "./pages/UserSearch";
 import API from "./utils/API"
 import "./App.css";
 import Login from './pages/Login';
-import Error from "./pages/Error";
+// import Error from "./pages/Error";
 
 class App extends React.Component {
 
@@ -142,13 +142,11 @@ class App extends React.Component {
 
     return (
       <Router>
-        
-      
-        <div className="wrapper">
+        <div className="hero is-dark is-fullheight">
         {this.state.redirect
         ? <Redirect to= "/" />
         : null
-        } 
+        }
           {!this.isLoggedIn()
             ? <Route
               render={() =>
