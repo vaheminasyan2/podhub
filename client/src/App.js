@@ -13,15 +13,18 @@ import "./App.css";
 
 import Login from './pages/Login';
 
-class App extends Component {
+class App extends React.Component {
 
-  state = {
+  constructor(props) {
+    super(props)
+
+  this.state = {
     podcastSearch: "",
     podcasts: [],
     showPodcasts: "hidePodcasts",
     redirect: false,
   };
-
+}
   // Listen for when user enters text into Podcast search fields
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -49,16 +52,6 @@ class App extends Component {
         });
       }
 
-<<<<<<< HEAD
-      this.getPodcasts();
-    }
-    else if (this.state.podcastSearch == "") {
-      this.setState({
-        showPodcasts: "hidePodcasts"
-      });
-    }
-  }
-=======
     }, 250));
   };
 
@@ -85,7 +78,6 @@ class App extends Component {
       if (callNow) func.apply(context, args);
     };
   };
->>>>>>> 4b39420dceccf713ca80b584e8dc55ef0c1d7f93
 
   // Search for podcasts by calling API
   getPodcasts = () => {
@@ -120,6 +112,9 @@ class App extends Component {
   }
 
   render() {
+
+    console.log(this.props.user)
+
     if (this.state.redirect) {
       return (
         <Switch>
@@ -144,7 +139,9 @@ class App extends Component {
             podcasts={this.state.podcasts}
           />
 
-          <Route exact path="/home" component={Home} />
+           <Route exact path="/home" render={() => <Home
+            user={this.state.user}
+          />} />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/episodeList" component={EpisodeList} />
           <Route exact path="/listen" component={Listen} />

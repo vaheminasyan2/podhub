@@ -9,15 +9,21 @@ import Error from "./pages/Error";
 
 class Application extends React.Component {
 
-  state = {
-    user: []
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      user: []
+    }
   }
 
   handleUser = (userData) => {
     this.setState({ user: userData })
   }
 
-
+  sendUserData = () => {
+    return this.state.user
+  }
 
   render() {
     console.log(this.state.user)
@@ -29,7 +35,9 @@ class Application extends React.Component {
           <Route exact path="/" render={() => <Login
             handleUser={this.handleUser}
           />} />
-          <Route path="*" component={App} />
+          <Route path="*" render={() => <App
+            user={this.state.user}
+          />} />
           <Route component={Error} />
 
         </Switch>
