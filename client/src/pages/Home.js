@@ -20,11 +20,12 @@ class Home extends Component {
 
     // API request to get the user's and his follower's posts
     getPosts = () => {
-        API.getFollowingsPosts(this.props.user.id)
+        API.getFollowingsPosts("7")
             .then(res =>
-                this.setState({
-                    posts: res.data
-                })
+                // this.setState({
+                //     posts: res.data
+                // })
+                console.log(res.data)
             )
             .catch(() =>
                 this.setState({
