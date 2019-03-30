@@ -104,6 +104,8 @@ class AudioPlayer extends Component {
         const playhead = this.playhead.current;
         // timeline width (adjusted for playhead)
 
+        if (!audioElement || !timeline || !playhead ) return;
+
         const timelineWidth = timeline.offsetWidth - playhead.offsetWidth;
         
         if (this.state.mouseOnPlayhead) {
