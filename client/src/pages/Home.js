@@ -10,56 +10,17 @@ class Home extends Component {
         posts: [],
         message: "Loading ..."
     };
-/*
-    state = {
-        posts: [
-            {
-                id: 1,
-                userProfileImage: "https://picsum.photos/200",
-                userName: "Vahe Minasyan",
-                date: "03/20/2019",
-                message: "Checkout this awesome podcast",
-                podcastIcon: "https://picsum.photos/200",
-                podcastEpisode: "Very Bad Wizards Episode 159: You have the right...",
-                episodeDescription: "Description",
-                link: "link",
-                likes: 10,
-                comments: 10,
-            },
-            {
-                id: 2,
-                userProfileImage: "https://picsum.photos/200",
-                userName: "John Smith",
-                date: "03/21/2019",
-                message: "Checkout this awesome podcast",
-                podcastIcon: "https://picsum.photos/200",
-                podcastEpisode: "Very Bad Wizards Episode 159: You have the right...",
-                episodeDescription: "Description",
-                link: "link",
-                likes: 10,
-                comments: 10,
-            },
-        ],
-        user: [
-            {
-                name: "John Smith",
-                userProfileImage: "https://picsum.photos/200",
-                googleUserId: "1111",
-            },
-        ],
-
+    componentDidMount() {
+        this.getPosts();
+        console.log(this.props.user.id)
     };
-*/
-     componentDidMount() {
-         this.getPosts();
-     };
 
     // Add function to call getPost function every time when something is posted or every 2 mins or so
 
 
     // API request to get the user's and his follower's posts
     getPosts = () => {
-        API.getFollowingsPosts("1")  // TODO: "1" -> sessionStorage.id
+        API.getFollowingsPosts(this.props.user.id)
             .then(res =>
                 this.setState({
                     posts: res.data
@@ -74,6 +35,8 @@ class Home extends Component {
     };
 
     render() {
+        console.log(this.props.user.id)
+        console.log(this.state.posts.length)
         return (
             <Container>
                 <Row>
@@ -83,12 +46,12 @@ class Home extends Component {
                                 <PostCard
                                     key={post.id}
                                     photo={post.userProfileImage}
-                                    name={post.userName}
-                                    date={post.date}
+                                    name={post.name}
+                                    date={post.createdAt}
                                     message={post.message}
-                                    icon={post.podcastIcon}
-                                    title={post.podcastEpisode}
-                                    description={post.episodeDescription}
+                                    icon={post.imageIcon}
+                                    title={post.title}
+                                    description={post.details}
                                     link={post.link}
                                     likes={post.numberOfLikes}
                                     comments={post.numberOfComments}
