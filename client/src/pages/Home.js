@@ -10,7 +10,6 @@ class Home extends Component {
         posts: [],
         message: "Loading ..."
     };
-
     componentDidMount() {
         this.getPosts();
         console.log(this.props.user.id)
