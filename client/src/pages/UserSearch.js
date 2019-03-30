@@ -53,6 +53,13 @@ class UserSearch extends Component {
                 }
             ]
         });
+    }
+
+    followUser = (event) => {
+        event.preventDefault();
+
+        alert("Followed!");
+    }
 
         // API.getUsers()
         //     .then(res =>
@@ -67,7 +74,6 @@ class UserSearch extends Component {
         //             users: [],
         //         }),
         //     )
-    }
 
     render() {
         return (
@@ -90,12 +96,20 @@ class UserSearch extends Component {
                 {this.state.users.length ? (
                     <List>
                         {this.state.users.map(user => (
-                            <User
-                                userId={user.id}
-                                userName={user.userName}
-                                userImage={user.userImage}
-                                handler={null}
-                            />
+                            <div>
+                                <User
+                                    userId={user.id}
+                                    userName={user.userName}
+                                    userImage={user.userImage}
+                                    handler={null}
+                                />
+                                <button 
+                                    className="btn btn-primary" 
+                                    onClick={this.followUser}
+                                >
+                                    Follow
+                                </button>
+                            </div>
                         ))}
                     </List>
                 ) : (
