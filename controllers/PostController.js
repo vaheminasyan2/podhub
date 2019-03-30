@@ -10,7 +10,9 @@ class PostController {
    * @param {*} res
    */
   create(req, res) {
-    db.post.findOrCreate({ where: req.body }).then(post => res.json(post));
+
+    console.log(req.body);
+    db.post.create(req.body).then(post => res.json(post));
   }
 
   // /**
