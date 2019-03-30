@@ -15,9 +15,9 @@ export default {
         return axios.get("api/getUsers", user)
     },
 
-    // Gets all episodes for a particular podcast
+ // Gets all episodes for a particular podcast
     getPodcasts: function (podcast) {
-        var URL = "https://listennotes.p.rapidapi.com/api/v1/search?sort_by_date=0&type=podcast&only_in=title&language=English&safe_mode=1&q=" + podcast;
+        var URL = "https://listennotes.p.rapidapi.com/api/v1/search?sort_by_date=0&type=podcast&only_in=title&language=English&q=" + podcast;
 
         return axios.get(URL, { 'headers': { 'X-RapidAPI-Key': "a063bce4f1msh0a4f44209d57a2fp1225adjsn3f80cc1cf1bb" } })
             .then((response) => {
@@ -30,18 +30,40 @@ export default {
     },
 
     // Gets all episodes for a particular podcast
-    getEpisodes: function (podcastId) {
-        let URL = "https://listennotes.p.rapidapi.com/api/v1/podcasts/" + podcastId + "?sort=recent_first";
+    getEpisodes: function (podcastId, pagination) {
+        let numEpisodes = 0;
+        let episodes = [];
+        let limit = 10;
 
-        return axios.get(URL, { 'headers': { 'X-RapidAPI-Key': "a063bce4f1msh0a4f44209d57a2fp1225adjsn3f80cc1cf1bb" } })
-            .then((response => {
-                // console.log(response);
-                return response;
-            }))
-            .catch((error) => {
-                console.log(error);
-            });
+        if (pagination > 0) {
+            limit = 50;
+        }
 
+        return request(podcastId, pagination, episodes);
+
+        function request(podcastId, pagination, episodes) {
+
+            let URL = "https://listennotes.p.rapidapi.com/api/v1/podcasts/" + podcastId + "?sort=recent_first&next_episode_pub_date=" + pagination;
+
+            return axios.get(URL, { 'headers': { 'X-RapidAPI-Key': "a063bce4f1msh0a4f44209d57a2fp1225adjsn3f80cc1cf1bb" } })
+                .then((response => {
+                    numEpisodes = response.data.episodes.length;
+                    
+                    if (numEpisodes > 0 && episodes.length < limit) {
+
+                        pagination = response.data.episodes[numEpisodes-1].pub_date_ms;
+                        return request(podcastId, pagination, episodes.concat(response.data.episodes));
+
+                    } else {
+
+                        return episodes;
+
+                    }
+                }))
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
     },
 
     getOrCreateUser: function (id_token) {
