@@ -179,7 +179,7 @@ class AudioPlayer extends Component {
 
     render() {
         const { audioLink } = this.props;
-        const { initialSpeed, handleChange } = this.props;
+        const { initialSpeed, changeSpeed } = this.props;
 
         return (
             <div id="audio-player-container">
@@ -219,7 +219,7 @@ class AudioPlayer extends Component {
                     min="1"
                     max="2.35"
                     value={initialSpeed}
-                    onChange={handleChange}
+                    onChange={changeSpeed}
                     step=".15"
                     list="steplist"
                 />
