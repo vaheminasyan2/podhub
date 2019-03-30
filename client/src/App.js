@@ -106,7 +106,7 @@ class App extends React.Component {
 
   logout = () => {
     this.setState({
-      user: [],
+      user: null,
       redirect: true
     });
     localStorage.clear();
@@ -116,19 +116,22 @@ class App extends React.Component {
     this.setState({ user: userData })
   }
 
-  isLoggedIn = () => {
-    // Is there a user in state?
-    // return true
+  isLoggedIn = () => this.state.user != null;
 
-    // If not, is there a user in localStorage?
-    // If there is, add it to state.
-    // return true
-
-    // return
+  loadUserFromLocalStorage() {
+    if (this.state.user){
+      return;
+    }
+    if (localStorage.getItem("user")) {
+      this.setState({
+        user: JSON.parse(localStorage.getItem("user"))
+      });
+    }
   }
 
   componentDidMount() {
     console.log("mount")
+    this.loadUserFromLocalStorage();
   }
 
 
@@ -139,8 +142,14 @@ class App extends React.Component {
 
     return (
       <Router>
+        
+      
         <div className="wrapper">
-          {this.state.user == null
+        {this.state.redirect
+        ? <Redirect to= "/" />
+        : null
+        } 
+          {!this.isLoggedIn()
             ? <Route
               render={() =>
                 <Login handleUser={this.handleUser}
