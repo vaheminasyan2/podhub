@@ -116,15 +116,26 @@ class App extends React.Component {
     this.setState({ user: userData })
   }
 
-  componentDidMount(){
+  isLoggedIn = () => {
+    // Is there a user in state?
+    // return true
+
+    // If not, is there a user in localStorage?
+    // If there is, add it to state.
+    // return true
+
+    // return
+  }
+
+  componentDidMount() {
     console.log("mount")
   }
 
 
   render() {
 
-    console.log(this.state.user)
-    console.log(localStorage.getItem("user"))
+    console.log("state user:", this.state.user)
+    console.log("localStorage user:", localStorage.getItem("user"))
 
     return (
       <Router>
@@ -158,7 +169,7 @@ class App extends React.Component {
                 />} />
                 <Route exact path="/episodeList" component={EpisodeList} />
                 <Route exact path="/listen" component={Listen} />
-                <Route exact path="/userSearch" component={UserSearch} />
+                <Route exact path="/userSearch" component={UserSearch} />                  
                 {/* <Route component={Error} /> */}
               </Switch>
             </>
