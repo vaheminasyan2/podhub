@@ -19,7 +19,8 @@ function Podcast ({ podcastId, podcastName, podcastLogo, thumbnail, hide }) {
             state: {
                 podcastId: podcastId,
                 podcastName: podcastName,
-                podcastLogo: podcastLogo
+                podcastLogo: podcastLogo,
+                loadMore: true
             }
             }} 
             className="podcast"
