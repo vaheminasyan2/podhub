@@ -71,7 +71,7 @@ class UserController {
           }
         })
         .spread(function(user, created) {
-          res.json(newUser);
+          res.json(user);
         });
       })
       .catch(function(error) {
@@ -121,23 +121,63 @@ class UserController {
   // Input: UserId
   // Output: Posts (From All The Followed Users)
   getFollowingsPosts(req, res) {
+    var postPromises =[];
+    var postId2Likes = {};
+    var postId2Comments = {};
+    db.user.findByPk(req.params.id).then(function(user) {
+      postPromises.push(user.getPosts());
+      user.getIsFollowing().then(function(users) {
+        users.forEach(user => {
+          const newPromise = user.getPosts();
+          postPromises.push(newPromise);
+        });
+       
 
-    /*
-    db.user.findByPk(req.params.id).then(function (user) {
-			if (user === null) {
-				res.status(404).send("Not Found");
-			}
-      res.json(user)
-			/*
-			user.getUsers().then(function (followings) {
-				res.json(followings)
-			}); 
+        Promise.all(postPromises).then(function(posts) {
+          const sortedPosts = posts.flat().sort(function(a, b) {
+            if (a.updatedAt < b.updatedAt) return 1;
+            if (a.updatedAt > b.updatedAt) return -1;
+            return 0;
+          });
+
+          // Likes
+          var likeCommPromises = [];
+          sortedPosts.forEach(post => {
+            const likePromise = post.getPostLikes();
+            const commentPromise = post.getComments();
+            likeCommPromises.push(likePromise);
+            likeCommPromises.push(commentPromise);
+
+            likePromise.then(function(likes) {
+              postId2Likes[post.id] = likes.length;
+            });
+            commentPromise.then(function(comments) {
+              postId2Comments[post.id] = comments.length;
+            });
+          });
+
+          Promise.all(likeCommPromises).then(function() {
+            sortedPosts.forEach(post => {
+              post.numberOfLikes = postId2Likes[post.id];
+              post.numberOfComments = postId2Comments[post.id];
+            });
+  
+            res.json(sortedPosts);
+          })
+        }).catch(function(error) {
+          res.status(400);
+        })
+      });
     });
-    */
   }
 
-
-
-  
+ /* 
+  reverse_compare(a, b) {
+    if (a.updatedAt < b.updatedAt) return 1;
+    if (a.updatedAt > b.updatedAt) return -1;
+    return 0;
+  }
+ */ 
 }
+
 module.exports = UserController;
