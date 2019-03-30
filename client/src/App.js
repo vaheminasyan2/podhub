@@ -28,22 +28,28 @@ class App extends Component {
 
     this.setState({
       [name]: value,
-    }, () => {
-      let timer;
-      clearTimeout(timer);
-      timer = setTimeout(() => this.checkContent(), 500);
-    });
-  };
+    }, 
+    
+    this.debounce(() => {
 
-  // Check if Podcast Search input has text and show/hide
-  checkContent = () => {
+      // Show podcast search results
+      if (this.state.podcastSearch !== "") {
+        this.setState({
+          showPodcasts: "showPodcasts"
+        });
+  
+        // Get podcasts that match user query
+        this.getPodcasts();
+      }
 
-    // Show Podcast search results
-    if (this.state.podcastSearch !== "") {
-      this.setState({
-        showPodcasts: "showPodcasts"
-      });
+      // Hide podcast search results
+      else if (this.state.podcastSearch === "") {
+        this.setState({
+          showPodcasts: "hidePodcasts"
+        });
+      }
 
+<<<<<<< HEAD
       this.getPodcasts();
     }
     else if (this.state.podcastSearch == "") {
@@ -52,6 +58,34 @@ class App extends Component {
       });
     }
   }
+=======
+    }, 250));
+  };
+
+  // Debouncing function
+  // Delays execution of search operation to prevent it from firing too often
+  debounce = (func, wait, immediate) => {
+    var timeout;
+  
+    return function executedFunction() {
+      var context = this;
+      var args = arguments;
+        
+      var later = function() {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+  
+      var callNow = immediate && !timeout;
+    
+      clearTimeout(timeout);
+  
+      timeout = setTimeout(later, wait);
+    
+      if (callNow) func.apply(context, args);
+    };
+  };
+>>>>>>> 4b39420dceccf713ca80b584e8dc55ef0c1d7f93
 
   // Search for podcasts by calling API
   getPodcasts = () => {
@@ -100,6 +134,7 @@ class App extends Component {
           <Navbar
             podcastSearch={this.podcastSearch}
             handleInputChange={this.handleInputChange}
+            hidePodcasts={this.hidePodcasts}
             logout={this.logout}
           />
 

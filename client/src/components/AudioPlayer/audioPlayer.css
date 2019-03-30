@@ -1,3 +1,49 @@
-h5 {
-    color: red;
+#audio-player-container {
+    background-color: red;
+}
+
+
+.playing {
+    background: url('../../images/pause.png');
+
+}
+
+.paused {
+    background: url('../../images/play.png');
+
+}
+
+#pButton {
+    width: 30px; 
+    height: 30px;
+    border-radius: 15px;
+    border-color: transparent;
+    background-size: 16px 18px;
+    background-repeat: no-repeat;
+    background-color: black;
+    background-position: 6px center;
+    float: left;
+    margin: 5px;
+    padding: 10px auto;
+}
+
+#pButton:focus {
+    outline: 0;
+}
+
+#timeline {
+    width: 400px;
+    height: 20px;
+    background: #4200f7;
+    margin-top: 20px;
+    float: left;
+    border-radius: 15px;
+}
+
+#playhead{
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    margin-top: 1px;
+    background: rgba(0, 255, 196, 0.82);
 }

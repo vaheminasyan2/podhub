@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import Container from "../components/Container/container";
 import Row from "../components/Row/row";
 import Modal from "react-responsive-modal";
@@ -13,27 +12,21 @@ import API from "../utils/API";
 
 class Listen extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            podcastId: "",
-            podcastName: "",
-            podcastLogo: "",
-            episodeId: "",
-            episodeName: "",
-            date: "",
-            description: "",
-            audioLink: "",
-            showModal: false,
-            showPortal: false,
-            speed: 1.0,
-        };
-        this.togglePortal = this.togglePortal.bind(this);
-    }
+    state = {
+        podcastName: "",
+        podcastLogo: "",
+        episodeId: "",
+        episodeName: "",
+        date: "",
+        description: "",
+        audioLink: "",
+        showModal: false,
+        showPortal: false,
+        speed: 1.0,
+    };
 
     componentDidMount = () => {
         this.setState({
-            podcastId: this.props.location.state.podcastId,
             podcastName: this.props.location.state.podcastName,
             podcastLogo: this.props.location.state.podcastLogo,
             episodeId: this.props.location.state.episodeId,
@@ -81,12 +74,12 @@ class Listen extends Component {
     // Activates pop-out window with podcast audio
     togglePortal = event => {
         event.preventDefault();
-        console.log("Toggled");
-        this.setState(state => ({
-            showPortal: !state.showPortal
-        }));
+        this.setState({
+            showPortal: !this.state.showPortal
+        }, () => console.log(this.state));
     }
 
+    // Adjusts playback speed of AudioPlayer
     changeSpeed = (event) => {
         this.setState({
             speed: event.target.value
@@ -97,19 +90,10 @@ class Listen extends Component {
         return (
             <Container>
                 <Row>
-                    <Link
-                        to={{
-                            pathname: "/episodeList",
-                            state: {
-                                podcastId: this.state.podcastId,
-                                podcastName: this.state.podcastName,
-                                podcastLogo: this.state.podcastLogo
-                            }
-                        }}
-                    >
-                        {this.state.podcastName}
-                    </Link>
-                    <img src={this.state.podcastLogo} alt="Podcast Logo" />
+                    <div>
+                        <h2>{this.state.podcastName}</h2>
+                        <img src={this.state.podcastLogo} alt="Podcast Logo" />
+                    </div>
                 </Row>
 
                 <Row>
@@ -117,20 +101,12 @@ class Listen extends Component {
                     <div>
                         <h4>{this.state.episodeName} &nbsp;|&nbsp; {this.state.date}</h4>
 
-                        <AudioPlayer
+                        {/* <AudioPlayer
                             audioLink={this.state.audioLink}
                             playbackRate={this.state.speed}
-                        />
-                        <input
-                            type="range"
-                            min="1"
-                            max="2.35"
-                            value={this.state.speed}
-                            onChange={this.changeSpeed}
-                            step=".15"
-                            list="steplist"
-                        />
-                        <label htmlFor="steplist">Speed</label>
+                            changeSpeed={this.changeSpeed}
+                            initialSpeed={this.state.speed}
+                        /> */}
 
                     </div>
                 </Row>
@@ -145,30 +121,19 @@ class Listen extends Component {
                     <button className="btn btn-dark" onClick={this.togglePortal}>Open Portal</button>
                 </Row>
 
-                {this.state.showPortal ? (
+                {this.state.showPortal && (
                     <Portal>
                         <h4>{this.state.podcastName}</h4>
                         <p>{this.state.episodeName}</p>
 
-                        <AudioPlayer
+                        {/* <AudioPlayer
                             audioLink={this.state.audioLink}
                             playbackRate={this.state.speed}
-                        />
-
-                        <input
-                            type="range"
-                            min="1"
-                            max="2.35"
-                            value={this.state.speed}
-                            onChange={this.changeSpeed}
-                            step=".15"
-                            list="steplist"
-                        />
-
-                        <label for="steplist">Speed</label>
+                            changeSpeed={this.changeSpeed}
+                            initialSpeed={this.state.speed}
+                        /> */}
 
                         <br />
-
                         <button
                             className="btn btn-primary"
                             onClick={this.togglePortal}
@@ -176,11 +141,9 @@ class Listen extends Component {
                             Close
                         </button>
                     </Portal>
-                ) : (
-                    <></>
                 )}
 
-                <Modal open={this.state.showModal} onClose={this.handleCloseModal} center>
+                <Modal open={this.state.showModal} onClose={this.togglePortal} center>
 
                     <Container>
                         <div>

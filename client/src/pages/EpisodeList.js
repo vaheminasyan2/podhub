@@ -15,6 +15,7 @@ class EpisodeList extends Component {
         podcastName: "",
         podcastLogo: "",
         episodes: [],
+        loadMore: true,
         message: ""
     };
 
@@ -24,7 +25,8 @@ class EpisodeList extends Component {
         this.setState({
             podcastId: this.props.location.state.podcastId,
             podcastName: this.props.location.state.podcastName,
-            podcastLogo: this.props.location.state.podcastLogo
+            podcastLogo: this.props.location.state.podcastLogo,
+            loadMore: this.props.location.state.loadMore
         }, () => { this.getEpisodes() });
     }
 
@@ -35,6 +37,7 @@ class EpisodeList extends Component {
                 podcastId: this.props.location.state.podcastId,
                 podcastName: this.props.location.state.podcastName,
                 podcastLogo: this.props.location.state.podcastLogo,
+                loadMore: this.props.location.state.loadMore,
                 episodes: []
             }, () => {this.getEpisodes() });
         }
@@ -57,10 +60,20 @@ class EpisodeList extends Component {
         API.getEpisodes(this.state.podcastId, pagination)
             .then(res => {
 
+                // If less than 10 episodes returned, hide Load More button
+                // OR if user clicks Load More (pagination > 0) and less than 50 eps return, hide button
+                if (res.length < 10 || pagination > 0 && res.length < 50) {
+                    this.setState({
+                        loadMore: false
+                    });
+                }
+
+                // If episodes are returned, add to current list of episodes
                 if (numEpisodes > 0) {
                     res = this.state.episodes.concat(res);
                 }
 
+                // Update state with episode list
                 this.setState({
                     episodes: res,
                     message: ""
@@ -77,7 +90,7 @@ class EpisodeList extends Component {
     // Converts date from ms to MM/DD/YYYY format
     convertDate = (date_ms) => {
         let date = new Date(date_ms);
-        return `${date.getMonth() + 1}/${date.getDate() + 1}/${date.getFullYear().toString()}`;
+        return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear().toString()}`;
     }
 
     // Converts time from seconds to HH:MM:SS format
@@ -154,7 +167,11 @@ class EpisodeList extends Component {
                                     />
                                 ))}
                             </List>
-                            <button className="btn btn-dark" onClick={this.getEpisodes}>Load More</button>
+                            {this.state.loadMore ? (
+                                <button className="btn btn-dark" onClick={this.getEpisodes}>Load More</button>
+                            ) : (
+                                <></>
+                            )}
                             <button className="btn btn-light" onClick={this.scrollToTop}>Back to Top</button>
                         </Container>
 
