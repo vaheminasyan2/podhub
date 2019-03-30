@@ -39,13 +39,7 @@ class Home extends Component {
                 comments: 10,
             },
         ],
-        user: [
-            {
-                name: "John Smith",
-                userProfileImage: "https://picsum.photos/300",
-                googleUserId: "1111"
-            }
-        ],
+       
         followers: 5,
         following: 10,
         favorites: [
@@ -154,16 +148,17 @@ class Home extends Component {
 
 
     render() {
+        console.log(this.props.user)
         return (
             <Container >
                 <div className="row userProfile rounded bg-light">
                     <div className="col-4">
-                        <img src={this.state.user[0].userProfileImage} alt="User" id="userMainProfileImage"/>
+                        <img src={this.props.user.profileImage} alt="User" id="userMainProfileImage"/>
                     </div>
 
                     <div className="col-8">
                         <Row>
-                            <h2>{this.state.user[0].name}</h2>
+                            <h2>{this.props.user.name}</h2>
                         </Row>
                         <Row>
                             Posts:&nbsp; {this.state.posts.length} &nbsp; | &nbsp;

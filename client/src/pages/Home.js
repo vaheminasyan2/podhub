@@ -6,7 +6,6 @@ import API from "../utils/API";
 import PostCard from "../components/PostCard/postCard";
 
 class Home extends Component {
-
     state = {
         posts: [
             {
@@ -36,19 +35,17 @@ class Home extends Component {
                 comments: 10,
             },
         ],
-        user: [
-            {
-                name: "John Smith",
-                userProfileImage: "https://picsum.photos/200",
-                googleUserId: "1111",
-            },
-        ],
+};
 
-    };
+    //componentDidMount() {
 
-    // componentDidMount() {
     //     this.getPosts();
-    // };
+
+  
+    
+   // };
+
+   
 
     // Add function to call getPost function every time when something is posted or every 2 mins or so
 
@@ -69,7 +66,10 @@ class Home extends Component {
             );
     };
 
+
+
     render() {
+        console.log(this.props.user)
         return (
             <Container>
                 <Row>

@@ -120,40 +120,42 @@ class App extends React.Component {
 
     return (
       <Router>
-      <div className="wrapper">
-        {this.state.user == null
-          ? <Route 
-              render={() => 
+        <div className="wrapper">
+          {this.state.user == null
+            ? <Route
+              render={() =>
                 <Login handleUser={this.handleUser}
-                />} 
+                />}
             />
-          :
-          <>
-          <Navbar
-            podcastSearch={this.podcastSearch}
-            handleInputChange={this.handleInputChange}
-            hidePodcasts={this.hidePodcasts}
-            logout={this.logout}
-          />
-          <PodcastSearch
-            show={this.state.showPodcasts}
-            hide={this.hidePodcasts}
-            podcasts={this.state.podcasts}
-          />
+            :
+            <>
+              <Navbar
+                podcastSearch={this.podcastSearch}
+                handleInputChange={this.handleInputChange}
+                hidePodcasts={this.hidePodcasts}
+                logout={this.logout}
+              />
+              <PodcastSearch
+                show={this.state.showPodcasts}
+                hide={this.hidePodcasts}
+                podcasts={this.state.podcasts}
+              />
 
-          <Switch>
-            <Route exact path="/home" render={() => <Home
-              user={this.state.user}
-            />} />
-            <Route exact path="/profile" component={Profile} />
-            <Route exact path="/episodeList" component={EpisodeList} />
-            <Route exact path="/listen" component={Listen} />
-            <Route exact path="/userSearch" component={UserSearch} />
-            <Route component={Error} />
-          </Switch>
-          </>
-        }
-      </div>
+              <Switch>
+                <Route exact path="/home" render={() => <Home
+                  user={this.state.user}
+                />} />
+                <Route exact path="/profile" render={() => <Profile
+                  user={this.state.user}
+                />} />
+                <Route exact path="/episodeList" component={EpisodeList} />
+                <Route exact path="/listen" component={Listen} />
+                <Route exact path="/userSearch" component={UserSearch} />
+                <Route component={Error} />
+              </Switch>
+            </>
+          }
+        </div>
       </Router>
     )
   }
