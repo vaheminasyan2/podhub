@@ -1,16 +1,18 @@
 .showPodcasts {
-    background: gray;
-    border: 1px solid black;
-    color: black;
-    font-size: 14px;
-    padding: 5px;
+    
     position: absolute;
-    right: 120px;
-    width: 200px;
+    right: 15%;
     z-index: 99;
+    background-color: #9f26e51a;
 }
 
 .hidePodcasts {
     font-size: 48px;
-    display: none;
+    display: none !important;
 }
+ .notFound{
+    white-space:nowrap;
+    width: 250px;
+    font-size: 20px;
+    text-align: center;
+ }

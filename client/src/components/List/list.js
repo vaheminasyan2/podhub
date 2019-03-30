@@ -3,13 +3,13 @@ import React from "react";
 // LIST AND LIST ITEM COMPONENTS
 
 export const List = ({ children }) => (
-    <ul className="list-group">
+  <div className="tile is-parent is-4 is-vertical show">
       {children}
-    </ul>
+    </div>
   );
   
 export function ListItem({ children }) {
-    return <li className="list-group-item">{children}</li>;
+    return <div>{children}</div>;
 }
 
 export default List;

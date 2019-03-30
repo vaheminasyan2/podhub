@@ -14,8 +14,8 @@ import "./podcastSearch.css";
 function PodcastSearch ({ show, hide, podcasts }) {
 
     return (
-        <Container>
-            <div className={show}>
+        <div>
+            <div className={`${show} tile is-ancestor`}>
                 {podcasts.length > 0 ? (
                     <List>
                         {podcasts.map((podcast) =>
@@ -30,10 +30,12 @@ function PodcastSearch ({ show, hide, podcasts }) {
                         )}       
                     </List>
                 ) : (
-                    <p>No podcasts found.</p>
+                    <div className='tile is-parent is-4 is-vertical'>
+                    <p className="notFound">No podcasts found</p>
+                    </div>
                 )}
             </div>
-        </Container>
+        </div>
         )
 };
 

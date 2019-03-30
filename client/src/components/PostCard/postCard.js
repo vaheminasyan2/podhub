@@ -5,7 +5,7 @@ import "./postCard.css";
 
 function Card({ photo, name, date, message, icon, title, description, link, likes, comments }) {
   return (
-    <div className="container rounded-0 border-top-0 border-left-0 border-right-0 card">
+    <div className="columns">
       <div className="row">
         <div className="col-1">
           <img id="profileImage" src={photo} alt="Poster"/>

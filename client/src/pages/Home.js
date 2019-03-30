@@ -38,10 +38,10 @@ class Home extends Component {
         console.log(this.props.user.id)
         console.log(this.state.posts.length)
         return (
-            <Container>
-                <Row>
+            <div>
+                <div>
                     {!!this.state && !!this.state.posts && this.state.posts.length > 0 ? (
-                        <Container>
+                        <div>
                             {this.state.posts.map(post => (
                                 <PostCard
                                     key={post.id}
@@ -57,12 +57,12 @@ class Home extends Component {
                                     comments={post.numberOfComments}
                                 />
                             ))}
-                        </Container>
+                        </div>
                     ) : (
                             <h4 className="text-center">{this.state.message}</h4>
                         )}
-                </Row>
-            </Container>
+                </div>
+            </div>
         )
     }
 }
