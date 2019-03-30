@@ -85,43 +85,26 @@ class Home extends Component {
     getPostsOnlyByUser = () => {
         API.getPostsOnlyByUser(this.props.user.id)
             .then(res =>{
-                if (res.data.length === 0) {
-                    this.setState({
-                        posts: [],
-                        messageNoPodcast: "No posts found, post something."
-                    })
-                }
-                else {
-                    console.log(res.data)
-                    this.setState({
-                        posts: res.data
-                    })
-                }
+                console.log(res.data)
+                this.setState({
+                    posts: res.data
+                })
             })
             .catch(() =>
                 this.setState({
                     posts: [],
                     messageNoPodcast: "No posts found, post something."
                 })
-        
             );
     };
 
     getFavorites = () => {
         API.getFavorites(this.props.user.id)
-            .then(res =>{
-                if (res.data.length === 0) {
-                    this.setState({
-                        favorites: [],
-                        messageNoFav: "No favorites found. Search for a podcast and add it to your favorites."
-                    })
-                }
-                else {
-                    this.setState({
-                        favorites: res.data
-                    })
-                }
-            })
+            .then(res =>
+                this.setState({
+                    favorites: res.data
+                })
+            )
             .catch(() =>
                 this.setState({
                     favorites: [],
