@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import Container from "../components/Container/container";
 import Row from "../components/Row/row";
 import Modal from "react-responsive-modal";
@@ -14,7 +13,6 @@ import API from "../utils/API";
 class Listen extends Component {
 
     state = {
-        podcastId: "",
         podcastName: "",
         podcastLogo: "",
         episodeId: "",
@@ -25,19 +23,16 @@ class Listen extends Component {
         showModal: false,
         showPortal: false,
         speed: 1.0,
-        userMessage: ""
     };
 
     componentDidMount = () => {
-        
         this.setState({
-            podcastId: this.props.location.state.podcastId,
             podcastName: this.props.location.state.podcastName,
             podcastLogo: this.props.location.state.podcastLogo,
             episodeId: this.props.location.state.episodeId,
             episodeName: this.props.location.state.episodeName,
             date: this.props.location.state.date,
-            description: this.props.location.state.description.replace(/<\/?[^>]+(>|$)/g, ""),
+            description: this.props.location.state.description,
             audioLink: this.props.location.state.audioLink
         });
     }
@@ -65,32 +60,8 @@ class Listen extends Component {
     handleShareEpisode = event => {
         event.preventDefault();
         this.handleCloseModal();
-
-        // alert("shared");
-
+        alert("shared");
         // Call Share Episode sequence
-        let userId = JSON.parse(localStorage.getItem("user")).id;
-
-        API.sharePodcast(
-            userId, 
-            this.state.podcastName, 
-            this.state.podcastLogo,
-            this.state.audioLink,
-            this.state.description,
-            this.state.userMessage
-        )
-            // .then(function(response) {
-            //     console.log(response);
-            // });
-        
-    }
-
-    handleInputChange = event => {
-        const { name, value } = event.target;
-
-        this.setState({
-            [name]: value
-        });
     }
 
     // Adds this episode to User's list of Favorite Episodes
@@ -108,34 +79,18 @@ class Listen extends Component {
         }, () => console.log(this.state));
     }
 
-    // Adjusts playback speed of AudioPlayer
-    changeSpeed = (event) => {
+    handleChange = (event) => {
         this.setState({
             speed: event.target.value
         })
     }
 
     render() {
-        var userId = JSON.parse(localStorage.getItem("user")).id;
-        // console.log(userId);
-
         return (
             <Container>
                 <Row>
                     <div>
-                        <Link
-                            to={{
-                                pathname: "/episodeList", 
-                                state: {
-                                    podcastId: this.state.podcastId,
-                                    podcastName: this.state.podcastName,
-                                    podcastLogo: this.state.podcastLogo,
-                                    loadMore: true
-                                }
-                            }} 
-                        >
-                            {this.state.podcastName}
-                        </Link>
+                        <h2>{this.state.podcastName}</h2>
                         <img src={this.state.podcastLogo} alt="Podcast Logo" />
                     </div>
                 </Row>
@@ -145,19 +100,19 @@ class Listen extends Component {
                     <div>
                         <h4>{this.state.episodeName} &nbsp;|&nbsp; {this.state.date}</h4>
 
-                        {/* <AudioPlayer
+                        <AudioPlayer
                             audioLink={this.state.audioLink}
                             playbackRate={this.state.speed}
-                            changeSpeed={this.changeSpeed}
+                            handleChange={this.handleChange}
                             initialSpeed={this.state.speed}
-                        /> */}
+                        />
 
                     </div>
                 </Row>
 
                 <Row>
                     <div>
-                        <p>{this.state.description}</p>
+                        <p>{this.state.description.replace(/<\/?[^>]+(>|$)/g, "")}</p>
                     </div>
 
                     <button className="btn btn-primary" onClick={this.handleShowModal}>Share</button>
@@ -170,12 +125,12 @@ class Listen extends Component {
                         <h4>{this.state.podcastName}</h4>
                         <p>{this.state.episodeName}</p>
 
-                        {/* <AudioPlayer
+                        <AudioPlayer
                             audioLink={this.state.audioLink}
                             playbackRate={this.state.speed}
-                            changeSpeed={this.changeSpeed}
+                            handleChange={this.handleChange}
                             initialSpeed={this.state.speed}
-                        /> */}
+                        />
 
                         <br />
                         <button
@@ -187,7 +142,7 @@ class Listen extends Component {
                     </Portal>
                 )}
 
-                <Modal open={this.state.showModal} onClose={this.handleCloseModal} center>
+                <Modal open={this.state.showModal} onClose={this.togglePortal} center>
 
                     <Container>
                         <div>
@@ -197,23 +152,15 @@ class Listen extends Component {
                         </div>
 
                         <form>
-                            <input 
-                                className="userPostInput" 
-                                name="userMessage" 
-                                onChange={this.handleInputChange}
-                                placeholder="Enter message"
-                                value={this.state.userMessage}
-                            >
-                            </input>
-                        
-                            <button
-                                className="btn btn-primary"
-                                onClick={this.handleShareEpisode}
-                                type="submit"
-                            >
-                                Share
-                            </button>
+                            <input className="userPostInput" placeholder="Enter message"></input>
                         </form>
+
+                        <button
+                            className="btn btn-primary"
+                            onClick={this.handleShareEpisode}
+                        >
+                            Share
+                        </button>
                     </Container>
 
                 </Modal>
@@ -224,3 +171,4 @@ class Listen extends Component {
 }
 
 export default Listen;
+
