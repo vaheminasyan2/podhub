@@ -17,7 +17,7 @@ export default {
 
     // Gets all episodes for a particular podcast
     getPodcasts: function (podcast) {
-        var URL = "https://listennotes.p.rapidapi.com/api/v1/search?sort_by_date=0&type=podcast&only_in=title&language=English&safe_mode=1&q=" + podcast;
+        var URL = "https://listennotes.p.rapidapi.com/api/v1/search?sort_by_date=0&type=podcast&only_in=title&language=English&q=" + podcast;
 
         return axios.get(URL, { 'headers': { 'X-RapidAPI-Key': "a063bce4f1msh0a4f44209d57a2fp1225adjsn3f80cc1cf1bb" } })
             .then((response) => {
