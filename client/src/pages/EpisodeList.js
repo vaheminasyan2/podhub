@@ -77,7 +77,7 @@ class EpisodeList extends Component {
     // Converts date from ms to MM/DD/YYYY format
     convertDate = (date_ms) => {
         let date = new Date(date_ms);
-        return `${date.getMonth() + 1}/${date.getDate() + 1}/${date.getFullYear().toString()}`;
+        return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear().toString()}`;
     }
 
     // Converts time from seconds to HH:MM:SS format

@@ -74,7 +74,12 @@ class AudioPlayer extends Component {
         const timeline = this.timeline.current;
         // timeline width (adjusted for playhead)
 
-        const timelineWidth = timeline.offsetWidth - playhead.offsetWidth;
+        let timelineWidth = 400;
+        
+        if (timeline && playhead) {
+            timelineWidth = timeline.offsetWidth - playhead.offsetWidth;
+        }
+
         let marginLeft = timelineWidth * (audioElement.currentTime / audioElement.duration);
         let currentTimeMinutes = parseInt(audioElement.currentTime / 60);
         let currentTimeSeconds = parseInt(audioElement.currentTime % 60, 10).toString();
@@ -101,7 +106,11 @@ class AudioPlayer extends Component {
         const timeline = this.timeline.current;
         const playhead = this.playhead.current;
         // timeline width (adjusted for playhead)
-        const timelineWidth = timeline.offsetWidth - playhead.offsetWidth;
+        let timelineWidth = 400;
+        
+        if (timeline && playhead) {
+            timelineWidth = timeline.offsetWidth - playhead.offsetWidth;
+        }
 
         if (this.state.mouseOnPlayhead) {
             window.removeEventListener('mousemove', this.movePlayhead, true);
@@ -172,7 +181,7 @@ class AudioPlayer extends Component {
 
     render() {
         const { audioLink } = this.props;
-        const { initialSpeed, handleChange } = this.props;
+        const { initialSpeed, changeSpeed } = this.props;
 
         return (
             <div id="audio-player-container">
@@ -212,7 +221,7 @@ class AudioPlayer extends Component {
                     min="1"
                     max="2.35"
                     value={initialSpeed}
-                    onChange={handleChange}
+                    onChange={changeSpeed}
                     step=".15"
                     list="steplist"
                 />

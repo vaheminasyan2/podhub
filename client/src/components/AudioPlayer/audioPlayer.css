@@ -32,18 +32,18 @@
 }
 
 #timeline {
-    width: 400px !important;
-    height: 20px !important;
-    background: #4200f7 !important;
-    margin-top: 20px !important;
-    float: left !important;
-    border-radius: 15px !important;
+    width: 400px;
+    height: 20px;
+    background: #4200f7;
+    margin-top: 20px;
+    float: left;
+    border-radius: 15px;
 }
 
 #playhead{
-    width: 18px !important;
-    height: 18px !important;
-    border-radius: 50% !important;
-    margin-top: 1px !important;
-    background: rgba(0, 255, 196, 0.82) !important;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    margin-top: 1px;
+    background: rgba(0, 255, 196, 0.82);
 }
