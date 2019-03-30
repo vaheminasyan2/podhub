@@ -21,21 +21,13 @@ class Login extends Component {
     getOrCreateUser = () => {
         API.getOrCreateUser(this.state.id_token)
             .then(res => {
-                this.props.handleUser(res.data)
-            }
-            )
-        this.setState({
-            redirect: true,
-        })
-
+                this.props.handleUser(res.data);
+                localStorage.setItem("user", JSON.stringify(res.data));
+            })
     };
 
     //
     render() {
-
-        if (this.state.redirect || sessionStorage.getItem("id")) {
-            return (<Redirect to={'/home'} />)
-        }
 
         const responseGoogle = (response) => {
             console.log(response);
