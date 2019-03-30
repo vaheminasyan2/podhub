@@ -26,7 +26,7 @@ VALUES
 ("test2","https://www.test2.link"," ","tech talk2",now(), now(),1),
 ("test3","https://www.test3.link"," ","tech talk3",now(), now(),2);
 
-INSERT INTO follow(isFollowing,followedBy,createdAt,updatedAt)
+INSERT INTO follows (isFollowing,followedBy,createdAt,updatedAt)
 VALUES
 (1,2,now(), now()),
 (2,1,now(), now());
