@@ -6,7 +6,11 @@ import API from "../utils/API";
 import PostCard from "../components/PostCard/postCard";
 
 class Home extends Component {
-
+    state = {
+        posts: [],
+        message: "Loading ..."
+    };
+/*
     state = {
         posts: [
             {
@@ -45,17 +49,17 @@ class Home extends Component {
         ],
 
     };
-
-    // componentDidMount() {
-    //     this.getPosts();
-    // };
+*/
+     componentDidMount() {
+         this.getPosts();
+     };
 
     // Add function to call getPost function every time when something is posted or every 2 mins or so
     
 
     // API request to get the user's and his follower's posts
     getPosts = () => {
-        API.getPosts(this.state.user.googleUserId)
+        API.getFollowingsPosts("1")  // TODO: "1" -> sessionStorage.id
             .then(res =>
                 this.setState({
                     posts: res.data
@@ -73,7 +77,7 @@ class Home extends Component {
         return (
             <Container>
                 <Row>
-                    {this.state.posts.length ? (
+                    {!!this.state && !!this.state.posts && this.state.posts.length > 0 ? (
                         <Container>
                             {this.state.posts.map(post => (
                                 <PostCard
@@ -86,8 +90,8 @@ class Home extends Component {
                                     title={post.title}
                                     description={post.details}
                                     link={post.link}
-                                    likes={post.likes}
-                                    comments={post.comments}
+                                    likes={post.numberOfLikes}
+                                    comments={post.numberOfComments}
                                 />
                             ))}
                         </Container>

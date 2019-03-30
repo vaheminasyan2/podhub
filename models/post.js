@@ -20,10 +20,8 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: false
     },
-    likes: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    }
+    numberOfLikes: sequelize.Sequelize.VIRTUAL,
+    numberOfComments: sequelize.Sequelize.VIRTUAL
   });
 
   // Creates associates

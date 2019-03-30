@@ -72,6 +72,11 @@ export default {
     addPodcastToFavorites: function(podcastId) {
         // add podcast to user's favorite podcasts
         return podcastId;
+    },
+
+    getFollowingsPosts: function(userId) {
+        // Get all user and user followings posts latest-first 
+        return axios.get("/api/users/" + userId + "/followings/posts");
     }
 
 };
