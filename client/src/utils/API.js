@@ -99,6 +99,20 @@ export default {
     getFollowingsPosts: function(userId) {
         // Get all user and user followings posts latest-first 
         return axios.get("/api/users/" + userId + "/followings/posts");
-    }
+    },
 
+    sharePodcast: function(userId, podcastName, podcastLogo, audioLink, description, userMessage) {
+        console.log(arguments);
+
+        let temp = {
+            title: podcastName,
+            link: audioLink,
+            imageIcon: podcastLogo,
+            details: description,
+            message: userMessage,
+            postedBy: userId
+        }
+
+        return axios.post("/api/posts/", temp);
+    }
 };
