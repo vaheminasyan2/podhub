@@ -10,71 +10,71 @@ import Listen from "./pages/Listen";
 import UserSearch from "./pages/UserSearch";
 import API from "./utils/API"
 import "./App.css";
-
 import Login from './pages/Login';
+import Error from "./pages/Error";
 
 class App extends React.Component {
 
   constructor(props) {
     super(props)
 
-  this.state = {
-    podcastSearch: "",
-    podcasts: [],
-    showPodcasts: "hidePodcasts",
-    redirect: false,
-  };
-}
+    this.state = {
+      podcastSearch: "",
+      podcasts: [],
+      showPodcasts: "hidePodcasts",
+      redirect: false,
+    };
+  }
   // Listen for when user enters text into Podcast search fields
   handleInputChange = event => {
     const { name, value } = event.target;
 
     this.setState({
       [name]: value,
-    }, 
-    
-    this.debounce(() => {
+    },
 
-      // Show podcast search results
-      if (this.state.podcastSearch !== "") {
-        this.setState({
-          showPodcasts: "showPodcasts"
-        });
-  
-        // Get podcasts that match user query
-        this.getPodcasts();
-      }
+      this.debounce(() => {
 
-      // Hide podcast search results
-      else if (this.state.podcastSearch === "") {
-        this.setState({
-          showPodcasts: "hidePodcasts"
-        });
-      }
+        // Show podcast search results
+        if (this.state.podcastSearch !== "") {
+          this.setState({
+            showPodcasts: "showPodcasts"
+          });
 
-    }, 250));
+          // Get podcasts that match user query
+          this.getPodcasts();
+        }
+
+        // Hide podcast search results
+        else if (this.state.podcastSearch === "") {
+          this.setState({
+            showPodcasts: "hidePodcasts"
+          });
+        }
+
+      }, 250));
   };
 
   // Debouncing function
   // Delays execution of search operation to prevent it from firing too often
   debounce = (func, wait, immediate) => {
     var timeout;
-  
+
     return function executedFunction() {
       var context = this;
       var args = arguments;
-        
-      var later = function() {
+
+      var later = function () {
         timeout = null;
         if (!immediate) func.apply(context, args);
       };
-  
+
       var callNow = immediate && !timeout;
-    
+
       clearTimeout(timeout);
-  
+
       timeout = setTimeout(later, wait);
-    
+
       if (callNow) func.apply(context, args);
     };
   };
@@ -105,48 +105,55 @@ class App extends React.Component {
   }
 
   logout = () => {
-    sessionStorage.clear();
     this.setState({
-      redirect: true
+      user: []
     });
+  }
+
+  handleUser = (userData) => {
+    this.setState({ user: userData })
   }
 
   render() {
 
-    console.log(this.props.user)
-
-    if (this.state.redirect) {
-      return (
-        <Switch>
-          <Redirect to={'/'} />
-        </Switch>
-      )
-    }
+    console.log(this.state.user)
 
     return (
       <Router>
-        <div className="wrapper">
+      <div className="wrapper">
+        {this.state.user == null
+          ? <Route 
+              render={() => 
+                <Login handleUser={this.handleUser}
+                />} 
+            />
+          :
+          <>
           <Navbar
             podcastSearch={this.podcastSearch}
             handleInputChange={this.handleInputChange}
             hidePodcasts={this.hidePodcasts}
             logout={this.logout}
           />
-
           <PodcastSearch
             show={this.state.showPodcasts}
             hide={this.hidePodcasts}
             podcasts={this.state.podcasts}
           />
 
-           <Route exact path="/home" render={() => <Home
-            user={this.state.user}
-          />} />
-          <Route exact path="/profile" component={Profile} />
-          <Route exact path="/episodeList" component={EpisodeList} />
-          <Route exact path="/listen" component={Listen} />
-          <Route exact path="/userSearch" component={UserSearch} />
-        </div>
+          <Switch>
+            <Route exact path="/home" render={() => <Home
+              user={this.state.user}
+            />} />
+            <Route exact path="/profile" component={Profile} />
+            <Route exact path="/episodeList" component={EpisodeList} />
+            <Route exact path="/listen" component={Listen} />
+            <Route exact path="/userSearch" component={UserSearch} />
+            <Route component={Error} />
+          </Switch>
+          </>
+        }
+      </div>
       </Router>
     )
   }
