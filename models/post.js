@@ -8,9 +8,8 @@ module.exports = function(sequelize, DataTypes) {
     podcastLogo: {
       type: DataTypes.STRING(2000)
     },
-
-    episodeName: {
-      type: DataTypes.STRING(2000)
+    imageIcon: {
+      type: DataTypes.STRING,
     },
 
     description: {
