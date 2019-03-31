@@ -127,7 +127,7 @@ class UserController {
     var postId2Comments = {};
     db.user.findByPk(req.params.id).then(function(user) {
       postPromises.push(user.getPosts());
-      user.getIsFollowing().then(function(users) {
+      user.getFollowedBy().then(function(users) {
         users.forEach(user => {
           const newPromise = user.getPosts();
           postPromises.push(newPromise);
