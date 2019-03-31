@@ -30,8 +30,9 @@ module.exports = function(sequelize, DataTypes) {
     },
 
     numberOfLikes: sequelize.Sequelize.VIRTUAL,
-
-    numberOfComments: sequelize.Sequelize.VIRTUAL
+    numberOfComments: sequelize.Sequelize.VIRTUAL,
+    userName: sequelize.Sequelize.VIRTUAL,
+    userImage: sequelize.Sequelize.VIRTUAL
 
   });
 

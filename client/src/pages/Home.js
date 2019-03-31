@@ -35,8 +35,6 @@ class Home extends Component {
     };
 
     render() {
-        // console.log(this.props.user.id)
-        // console.log(this.state.posts.length)
         return (
             <Container>
                 <Row>
@@ -45,16 +43,18 @@ class Home extends Component {
                             {this.state.posts.map(post => (
                                 <PostCard
                                     key={post.id}
-                                    photo={post.userProfileImage}
-                                    name={post.name}
+                                    userPhoto={post.userImage}
+                                    userName={post.userName}
                                     date={post.createdAt}
-                                    message={post.message}
-                                    icon={post.imageIcon}
-                                    title={post.title}
-                                    description={post.details}
-                                    link={post.link}
+                                    podcastName={post.podcastName}
+                                    podcastLogo={post.podcastLogo}
+                                    episodeName={post.episodeName}
+                                    description={post.description}
+                                    audioLink={post.audioLink}
+                                    userMessage={post.userMessage}
                                     likes={post.numberOfLikes}
                                     comments={post.numberOfComments}
+                                    handlePostDelete={this.handlePostDelete}
                                 />
                             ))}
                         </Container>
