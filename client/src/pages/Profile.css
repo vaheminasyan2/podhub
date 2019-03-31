@@ -1,17 +1,21 @@
+.userProfile {
+    height: 150px;
+    margin-bottom: 20px;
+  }
+
+  .favorites{
+    margin-bottom: 20px;
+  }
+
   #userMainProfileImage{
-    width: 200px;
-    border-radius: 25px;
-    border:4px solid white;
-    display:inherit;
+    width: 100px;
   }
 
-  .hcenter{
-    margin:auto;
+  #favoriteIcon{
+    width: 100px;
+    margin: 10px;
   }
 
-
-  #inherit{
-    display:inherit;
-    border-radius: 25px;
-    border:4px solid white;
+  .favorite {
+    margin-bottom: 10px;
   }

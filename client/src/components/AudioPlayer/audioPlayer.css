@@ -68,17 +68,12 @@
 
 #skip-forward-15:hover, #skip-backward-15:hover {
     cursor: pointer;
+
 }
 
 
 
-
-
-
-
-
-
-/* speed slider */
+/* Speed slider styling */
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     input[type='range'] {
@@ -109,4 +104,3 @@
     }
 
 }
-  

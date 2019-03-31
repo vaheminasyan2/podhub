@@ -16,10 +16,13 @@
   margin-left:25px;
 }
 
-
-
 #podcastIcon{
   width: 100px;
   margin: 10px;
+}
+
+.deletePost {
+  float: right;
+  position: absolute;
 }
 

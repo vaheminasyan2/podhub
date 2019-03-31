@@ -163,6 +163,7 @@ class AudioPlayer extends Component {
         const timeline = this.timeline.current;
         const playhead = this.playhead.current;
         const audioElement = this.audioElement.current;
+
         // timeline width (adjusted for playhead)
         const timelineWidth = timeline.offsetWidth - playhead.offsetWidth;
 
@@ -191,8 +192,6 @@ class AudioPlayer extends Component {
         const audioElement = this.audioElement.current;
         audioElement.currentTime -= 15;
     }
-
-
 
     render() {
         const { audioLink } = this.props;
@@ -255,6 +254,3 @@ class AudioPlayer extends Component {
 }
 
 export default AudioPlayer;
-
-
-
