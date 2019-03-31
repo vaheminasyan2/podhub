@@ -1,23 +1,15 @@
-/* .findUsers {
+.findUsers {
     margin-left: 5px;
     margin-top: 5px;
     width: 120px;
-} */
-
-.navbar{
-    background-color:rgba(0, 0, 0, 0.253) !important;
 }
 
-.hover:hover{
-    background-color:black !important;
+.navbarText {
+    font-weight: bold;
+    font-size: 20px;
+    color: white!important; 
 }
 
-.logo{
-    
-    height: 50px !important;
-}
-
-.navbar-item img{
-    max-height:100% !important;
-    margin: 0 auto !important;
+.navbar {
+    margin-bottom: 20px;
 }

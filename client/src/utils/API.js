@@ -102,9 +102,9 @@ export default {
     },
 
     sharePodcast: function(userId, podcastName, podcastLogo, audioLink, description, userMessage) {
-        console.log(arguments);
+        // console.log(arguments);
 
-        let temp = {
+        let data = {
             title: podcastName,
             link: audioLink,
             imageIcon: podcastLogo,
@@ -113,6 +113,6 @@ export default {
             postedBy: userId
         }
 
-        return axios.post("/api/posts/", temp);
+        return axios.post("/api/posts/", data);
     }
 };

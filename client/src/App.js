@@ -13,7 +13,7 @@ import "./App.css";
 import Login from './pages/Login';
 // import Error from "./pages/Error";
 
-class App extends React.Component {
+class App extends Component {
 
   constructor(props) {
     super(props)
@@ -130,23 +130,25 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log("mount")
+    // console.log("mount")
     this.loadUserFromLocalStorage();
   }
 
 
   render() {
 
-    console.log("state user:", this.state.user)
-    console.log("localStorage user:", localStorage.getItem("user"))
+    // console.log("state user:", this.state.user)
+    // console.log("localStorage user:", localStorage.getItem("user"))
 
     return (
       <Router>
-        <div className="hero is-dark is-fullheight">
+        
+      
+        <div className="wrapper">
         {this.state.redirect
         ? <Redirect to= "/" />
         : null
-        }
+        } 
           {!this.isLoggedIn()
             ? <Route
               render={() =>

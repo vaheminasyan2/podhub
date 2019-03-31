@@ -62,7 +62,7 @@ class EpisodeList extends Component {
 
                 // If less than 10 episodes returned, hide Load More button
                 // OR if user clicks Load More (pagination > 0) and less than 50 eps return, hide button
-                if (res.length < 10 || pagination > 0 && res.length < 50) {
+                if (res.length < 10 || (pagination > 0 && res.length < 50)) {
                     this.setState({
                         loadMore: false
                     });

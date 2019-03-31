@@ -66,9 +66,6 @@ class Listen extends Component {
         event.preventDefault();
         this.handleCloseModal();
 
-        // alert("shared");
-
-        // Call Share Episode sequence
         let userId = JSON.parse(localStorage.getItem("user")).id;
 
         API.sharePodcast(
@@ -79,12 +76,12 @@ class Listen extends Component {
             this.state.description,
             this.state.userMessage
         )
-            // .then(function(response) {
-            //     console.log(response);
-            // });
-        
+            .then(function(response) {
+                console.log(response);
+            });
     }
 
+    // Collects text input from modal for User Message
     handleInputChange = event => {
         const { name, value } = event.target;
 
@@ -105,20 +102,17 @@ class Listen extends Component {
         event.preventDefault();
         this.setState({
             showPortal: !this.state.showPortal
-        }, () => console.log(this.state));
+        });
     }
 
     // Adjusts playback speed of AudioPlayer
     changeSpeed = (event) => {
         this.setState({
             speed: event.target.value
-        })
+        });
     }
 
     render() {
-        var userId = JSON.parse(localStorage.getItem("user")).id;
-        // console.log(userId);
-
         return (
             <Container>
                 <Row>
@@ -170,12 +164,12 @@ class Listen extends Component {
                         <h4>{this.state.podcastName}</h4>
                         <p>{this.state.episodeName}</p>
 
-                        {/* <AudioPlayer
+                        <AudioPlayer
                             audioLink={this.state.audioLink}
                             playbackRate={this.state.speed}
                             changeSpeed={this.changeSpeed}
                             initialSpeed={this.state.speed}
-                        /> */}
+                        />
 
                         <br />
                         <button
