@@ -22,7 +22,7 @@ function Navbar({ podcastSearch, handleInputChange, hidePodcasts, logout }) {
             <img src={logo} alt="logo" className="logo"/>
             </Link>
             </div>
-            <span class="navbar-burger burger" data-target="navbarMenuHeroC">
+            <span className="navbar-burger burger" data-target="navbarMenuHeroC">
             <span></span>
             <span></span>
             <span></span>
@@ -30,7 +30,7 @@ function Navbar({ podcastSearch, handleInputChange, hidePodcasts, logout }) {
         </div>
         <div id="navbarMenuHeroC" className="navbar-menu">
           <div className="navbar-start">
-            <a className="navbar-item hover">
+          
             <Link
                to="/profile"
                className={
@@ -41,8 +41,7 @@ function Navbar({ podcastSearch, handleInputChange, hidePodcasts, logout }) {
              >
                Profile
             </Link>
-            </a>
-            <a class="navbar-item hover">
+
             <Link
               to="/home"
               className={
@@ -53,9 +52,7 @@ function Navbar({ podcastSearch, handleInputChange, hidePodcasts, logout }) {
             >
               Home
             </Link>
-            </a>
-            <a class="navbar-item hover">
-            
+
             <Link
               to={{
                 pathname: "/userSearch",
@@ -65,14 +62,13 @@ function Navbar({ podcastSearch, handleInputChange, hidePodcasts, logout }) {
               <FontAwesomeIcon icon="search" />
               <span>&nbsp; Find Users</span>
             </Link>
-            
-            </a>
+
           </div>
         </div>
         
         <div className="navbar-end">
               
-              <div class="navbar-item">
+              <div className="navbar-item">
               <form className="searchPodcastForm">
         <div className="field">
           <div className="control has-icons-left has-icons-right">
