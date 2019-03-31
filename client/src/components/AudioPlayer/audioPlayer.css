@@ -1,54 +1,112 @@
 #audio-player-container {
-    background-color: red;
+    background-color: #292929;
+    border: 3px solid rgb(62, 52, 68);
+    box-shadow: 2px 2px 3px rgb(31, 30, 30);
+    width: 500px;
 }
 
-
-.playing {
-    background: url('../../images/pause.png');
-
+#current-time {
+  display: inline-block;
+  margin-right: 286px;
 }
 
-.paused {
-    background: url('../../images/play.png');
-
+#duration {
+  display: inline-block;
 }
+
+#current-time, #duration {
+  font-size: 13px;
+}
+
 
 #pButton {
     width: 30px; 
     height: 30px;
     border-radius: 15px;
     border-color: transparent;
-    background-size: 16px 18px;
-    background-repeat: no-repeat;
-    background-color: black;
-    background-position: 6px center;
-    float: left;
-    margin: 5px;
-    padding: 10px auto;
+    display: inline-block;
 }
 
-#pButton:focus {
-    outline: 0;
+#pButton:hover {
+    cursor: pointer;
 }
 
 #timeline {
-    width: 400px;
-    height: 20px;
-    background: #4200f7;
-    margin-top: 20px;
+    width: 350px;
+    height: 5px;
+    background: #363636;
     float: left;
     cursor: pointer;
+    position: relative;
+    display: inline-block;
 }
 
 #playhead{
-    width: 4px;
-    height: 18px;
-    margin-top: 1px;
-    background: rgba(0, 255, 196, 0.82);
-    /* cursor: pointer; */
+    width: 5px;
+    height: 13px;
+    border-radius: 2px;
+    background: #9E26E5;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%,-50%);
 }
 
-/* #playhead:hover {
+#playhead:hover {
     cursor: pointer;
-} */
 
+}
+
+
+#skip-forward-15 {
+    width: 25px;
+    height: 25px;
+}
+#skip-backward-15 {
+    width: 25px;
+    height: 25px;
+}
+
+#skip-forward-15:hover, #skip-backward-15:hover {
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+/* speed slider */
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    input[type='range'] {
+      overflow: hidden;
+      width: 80px;
+      -webkit-appearance: none;
+      background-color: #3E3443;
+      cursor: pointer;
+      outline: 0;
+    }
+    
+    input[type='range']::-webkit-slider-runnable-track {
+      height: 10px;
+      -webkit-appearance: none;
+      margin-top: -1px;
+      outline: 0;
+    }
+    
+    input[type='range']::-webkit-slider-thumb {
+      width: 10px;
+      -webkit-appearance: none;
+      height: 10px;
+      cursor: pointer;
+      background: #000000;
+      outline: 0;
+      box-shadow: 10px 10px;
+      
+    }
+
+}
+  

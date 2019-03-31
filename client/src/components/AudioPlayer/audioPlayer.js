@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import "./audioPlayer.css";
+import skipForwardImage from "../../images/skip-forward.png";
+import skipBackwardImage from "../../images/skip-backward.png";
+import playImg from "../../images/play.png";
+import pauseImg from "../../images/pause.png";
 
 // AUDIO PLAYER COMPONENT
 
@@ -74,7 +78,7 @@ class AudioPlayer extends Component {
         const timeline = this.timeline.current;
         // timeline width (adjusted for playhead)
 
-        if (!audioElement || !timeline || !playhead ) return;
+        if (!audioElement || !timeline || !playhead) return;
 
         const timelineWidth = timeline.offsetWidth - playhead.offsetWidth;
         let marginLeft = timelineWidth * (audioElement.currentTime / audioElement.duration);
@@ -104,10 +108,10 @@ class AudioPlayer extends Component {
         const playhead = this.playhead.current;
         // timeline width (adjusted for playhead)
 
-        if (!audioElement || !timeline || !playhead ) return;
+        if (!audioElement || !timeline || !playhead) return;
 
         const timelineWidth = timeline.offsetWidth - playhead.offsetWidth;
-        
+
         if (this.state.mouseOnPlayhead) {
             audioElement.currentTime = ((event.clientX - timeline.getBoundingClientRect().left) / timelineWidth) * audioElement.duration
             window.removeEventListener('mousemove', this.movePlayhead, true);
@@ -173,10 +177,21 @@ class AudioPlayer extends Component {
         else if (newMargLeft > timelineWidth) {
             this.setHeadPosition(timelineWidth)
         }
-        
+
         audioElement.currentTime = ((event.clientX - timeline.getBoundingClientRect().left) / timelineWidth) * audioElement.duration;
 
     }
+
+    skipForward15 = () => {
+        const audioElement = this.audioElement.current;
+        audioElement.currentTime += 15;
+    }
+
+    skipBackward15 = () => {
+        const audioElement = this.audioElement.current;
+        audioElement.currentTime -= 15;
+    }
+
 
 
     render() {
@@ -185,24 +200,16 @@ class AudioPlayer extends Component {
 
         return (
             <div id="audio-player-container">
-                <audio
-                    id="music"
-                    src={audioLink}
-                    type="audio/mpeg"
-                    ref={this.audioElement}
-                />
-                <button
-                    id="pButton"
-                    className={this.state.play ? "playing" : "paused"}
-                    onClick={this.playAudio}
-                >
-                </button>
                 <div id="current-time">
                     {this.state.currentTime}
                 </div>
                 <div id="duration">
                     {this.state.duration}
                 </div>
+                <img src={this.state.play ? pauseImg : playImg} alt="play button"
+                    id="pButton"
+                    onClick={this.playAudio}
+                />
                 <div
                     id="timeline"
                     onClick={this.movePlayhead}
@@ -216,16 +223,32 @@ class AudioPlayer extends Component {
                     </div>
 
                 </div>
-                <input
-                    type="range"
-                    min="1"
-                    max="2.35"
-                    value={initialSpeed}
-                    onChange={changeSpeed}
-                    step=".15"
-                    list="steplist"
+                <img src={skipForwardImage} alt="skip forward"
+                    id="skip-forward-15"
+                    onClick={this.skipForward15}
                 />
-                <label htmlFor="steplist">Speed</label>
+                <div id="speed-slider-container">
+                    <input
+                        type="range"
+                        min="1"
+                        max="2.35"
+                        value={initialSpeed}
+                        onChange={changeSpeed}
+                        step=".15"
+                        list="steplist"
+                    />
+                    <label htmlFor="steplist">Speed</label>
+                </div>
+                <img src={skipBackwardImage} alt="skip backward"
+                    id="skip-backward-15"
+                    onClick={this.skipBackward15}
+                />
+                <audio
+                    id="music"
+                    src={audioLink}
+                    type="audio/mpeg"
+                    ref={this.audioElement}
+                />
             </div>
         );
     }
