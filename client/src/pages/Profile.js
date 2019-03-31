@@ -114,6 +114,10 @@ class Home extends Component {
                 });
             });
     };
+    
+    handlePostDelete = () => {
+        console.log("Delete");
+    }
 
     handleFavoriteDelete = id => {
         API.deleteFavorite(id)
@@ -195,6 +199,7 @@ class Home extends Component {
                                     userMessage={post.userMessage}
                                     likes={post.likes}
                                     comments={post.comments}
+                                    handlePostDelete={this.handlePostDelete}
                                 />
                             ))}
                         </Container>
