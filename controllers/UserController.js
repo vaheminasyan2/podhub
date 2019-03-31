@@ -125,6 +125,8 @@ class UserController {
     var postPromises =[];
     var postId2Likes = {};
     var postId2Comments = {};
+    var postId2UserNames = {};
+    var postId2UserImages = {};
     db.user.findByPk(req.params.id).then(function(user) {
       postPromises.push(user.getPosts());
       user.getFollowedBy().then(function(users) {
@@ -146,8 +148,10 @@ class UserController {
           sortedPosts.forEach(post => {
             const likePromise = post.getPostLikes();
             const commentPromise = post.getComments();
+            const userPromise = db.user.findByPk(post.postedBy)
             likeCommPromises.push(likePromise);
             likeCommPromises.push(commentPromise);
+            likeCommPromises.push(userPromise);
 
             likePromise.then(function(likes) {
               postId2Likes[post.id] = likes.length;
@@ -155,12 +159,18 @@ class UserController {
             commentPromise.then(function(comments) {
               postId2Comments[post.id] = comments.length;
             });
+            userPromise.then(function(user){
+              postId2UserNames[post.id] = user.name;
+              postId2UserImages[post.id] = user.profileImage;
+            })
           });
 
           Promise.all(likeCommPromises).then(function() {
             sortedPosts.forEach(post => {
               post.numberOfLikes = postId2Likes[post.id];
               post.numberOfComments = postId2Comments[post.id];
+              post.userName = postId2UserNames[post.id];
+              post.userImage = postId2UserImages[post.id];
             });
   
             res.json(sortedPosts);
