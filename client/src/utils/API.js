@@ -101,18 +101,19 @@ export default {
         return axios.get("/api/users/" + userId + "/followings/posts");
     },
 
-    sharePodcast: function(userId, podcastName, podcastLogo, audioLink, description, userMessage) {
-        console.log(arguments);
+    sharePodcast: function(podcastName, podcastLogo, episodeName, description, audioLink, userMessage, userId) {
+        // console.log(arguments);
 
-        let temp = {
-            title: podcastName,
-            link: audioLink,
-            imageIcon: podcastLogo,
-            details: description,
-            message: userMessage,
+        let data = {
+            podcastName: podcastName,
+            podcastLogo: podcastLogo,
+            episodeName: episodeName,
+            description: description,
+            audioLink: audioLink,
+            userMessage: userMessage,
             postedBy: userId
         }
 
-        return axios.post("/api/posts/", temp);
+        return axios.post("/api/posts/", data);
     }
 };
