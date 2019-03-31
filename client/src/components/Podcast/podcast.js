@@ -13,6 +13,7 @@ import "./podcast.css";
 function Podcast ({ podcastId, podcastName, podcastLogo, thumbnail, hide }) {
 
     return (
+        
         <Link to={{
             pathname: "/episodeList", 
             state: {
@@ -22,14 +23,13 @@ function Podcast ({ podcastId, podcastName, podcastLogo, thumbnail, hide }) {
                 loadMore: true
             }
             }} 
-            className="podcast tile is-child notification"
+            className="podcast"
             onClick={hide}
-            onMouseDown={event => event.preventDefault()}>
-            
-            <img className="podcastLogoSmall" src={thumbnail} alt="Podcast Logo"/>
-            <p className="podcastTitle">{podcastName}</p>
+            onMouseDown={event => event.preventDefault()}
+        >
+            <span><img className="podcastLogoSmall" src={thumbnail} alt="Podcast Logo"/></span>
+            <span><p className="podcastTitle">{podcastName}</p></span>
         </Link>
-        
     );
 };
 

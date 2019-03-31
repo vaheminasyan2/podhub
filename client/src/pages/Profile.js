@@ -10,7 +10,7 @@ import "./Profile.css";
 class Home extends Component {
 
     state = {
-        posts:[],
+        posts: [],
         followers: 0,
         following: 0,
         favorites: []
@@ -26,7 +26,7 @@ class Home extends Component {
 
     getPostsOnlyByUser = () => {
         API.getPostsOnlyByUser(this.props.user.id)
-            .then(res =>{
+            .then(res => {
                 if (res.data.length === 0) {
                     this.setState({
                         posts: [],
@@ -36,122 +36,119 @@ class Home extends Component {
                 else {
                     this.setState({
                         posts: res.data
-                    })
+                    });
                 }
             })
-            .catch(() =>
+            .catch(() => {
                 this.setState({
                     posts: [],
                     messageNoPodcast: "No posts found, post something."
-                })
-        
-            );
+                });
+            });
     };
 
     getFavorites = () => {
         API.getFavorites(this.props.user.id)
-            .then(res =>{
+            .then(res => {
                 if (res.data.length === 0) {
                     this.setState({
                         favorites: [],
                         messageNoFav: "No favorites found. Search for a podcast and add it to your favorites."
-                    })
+                    });
                 }
                 else {
                     this.setState({
                         favorites: res.data
-                    })
+                    });
                 }
             })
-            .catch(() =>
+            .catch(() => {
                 this.setState({
                     favorites: [],
                     messageNoFav: "No favorites found. Search for a podcast and add it to your favorites."
-                })
-            );
+                });
+            });
     };
 
     getOrCreateUser = () => {
         API.getOrCreateUser(this.state.userId)
-            .then(res =>
+            .then(res => {
                 this.setState({
                     user: res.data
-                })
-            );
+                });
+            });
     };
 
     getFollowers = () => {
         API.getFollowers(this.props.user.id)
-            .then(res =>{
+            .then(res => {
                 this.setState({
                     followers: res.data[0].count
-                })
+                });
             })
-            .catch(() =>
+            .catch(() => {
                 this.setState({
                     followers: 0,
-                })
-            );
+                });
+            });
     };
 
     getFollowing = () => {
         API.getFollowing(this.props.user.id)
-            .then(res =>{
+            .then(res => {
                 this.setState({
                     following: res.data[0].count
-                })
+                });
             })
-            .catch(() =>
+            .catch(() => {
                 this.setState({
                     following: 0,
-                })
-            );
+                });
+            });
     };
 
     handleFavoriteDelete = id => {
-        API.deleteFavorite(id).then(res => this.getFavorites());
+        API.deleteFavorite(id)
+            .then(res => {
+                this.getFavorites()
+            });
     };
 
     render() {
-        console.log(this.props.user)
         return (
-            <Container>
-                <div className="columns userProfile rounded bg-light">
-                    <div className="column is-narrow">
-                        <img src={this.props.user.profileImage} alt="User" id="userMainProfileImage"/>
+
+            <Container >
+                <div className="row userProfile rounded bg-light">
+                    <div className="col-4">
+                        <img src={this.props.user.profileImage} alt="User" id="userMainProfileImage" />
                     </div>
 
-                    <div className="column is-one-quarter">
+                    <div className="col-8">
                         <Row>
-                            <h2 className="hcenter">{this.props.user.name}</h2>
+                            <h2>{this.props.user.name}</h2>
                         </Row>
                         <Row>
-                            <h2 className="hcenter">
                             Posts:&nbsp; {this.state.posts.length} &nbsp; | &nbsp;
                             Followers:&nbsp;{this.state.followers}&nbsp; | &nbsp;
                             Following:&nbsp;{this.state.following}
-                            </h2>
                         </Row>
                     </div>
                 </div>
 
-                <Row>
-                    <div className="column is-one-third">
-                    <h2 className="is-size-3">Favorites: </h2>
-                    </div>
-                </Row>
-                <Row>
+                <div className="row favorites rounded">
+                    <h4>Favorites: </h4>
+                    
                     {this.state.favorites.length ? (
-                        <div className="column is-full">
+                        <Container>
                             {this.state.favorites.map(favorites => (
 
-                                <div key={favorites.id} className="columns is-mobile">
+                                <div className="row border rounded favorite" key={favorites.id}>
 
-                                    <div className="column is-narrow">
+                                    <div className="col-2 p-0">
 
-                                        <img src={favorites.podcastIcon} alt="Podcast Icon" id="inherit"/>
+                                        <img src={favorites.podcastIcon} alt="Podcast Icon" id="favoriteIcon" />
                                     </div>
-                                    <div className="column">
+                                    <div className="col p-0">
                                         <p>{favorites.podcastTitle}</p>
                                         <p>{favorites.podcastDescription}</p>
                                         <a href={favorites.link}>{favorites.link}</a> &nbsp;
@@ -165,21 +162,17 @@ class Home extends Component {
                                     </div>
                                 </div>
                             ))}
-                        </div>
+                        </Container>
                     ) : (
                             <div className="col">
                                 <h5 className="text-center">&nbsp;{this.state.messageNoFav}</h5>
                             </div>
                         )}
-                </Row>
+                </div>
                 <Row>
-                <div className="column">
-                    <h2 className="is-size-3">Recent Posts: </h2>
-                    </div>
-                </Row>
-                <Row>
+                    <h4>Recent posts:</h4>
                     {this.state.posts.length ? (
-                        <div>
+                        <Container>
                             {this.state.posts.map(post => (
                                 <PostCard
                                     key={post.id}
@@ -195,7 +188,7 @@ class Home extends Component {
                                     comments={post.comments}
                                 />
                             ))}
-                        </div>
+                        </Container>
                     ) : (
                             <div className="col">
                                 <h5 className="text-center">&nbsp;{this.state.messageNoPodcast}</h5>
