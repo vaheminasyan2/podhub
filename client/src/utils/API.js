@@ -101,15 +101,16 @@ export default {
         return axios.get("/api/users/" + userId + "/followings/posts");
     },
 
-    sharePodcast: function(userId, podcastName, podcastLogo, audioLink, description, userMessage) {
+    sharePodcast: function(podcastName, podcastLogo, episodeName, description, audioLink, userMessage, userId) {
         // console.log(arguments);
 
         let data = {
-            title: podcastName,
-            link: audioLink,
-            imageIcon: podcastLogo,
-            details: description,
-            message: userMessage,
+            podcastName: podcastName,
+            podcastLogo: podcastLogo,
+            episodeName: episodeName,
+            description: description,
+            audioLink: audioLink,
+            userMessage: userMessage,
             postedBy: userId
         }
 

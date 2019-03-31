@@ -10,6 +10,7 @@ import "./Profile.css";
 class Home extends Component {
 
     state = {
+        user: [],
         posts: [],
         followers: 0,
         following: 0,
@@ -17,12 +18,19 @@ class Home extends Component {
     }
 
     componentDidMount() {
+        this.setUser();
         this.getPostsOnlyByUser();
         this.getFavorites();
         // this.getOrCreateUser();
         this.getFollowers();
         this.getFollowing();
     };
+
+    setUser = () => {
+        this.setState({
+            user: this.props.user
+        });
+    }
 
     getPostsOnlyByUser = () => {
         API.getPostsOnlyByUser(this.props.user.id)
@@ -106,6 +114,10 @@ class Home extends Component {
                 });
             });
     };
+    
+    handlePostDelete = () => {
+        console.log("Delete");
+    }
 
     handleFavoriteDelete = id => {
         API.deleteFavorite(id)
@@ -140,21 +152,21 @@ class Home extends Component {
                     
                     {this.state.favorites.length ? (
                         <Container>
-                            {this.state.favorites.map(favorites => (
+                            {this.state.favorites.map(favorite => (
 
-                                <div className="row border rounded favorite" key={favorites.id}>
+                                <div className="row border rounded favorite" key={favorite.id}>
 
                                     <div className="col-2 p-0">
 
-                                        <img src={favorites.podcastIcon} alt="Podcast Icon" id="favoriteIcon" />
+                                        <img src={favorite.podcastIcon} alt="Podcast Icon" id="favoriteIcon" />
                                     </div>
                                     <div className="col p-0">
-                                        <p>{favorites.podcastTitle}</p>
-                                        <p>{favorites.podcastDescription}</p>
-                                        <a href={favorites.link}>{favorites.link}</a> &nbsp;
+                                        <p>{favorite.podcastTitle}</p>
+                                        <p>{favorite.podcastDescription}</p>
+                                        <a href={favorite.link}>{favorite.link}</a> &nbsp;
 
                                             <button className="btn btn-sm mb-1 btn-light"
-                                            onClick={() => this.handleFavoriteDelete(favorites.id)}
+                                            onClick={() => this.handleFavoriteDelete(favorite.id)}
                                         >
                                             x
                                             </button>
@@ -176,16 +188,18 @@ class Home extends Component {
                             {this.state.posts.map(post => (
                                 <PostCard
                                     key={post.id}
-                                    photo={post.userProfileImage}
-                                    name={post.userName}
+                                    userPhoto={this.state.user.profileImage}
+                                    userName={this.state.user.name}
                                     date={post.date}
-                                    message={post.message}
-                                    icon={post.podcastIcon}
-                                    title={post.podcastEpisode}
-                                    description={post.episodeDescription}
-                                    link={post.link}
+                                    podcastName={post.podcastName}
+                                    podcastLogo={post.podcastLogo}
+                                    episodeName={post.episodeName}
+                                    description={post.description}
+                                    audioLink={post.audioLink}
+                                    userMessage={post.userMessage}
                                     likes={post.likes}
                                     comments={post.comments}
+                                    handlePostDelete={this.handlePostDelete}
                                 />
                             ))}
                         </Container>

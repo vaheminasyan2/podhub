@@ -68,13 +68,14 @@ class Listen extends Component {
 
         let userId = JSON.parse(localStorage.getItem("user")).id;
 
-        API.sharePodcast(
-            userId, 
+        API.sharePodcast( 
             this.state.podcastName, 
             this.state.podcastLogo,
-            this.state.audioLink,
+            this.state.episodeName,
             this.state.description,
-            this.state.userMessage
+            this.state.audioLink,
+            this.state.userMessage,
+            userId
         )
             .then(function(response) {
                 console.log(response);

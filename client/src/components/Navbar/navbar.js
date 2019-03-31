@@ -23,6 +23,20 @@ function Navbar({ podcastSearch, handleInputChange, hidePodcasts, logout }) {
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
 
         <ul className="navbar-nav mr-auto">
+
+          <li className="nav-item">
+            <Link
+              to="/home"
+              className={
+                window.location.pathname === "/home"
+                  ? "nav-link active"
+                  : "nav-link"
+              }
+            >
+              Home
+            </Link>
+          </li>
+
           <li className="nav-item">
             <Link
               to="/profile"
@@ -38,23 +52,10 @@ function Navbar({ podcastSearch, handleInputChange, hidePodcasts, logout }) {
 
           <li className="nav-item">
             <Link
-              to="/home"
-              className={
-                window.location.pathname === "/home"
-                  ? "nav-link active"
-                  : "nav-link"
-              }
-            >
-              Home
-            </Link>
-          </li>
-
-          <li>
-            <Link
               to={{
                 pathname: "/userSearch",
               }}
-              className="btn btn-dark btn-sm findUsers"
+              className="nav-link"
             >
               <FontAwesomeIcon icon="search" />
               <span>&nbsp; Find Users</span>
@@ -69,7 +70,7 @@ function Navbar({ podcastSearch, handleInputChange, hidePodcasts, logout }) {
               placeholder="Search for a podcast"
               aria-label="Search"
               id="podcastInput"
-              value={podcastSearch}           
+              value={podcastSearch}
               name="podcastSearch"
               autoComplete="off"
               onBlur={hidePodcasts}
