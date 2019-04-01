@@ -4,19 +4,18 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(2000),
       allowNull: false
     },
+    podcastLogo: {
+      type: DataTypes.STRING(2000)
+    },
     audioLink: {
       type: DataTypes.STRING(2000),
       allowNull: false,
       len: [1]
-    },
-    podcastLogo: {
-      type: DataTypes.STRING(2000)
     },
     description: {
       type: DataTypes.TEXT,
       allowNull: false
     }
   });
-
   return favorite;
 };
