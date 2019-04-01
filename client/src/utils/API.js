@@ -91,9 +91,24 @@ export default {
         return episodeId;
     },
 
-    addPodcastToFavorites: function(podcastId) {
-        // add podcast to user's favorite podcasts
-        return podcastId;
+    // addPodcastToFavorites: function(podcastId) {
+    //     // add podcast to user's favorite podcasts
+    //     return podcastId;
+    // },
+
+    addPodcastToFavorites: function(podcastName,podcastLogo,description, audioLink, userId) {
+        // console.log(arguments);
+
+        let data = {
+            podcastName: podcastName,
+            podcastLogo: podcastLogo,
+            description: description,
+            audioLink: audioLink,
+            userId: userId
+        }
+        console.log(data)
+
+        return axios.post("/api/favorites/", data);
     },
 
     getFollowingsPosts: function(userId) {
