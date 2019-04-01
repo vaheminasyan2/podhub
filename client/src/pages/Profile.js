@@ -190,7 +190,7 @@ class Home extends Component {
                                     key={post.id}
                                     userPhoto={this.state.user.profileImage}
                                     userName={this.state.user.name}
-                                    date={post.date}
+                                    date={post.createdAt}
                                     podcastName={post.podcastName}
                                     podcastLogo={post.podcastLogo}
                                     episodeName={post.episodeName}
