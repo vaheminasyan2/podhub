@@ -35,11 +35,11 @@ router.get("/getPostsOnlyByUser/:id", (req, res) => controller.getPostByUser(req
 router.get("/update/:id", (req, res) => controller.update(req, res));
 
 /**
- * Route to remove the existing post
+ * Route to remove the existing post <----- User Profile Page ----->
  * @param {*} req
  * @param {*} res
  */
-router.delete("/:id", (req, res) => controller.remove(req, res));
+router.delete("/delete/:id", (req, res) => controller.remove(req, res));
 
 
 /**

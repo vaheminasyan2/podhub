@@ -83,7 +83,12 @@ export default {
     },
 
     handleFavoriteDelete: function (id) {
-        return axios.post("/api/favorites", id);
+        console.log("api",id)
+        return axios.delete("/api/favorites/delete/" + id);
+    },
+
+    handlePostDelete: function (id) {
+        return axios.delete("/api/posts/delete/" + id);
     },
 
     addEpisodeToFavorites: function(episodeId) {

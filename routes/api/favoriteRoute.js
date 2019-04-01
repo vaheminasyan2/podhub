@@ -24,10 +24,10 @@ router.get("/:id", (req, res) => controller.findAll(req, res));
 router.get("/update/:id", (req, res) => controller.update(req, res));
 
 /**
- * Route to remove the existing favorite podcast in database
+ * Route to remove the existing favorite podcast in database <----- User Profile Page ----->
  * @param {*} req
  * @param {*} res
  */
-router.get("/remove/:id", (req, res) => controller.remove(req, res));
+router.delete("/delete/:id", (req, res) => controller.remove(req, res));
 
 module.exports = router;

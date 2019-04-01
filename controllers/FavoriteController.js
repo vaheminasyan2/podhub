@@ -39,7 +39,7 @@ class FavoriteController {
   }
 
   /**
-   * Remove a favorite podcast in database
+   * Remove a favorite podcast in database <----- User Profile Page ----->
    * @param {*} req
    * @param {*} res
    */
