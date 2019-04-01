@@ -164,6 +164,7 @@ class Home extends Component {
                     />
                   </div>
                   <div className="col p-0">
+                    <p>{favorite.createdAt}</p>
                     <p>{favorite.podcastName}</p>
                     <p>{favorite.description}</p>
                     <a href={favorite.audioLink}>{favorite.audioLink}</a> &nbsp;
@@ -199,8 +200,8 @@ class Home extends Component {
                   description={post.description}
                   audioLink={post.audioLink}
                   userMessage={post.userMessage}
-                  likes={post.likes}
-                  comments={post.comments}
+                  likes={post.numberOfLikes}
+                  comments={post.numberOfComments}
                   postId={post.id}
                   handlePostDelete={this.handlePostDelete}
                 />
