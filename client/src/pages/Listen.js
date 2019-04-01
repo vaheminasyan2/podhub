@@ -92,11 +92,32 @@ class Listen extends Component {
     }
 
     // Adds this episode to User's list of Favorite Episodes
+    // addToFavorites = event => {
+    //     event.preventDefault();
+    //     API.addEpisodeToFavorites(this.state.episodeId);
+    //     alert("Favorited!");
+    // }
+
     addToFavorites = event => {
         event.preventDefault();
-        API.addEpisodeToFavorites(this.state.episodeId);
-        alert("Favorited!");
+        this.handleCloseModal();
+
+        let userId = JSON.parse(localStorage.getItem("user")).id;
+
+        API.addPodcastToFavorites( 
+            this.state.podcastName, 
+            this.state.podcastLogo,
+            this.state.description,
+            this.state.audioLink,
+            userId
+        )
+            .then(function(response) {
+                console.log(response);
+                alert("Favorited!");
+            });
     }
+
+
 
     // Activates pop-out window with podcast audio
     togglePortal = event => {

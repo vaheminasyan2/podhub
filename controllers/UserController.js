@@ -6,7 +6,7 @@ const axios = require('axios');
  */
 class UserController {
   /**
-   * Get the isFollowing by userId from database
+   * Get the isFollowing by userId from database <----- user Profile Page ----->
    * @param {*} req
    * @param {*} res
    */
@@ -33,7 +33,7 @@ class UserController {
   }
 
   /**
-   * Get the isFollowed by userId from database
+   * Get the isFollowed by userId from database <----- user Profile Page ----->
    * @param {*} req
    * @param {*} res
    */
@@ -41,12 +41,11 @@ class UserController {
     console.log(req.params.id);
     db.follow
       .findAll({ where: { isFollowing: req.params.id } })
-      // .then(dbfollow => res.json({ count: dbfollow.length }));
       .then(dbfollow => res.json([{ count: dbfollow.length }]));
   }
 
   /**
-   * Get the userDetails by userId from database
+   * Get the userDetails by userId from database <----- Login to Home Page ----->
    * @param {*} req
    * @param {*} res
    */
