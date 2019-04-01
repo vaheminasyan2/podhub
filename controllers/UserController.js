@@ -136,7 +136,8 @@ class UserController {
        
 
         Promise.all(postPromises).then(function(posts) {
-          const sortedPosts = posts.flat().sort(function(a, b) {
+          const flattenedPosts = [].concat.apply([], posts);
+          const sortedPosts = flattenedPosts.sort(function(a, b) {
             if (a.updatedAt < b.updatedAt) return 1;
             if (a.updatedAt > b.updatedAt) return -1;
             return 0;
