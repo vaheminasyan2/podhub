@@ -27,12 +27,17 @@ class PostController {
   // }
 
   /**
-   * Get the posts by userId from database
+   * Get the posts by userId from database <----- User Profile Page ----->
    * @param {*} req
    * @param {*} res
    */
   getPostByUser(req, res) {
     console.log(req.params.id)
+    var postPromises =[];
+    var postId2Likes = {};
+    var postId2Comments = {};
+    var postId2UserNames = {};
+    var postId2UserImages = {};
     db.post.findAll({where: {postedBy: req.params.id}})
       .then(dbPost => {
         const sortedPosts = dbPost.sort(function(a, b) {
@@ -40,7 +45,39 @@ class PostController {
           if (a.updatedAt > b.updatedAt) return -1;
           return 0;
         });
-        res.json(sortedPosts)
+        postPromises.push(...sortedPosts);
+        var likeCommPromises = [];
+        sortedPosts.forEach(post => {
+          const likePromise = post.getPostLikes();
+          const commentPromise = post.getComments();
+          const userPromise = db.user.findByPk(post.postedBy)
+          likeCommPromises.push(likePromise);
+          likeCommPromises.push(commentPromise);
+          likeCommPromises.push(userPromise);
+
+          likePromise.then(function(likes) {
+            postId2Likes[post.id] = likes.length;
+          });
+          commentPromise.then(function(comments) {
+            postId2Comments[post.id] = comments.length;
+          });
+          userPromise.then(function(user){
+            postId2UserNames[post.id] = user.name;
+            postId2UserImages[post.id] = user.profileImage;
+          })
+        });
+
+        Promise.all(likeCommPromises).then(function() {
+          sortedPosts.forEach(post => {
+            post.numberOfLikes = postId2Likes[post.id];
+            post.numberOfComments = postId2Comments[post.id];
+            post.userName = postId2UserNames[post.id];
+            post.userImage = postId2UserImages[post.id];
+          });
+        res.json(postPromises)
+    }).catch(function(error) {
+      res.status(400);
+    })
       });
   }
 
@@ -65,8 +102,13 @@ class PostController {
     db.post.destroy({ where: req.params }).then(post => res.json(post));
   }
 
-  ///// get Post comments
+  /**
+   * Get Post comments from database <----- User Profile Page, Home Page ----->
+   * @param {*} req
+   * @param {*} res
+   */
   getPostComments(req, res){
+    console.log(req.params)
     db.comment.findAll({
       where:
       {
@@ -77,7 +119,11 @@ class PostController {
     })
   }
 
-  ///// get Post likes
+  /**
+   * Get Post likes from database <----- User Profile Page, Home Page ----->
+   * @param {*} req
+   * @param {*} res
+   */
   getPostLikes(req, res){
     db.postLike.findAll({
       where:
