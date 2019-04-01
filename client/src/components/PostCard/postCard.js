@@ -3,7 +3,7 @@ import "./postCard.css";
 
 // POST COMPONENT
 
-function Card({ userPhoto, userName, date, podcastName, podcastLogo, episodeName, description, audioLink, userMessage, likes, comments, handlePostDelete }) {
+function Card({ userPhoto, userName, date, podcastName, podcastLogo, episodeName, description, audioLink, userMessage, likes, comments, postId, handlePostDelete }) {
   return (
     <div className="container rounded-0 border-top-0 border-left-0 border-right-0 card">
       <div className="row">
@@ -18,7 +18,7 @@ function Card({ userPhoto, userName, date, podcastName, podcastLogo, episodeName
               <img id="podcastIcon" src={podcastLogo} alt="Podcast Logo" />
             </div>
             <div className="col p-0">
-              <button className="btn btn-danger btn-sm deletePost" onClick={handlePostDelete}>Delete</button>
+              <button className="btn btn-danger btn-sm deletePost" onClick={() => handlePostDelete(postId)}>Delete</button>
               <h4>{podcastName}</h4>
               <p>{episodeName}</p>
               <p>{description}</p>
