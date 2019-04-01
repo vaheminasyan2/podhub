@@ -24,7 +24,14 @@ class FavoriteController {
   findAll(req, res) {
     console.log(req.params.id)
     db.favorite.findAll({where: {userId: req.params.id}})
-      .then(favorite => res.json(favorite));
+      .then(dbfavorite => {
+        const sortedFavorite = dbfavorite.sort(function(a, b) {
+          if (a.updatedAt < b.updatedAt) return 1;
+          if (a.updatedAt > b.updatedAt) return -1;
+          return 0;
+        });
+        res.json(sortedFavorite)
+      });
   }
 
   /**

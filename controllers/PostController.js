@@ -65,8 +65,13 @@ class PostController {
     db.post.destroy({ where: req.params }).then(post => res.json(post));
   }
 
-  ///// get Post comments
+  /**
+   * Get Post comments from database <----- User Profile Page, Home Page ----->
+   * @param {*} req
+   * @param {*} res
+   */
   getPostComments(req, res){
+    console.log(req.params)
     db.comment.findAll({
       where:
       {
@@ -77,7 +82,11 @@ class PostController {
     })
   }
 
-  ///// get Post likes
+  /**
+   * Get Post likes from database <----- User Profile Page, Home Page ----->
+   * @param {*} req
+   * @param {*} res
+   */
   getPostLikes(req, res){
     db.postLike.findAll({
       where:
