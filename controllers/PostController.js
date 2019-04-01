@@ -11,7 +11,7 @@ class PostController {
    */
   create(req, res) {
 
-    console.log(req.body);
+    console.log("posts",req.body);
     db.post.create(req.body).then(post => res.json(post));
   }
 
@@ -34,7 +34,14 @@ class PostController {
   getPostByUser(req, res) {
     console.log(req.params.id)
     db.post.findAll({where: {postedBy: req.params.id}})
-      .then(dbPost => res.json(dbPost));
+      .then(dbPost => {
+        const sortedPosts = dbPost.sort(function(a, b) {
+          if (a.updatedAt < b.updatedAt) return 1;
+          if (a.updatedAt > b.updatedAt) return -1;
+          return 0;
+        });
+        res.json(sortedPosts)
+      });
   }
 
 

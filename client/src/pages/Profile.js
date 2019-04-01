@@ -158,12 +158,12 @@ class Home extends Component {
 
                                     <div className="col-2 p-0">
 
-                                        <img src={favorite.podcastIcon} alt="Podcast Icon" id="favoriteIcon" />
+                                        <img src={favorite.podcastLogo} alt="Podcast Icon" id="favoriteIcon" />
                                     </div>
                                     <div className="col p-0">
-                                        <p>{favorite.podcastTitle}</p>
-                                        <p>{favorite.podcastDescription}</p>
-                                        <a href={favorite.link}>{favorite.link}</a> &nbsp;
+                                        <p>{favorite.podcastName}</p>
+                                        <p>{favorite.description}</p>
+                                        <a href={favorite.audioLink}>{favorite.audioLink}</a> &nbsp;
 
                                             <button className="btn btn-sm mb-1 btn-light"
                                             onClick={() => this.handleFavoriteDelete(favorite.id)}
@@ -190,7 +190,7 @@ class Home extends Component {
                                     key={post.id}
                                     userPhoto={this.state.user.profileImage}
                                     userName={this.state.user.name}
-                                    date={post.date}
+                                    date={post.createdAt}
                                     podcastName={post.podcastName}
                                     podcastLogo={post.podcastLogo}
                                     episodeName={post.episodeName}
