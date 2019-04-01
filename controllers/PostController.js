@@ -57,7 +57,7 @@ class PostController {
   }
 
   /**
-   * Remove a Post in database
+   * Remove a Post in database <----- User Profile Page ----->
    * @param {*} req
    * @param {*} res
    */
