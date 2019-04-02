@@ -47,7 +47,7 @@ class Episode extends Component {
 
     return (
 
-      <div className="container rounded-0 border-0 card">
+      <div className="container pt-4 px-4 bg-black highlight" onClick={this.listenToEpisode}>
         <div className="col">
 
           {/* Name | Date */}
@@ -55,12 +55,11 @@ class Episode extends Component {
             {this.props.episodeName} &nbsp;|&nbsp; {this.props.date} &nbsp;|&nbsp; {this.props.length}
           </div>
 
-          <div className="border rounded">
+          <div className="pt-2 line pb-4">
 
             {/* Episode Description */}
             <span>{this.props.description.replace(/<\/?[^>]+(>|$)/g, "")}<br /></span>
 
-            <button className="btn btn-primary" onClick={this.listenToEpisode}>Listen</button>
           </div>
         </div>
       </div>
