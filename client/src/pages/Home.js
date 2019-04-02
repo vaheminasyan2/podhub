@@ -71,10 +71,9 @@ class Home extends Component {
             showLikesModal: true
         });
 
-        let userId = JSON.parse(localStorage.getItem("user")).id;
+        //let userId = JSON.parse(localStorage.getItem("user")).id;
 
         API.getLikes(
-            userId,
             postId
         )
             .then(function (response) {
@@ -119,7 +118,7 @@ class Home extends Component {
                             ))}
 
                             <Modal open={this.state.showLikesModal} onClose={this.handleCloseLikesModal} center>
-                                <h1>Hello</h1>
+                                <h4>Modal to show profile image and name of all users who liked the post</h4>
                             </Modal>
 
                         </Container>
