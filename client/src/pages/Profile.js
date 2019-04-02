@@ -159,7 +159,7 @@ class Home extends Component {
             <Container>
               {this.state.favorites.map(favorite => (
                 <div className="row rounded favorite bg-dark text-secondary" key={favorite.id}>
-                  <div className="col-2 p-3 pad">
+                  <div className="col-2 p-4 pad">
                     <img
                       src={favorite.podcastLogo}
                       alt="Podcast Icon"

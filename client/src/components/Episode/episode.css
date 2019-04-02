@@ -7,3 +7,17 @@ img {
   margin-top: 25px;
   margin-left: 10px;
 }
+
+.highlight{
+  background-color: black;
+  width: 75%;
+}
+
+.highlight:hover{
+  background-color:rgb(49, 49, 49);
+  cursor: pointer;
+}
+
+.line{
+  border-bottom: 1px solid rgb(54, 54, 54);
+}
