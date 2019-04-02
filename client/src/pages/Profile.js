@@ -4,6 +4,8 @@ import Row from "../components/Row/row";
 import API from "../utils/API";
 import PostCard from "../components/PostCard/postCard";
 import "./Profile.css";
+var moment = require('moment');
+import Delete from "./delete.png"
 
 // USER PROFILE PAGE
 
@@ -128,18 +130,19 @@ class Home extends Component {
   render() {
     return (
       <Container>
-        <div className="row userProfile rounded bg-light">
-          <div className="col-4">
+        <div className="row userProfile rounded bg-dark text-white">
+          <div className="col-5">
             <img
               src={this.props.user.profileImage}
               alt="User"
               id="userMainProfileImage"
+              className="rounded border-white"
             />
           </div>
 
-          <div className="col-8">
+          <div className="col">
             <Row>
-              <h2>{this.props.user.name}</h2>
+              <h2 className="paddingTop">{this.props.user.name}</h2>
             </Row>
             <Row>
               Posts:&nbsp; {this.state.posts.length} &nbsp; | &nbsp;
@@ -151,49 +154,54 @@ class Home extends Component {
 
         <div className="row favorites rounded">
           <h4>Favorites: </h4>
-
+            
           {this.state.favorites.length ? (
             <Container>
               {this.state.favorites.map(favorite => (
-                <div className="row border rounded favorite" key={favorite.id}>
-                  <div className="col-2 p-0">
+                <div className="row rounded favorite bg-dark text-secondary" key={favorite.id}>
+                  <div className="col-2 p-3 pad">
                     <img
                       src={favorite.podcastLogo}
                       alt="Podcast Icon"
                       id="favoriteIcon"
+                      className="rounded border-white"
                     />
                   </div>
                   <div className="col p-0">
-                    <p>{favorite.createdAt}</p>
-                    <p>{favorite.podcastName}</p>
-                    <p>{favorite.description}</p>
-                    <a href={favorite.audioLink}>{favorite.audioLink}</a> &nbsp;
-                    <button
-                      className="btn btn-sm mb-1 btn-light"
+                  <button
+                      className="btn btn-sm mb-1 float-right"
                       onClick={() => this.handleFavoriteDelete(favorite.id)}
                     >
-                      x
+                      <img src={Delete} alt="delete" className="size"/>
                     </button>
+                    <p>{moment(favorite.createdAt).format("LLL")}</p>
+                    <p>{favorite.podcastName}</p>
+                    <div>
+                    <p className="ellipsis">{favorite.description}</p>
+                    </div>
+                    
+                    <a href={favorite.audioLink} target="_blank" className="btn btn-sm btn-dark mb-1 listenFav"> Listen</a>
+        
                   </div>
                 </div>
               ))}
             </Container>
           ) : (
-            <div className="col">
-              <h5 className="text-center">&nbsp;{this.state.messageNoFav}</h5>
-            </div>
-          )}
+              <div className="col">
+                <h5 className="text-center">&nbsp;{this.state.messageNoFav}</h5>
+              </div>
+            )}
         </div>
         <Row>
           <h4>Recent posts:</h4>
           {this.state.posts.length ? (
-            <Container>
+            <div className="container bg-dark">
               {this.state.posts.map(post => (
                 <PostCard
                   key={post.id}
                   userPhoto={this.state.user.profileImage}
                   userName={this.state.user.name}
-                  date={post.createdAt}
+                  date={moment(post.createdAt).format("LLL")}
                   podcastName={post.podcastName}
                   podcastLogo={post.podcastLogo}
                   episodeName={post.episodeName}
@@ -206,14 +214,14 @@ class Home extends Component {
                   handlePostDelete={this.handlePostDelete}
                 />
               ))}
-            </Container>
-          ) : (
-            <div className="col">
-              <h5 className="text-center">
-                &nbsp;{this.state.messageNoPodcast}
-              </h5>
             </div>
-          )}
+          ) : (
+              <div className="col">
+                <h5 className="text-center">
+                  &nbsp;{this.state.messageNoPodcast}
+                </h5>
+              </div>
+            )}
         </Row>
       </Container>
     );

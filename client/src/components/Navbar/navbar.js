@@ -2,19 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faUser, faHome } from '@fortawesome/free-solid-svg-icons'
 import "./navbar.css";
 import { GoogleLogout } from 'react-google-login';
+import Logo from "./purple_back.png";
 
-library.add(faSearch);
+library.add(faSearch, faUser, faHome);
 
 function Navbar({ podcastSearch, handleInputChange, hidePodcasts, logout }) {
 
   return (
 
-    <nav className="navbar navbar-expand-lg navbar-light bg-success">
-
-      <Link className="navbarText navbar-brand" to="/home">PodHub</Link>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+      <div className="container mini">
+      <Link className="navbarText navbar-brand" to="/home"><img src={Logo} alt="logo" id="size"/></Link>
 
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
@@ -33,7 +34,8 @@ function Navbar({ podcastSearch, handleInputChange, hidePodcasts, logout }) {
                   : "nav-link"
               }
             >
-              Home
+            <FontAwesomeIcon icon="home" />
+            &nbsp;Home
             </Link>
           </li>
 
@@ -46,7 +48,8 @@ function Navbar({ podcastSearch, handleInputChange, hidePodcasts, logout }) {
                   : "nav-link"
               }
             >
-              Profile
+              <FontAwesomeIcon icon="user" />
+              &nbsp;Profile
             </Link>
           </li>
 
@@ -88,7 +91,7 @@ function Navbar({ podcastSearch, handleInputChange, hidePodcasts, logout }) {
         </GoogleLogout>
 
       </div>
-
+            </div>
     </nav>
   );
 }

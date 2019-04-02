@@ -51,6 +51,11 @@ class AudioPlayer extends Component {
         audioElement.addEventListener('loadedmetadata', () => {
             let durationMinutes = parseInt(audioElement.duration / 60);
             let durationSeconds = parseInt(audioElement.duration % 60);
+            if (durationSeconds < 10) {
+                durationSeconds = "0" + durationSeconds;
+                console.log(durationSeconds);
+            }
+            console.log(typeof durationSeconds);
             this.setDuration(durationMinutes, durationSeconds);
 
             audioElement.addEventListener('timeupdate', this.timeUpdate, false);
@@ -198,77 +203,86 @@ class AudioPlayer extends Component {
         const { initialSpeed, changeSpeed } = this.props;
 
         return (
-            <div id="audio-player-container" className="container">
+            <div id="audio-player-container">
 
-                <div className="row">
-                    <div className="col-sm-2 play-line">
+
+                <div className="first-row">
+                    <div className="CURRENT-TIME"
+                        id="current-time">
+
+                        {this.state.currentTime}
+                    </div>
+
+                    <div className="placeholder"></div>
+
+                    <div className="DURATION"
+                        id="duration">
+                        {this.state.duration}
+                    </div>
+                </div>
+
+
+
+                <div className="second-row">
+                    <div className="PLAY-BUTTON">
                         <img src={this.state.play ? pauseImg : playImg} alt="play button"
                             id="pButton"
                             onClick={this.playAudio}
                         />
                     </div>
-                    <div className="col-sm-10 play-line">
+
+
+                    <div className="TIMELINE"
+                        id="timeline"
+                        onClick={this.movePlayhead}
+                        ref={this.timeline}
+                    >
                         <div
-                            id="timeline"
-                            onClick={this.movePlayhead}
-                            ref={this.timeline}
+                            id="playhead"
+                            style={{ marginLeft: `${this.state.headPosition}px` }}
+                            ref={this.playhead}
                         >
-                            <div
-                                id="playhead"
-                                style={{ marginLeft: `${this.state.headPosition}px` }}
-                                ref={this.playhead}
-                            >
-                            </div>
-
                         </div>
+
                     </div>
                 </div>
 
-                <div className="row">
-                    <div className="col-sm-3">
-                        <div className="float-right" id="current-time">
-                        
-                            {this.state.currentTime}
-                        </div>
-                    </div>
-                    <div className="col-sm-7"></div>
-                    <div className="col-sm-2">
-                        <div id="duration">
-                            {this.state.duration}
-                        </div>
-                    </div>
-                </div>
 
-                <div className="row">
-                    <div className="col-sm-4">
-                        <img src={skipForwardImage} alt="skip forward"
-                        className="float-right"
-                            id="skip-forward-15"
-                            onClick={this.skipForward15}
-                        />
-                    </div>
-                    <div className="col-sm-4 text-center">
-                    <div id="speed-slider-container">
-                        <p id="speed-label">SPEED</p>
-                            <input
-                                id="speed-slider"
-                                type="range"
-                                min="1"
-                                max="2.35"
-                                value={initialSpeed}
-                                onChange={changeSpeed}
-                                step=".15"
-                                list="steplist"
-                            />
-                        </div>
-                    </div>
-                    <div className="col-sm-4">
+                <div className="third-row">
+
+                    <div className="SKIP-BACKWARD-15">
                         <img src={skipBackwardImage} alt="skip backward"
                             id="skip-backward-15"
                             onClick={this.skipBackward15}
                         />
                     </div>
+
+                    <div className="SPEED-SLIDER"
+                        id="speed-slider-container">
+                        <p id="speed-label">SPEED</p>
+                        <input
+                            id="speed-slider"
+                            type="range"
+                            min="1"
+                            max="2.35"
+                            value={initialSpeed}
+                            onChange={changeSpeed}
+                            step=".15"
+                            list="steplist"
+                        />
+                    </div>
+
+                    <div className="SKIP-FORWARD-15">
+                        <img src={skipForwardImage} alt="skip forward"
+                            id="skip-forward-15"
+                            onClick={this.skipForward15}
+                        />
+                    </div>
+
                 </div>
+
+
+
 
                 <audio
                     id="music"
@@ -283,3 +297,4 @@ class AudioPlayer extends Component {
 }
 
 export default AudioPlayer;
+

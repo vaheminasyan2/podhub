@@ -19,3 +19,41 @@
   .favorite {
     margin-bottom: 10px;
   }
+
+  .size{
+    width: 20px;
+    margin:0;
+    float:right;
+  }
+
+  .border-white{
+    border-radius: 20px !important;
+    border: 3px solid white !important;
+  }
+
+  .paddingTop{
+    padding-top:1em;
+  }
+
+  .ellipsis{
+      max-lines: 2;
+      width: 50em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    
+  }
+
+  .pad{
+    padding:1em;
+  }
+
+  a{
+    color:rgb(15, 15, 15);
+    text-decoration:none !important;
+  }
+
+a:hover{
+  text-decoration:none !important;
+  color: rgb(15, 15, 15);
+}
