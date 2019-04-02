@@ -39,7 +39,7 @@ function Card({ userPhoto, userName, date, podcastName, podcastLogo, episodeName
           <div className="row pb-1">
             <a 
               className="likes padding text-white"
-              onClick={() => handleShowLikes} 
+              onClick={() => handleShowLikes(postId)} 
             >
                 <FontAwesomeIcon icon="heart"/>
                   &nbsp;{likes}&nbsp;
