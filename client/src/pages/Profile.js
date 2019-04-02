@@ -165,16 +165,18 @@ class Home extends Component {
                     />
                   </div>
                   <div className="col p-0">
+                  <a href={favorite.audioLink} target="_blank" className="btn btn-sm btn-dark mb-1 listenFav"> Listen</a>
                   <button
                       className="btn btn-sm mb-1 btn-danger deleteFav"
                       onClick={() => this.handleFavoriteDelete(favorite.id)}
                     >
                       Delete
                     </button>
+                    
                     <p>{moment(favorite.createdAt).format("LLL")}</p>
                     <p>{favorite.podcastName}</p>
                     <p>{favorite.description}</p>
-                    <a href={favorite.audioLink}>{favorite.audioLink}</a> &nbsp;
+                     &nbsp;
                 
                   </div>
                 </div>

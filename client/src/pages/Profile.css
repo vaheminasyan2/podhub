@@ -21,6 +21,11 @@
   }
 
   .deleteFav {
-    float: right;
-    position: absolute;
+  
+  }
+
+  .listenFav {
+  left: 100;
+
+    
   }
