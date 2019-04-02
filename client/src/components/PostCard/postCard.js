@@ -31,7 +31,7 @@ function Card({ userPhoto, userName, date, podcastName, podcastLogo, episodeName
               <h4>{podcastName}</h4>
               <p>{episodeName}</p>
               <p className="ellipsis">{description}</p>
-              <a href={audioLink}>{audioLink}</a>
+              <a href={audioLink} target="_blank" className="btn btn-sm btn-dark mb-1 listenPost"> Listen</a>
             </div>
           </div>
           <div className="row pb-1">
