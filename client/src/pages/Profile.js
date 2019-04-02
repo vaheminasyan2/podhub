@@ -165,16 +165,17 @@ class Home extends Component {
                     />
                   </div>
                   <div className="col p-0">
+                  <button
+                      className="btn btn-sm mb-1 btn-danger deleteFav"
+                      onClick={() => this.handleFavoriteDelete(favorite.id)}
+                    >
+                      Delete
+                    </button>
                     <p>{moment(favorite.createdAt).format("LLL")}</p>
                     <p>{favorite.podcastName}</p>
                     <p>{favorite.description}</p>
                     <a href={favorite.audioLink}>{favorite.audioLink}</a> &nbsp;
-                    <button
-                      className="btn btn-sm mb-1 btn-light"
-                      onClick={() => this.handleFavoriteDelete(favorite.id)}
-                    >
-                      x
-                    </button>
+                
                   </div>
                 </div>
               ))}

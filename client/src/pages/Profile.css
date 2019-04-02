@@ -19,3 +19,8 @@
   .favorite {
     margin-bottom: 10px;
   }
+
+  .deleteFav {
+    float: right;
+    position: absolute;
+  }
