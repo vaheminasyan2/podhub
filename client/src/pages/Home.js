@@ -4,6 +4,7 @@ import Row from "../components/Row/row";
 //import Col from "../components/Col/col";
 import API from "../utils/API";
 import PostCard from "../components/PostCard/postCard";
+var moment = require('moment');
 
 class Home extends Component {
 
@@ -45,7 +46,7 @@ class Home extends Component {
                                     key={post.id}
                                     userPhoto={post.userImage}
                                     userName={post.userName}
-                                    date={post.createdAt}
+                                    date={moment(post.createdAt).format("LLL")}
                                     podcastName={post.podcastName}
                                     podcastLogo={post.podcastLogo}
                                     episodeName={post.episodeName}

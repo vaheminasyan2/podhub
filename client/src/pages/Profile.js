@@ -4,6 +4,7 @@ import Row from "../components/Row/row";
 import API from "../utils/API";
 import PostCard from "../components/PostCard/postCard";
 import "./Profile.css";
+var moment = require('moment');
 
 // USER PROFILE PAGE
 
@@ -164,7 +165,7 @@ class Home extends Component {
                     />
                   </div>
                   <div className="col p-0">
-                    <p>{favorite.createdAt}</p>
+                    <p>{moment(favorite.createdAt).format("LLL")}</p>
                     <p>{favorite.podcastName}</p>
                     <p>{favorite.description}</p>
                     <a href={favorite.audioLink}>{favorite.audioLink}</a> &nbsp;
@@ -193,7 +194,7 @@ class Home extends Component {
                   key={post.id}
                   userPhoto={this.state.user.profileImage}
                   userName={this.state.user.name}
-                  date={post.createdAt}
+                  date={moment(post.createdAt).format("LLL")}
                   podcastName={post.podcastName}
                   podcastLogo={post.podcastLogo}
                   episodeName={post.episodeName}
