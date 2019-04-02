@@ -4,6 +4,7 @@ import Row from "../components/Row/row";
 import API from "../utils/API";
 import PostCard from "../components/PostCard/postCard";
 import "./Profile.css";
+var moment = require('moment');
 import Delete from "./delete.png"
 
 // USER PROFILE PAGE
@@ -172,23 +173,23 @@ class Home extends Component {
                     >
                       <img src={Delete} alt="delete" className="size"/>
                     </button>
-                    <p>{favorite.createdAt}</p>
+                    <p>{moment(favorite.createdAt).format("LLL")}</p>
                     <p>{favorite.podcastName}</p>
                     <div>
                     <p className="ellipsis">{favorite.description}</p>
                     </div>
                     
-                    <a href={favorite.audioLink}>{favorite.audioLink}</a> &nbsp;
-                    
+                    <a href={favorite.audioLink} target="_blank" className="btn btn-sm btn-dark mb-1 listenFav"> Listen</a>
+        
                   </div>
                 </div>
               ))}
             </Container>
           ) : (
-            <div className="col">
-              <h5 className="text-center">&nbsp;{this.state.messageNoFav}</h5>
-            </div>
-          )}
+              <div className="col">
+                <h5 className="text-center">&nbsp;{this.state.messageNoFav}</h5>
+              </div>
+            )}
         </div>
         <Row>
           <h4>Recent posts:</h4>
@@ -199,7 +200,7 @@ class Home extends Component {
                   key={post.id}
                   userPhoto={this.state.user.profileImage}
                   userName={this.state.user.name}
-                  date={post.createdAt}
+                  date={moment(post.createdAt).format("LLL")}
                   podcastName={post.podcastName}
                   podcastLogo={post.podcastLogo}
                   episodeName={post.episodeName}
@@ -214,12 +215,12 @@ class Home extends Component {
               ))}
             </div>
           ) : (
-            <div className="col">
-              <h5 className="text-center">
-                &nbsp;{this.state.messageNoPodcast}
-              </h5>
-            </div>
-          )}
+              <div className="col">
+                <h5 className="text-center">
+                  &nbsp;{this.state.messageNoPodcast}
+                </h5>
+              </div>
+            )}
         </Row>
       </Container>
     );

@@ -11,7 +11,7 @@ import UserSearch from "./pages/UserSearch";
 import API from "./utils/API"
 import "./App.css";
 import Login from './pages/Login';
-// import Error from "./pages/Error";
+import Error from "./pages/Error";
 
 class App extends Component {
 
@@ -107,19 +107,20 @@ class App extends Component {
   logout = () => {
     this.setState({
       user: null,
-      redirect: true
+      //redirect: true
     });
     localStorage.clear();
   }
 
   handleUser = (userData) => {
     this.setState({ user: userData })
+    this.setState({ redirect: true })
   }
 
   isLoggedIn = () => this.state.user != null;
 
   loadUserFromLocalStorage() {
-    if (this.state.user){
+    if (this.state.user) {
       return;
     }
     if (localStorage.getItem("user")) {
@@ -142,13 +143,13 @@ class App extends Component {
 
     return (
       <Router>
-        
-      
+
+
         <div className="wrapper">
-        {this.state.redirect
-        ? <Redirect to= "/" />
-        : null
-        } 
+          {this.state.redirect
+            ? <Redirect to="/home" />
+            : null
+          }
           {!this.isLoggedIn()
             ? <Route
               render={() =>
@@ -178,8 +179,8 @@ class App extends Component {
                 />} />
                 <Route exact path="/episodeList" component={EpisodeList} />
                 <Route exact path="/listen" component={Listen} />
-                <Route exact path="/userSearch" component={UserSearch} />                  
-                {/* <Route component={Error} /> */}
+                <Route exact path="/userSearch" component={UserSearch} />
+                <Route component={Error} />
               </Switch>
             </>
           }
