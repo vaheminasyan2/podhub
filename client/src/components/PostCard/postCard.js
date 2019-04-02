@@ -31,7 +31,9 @@ function Card({ userPhoto, userName, date, podcastName, podcastLogo, episodeName
               <h4>{podcastName}</h4>
               <p>{episodeName}</p>
               <p className="ellipsis">{description}</p>
+
               <a href={audioLink}/>
+
             </div>
           </div>
           <div className="row pb-1">
@@ -47,5 +49,6 @@ function Card({ userPhoto, userName, date, podcastName, podcastLogo, episodeName
 }
 
 export default Card;
+
 
 
