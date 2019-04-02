@@ -11,5 +11,10 @@
 }
 
 .navbar {
-    margin-bottom: 20px;
+    margin-bottom: 20px; 
+    border-bottom: solid 3px rgb(167, 167, 167);
+}
+
+.mini{
+    max-width:75% !important;
 }

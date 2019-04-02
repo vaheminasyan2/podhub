@@ -10,6 +10,7 @@
 #profileImage {
   width: 35px;
   margin: 10px;
+  
 }
 
 .card-body {
@@ -22,10 +23,18 @@
 }
 
 .deletePost {
-
+  float: right;
+  position: absolute;
 }
 
-/* .userName {
-  margin-left: 10px;
-} */
+.padding{
+  padding-right:1em;
+}
 
+.fa-heart{
+  color:red;
+}
+
+.fa-comment{
+  color:white;
+}
