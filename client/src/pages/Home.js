@@ -1,45 +1,68 @@
 import React, { Component } from "react";
 import Container from "../components/Container/container";
 import Row from "../components/Row/row";
-//import Col from "../components/Col/col";
 import API from "../utils/API";
 import PostCard from "../components/PostCard/postCard";
+
 var moment = require('moment');
 
 class Home extends Component {
 
     state = {
         posts: [],
-        message: "Loading..."
+        message: ""
     };
-    
+
     componentDidMount() {
         this.getPosts();
     };
 
-    // Add function to call getPost function every time when something is posted or every 2 mins or so
-
-    // API request to get the user's and his follower's posts
+    // Get posts from user and those that user is following
     getPosts = () => {
+
+        this.setState({
+            message: "Getting posts..."
+        });
+
         API.getFollowingsPosts(this.props.user.id)
             .then(res => {
+
+                var message = "";
+
+                if (res.data.length == 0) {
+                    message = "No posts found."
+                }
+
                 this.setState({
+                    message: message,
                     posts: res.data
                 });
             })
-            .catch(() => {
+            .catch((error) => {
+                console.log(error);
                 this.setState({
-                    posts: [],
-                    message: "No podcast found, please post something or follow someone to see the feeds."
+                    message: "No posts found.",
+                    posts: []
                 });
             });
+    };
+
+    // Delete post
+    handlePostDelete = (id) => {
+
+        if (window.confirm("Delete post?")) {
+            API.handlePostDelete(id)
+                .then(res => {
+                    this.getPosts();
+                });
+        }
     };
 
     render() {
         return (
             <div className="container bg-dark rounded">
                 <Row>
-                    {this.state && this.state.posts && this.state.posts.length > 0 ? (
+                    {this.state.posts.length > 0 ? (
                         <Container>
                             {this.state.posts.map(post => (
                                 <PostCard
@@ -55,6 +78,7 @@ class Home extends Component {
                                     userMessage={post.userMessage}
                                     likes={post.numberOfLikes}
                                     comments={post.numberOfComments}
+                                    postId={post.id}
                                     handlePostDelete={this.handlePostDelete}
                                 />
                             ))}

@@ -116,9 +116,14 @@ class Home extends Component {
   };
 
   handlePostDelete = (id) => {
-    API.handlePostDelete(id).then(res => {
-      this.getPostsOnlyByUser();
-    });
+
+    if (window.confirm("Delete post?")) {
+
+      API.handlePostDelete(id)
+        .then(res => {
+          this.getPostsOnlyByUser();
+        });
+    }
   };
 
   handleFavoriteDelete = id => {
@@ -154,7 +159,7 @@ class Home extends Component {
 
         <div className="row favorites rounded">
           <h4>Favorites: </h4>
-            
+
           {this.state.favorites.length ? (
             <Container>
               {this.state.favorites.map(favorite => (
@@ -168,20 +173,20 @@ class Home extends Component {
                     />
                   </div>
                   <div className="col p-0">
-                  <button
+                    <button
                       className="btn btn-sm mb-1 float-right"
                       onClick={() => this.handleFavoriteDelete(favorite.id)}
                     >
-                      <img src={Delete} alt="delete" className="size"/>
+                      <img src={Delete} alt="delete" className="size" />
                     </button>
                     <p>{moment(favorite.createdAt).format("LLL")}</p>
                     <p>{favorite.podcastName}</p>
                     <div>
-                    <p className="ellipsis">{favorite.description}</p>
+                      <p className="ellipsis">{favorite.description}</p>
                     </div>
-                    
+
                     <a href={favorite.audioLink} target="_blank" className="btn btn-sm btn-dark mb-1 listenFav"> Listen</a>
-        
+
                   </div>
                 </div>
               ))}
