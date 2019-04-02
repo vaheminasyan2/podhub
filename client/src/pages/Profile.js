@@ -155,7 +155,7 @@ class Home extends Component {
           {this.state.favorites.length ? (
             <Container>
               {this.state.favorites.map(favorite => (
-                <div className="row border rounded favorite" key={favorite.id}>
+                <div className="row border-bottom rounded favorite" key={favorite.id}>
                   <div className="col-2 p-0">
                     <img
                       src={favorite.podcastLogo}
