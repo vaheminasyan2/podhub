@@ -46,3 +46,7 @@
   float:right;
   
 }
+
+.likes:hover {
+  cursor: pointer;
+}

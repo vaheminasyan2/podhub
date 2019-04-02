@@ -9,7 +9,7 @@ library.add(faComment);
 library.add(faHeart);
 // POST COMPONENT
 
-function Card({ userPhoto, userName, date, podcastName, podcastLogo, episodeName, description, audioLink, userMessage, likes, comments, postId, handlePostDelete }) {
+function Card({ userPhoto, userName, date, podcastName, podcastLogo, episodeName, description, audioLink, userMessage, likes, comments, postId, handlePostDelete, handleShowLikes}) {
   return (
     <div className="container rounded-0 border-top-0 border-left-0 border-right-0 card text-secondary bg-dark">
       <div className="row">
@@ -37,7 +37,7 @@ function Card({ userPhoto, userName, date, podcastName, podcastLogo, episodeName
             </div>
           </div>
           <div className="row pb-1">
-            <a href="/" className="likes padding text-white"><FontAwesomeIcon icon="heart"/>&nbsp;{likes}&nbsp;</a>
+            <a button onClick={() => handleShowLikes(postId)} className="likes padding text-white"><FontAwesomeIcon icon="heart"/>&nbsp;{likes}&nbsp;</a>
             <a href="/" className="comments text-white"> <FontAwesomeIcon icon="comment" /> &nbsp;{comments}</a>
           </div>
 

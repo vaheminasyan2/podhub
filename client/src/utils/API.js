@@ -1,6 +1,12 @@
 import axios from "axios";
+import { func } from "prop-types";
 
 export default {
+
+    // Show users how liked the post
+    getLikes: function(userid, postId) {
+        return axios.get("/api/getLikes/" + userid + "/" + postId)
+    },
 
     // Gets all posts for specific user
     getPosts: function (userId) {
