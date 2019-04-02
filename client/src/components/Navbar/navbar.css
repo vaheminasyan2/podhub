@@ -15,11 +15,16 @@
     border-bottom: solid 3px rgb(167, 167, 167);
 }
 
-.mini{
+.mini {
     max-width:75% !important;
 }
 
-#size{
+#size {
     width: 3em;
     margin: 0 !important;
+}
+
+#podcastInput {
+    border-radius: 21px;
+    width: 160px;
 }
