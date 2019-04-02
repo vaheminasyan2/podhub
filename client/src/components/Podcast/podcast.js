@@ -23,12 +23,12 @@ function Podcast ({ podcastId, podcastName, podcastLogo, thumbnail, hide }) {
                 loadMore: true
             }
             }} 
-            className="podcast"
+            className="podcast p-0"
             onClick={hide}
             onMouseDown={event => event.preventDefault()}
         >
-            <span><img className="podcastLogoSmall" src={thumbnail} alt="Podcast Logo"/></span>
-            <span><p className="podcastTitle">{podcastName}</p></span>
+            <span><img className="podcastLogoSmall radius-white rounded" src={thumbnail} alt="Podcast Logo"/></span>
+            <span><p className="podcastTitle text-secondary">{podcastName}</p></span>
         </Link>
     );
 };

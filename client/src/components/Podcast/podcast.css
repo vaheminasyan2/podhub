@@ -1,21 +1,25 @@
 .podcastLogoSmall {
     margin: 0px;
-    width: 50px;
+    width: 70px;
     /* position: absolute; */
 }
 
 .podcastTitle {
     display: inline;
-    font-size: 12px;
+    font-size: 1rem;
     margin-left: 10px;
+    padding-left: 1em;
 }
 
 .podcast {
-    background: lightgray;
-    border: 1px solid black;
+    background: rgb(0, 0, 0);
     cursor: pointer;
-    height: 60px;
-    margin-bottom: 5px;
+    height: 70px;
+    margin-bottom: 15px;
     overflow: hidden;
     padding: 5px;
+}
+
+.radius-white{
+    border: 2px solid white;
 }

@@ -18,3 +18,8 @@
 .mini{
     max-width:75% !important;
 }
+
+#size{
+    width: 3em;
+    margin: 0 !important;
+}

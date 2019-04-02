@@ -25,6 +25,7 @@
 .deletePost {
   float: right;
   position: absolute;
+  margin:0 !important;
 }
 
 .padding{

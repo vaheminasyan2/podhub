@@ -136,6 +136,7 @@ class Home extends Component {
               src={this.props.user.profileImage}
               alt="User"
               id="userMainProfileImage"
+              className="rounded border-white"
             />
           </div>
 
