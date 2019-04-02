@@ -27,10 +27,10 @@ function Card({ userPhoto, userName, date, podcastName, podcastLogo, episodeName
               <img id="podcastIcon" src={podcastLogo} alt="Podcast Logo" className="border-white"/>
             </div>
             <div className="col p-0">
-              
+                 
               <h4>{podcastName}</h4>
               <p>{episodeName}</p>
-              <p className="ellipsis">{description}</p>
+              <p className="ellipsis">{description}</p
               {/* <a href={audioLink}>{audioLink}</a> */}
             </div>
           </div>
@@ -38,7 +38,7 @@ function Card({ userPhoto, userName, date, podcastName, podcastLogo, episodeName
             <a href="/" className="likes padding text-white"><FontAwesomeIcon icon="heart"/>&nbsp;{likes}&nbsp;</a>
             <a href="/" className="comments text-white"> <FontAwesomeIcon icon="comment" /> &nbsp;{comments}</a>
           </div>
-          
+
         </div>
       </div>
     </div>
