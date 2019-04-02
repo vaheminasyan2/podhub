@@ -4,6 +4,7 @@ import List from "../components/List/list";
 import User from "../components/User/user";
 // import API from "../utils/API";
 import "./UserSearch.css";
+import API from "../utils/API";
 
 // USER SEARCH PAGE
 
@@ -12,15 +13,18 @@ class UserSearch extends Component {
     state = {
         message: "",
         userSearch: "",
-        users: []
+        users: [],
+        allUsers: []
     }
+
+    componentDidMount() {
+        this.getUsers();
+    };
 
     // Listen for when user enters text into User search field
     handleInputChange = event => {
-        const { name, value } = event.target;
-
         this.setState({
-            [name]: value,
+            userSearch: event.target.value,
         }, () => {
             let timer;
             clearTimeout(timer);
@@ -31,28 +35,30 @@ class UserSearch extends Component {
     // Check if User Search input has text and show/hide
     checkContent = () => {
         // Show Podcast search results
-        if (this.state.userSearch !== "") {
-            this.getUsers();
+        if (this.state.userSearch !== "" && this.state.userSearch.length > 1) {
+            let filteredUsers = [];
+            this.state.allUsers.forEach(u => {
+                if(u.name.toLowerCase().includes(this.state.userSearch.toLowerCase())) {
+                    filteredUsers.push(u);
+                }
+            }); 
+            this.setState({users: filteredUsers});
         }
     }
 
     getUsers = () => {
-
-        this.setState({
-            users: [
-                {
-                    userId: "1",
-                    userName: "Curtis",
-                    userImage: "https://picsum.photos/200"
-                }, 
-
-                {
-                    userId: "1",
-                    userName: "John",
-                    userImage: "https://picsum.photos/200"
-                }
-            ]
-        });
+        API.getUsersToFollow(this.props.user.id)
+            .then(res => {
+                this.setState({
+                    allUsers: res.data
+                });
+            })
+            .catch(() => {
+                this.setState({
+                    allUsers: [],
+                    message: "No user found."
+                });
+            });
     }
 
     followUser = (event) => {
@@ -77,7 +83,7 @@ class UserSearch extends Component {
 
     render() {
         var userId = JSON.parse(localStorage.getItem("user")).id;
-        console.log(userId);
+        console.log("Render", userId);
 
         return (
             <Container>
@@ -99,11 +105,11 @@ class UserSearch extends Component {
                 {this.state.users.length ? (
                     <List>
                         {this.state.users.map(user => (
-                            <div>
+                            <div key={user.id}>
                                 <User
                                     userId={user.id}
-                                    userName={user.userName}
-                                    userImage={user.userImage}
+                                    userName={user.name}
+                                    userImage={user.profileImage}
                                     handler={null}
                                 />
                                 <button 

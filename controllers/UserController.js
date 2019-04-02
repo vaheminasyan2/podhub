@@ -6,6 +6,31 @@ const axios = require('axios');
  */
 class UserController {
   /**
+   * Get all existing users except current logged in user <----- user Search Page ----->
+   * @param {*} req
+   * @param {*} res
+   */
+  getUsersList(req, res){
+    db.user.findAll().then(function(users){
+      for( var i = 0; i < users.length; i++){ 
+        if ( users[i].id == req.params.id) {
+          users.splice(i, 1); 
+        }
+     }
+     res.json(users);
+    })
+  }
+
+  /**
+   * Post new following in database <----- user Search Page ----->
+   * @param {*} req
+   * @param {*} res
+   */
+  postFollowUser(req, res){
+    db.follow.create(req.body).then(follow => res.json(follow));
+  }
+
+  /**
    * Get the isFollowing by userId from database <----- user Profile Page ----->
    * @param {*} req
    * @param {*} res
