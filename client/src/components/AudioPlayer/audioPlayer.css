@@ -72,7 +72,7 @@ font-size: 12px;
 font-weight: bold;
 color: #000000;
 margin: 0px;
-padding-left: 23px;
+padding-left: 3px;
 }
 
 
@@ -111,6 +111,9 @@ padding-left: 23px;
   vertical-align: top;
 }
 
+.SKIP-FORWARD-15 {
+  justify-self: start;
+}
 
 /* Speed slider styling */
 

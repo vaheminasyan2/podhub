@@ -70,7 +70,7 @@ function Navbar({ podcastSearch, handleInputChange, hidePodcasts, logout }) {
           <form className="form-inline my-2 my-lg-0 searchPodcastForm">
             <input className="form-control mr-sm-2 searchPodcastInput"
               type="search"
-              placeholder="Search for a podcast"
+              placeholder="Search Podcasts"
               aria-label="Search"
               id="podcastInput"
               value={podcastSearch}
