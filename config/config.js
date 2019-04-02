@@ -2,7 +2,7 @@ require("dotenv").config();
 module.exports = {
   development: {
     username: "root",
-    password: "Allstar5",
+    password: "",
     database: "podHub",
     host: "localhost",
     dialect: "mysql"
