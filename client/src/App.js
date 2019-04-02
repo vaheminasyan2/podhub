@@ -107,19 +107,20 @@ class App extends Component {
   logout = () => {
     this.setState({
       user: null,
-      redirect: true
+      //redirect: true
     });
     localStorage.clear();
   }
 
   handleUser = (userData) => {
     this.setState({ user: userData })
+    this.setState({redirect: true})
   }
 
   isLoggedIn = () => this.state.user != null;
 
   loadUserFromLocalStorage() {
-    if (this.state.user){
+    if (this.state.user) {
       return;
     }
     if (localStorage.getItem("user")) {
@@ -142,13 +143,13 @@ class App extends Component {
 
     return (
       <Router>
-        
-      
+
+
         <div className="wrapper">
-        {this.state.redirect
-        ? <Redirect to= "/" />
-        : null
-        } 
+          {this.state.redirect
+            ? <Redirect to="/home" />
+            : null
+          }
           {!this.isLoggedIn()
             ? <Route
               render={() =>
@@ -168,7 +169,7 @@ class App extends Component {
                 hide={this.hidePodcasts}
                 podcasts={this.state.podcasts}
               />
-
+              
               <Switch>
                 <Route exact path="/home" render={() => <Home
                   user={this.state.user}
@@ -178,7 +179,7 @@ class App extends Component {
                 />} />
                 <Route exact path="/episodeList" component={EpisodeList} />
                 <Route exact path="/listen" component={Listen} />
-                <Route exact path="/userSearch" component={UserSearch} />                  
+                <Route exact path="/userSearch" component={UserSearch} />
                 {/* <Route component={Error} /> */}
               </Switch>
             </>
