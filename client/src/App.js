@@ -179,7 +179,9 @@ class App extends Component {
                 />} />
                 <Route exact path="/episodeList" component={EpisodeList} />
                 <Route exact path="/listen" component={Listen} />
-                <Route exact path="/userSearch" component={UserSearch} />
+                <Route exact path="/userSearch" render={() => <UserSearch
+                  user={this.state.user}
+                />} />  
                 <Route component={Error} />
               </Switch>
             </>

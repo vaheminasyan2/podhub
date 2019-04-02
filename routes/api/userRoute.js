@@ -3,6 +3,24 @@ const UserController = require("../../controllers/UserController");
 const controller = new UserController();
 
 /**
+ * Route to get all existing users
+ * @param {*} req
+ * @param {*} res
+ */
+router.get("/:id", (req, res) => {
+    controller.getUsersList(req, res);
+});
+
+/**
+ * Route to follow a user
+ * @param {*} req
+ * @param {*} res
+ */
+router.post("/:id", (req, res) => {
+    controller.postFollowUser(req, res);
+});
+
+/**
  * Route to create a new user in database or get userDetails by userId for exisiting user
  * @param {*} req
  * @param {*} res
