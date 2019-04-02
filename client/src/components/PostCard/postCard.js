@@ -30,7 +30,7 @@ function Card({ userPhoto, userName, date, podcastName, podcastLogo, episodeName
                  
               <h4>{podcastName}</h4>
               <p>{episodeName}</p>
-              <p className="ellipsis">{description}</p
+              <p className="ellipsis">{description}</p>
               {/* <a href={audioLink}>{audioLink}</a> */}
             </div>
           </div>
