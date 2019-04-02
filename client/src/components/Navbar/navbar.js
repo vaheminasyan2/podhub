@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faUser, faHome } from '@fortawesome/free-solid-svg-icons'
 import "./navbar.css";
 import { GoogleLogout } from 'react-google-login';
-import Container from "../Container/container";
+import Logo from "./purple_back.png";
 
 library.add(faSearch, faUser, faHome);
 
@@ -15,7 +15,7 @@ function Navbar({ podcastSearch, handleInputChange, hidePodcasts, logout }) {
 
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
       <div className="container mini">
-      <Link className="navbarText navbar-brand" to="/home">PodHub</Link>
+      <Link className="navbarText navbar-brand" to="/home"><img src={Logo} alt="logo" id="size"/></Link>
 
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>

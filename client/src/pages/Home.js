@@ -36,7 +36,7 @@ class Home extends Component {
 
     render() {
         return (
-            <Container>
+            <div className="container bg-dark rounded">
                 <Row>
                     {this.state && this.state.posts && this.state.posts.length > 0 ? (
                         <Container>
@@ -62,7 +62,7 @@ class Home extends Component {
                             <h4 className="text-center">{this.state.message}</h4>
                         )}
                 </Row>
-            </Container>
+            </div>
         )
     }
 }

@@ -1,13 +1,14 @@
 .showPodcasts {
-    background: gray;
+    background: rgb(0, 0, 0);
     border: 1px solid black;
     color: black;
     font-size: 14px;
     padding: 5px;
     position: absolute;
-    right: 120px;
-    width: 200px;
-    z-index: 99;
+    right: 19%;
+    top: 7%;
+    width: 300px;
+    z-index: 999999999999999999999999999;
 }
 
 .hidePodcasts {
