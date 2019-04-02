@@ -18,10 +18,11 @@ function Card({ userPhoto, userName, date, podcastName, podcastLogo, episodeName
               <img id="podcastIcon" src={podcastLogo} alt="Podcast Logo" />
             </div>
             <div className="col p-0">
-              <button className="btn btn-danger btn-sm deletePost" onClick={() => handlePostDelete(postId)}>Delete</button>
               <h4 className="ml-6">{podcastName}</h4>
               <p>{episodeName}</p>
               <p>{description}</p>
+              <a href={audioLink} target="_blank" className="btn btn-sm btn-dark mb-1 listenBtn"> Listen</a>
+              <button className="btn btn-danger btn-sm mb-1 deletePost" onClick={() => handlePostDelete(postId)}>Delete</button>
               {/* <a href={audioLink}>{audioLink}</a> */}
             </div>
           </div>
@@ -29,7 +30,7 @@ function Card({ userPhoto, userName, date, podcastName, podcastLogo, episodeName
             <a href="/" className="likes">Likes:&nbsp;{likes}&nbsp;</a>
             <a href="/" className="comments"> Comments:&nbsp;{comments}</a>
           </div>
-          
+
         </div>
       </div>
     </div>

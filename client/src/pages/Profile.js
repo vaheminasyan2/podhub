@@ -165,28 +165,26 @@ class Home extends Component {
                     />
                   </div>
                   <div className="col p-0">
-                  <a href={favorite.audioLink} target="_blank" className="btn btn-sm btn-dark mb-1 listenFav"> Listen</a>
-                  <button
+                    <p>{moment(favorite.createdAt).format("LLL")}</p>
+                    <p>{favorite.podcastName}</p>
+                    <p>{favorite.description}</p>
+                    <a href={favorite.audioLink} target="_blank" className="btn btn-sm btn-dark mb-1 listenFav"> Listen</a>
+                    <button
                       className="btn btn-sm mb-1 btn-danger deleteFav"
                       onClick={() => this.handleFavoriteDelete(favorite.id)}
                     >
                       Delete
                     </button>
-                    
-                    <p>{moment(favorite.createdAt).format("LLL")}</p>
-                    <p>{favorite.podcastName}</p>
-                    <p>{favorite.description}</p>
-                     &nbsp;
-                
+
                   </div>
                 </div>
               ))}
             </Container>
           ) : (
-            <div className="col">
-              <h5 className="text-center">&nbsp;{this.state.messageNoFav}</h5>
-            </div>
-          )}
+              <div className="col">
+                <h5 className="text-center">&nbsp;{this.state.messageNoFav}</h5>
+              </div>
+            )}
         </div>
         <Row>
           <h4>Recent posts:</h4>
@@ -212,12 +210,12 @@ class Home extends Component {
               ))}
             </Container>
           ) : (
-            <div className="col">
-              <h5 className="text-center">
-                &nbsp;{this.state.messageNoPodcast}
-              </h5>
-            </div>
-          )}
+              <div className="col">
+                <h5 className="text-center">
+                  &nbsp;{this.state.messageNoPodcast}
+                </h5>
+              </div>
+            )}
         </Row>
       </Container>
     );
