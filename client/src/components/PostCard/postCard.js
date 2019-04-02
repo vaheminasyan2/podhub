@@ -18,7 +18,7 @@ function Card({ userPhoto, userName, date, podcastName, podcastLogo, episodeName
         </div>
         <div className="col">
         <button className="btn btn-sm deletePost float-right" onClick={() => handlePostDelete(postId)}>
-              <img src={Delete} alt="delete" className="size"/>
+              <img src={Delete} alt="delete" className="x"/>
               </button>
           <div className="row">{userName} &nbsp;|&nbsp; {date}</div>
           <div className="row">{userMessage}</div>
@@ -30,8 +30,8 @@ function Card({ userPhoto, userName, date, podcastName, podcastLogo, episodeName
                  
               <h4>{podcastName}</h4>
               <p>{episodeName}</p>
-              <p className="ellipsis">{description}</p
-              {/* <a href={audioLink}>{audioLink}</a> */}
+              <p className="ellipsis">{description}</p>
+              <a href={audioLink}/>
             </div>
           </div>
           <div className="row pb-1">

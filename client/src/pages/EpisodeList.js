@@ -137,20 +137,21 @@ class EpisodeList extends Component {
     render() {
         return (
             <Container>
-                <h1>Episodes</h1>
-                <h4>{this.state.podcastName}</h4>
+                <h1 className="text-center text-black">{this.state.podcastName}</h1>
+                
                 <img
                     src={this.state.podcastLogo}
                     alt="Podcast Logo"
+                    className="rounded mx-auto d-block"
                 />
 
                 <br />
                 <Row>
 
-                    <button className="btn btn-danger" onClick={this.addToFavorites}>Favorite</button>
+                    <button className="btn btn-danger mx-auto d-block mb-3" onClick={this.addToFavorites}>Favorite</button>
 
                     {this.state.episodes.length ? (
-                        <Container>
+                        <div className="container rounded p-0 text-secondary">
                             <List>
                                 {this.state.episodes.map(episode => (
                                     <Episode
@@ -173,7 +174,7 @@ class EpisodeList extends Component {
                                 <></>
                             )}
                             <button className="btn btn-light" onClick={this.scrollToTop}>Back to Top</button>
-                        </Container>
+                        </div>
 
                     ) : (
                             this.state.message !== "Loading..." ? (

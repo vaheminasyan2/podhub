@@ -4,8 +4,8 @@ import Row from "../components/Row/row";
 import API from "../utils/API";
 import PostCard from "../components/PostCard/postCard";
 import "./Profile.css";
-var moment = require('moment');
 import Delete from "./delete.png"
+import moment from "moment";
 
 // USER PROFILE PAGE
 
@@ -159,7 +159,7 @@ class Home extends Component {
             <Container>
               {this.state.favorites.map(favorite => (
                 <div className="row rounded favorite bg-dark text-secondary" key={favorite.id}>
-                  <div className="col-2 p-3 pad">
+                  <div className="col-2 p-4 pad">
                     <img
                       src={favorite.podcastLogo}
                       alt="Podcast Icon"
