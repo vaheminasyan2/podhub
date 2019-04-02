@@ -73,9 +73,7 @@ class Home extends Component {
 
         //let userId = JSON.parse(localStorage.getItem("user")).id;
 
-        API.getLikes(
-            postId
-        )
+        API.getLikes(postId)
             .then(function (response) {
                 console.log(response)
             })
@@ -112,7 +110,7 @@ class Home extends Component {
                                     comments={post.numberOfComments}
                                     postId={post.id}
                                     handlePostDelete={this.handlePostDelete}
-                                    handleShowLikes={this. handleShowLikes}
+                                    handleShowLikes={this.handleShowLikes}
 
                                 />
                             ))}
