@@ -10,6 +10,7 @@
 #profileImage {
   width: 35px;
   margin: 10px;
+  
 }
 
 .card-body {
@@ -26,3 +27,14 @@
   position: absolute;
 }
 
+.padding{
+  padding-right:1em;
+}
+
+.fa-heart{
+  color:red;
+}
+
+.fa-comment{
+  color:white;
+}
