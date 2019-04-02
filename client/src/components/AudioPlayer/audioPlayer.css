@@ -1,16 +1,20 @@
 #audio-player-container {
-  background-color: #292929;
-  border: 3px solid rgb(62, 52, 68);
+  background-color: #535353;
+  border: 1px solid #000000;
   box-shadow: 2px 2px 3px rgb(31, 30, 30);
   width: 500px;
+  border-radius: 7px;
 }
 
 #current-time {
 color: #000000;
+justify-self: end;
+font-size: 11px;
 }
 
 #duration {
 color: #000000;
+font-size: 11px;
 }
 
 #current-time, #duration {
@@ -23,71 +27,89 @@ font-size: 13px;
   height: 30px;
   border-radius: 15px;
   border-color: transparent;
-
+  margin-top: 0px !important;
+  margin-left: 0px !important;
 }
 
 #pButton:hover {
   cursor: pointer;
 }
 
+.PLAY-BUTTON {
+  justify-self: center;
+}
+
 #timeline {
   width: 350px;
   height: 5px;
-  background: #363636;
+  background: #000000;
   cursor: pointer;
-  position: relative;
-  margin-top: 39px;
+  margin-top: 10px;
 }
 
-#playhead{
+#playhead {
   width: 5px;
   height: 13px;
   border-radius: 2px;
   background: #9E26E5;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%,-50%);
+  margin-top: -4px;
 }
 
 #playhead:hover {
   cursor: pointer;
-
-}
-
-.play-line {
-height: 16px;
 }
 
 
-#skip-forward-15 {
-  width: 25px;
-  height: 25px;
-}
-
-#speed-slider-container {
-display: inline-block;
+#skip-forward-15, #skip-backward-15 {
+  width: 26px;
+  height: 26px;
+  margin-top: 0px !important;
+  margin-left: 0px !important;
 }
 
 #speed-label {
-margin: 22px 0px 0px 0px;
-text-align: center;
-line-height: 8px;
 font-size: 12px;
 font-weight: bold;
 color: #000000;
+margin: 0px;
+padding-left: 23px;
 }
 
-#skip-backward-15 {
-  width: 25px;
-  height: 25px;
-}
 
 #skip-forward-15:hover, #skip-backward-15:hover {
   cursor: pointer;
-
 }
 
 
+.first-row {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 20% 59% 21%;
+}
+
+.second-row {
+  display: grid;
+  grid-template-columns: 15% 85%;
+  grid-template-rows: auto;
+}
+
+.third-row {
+  display: grid;
+  grid-template-columns: 28% 41% 31%;
+  margin-bottom: 3px;
+}
+
+.SKIP-BACKWARD-15 {
+  justify-self: end;
+}
+
+.SPEED-SLIDER {
+  justify-self: center;
+}
+
+#speed-slider {
+  vertical-align: top;
+}
 
 
 /* Speed slider styling */
@@ -97,7 +119,7 @@ color: #000000;
     overflow: hidden;
     width: 88px;
     -webkit-appearance: none;
-    background-color: #3E3443;
+    background-color: rgb(88, 42, 114);
     cursor: pointer;
     outline: 0;
   }
@@ -121,4 +143,5 @@ color: #000000;
   }
 
 }
+
 
