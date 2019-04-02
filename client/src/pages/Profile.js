@@ -179,7 +179,7 @@ class Home extends Component {
                     >
                       <img src={Delete} alt="delete" className="size" />
                     </button>
-                    <p>{moment(favorite.createdAt).format("LLL")}</p>
+                    {/* <p>{moment(favorite.createdAt).format("LLL")}</p> */}
                     <p>{favorite.podcastName}</p>
                     <div>
                       <p className="ellipsis">{favorite.description}</p>
