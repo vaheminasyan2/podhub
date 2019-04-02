@@ -6,6 +6,7 @@ import PostCard from "../components/PostCard/postCard";
 import "./Profile.css";
 import Delete from "./delete.png";
 import moment from "moment";
+import Modal from "react-responsive-modal";
 
 // USER PROFILE PAGE
 
@@ -15,7 +16,9 @@ class Home extends Component {
     posts: [],
     followers: 0,
     following: 0,
-    favorites: []
+    favorites: [],
+    showLikesModal: false,
+    likes: []
   };
 
   componentDidMount() {
@@ -132,6 +135,33 @@ class Home extends Component {
     });
   };
 
+  //Opens the Likes modal
+  //Executed upon user clicking "Likes" button on page
+  handleShowLikes = postId => {
+    // event.preventDefault();
+    console.log("hello");
+    this.setState({
+      showLikesModal: true
+    });
+
+    //let userId = JSON.parse(localStorage.getItem("user")).id;
+
+    API.getLikes(postId).then(res => {
+      console.log(res.data);
+      this.setState({
+        likes: res.data
+      });
+    });
+  };
+
+  // Closes Likes Episode modal
+  // Executed upon user clicking "Likes" button in modal
+  handleCloseLikesModal = () => {
+    this.setState({
+      showLikesModal: false
+    });
+  };
+
   render() {
     return (
       <Container>
@@ -217,8 +247,35 @@ class Home extends Component {
                   comments={post.numberOfComments}
                   postId={post.id}
                   handlePostDelete={this.handlePostDelete}
+                  handleShowLikes={this.handleShowLikes}
                 />
               ))}
+              <Modal
+                open={this.state.showLikesModal}
+                onClose={this.handleCloseLikesModal}
+                center
+              >
+                <h4>
+                  Modal to show profile image and name of all users who liked
+                  the post
+                </h4>
+                {this.state.likes.map(like => (
+                  <div
+                    className="row rounded favorite bg-dark text-secondary"
+                    key={like.id}
+                  >
+                    <div className="col-2 p-4 pad">
+                      <img
+                        src={like.image}
+                        alt="User Icon"
+                        id="userImage"
+                        className="rounded border-white"
+                      />
+                    </div>
+                    <h2>Name: {like.name}</h2>
+                  </div>
+                ))}
+              </Modal>
             </div>
           ) : (
               <div className="col">
