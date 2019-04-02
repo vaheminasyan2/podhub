@@ -4,9 +4,11 @@ import Row from "../components/Row/row";
 import API from "../utils/API";
 import PostCard from "../components/PostCard/postCard";
 import "./Profile.css";
+
 var moment = require('moment');
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
+
 import Delete from "./delete.png"
 
 // USER PROFILE PAGE
