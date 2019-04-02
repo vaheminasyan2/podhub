@@ -1,4 +1,5 @@
 const db = require(`../models/index.js`);
+const Op = db.Sequelize.Op;
 
 /**
  * Class Post Controller
@@ -10,8 +11,7 @@ class PostController {
    * @param {*} res
    */
   create(req, res) {
-
-    console.log("posts",req.body);
+    console.log("posts", req.body);
     db.post.create(req.body).then(post => res.json(post));
   }
 
@@ -32,55 +32,82 @@ class PostController {
    * @param {*} res
    */
   getPostByUser(req, res) {
-    console.log(req.params.id)
-    var postPromises =[];
+    console.log(req.params.id);
+    var postPromises = [];
     var postId2Likes = {};
     var postId2Comments = {};
     var postId2UserNames = {};
     var postId2UserImages = {};
-    db.post.findAll({where: {postedBy: req.params.id}})
-      .then(dbPost => {
-        const sortedPosts = dbPost.sort(function(a, b) {
-          if (a.updatedAt < b.updatedAt) return 1;
-          if (a.updatedAt > b.updatedAt) return -1;
-          return 0;
-        });
-        postPromises.push(...sortedPosts);
-        var likeCommPromises = [];
-        sortedPosts.forEach(post => {
-          const likePromise = post.getPostLikes();
-          const commentPromise = post.getComments();
-          const userPromise = db.user.findByPk(post.postedBy)
-          likeCommPromises.push(likePromise);
-          likeCommPromises.push(commentPromise);
-          likeCommPromises.push(userPromise);
+    db.post.findAll({ where: { postedBy: req.params.id } }).then(dbPost => {
+      const sortedPosts = dbPost.sort(function(a, b) {
+        if (a.updatedAt < b.updatedAt) return 1;
+        if (a.updatedAt > b.updatedAt) return -1;
+        return 0;
+      });
+      postPromises.push(...sortedPosts);
+      var likeCommPromises = [];
+      sortedPosts.forEach(post => {
+        const likePromise = post.getPostLikes();
+        const commentPromise = post.getComments();
+        const userPromise = db.user.findByPk(post.postedBy);
+        likeCommPromises.push(likePromise);
+        likeCommPromises.push(commentPromise);
+        likeCommPromises.push(userPromise);
 
-          likePromise.then(function(likes) {
-            postId2Likes[post.id] = likes.length;
-          });
-          commentPromise.then(function(comments) {
-            postId2Comments[post.id] = comments.length;
-          });
-          userPromise.then(function(user){
-            postId2UserNames[post.id] = user.name;
-            postId2UserImages[post.id] = user.profileImage;
-          })
+        likePromise.then(function(likes) {
+          postId2Likes[post.id] = likes.length;
         });
+        commentPromise.then(function(comments) {
+          postId2Comments[post.id] = comments.length;
+        });
+        userPromise.then(function(user) {
+          postId2UserNames[post.id] = user.name;
+          postId2UserImages[post.id] = user.profileImage;
+        });
+      });
 
-        Promise.all(likeCommPromises).then(function() {
+      Promise.all(likeCommPromises)
+        .then(function() {
           sortedPosts.forEach(post => {
             post.numberOfLikes = postId2Likes[post.id];
             post.numberOfComments = postId2Comments[post.id];
             post.userName = postId2UserNames[post.id];
             post.userImage = postId2UserImages[post.id];
           });
-        res.json(postPromises)
-    }).catch(function(error) {
-      res.status(400);
-    })
-      });
+          res.json(postPromises);
+        })
+        .catch(function(error) {
+          res.status(400);
+        });
+    });
   }
 
+  /**
+   * Get the users Details who liked post from database <----- Home and Profile Page ----->
+   * @param {*} req
+   * @param {*} res
+   */
+  getUsersLikedPost(req, res) {
+    console.log(req.params.id);
+    db.postLike
+      .findAll({ where: { postId: req.params.id } })
+      .then(dbPostLike => {
+        let userIds = dbPostLike.map(like => like.userId);
+        console.log(userIds);
+        db.user
+          .findAll({
+            where: {
+              id: {
+                [Op.or]: userIds
+              }
+            }
+          })
+          .then(dbUser => {
+            let userDetails = dbUser.map(user=>{ return {id: user.id, name: user.name, image: user.profileImage}})
+            res.json(userDetails);
+          });
+      });
+  }
 
   /**
    * Update the post in database
@@ -107,16 +134,17 @@ class PostController {
    * @param {*} req
    * @param {*} res
    */
-  getPostComments(req, res){
-    console.log(req.params)
-    db.comment.findAll({
-      where:
-      {
-        postId: req.params.id
-      }
-    }).then(function(comments){
-      res.json(comments);
-    })
+  getPostComments(req, res) {
+    console.log(req.params);
+    db.comment
+      .findAll({
+        where: {
+          postId: req.params.id
+        }
+      })
+      .then(function(comments) {
+        res.json(comments);
+      });
   }
 
   /**
@@ -124,19 +152,17 @@ class PostController {
    * @param {*} req
    * @param {*} res
    */
-  getPostLikes(req, res){
-    db.postLike.findAll({
-      where:
-      {
-        postId: req.params.id
-      }
-    }).then(function(postLikest){
-      res.json(postLikest);
-    })
+  getPostLikes(req, res) {
+    db.postLike
+      .findAll({
+        where: {
+          postId: req.params.id
+        }
+      })
+      .then(function(postLikest) {
+        res.json(postLikest);
+      });
   }
-
-  
-
 }
 
 module.exports = PostController;

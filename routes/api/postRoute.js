@@ -24,7 +24,12 @@ router.post("/", (req, res) => controller.create(req, res));
  */
 router.get("/getPostsOnlyByUser/:id", (req, res) => controller.getPostByUser(req, res));
 
-
+/**
+ * Route to get users who liked sost by postId from database <<--------------User Profile page------------->>
+ * @param {*} req
+ * @param {*} res
+ */
+router.get("/getUsersLikedPost/:id", (req, res) => controller.getUsersLikedPost(req, res));
 
 
 /**

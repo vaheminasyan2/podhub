@@ -5,7 +5,7 @@ export default {
 
     // Show users how liked the post
     getLikes: function(postId) {
-        return axios.get("/api/getLikes/" + postId)
+        return axios.get("/api/posts/getUsersLikedPost/" + postId)
     },
 
     // Gets all posts for specific user
