@@ -4,8 +4,8 @@ import Row from "../components/Row/row";
 import API from "../utils/API";
 import PostCard from "../components/PostCard/postCard";
 import "./Profile.css";
-var moment = require('moment');
-import Delete from "./delete.png"
+import Delete from "./delete.png";
+import moment from "moment";
 
 // USER PROFILE PAGE
 
@@ -229,3 +229,4 @@ class Home extends Component {
 }
 
 export default Home;
+
