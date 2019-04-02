@@ -37,7 +37,13 @@ function Card({ userPhoto, userName, date, podcastName, podcastLogo, episodeName
             </div>
           </div>
           <div className="row pb-1">
-            <a button onClick={() => handleShowLikes(postId)} className="likes padding text-white"><FontAwesomeIcon icon="heart"/>&nbsp;{likes}&nbsp;</a>
+            <a 
+              className="likes padding text-white"
+              onClick={() => handleShowLikes} 
+            >
+                <FontAwesomeIcon icon="heart"/>
+                  &nbsp;{likes}&nbsp;
+            </a>
             <a href="/" className="comments text-white"> <FontAwesomeIcon icon="comment" /> &nbsp;{comments}</a>
           </div>
 
@@ -49,6 +55,3 @@ function Card({ userPhoto, userName, date, podcastName, podcastLogo, episodeName
 }
 
 export default Card;
-
-
-
