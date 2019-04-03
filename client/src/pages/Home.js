@@ -3,7 +3,7 @@ import Container from "../components/Container/container";
 import Row from "../components/Row/row";
 import API from "../utils/API";
 import PostCard from "../components/PostCard/postCard";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import Modal from "react-responsive-modal";
 import "./Home.css"
 
@@ -31,7 +31,7 @@ class Home extends Component {
             .then(res => {
                 var message = "";
 
-                if (res.data.length == 0) {
+                if (res.data.length === 0) {
                     message = "No posts found.";
                 }
 
@@ -82,7 +82,7 @@ class Home extends Component {
     handleLikeOrUnlike = postId => {
         API.likePost(postId, this.props.user.id).then(res => {
             //console.log(res.data)
-            if (res.data[1] == false)
+            if (res.data[1] === false)
                 {
                 API.unlikePost(postId).then(res => {
                     //console.log(res.data)

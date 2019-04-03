@@ -1,5 +1,5 @@
 import axios from "axios";
-import { func } from "prop-types";
+//import { func } from "prop-types";
 
 export default {
 
