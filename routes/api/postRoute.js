@@ -25,11 +25,25 @@ router.post("/", (req, res) => controller.create(req, res));
 router.get("/getPostsOnlyByUser/:id", (req, res) => controller.getPostByUser(req, res));
 
 /**
- * Route to get users who liked sost by postId from database <<--------------User Profile page------------->>
+ * Route to get users who liked post by postId from database <<--------------User Profile page------------->>
  * @param {*} req
  * @param {*} res
  */
 router.get("/getUsersLikedPost/:id", (req, res) => controller.getUsersLikedPost(req, res));
+
+/**
+ * Route to create the likes by postId and userId from database <<--------------Home Page and User Profile page------------->>
+ * @param {*} req
+ * @param {*} res
+ */
+router.post("/like", (req, res) => controller.createLikes(req, res));
+
+/**
+ * Route to remove the likes by postId <<--------------Home Page and User Profile page------------->>
+ * @param {*} req
+ * @param {*} res
+ */
+router.delete("/unlike/:postId", (req, res) => controller.removeLikes(req, res));
 
 
 /**
