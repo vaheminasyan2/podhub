@@ -9,7 +9,7 @@ class CommentController {
    * @param {*} req
    * @param {*} res
    */
-  create(req, res) {
+  createComment(req, res) {
     db.comment.findOrCreate({ where: req.body }).then(comment => res.json(comment));
   }
 

@@ -7,7 +7,7 @@ const controller = new CommentController();
  * @param {*} req
  * @param {*} res
  */
-router.post("/", (req, res) => controller.create(req, res));
+router.post("/", (req, res) => controller.createComment(req, res));
 
 /**
  * Route to update the existing comment
