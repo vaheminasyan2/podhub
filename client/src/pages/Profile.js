@@ -25,22 +25,20 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    this.setUser();
+    console.log(this.props);
+
+    this.setState({
+      user: this.props.location.state.user
+    });
+
     this.getPostsOnlyByUser();
     this.getFavorites();
-    // this.getOrCreateUser();
     this.getFollowers();
     this.getFollowing();
   }
 
-  setUser = () => {
-    this.setState({
-      user: this.props.user
-    });
-  };
-
   getPostsOnlyByUser = () => {
-    API.getPostsOnlyByUser(this.props.user.id)
+    API.getPostsOnlyByUser(this.state.user.id)
       .then(res => {
         if (res.data.length === 0) {
           this.setState({
@@ -62,7 +60,7 @@ class Home extends Component {
   };
 
   getFavorites = () => {
-    API.getFavorites(this.props.user.id)
+    API.getFavorites(this.state.user.id)
       .then(res => {
         if (res.data.length === 0) {
           this.setState({
@@ -86,7 +84,7 @@ class Home extends Component {
   };
 
   getOrCreateUser = () => {
-    API.getOrCreateUser(this.state.userId).then(res => {
+    API.getOrCreateUser(this.state.user.id).then(res => {
       this.setState({
         user: res.data
       });
@@ -94,7 +92,7 @@ class Home extends Component {
   };
 
   getFollowers = () => {
-    API.getFollowers(this.props.user.id)
+    API.getFollowers(this.state.user.id)
       .then(res => {
         this.setState({
           followers: res.data[0].count
@@ -108,7 +106,7 @@ class Home extends Component {
   };
 
   getFollowing = () => {
-    API.getFollowing(this.props.user.id)
+    API.getFollowing(this.state.user.id)
       .then(res => {
         this.setState({
           following: res.data[0].count
@@ -162,7 +160,7 @@ class Home extends Component {
   };
 
   handleLikeOrUnlike = postId => {
-    API.likePost(postId, this.props.user.id).then(res => {
+    API.likePost(postId, this.state.user.id).then(res => {
       //console.log(res.data)
       if (res.data[1] == false) {
         API.unlikePost(postId).then(res => {
@@ -195,7 +193,7 @@ class Home extends Component {
         <div className="row userProfile rounded bg-dark text-white">
           <div className="col-5">
             <img
-              src={this.props.user.profileImage}
+              src={this.props.location.state.user.profileImage}
               alt="User"
               id="userMainProfileImage"
               className="rounded border-white"
@@ -204,7 +202,7 @@ class Home extends Component {
 
           <div className="col">
             <Row>
-              <h2 className="paddingTop">{this.props.user.name}</h2>
+              <h2 className="paddingTop">{this.props.location.state.user.name}</h2>
             </Row>
             <Row>
               Posts:&nbsp; {this.state.posts.length} &nbsp; | &nbsp;

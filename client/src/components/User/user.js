@@ -12,11 +12,13 @@ function User ({ userId, userName, userImage, handler }) {
     return (
 
         <Link to={{
-            pathname: "/userProfile",
+            pathname: "/profile",
             state: {
-                userId: userId,
-                userName: userName,
-                userImage: userImage
+                user: {
+                    id:userId,
+                    name:userName,
+                    profileImage:userImage
+                }
             }
             }}
             className="user"
