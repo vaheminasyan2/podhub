@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router";
 import Container from "../components/Container/container";
 import Row from "../components/Row/row";
 import API from "../utils/API";
+import Podcast from "../components/Podcast/podcast";
 import PostCard from "../components/PostCard/postCard";
 import "./Profile.css";
 import Delete from "./delete.png";
@@ -18,7 +20,8 @@ class Home extends Component {
     following: 0,
     favorites: [],
     showLikesModal: false,
-    likes: []
+    likes: [],
+    redirect: false
   };
 
   componentDidMount() {
@@ -130,9 +133,12 @@ class Home extends Component {
   };
 
   handleFavoriteDelete = id => {
-    API.handleFavoriteDelete(id).then(res => {
-      this.getFavorites();
-    });
+
+    if (window.confirm("Delete favorite?")) {
+      API.handleFavoriteDelete(id).then(res => {
+        this.getFavorites();
+      });
+    }
   };
 
   //Opens the Likes modal
@@ -162,7 +168,16 @@ class Home extends Component {
     });
   };
 
+  listenToEpisode = event => {
+    event.preventDefault();
+
+    this.setState({
+      redirect: true
+    });
+  }
+
   render() {
+    console.log(this.state.favorites);
     return (
       <Container>
         <div className="row userProfile rounded bg-dark text-white">
@@ -181,7 +196,7 @@ class Home extends Component {
             </Row>
             <Row>
               Posts:&nbsp; {this.state.posts.length} &nbsp; | &nbsp;
-              Followers:&nbsp;{this.state.followers}&nbsp; | &nbsp;
+              Followers:&nbsp;{this.state.followers} &nbsp; | &nbsp;
               Following:&nbsp;{this.state.following}
             </Row>
           </div>
@@ -193,15 +208,17 @@ class Home extends Component {
           {this.state.favorites.length ? (
             <Container>
               {this.state.favorites.map(favorite => (
+
                 <div className="row rounded favorite bg-dark text-secondary" key={favorite.id}>
                   <div className="col-2 p-4 pad">
-                    <img
-                      src={favorite.podcastLogo}
-                      alt="Podcast Icon"
-                      id="favoriteIcon"
-                      className="rounded border-white"
+                    <Podcast
+                      podcastId={favorite.podcastId}
+                      podcastName={favorite.podcastName}
+                      podcastLogo={favorite.podcastLogo}
+                      thumbnail={favorite.podcastLogo}
                     />
                   </div>
+
                   <div className="col p-0">
                     <button
                       className="btn btn-sm mb-1 float-right"
@@ -209,13 +226,35 @@ class Home extends Component {
                     >
                       <img src={Delete} alt="delete" className="size" />
                     </button>
-                    {/* <p>{moment(favorite.createdAt).format("LLL")}</p> */}
-                    <p>{favorite.podcastName}</p>
+
+                    <p>{moment(favorite.createdAt).format("LLL")}</p>
+
+                    {/* <p>{favorite.podcastName}</p> */}
                     <div>
                       <p className="ellipsis">{favorite.description}</p>
                     </div>
 
-                    <a href={favorite.audioLink} target="_blank" className="btn btn-sm btn-dark mb-1 listenFav"> Listen</a>
+                    <button className="btn btn-light" onClick={this.listenToEpisode}>Listen</button>
+
+                    {this.state.redirect ? (
+                      <Redirect
+                      to={{
+                        pathname: "/listen",
+                        state: {
+                          podcastId: favorite.podcastId,
+                          podcastName: favorite.podcastName,
+                          podcastLogo: favorite.podcastLogo,
+                          episodeId: favorite.episodeId,
+                          episodeName: favorite.episodeName,
+                          date: moment(favorite.date).format("LLL"),
+                          description: favorite.description,
+                          audioLink: favorite.audioLink
+                        }
+                      }}
+                    />
+                    ) : (
+                      <></>
+                    )}
 
                   </div>
                 </div>

@@ -147,9 +147,7 @@ class EpisodeList extends Component {
 
                 <br />
                 <Row>
-
-                    <button className="btn btn-danger mx-auto d-block mb-3" onClick={this.addToFavorites}>Favorite</button>
-
+                    
                     {this.state.episodes.length ? (
                         <div className="container rounded p-0 text-secondary">
                             <List>
