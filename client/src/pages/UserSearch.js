@@ -93,9 +93,9 @@ class UserSearch extends Component {
                 </form>
 
                 {this.state.users.length ? (
-                    <List>
+                    <ul className="flexRow">
                         {this.state.users.map(user => (
-                            <div key={user.id}>
+                            <div className="container bg-dark tile m-2" key={user.id}>
                                 <User
                                     userId={user.id}
                                     userName={user.name}
@@ -103,7 +103,7 @@ class UserSearch extends Component {
                                     handler={null}
                                 />
                                 <button
-                                    className="btn btn-primary" 
+                                    className="btn btn-outline-light buttonPosition" 
                                     onClick={(event)=>{
                                         event.preventDefault();
                                         this.followUser(user.id)}
@@ -113,7 +113,7 @@ class UserSearch extends Component {
                                 </button>
                             </div>
                         ))}
-                    </List>
+                    </ul>
                 ) : (
                     <h2>{this.state.message}</h2>
                 )}
