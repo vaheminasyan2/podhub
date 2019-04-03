@@ -162,7 +162,7 @@ class Home extends Component {
   handleLikeOrUnlike = postId => {
     API.likePost(postId, this.state.user.id).then(res => {
       //console.log(res.data)
-      if (res.data[1] == false) {
+      if (res.data[1] === false) {
         API.unlikePost(postId).then(res => {
           //console.log(res.data)
         })
