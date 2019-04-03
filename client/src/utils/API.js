@@ -8,6 +8,18 @@ export default {
         return axios.get("/api/posts/getUsersLikedPost/" + postId)
     },
 
+    likePost: function(postId, userId) {
+        let data = {
+            postId: postId,
+            userId:userId
+        }
+        return axios.post("/api/posts/like/", data )
+    },
+
+    unlikePost: function(postId) {
+        return axios.delete("/api/posts/unlike/" + postId)
+    },
+
     // Gets all posts for specific user
     getPosts: function (userId) {
         return axios.get("/api/getPosts", userId);
@@ -160,5 +172,6 @@ export default {
         }
 
         return axios.post("/api/posts/", data);
-    }
+    },
+
 };
