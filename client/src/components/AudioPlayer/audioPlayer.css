@@ -1,5 +1,5 @@
 #audio-player-container {
-  background-color: #535353;
+  background-color: #a8a6a6;
   border: 1px solid #000000;
   box-shadow: 2px 2px 3px rgb(31, 30, 30);
   width: 500px;
@@ -72,7 +72,7 @@ font-size: 12px;
 font-weight: bold;
 color: #000000;
 margin: 0px;
-padding-left: 23px;
+padding-left: 4px;
 }
 
 
@@ -84,7 +84,7 @@ padding-left: 23px;
 .first-row {
   margin-top: 10px;
   display: grid;
-  grid-template-columns: 20% 59% 21%;
+  grid-template-columns: 20% 45% 35%;
 }
 
 .second-row {
@@ -109,6 +109,10 @@ padding-left: 23px;
 
 #speed-slider {
   vertical-align: top;
+}
+
+.SKIP-FORWARD-15 {
+  justify-self: start;
 }
 
 

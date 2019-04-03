@@ -220,33 +220,51 @@ class Listen extends Component {
                     </Portal>
                 )}
 
-                <Modal open={this.state.showModal} onClose={this.handleCloseModal} center>
+                <Modal
+                    open={this.state.showModal}
+                    onClose={this.handleCloseModal}
+                    classNames={{ modal: "customModal", overlay: "customOverlay", closeButton: "customCloseButton" }}
+                >
 
                     <Container>
-                        <div>
-                            <h4>{this.state.podcastName}</h4>
-                            <img src={this.state.podcastLogo} alt="Podcast Logo" />
-                            <p>{this.state.episodeName}</p>
-                        </div>
 
-                        <form>
-                            <input
-                                className="userPostInput"
-                                name="userMessage"
-                                onChange={this.handleInputChange}
-                                placeholder="Enter message"
-                                value={this.state.userMessage}
-                            >
-                            </input>
+                        <h4 id="podcast-name-modal">New Post<span id="bar-listen">:&nbsp;&nbsp;</span>{this.state.podcastName}</h4>
+                        <span id="span"></span>
+                        <div id="modal-first-line">
+                            <div id="box-logo">
+                                <img src={this.state.podcastLogo} alt="Podcast Logo" id="podcast-logo-modal" />
+                            </div>
+                            <div id="box-title">
+                                <p id="podcast-episode-name-modal">{this.state.episodeName}</p>
+                            </div>
 
-                            <button
-                                className="btn btn-primary"
-                                onClick={this.handleShareEpisode}
-                                type="submit"
-                            >
-                                Share
+                            <div></div>
+
+                            <div>
+                                <form>
+                                    <div>
+                                        <textarea
+                                            id="new-post-message"
+                                            className="userPostInput"
+                                            name="userMessage"
+                                            onChange={this.handleInputChange}
+                                            placeholder="Caption..."
+                                            value={this.state.userMessage}
+                                        >
+                                        </textarea>
+                                    </div>
+
+                                    <button
+                                        id="share-modal-btn"
+                                        className="btn btn-primary"
+                                        onClick={this.handleShareEpisode}
+                                        type="submit"
+                                    >
+                                        Post
                             </button>
-                        </form>
+                                </form>
+                            </div>
+                        </div>
                     </Container>
 
                 </Modal>
