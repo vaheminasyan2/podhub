@@ -80,6 +80,7 @@ class Home extends Component {
     };
 
     handleLikeOrUnlike = postId => {
+        console.log("like post")
         API.likePost(postId, this.props.user.id).then(res => {
             console.log(res.data)
             if (res.data[1] == false)
@@ -88,6 +89,7 @@ class Home extends Component {
                     console.log(res.data)
                 })
             };
+            this.getPosts();
         })
     }
 
@@ -123,6 +125,7 @@ class Home extends Component {
                                         postId={post.id}
                                         handlePostDelete={this.handlePostDelete}
                                         handleShowLikes={this.handleShowLikes}
+                                        handleLikeOrUnlike={this.handleLikeOrUnlike}
                                     />
                                 ))}
 
