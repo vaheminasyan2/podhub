@@ -29,7 +29,7 @@ class CommentController {
    * @param {*} req
    * @param {*} res
    */
-  remove(req, res) {
+  removeComment(req, res) {
     db.comment.destroy({ where: req.params }).then(comment => res.json(comment));
   }
 

@@ -21,7 +21,7 @@ router.put("/:id", (req, res) => controller.update(req, res));
  * @param {*} req
  * @param {*} res
  */
-router.delete("/:id", (req, res) => controller.remove(req, res));
+router.delete("/:id", (req, res) => controller.removeComment(req, res));
 
 /**
  * Get Comment likes
