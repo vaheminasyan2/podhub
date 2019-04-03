@@ -27,6 +27,27 @@ class PostController {
   // }
 
   /**
+   * create the likes for the posts by userId, postId from database <----- Home Page  and User Profile Page ----->
+   * @param {*} req
+   * @param {*} res
+   */
+  createLikes(req, res) {
+    console.log(req.body)
+    db.postLike.findOrCreate({where: req.body}).then(dbPostLike => res.json(dbPostLike));
+  }
+
+  /**
+   * Remove likes for the posts <----- Home page and User Profile Page ----->
+   * @param {*} req
+   * @param {*} res
+   */
+  removeLikes(req, res) {
+    db.postLike
+      .destroy({ where: req.params })
+      .then(dbPostLike => res.json(dbPostLike));
+  }
+
+  /**
    * Get the posts by userId from database <----- User Profile Page ----->
    * @param {*} req
    * @param {*} res
