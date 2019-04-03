@@ -25,16 +25,16 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props);
+    // console.log(this.props);
 
     this.setState({
       user: this.props.location.state.user
+    }, () => {
+      this.getPostsOnlyByUser();
+      this.getFavorites();
+      this.getFollowers();
+      this.getFollowing();
     });
-
-    this.getPostsOnlyByUser();
-    this.getFavorites();
-    this.getFollowers();
-    this.getFollowing();
   }
 
   getPostsOnlyByUser = () => {
