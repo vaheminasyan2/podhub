@@ -40,11 +40,20 @@ function Card({ userPhoto, userName, date, podcastName, podcastLogo, episodeName
             <a 
               className="likes padding text-white"
               onClick={() => handleShowLikes(postId)} 
-            >
-                <FontAwesomeIcon icon="heart"/>
-                  &nbsp;{likes}&nbsp;
+            > 
+               <FontAwesomeIcon icon="heart"/>
             </a>
-            <a href="/" className="comments text-white"> <FontAwesomeIcon icon="comment" /> &nbsp;{comments}</a>
+            
+            {likes}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+             <a
+                className= "comments padding text-white"
+                // onClick={() => handleShowComments(postId)}
+              >
+                <FontAwesomeIcon icon="comment"/>
+             </a>
+              {comments}&nbsp;&nbsp;&nbsp;
+
           </div>
 
         </div>

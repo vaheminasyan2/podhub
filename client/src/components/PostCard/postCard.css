@@ -50,3 +50,11 @@
 .likes:hover {
   cursor: pointer;
 }
+
+.likes {
+  padding-right: 0.8em;
+}
+
+.comments {
+  padding-right: 0.8em;
+}
