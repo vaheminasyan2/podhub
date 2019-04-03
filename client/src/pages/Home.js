@@ -102,7 +102,7 @@ class Home extends Component {
 
     render() {
         return (
-            <div className="container bg-dark rounded">
+            <div className="container bg-dark rounded" id="post-container">
                 <Row>
                     {this.state.posts.length > 0
                         ? (

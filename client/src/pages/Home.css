@@ -3,3 +3,8 @@
     margin-top: 5px;
     margin-left: 0;
   }
+
+  #post-container {
+    box-shadow: 2px 2px 3px rgb(31, 30, 30);
+    border: 6px solid transparent;
+  }
