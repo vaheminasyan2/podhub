@@ -79,6 +79,17 @@ class Home extends Component {
         });
     };
 
+    handleLikeOrUnlike = postId => {
+        API.likePost(postId, this.props.user.id).then(res => {
+            console.log(res.data)
+            if (res.data[1] == false)
+                {
+                API.unlikePost(postId).then(res => {
+                    console.log(res.data)
+                })
+            };
+        })
+    }
 
     // Closes Likes Episode modal
     // Executed upon user clicking "Likes" button in modal
