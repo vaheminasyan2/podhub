@@ -1,13 +1,4 @@
-.user {
-    background: lightgray;
-    border: 1px solid black;
-    cursor: pointer;
-    height: auto;
-    margin-bottom: 5px;
-    overflow: hidden;
-    padding: 5px;
-    width: 400px;
-}
+
 
 .userImage {
     margin: 0px;
