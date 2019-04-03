@@ -107,12 +107,16 @@ export default {
     //     return podcastId;
     // },
 
-    addPodcastToFavorites: function(podcastName,podcastLogo,description, audioLink, userId) {
+    addPodcastToFavorites: function(podcastId, podcastName, podcastLogo, episodeId, episodeName, date, description, audioLink, userId) {
         // console.log(arguments);
 
         let data = {
+            podcastId: podcastId,
             podcastName: podcastName,
             podcastLogo: podcastLogo,
+            episodeId: episodeId,
+            episodeName: episodeName,
+            date: date,
             description: description,
             audioLink: audioLink,
             userId: userId
