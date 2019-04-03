@@ -53,9 +53,7 @@ class AudioPlayer extends Component {
             let durationSeconds = parseInt(audioElement.duration % 60);
             if (durationSeconds < 10) {
                 durationSeconds = "0" + durationSeconds;
-                console.log(durationSeconds);
             }
-            console.log(typeof durationSeconds);
             this.setDuration(durationMinutes, durationSeconds);
 
             audioElement.addEventListener('timeupdate', this.timeUpdate, false);
