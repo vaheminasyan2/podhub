@@ -144,25 +144,38 @@ class Home extends Component {
   //Opens the Likes modal
   //Executed upon user clicking "Likes" button on page
   handleShowLikes = postId => {
-    // event.preventDefault();
-    console.log("hello");
-    this.setState({
-      showLikesModal: true
-    });
-
-    //let userId = JSON.parse(localStorage.getItem("user")).id;
 
     API.getLikes(postId).then(res => {
-      console.log(res.data);
-      this.setState({
-        likes: res.data
-      });
+      //console.log(res.data);
+      if (res.data.length === 0) {
+        this.setState({
+          showLikesModal: false
+        });
+      }
+      else {
+        this.setState({
+          likes: res.data,
+          showLikesModal: true
+        });
+      }
     });
   };
 
+  handleLikeOrUnlike = postId => {
+    API.likePost(postId, this.props.user.id).then(res => {
+      //console.log(res.data)
+      if (res.data[1] == false) {
+        API.unlikePost(postId).then(res => {
+          //console.log(res.data)
+        })
+      };
+      this.getPostsOnlyByUser();
+    })
+  }
+
   // Closes Likes Episode modal
   // Executed upon user clicking "Likes" button in modal
-  handleCloseLikesModal = () => {
+  closeLikesModal = () => {
     this.setState({
       showLikesModal: false
     });
@@ -237,23 +250,23 @@ class Home extends Component {
 
                     {this.state.redirect ? (
                       <Redirect
-                      to={{
-                        pathname: "/listen",
-                        state: {
-                          podcastId: favorite.podcastId,
-                          podcastName: favorite.podcastName,
-                          podcastLogo: favorite.podcastLogo,
-                          episodeId: favorite.episodeId,
-                          episodeName: favorite.episodeName,
-                          date: moment(favorite.date).format("LLL"),
-                          description: favorite.description,
-                          audioLink: favorite.audioLink
-                        }
-                      }}
-                    />
+                        to={{
+                          pathname: "/listen",
+                          state: {
+                            podcastId: favorite.podcastId,
+                            podcastName: favorite.podcastName,
+                            podcastLogo: favorite.podcastLogo,
+                            episodeId: favorite.episodeId,
+                            episodeName: favorite.episodeName,
+                            date: moment(favorite.date).format("LLL"),
+                            description: favorite.description,
+                            audioLink: favorite.audioLink
+                          }
+                        }}
+                      />
                     ) : (
-                      <></>
-                    )}
+                        <></>
+                      )}
 
                   </div>
                 </div>
@@ -286,31 +299,30 @@ class Home extends Component {
                   postId={post.id}
                   handlePostDelete={this.handlePostDelete}
                   handleShowLikes={this.handleShowLikes}
+                  handleLikeOrUnlike={this.handleLikeOrUnlike}
                 />
               ))}
               <Modal
                 open={this.state.showLikesModal}
-                onClose={this.handleCloseLikesModal}
+                onClose={this.closeLikesModal}
                 center
               >
-                <h4>
-                  Modal to show profile image and name of all users who liked
-                  the post
-                </h4>
                 {this.state.likes.map(like => (
                   <div
                     className="row rounded favorite bg-dark text-secondary"
                     key={like.id}
                   >
-                    <div className="col-2 p-4 pad">
+                    <div className="col-3 mt-0">
                       <img
                         src={like.image}
                         alt="User Icon"
-                        id="userImage"
+                        id="userImageLikesModal"
                         className="rounded border-white"
                       />
                     </div>
-                    <h2>Name: {like.name}</h2>
+                    <div className="col-9">
+                      <p>{like.name}</p>
+                    </div>
                   </div>
                 ))}
               </Modal>
