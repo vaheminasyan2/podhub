@@ -47,14 +47,15 @@
   
 }
 
-.likes:hover {
+
+.likes, .comments {
+  padding-right: 0.8em;
+}
+
+.comments, .likes, .likesNumber:hover {
   cursor: pointer;
 }
 
-.likes {
-  padding-right: 0.8em;
-}
-
-.comments {
-  padding-right: 0.8em;
+.likesDiv {
+  margin-right: 2em
 }
