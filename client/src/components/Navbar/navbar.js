@@ -35,7 +35,7 @@ function Navbar({ podcastSearch, handleInputChange, hidePodcasts, logout, user }
               }
             >
             <FontAwesomeIcon icon="home" />
-            &nbsp;Home
+            &nbsp; Home
             </Link>
           </li>
 
@@ -54,7 +54,7 @@ function Navbar({ podcastSearch, handleInputChange, hidePodcasts, logout, user }
               }
             >
               <FontAwesomeIcon icon="user" />
-              &nbsp;Profile
+              &nbsp; Profile
             </Link>
           </li>
 
