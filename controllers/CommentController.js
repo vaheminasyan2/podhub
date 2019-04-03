@@ -14,6 +14,15 @@ class CommentController {
   }
 
   /**
+   * create likes for comments in database
+   * @param {*} req
+   * @param {*} res
+   */
+  createCommentLikes(req, res) {
+    db.commentLike.findOrCreate({ where: req.body }).then(commentLike => res.json(commentLike));
+  }
+
+  /**
    * Update the comment in database
    * @param {*} req
    * @param {*} res
@@ -30,8 +39,18 @@ class CommentController {
    * @param {*} res
    */
   removeComment(req, res) {
-    db.comment.destroy({ where: req.params }).then(comment => res.json(comment));
+    db.comment.destroy({ where: req.params }).then(dbcomment => res.json(dbcomment));
   }
+
+  /**
+   * Remove a comment likes in database
+   * @param {*} req
+   * @param {*} res
+   */
+  removeCommentLikes(req, res) {
+    db.commentLike.destroy({ where: req.params }).then(dbcommentLikes => res.json(dbcommentLikes));
+  }
+  
 
   /**
    * get comment likes
