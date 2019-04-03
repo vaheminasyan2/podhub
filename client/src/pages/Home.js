@@ -39,7 +39,7 @@ class Home extends Component {
                     message: message,
                     posts: res.data
                 });
-                console.log(res.data);
+                //console.log(res.data);
             })
             .catch(error => {
                 console.log(error);
@@ -64,7 +64,7 @@ class Home extends Component {
     handleShowLikes = postId => {
 
         API.getLikes(postId).then(res => {
-            console.log(res.data);
+            //console.log(res.data);
             if (res.data.length === 0) {
                 this.setState({
                     showLikesModal: false
@@ -80,13 +80,12 @@ class Home extends Component {
     };
 
     handleLikeOrUnlike = postId => {
-        console.log("like post")
         API.likePost(postId, this.props.user.id).then(res => {
-            console.log(res.data)
+            //console.log(res.data)
             if (res.data[1] == false)
                 {
                 API.unlikePost(postId).then(res => {
-                    console.log(res.data)
+                    //console.log(res.data)
                 })
             };
             this.getPosts();
