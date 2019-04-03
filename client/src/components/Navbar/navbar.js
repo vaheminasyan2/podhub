@@ -9,7 +9,7 @@ import Logo from "./purple_back.png";
 
 library.add(faSearch, faUser, faHome);
 
-function Navbar({ podcastSearch, handleInputChange, hidePodcasts, logout }) {
+function Navbar({ podcastSearch, handleInputChange, hidePodcasts, logout, user }) {
 
   return (
 
@@ -35,13 +35,18 @@ function Navbar({ podcastSearch, handleInputChange, hidePodcasts, logout }) {
               }
             >
             <FontAwesomeIcon icon="home" />
-            &nbsp;Home
+            &nbsp; Home
             </Link>
           </li>
 
           <li className="nav-item">
             <Link
-              to="/profile"
+              to={{
+                pathname: "/profile",
+                state: {
+                  user: user
+                }
+              }}
               className={
                 window.location.pathname === "/profile"
                   ? "nav-link active"
@@ -49,7 +54,7 @@ function Navbar({ podcastSearch, handleInputChange, hidePodcasts, logout }) {
               }
             >
               <FontAwesomeIcon icon="user" />
-              &nbsp;Profile
+              &nbsp; Profile
             </Link>
           </li>
 
