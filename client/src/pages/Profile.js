@@ -177,7 +177,6 @@ class Home extends Component {
   }
 
   render() {
-    console.log(this.state.favorites);
     return (
       <Container>
         <div className="row userProfile rounded bg-dark text-white">
