@@ -9,17 +9,18 @@
 
 #profileImage {
   width: 35px;
-  margin: 10px;
-  
+  margin: 0px;
+  border-radius: 35px;
 }
 
 .card-body {
-  margin-left:25px;
 }
 
-#podcastIcon{
-  width: 100px;
-  margin: 10px;
+#podcastIcon {
+  width: 80px;
+  margin: 5px 10px 5px 5px;
+  border: solid 3.4px rgb(255, 255, 255) !important;
+
 }
 
 .deletePost {
@@ -56,5 +57,66 @@
 }
 
 .likesDiv {
-  margin-right: 2em
+  text-align: right;
 }
+
+#img-post {
+  text-align: right;
+  padding: 10px;
+}
+
+#name-and-date {
+  text-align: center;
+}
+
+#post-top-row {
+  margin-bottom: 10px;
+}
+
+#post-top-row:after {
+  content: ""; /* This is necessary for the pseudo element to work. */ 
+  display: block; /* This will put the pseudo element on its own line. */
+  margin: 0 auto; /* This will center the border. */
+  width: 83%; /* Change this to whatever width you want. */
+  padding-top: 0px; /* This creates some space between the element and the border. */
+  border-bottom: 1px solid rgb(71, 70, 70); /* This creates the border. Replace black with whatever color you want. */
+}
+
+
+
+#second-row-post:after {
+  content: ""; /* This is necessary for the pseudo element to work. */ 
+  display: block; /* This will put the pseudo element on its own line. */
+  margin: 0 auto; /* This will center the border. */
+  width: 95%; /* Change this to whatever width you want. */
+  padding-top: 0px; /* This creates some space between the element and the border. */
+  border-bottom: 1px solid rgb(71, 70, 70); 
+}
+
+
+.ellipses {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+#top {
+  border-bottom: 4px solid #020202;
+}
+
+#second-row-post {
+  max-height: 230px !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
