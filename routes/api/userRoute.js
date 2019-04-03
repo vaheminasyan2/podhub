@@ -16,7 +16,7 @@ router.get("/:id", (req, res) => {
  * @param {*} req
  * @param {*} res
  */
-router.post("/:id", (req, res) => {
+router.post("/follow", (req, res) => {
     controller.postFollowUser(req, res);
 });
 

@@ -61,26 +61,16 @@ class UserSearch extends Component {
             });
     }
 
-    followUser = (event) => {
-        event.preventDefault();
-
-        alert("Followed!");
-    }
-
-        // API.getUsers()
-        //     .then(res =>
-        //         this.setState({
-        //             users: res.data
-        //         })
-        //     )
-        //     .catch((err) =>
-        //         console.log(err),
-        //         this.setState({
-        //             message: "No users found.",
-        //             users: [],
-        //         }),
-        //     )
-
+    followUser = (id) => {
+        API.followUser(this.props.user.id, id)
+            .then(function(response){
+                console.log(response);
+                alert("Followed!");
+            })
+             .catch((err) =>
+                 console.log(err)
+                )
+    }            
     render() {
         var userId = JSON.parse(localStorage.getItem("user")).id;
         console.log("Render", userId);
@@ -112,9 +102,12 @@ class UserSearch extends Component {
                                     userImage={user.profileImage}
                                     handler={null}
                                 />
-                                <button 
+                                <button
                                     className="btn btn-primary" 
-                                    onClick={this.followUser}
+                                    onClick={(event)=>{
+                                        event.preventDefault();
+                                        this.followUser(user.id)}
+                                    }
                                 >
                                     Follow
                                 </button>

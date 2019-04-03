@@ -139,7 +139,7 @@ export default {
             isFollowing: followUserId
         }
 
-        return axios.post("/api/posts/", data);
+        return axios.post("/api/users/follow/", data);
     },
 
     sharePodcast: function(podcastName, podcastLogo, episodeName, description, audioLink, userMessage, userId) {
