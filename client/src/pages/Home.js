@@ -6,7 +6,7 @@ import PostCard from "../components/PostCard/postCard";
 import { Link } from "react-router-dom";
 import Modal from "react-responsive-modal";
 
-var moment = require("moment");
+let moment = require("moment");
 
 class Home extends Component {
   state = {

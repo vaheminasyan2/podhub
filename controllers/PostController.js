@@ -94,6 +94,7 @@ class PostController {
       .then(dbPostLike => {
         let userIds = dbPostLike.map(like => like.userId);
         console.log(userIds);
+        if(userIds.length){
         db.user
           .findAll({
             where: {
@@ -106,6 +107,10 @@ class PostController {
             let userDetails = dbUser.map(user=>{ return {id: user.id, name: user.name, image: user.profileImage}})
             res.json(userDetails);
           });
+        }
+        else{
+          res.json(userIds);
+        }
       });
   }
 
