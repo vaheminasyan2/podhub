@@ -24,3 +24,10 @@
     padding: 1.2rem 2rem 0.7rem;
     border-radius:15px;
   }
+  #userImageCommentsModal{
+    width: 35px;
+  }
+
+  /* .userComment{
+    margin-left: 5em;
+  } */

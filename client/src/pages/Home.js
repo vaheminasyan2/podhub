@@ -244,16 +244,16 @@ class Home extends Component {
                                             <div
                                                 className="row comment-top-row"
                                             >
-                                                <div className="col-1 mt-0">
+                                                <div className="col-2 mt-0">
                                                     <img
                                                         src={comment.userImage}
                                                         alt="User Icon"
                                                         id="userImageCommentsModal"
-                                                        className="rounded border-white mt-2"
+                                                        className="rounded border-white mt-1"
                                                     />
                                                 </div>
-                                                <div className="col-10">
-                                                    <p>{comment.userName}&nbsp;|&nbsp; {comment.createdAt}</p>
+                                                <div className="col-9">
+                                                    <p>{comment.userName}&nbsp;|&nbsp; {moment(comment.createdAt).format("LLL")}</p>
                                                 </div>
                                                 <div className="col-1">
                                                     <button className="btn btn-sm deleteComment float-right" onClick={() => this.deleteComment(comment.id)}>
@@ -265,7 +265,7 @@ class Home extends Component {
                                             <div
                                                 className="row comment-second-row"
                                             >
-                                                <p className="userComment ml-3">{comment.comment}</p>
+                                                <p className="userComment pl-2 ml-3">{comment.comment}</p>
                                             </div>
                                         </div>
                                     ))}
