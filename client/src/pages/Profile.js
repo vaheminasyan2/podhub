@@ -37,7 +37,7 @@ class Home extends Component {
     });
   }
 
-  // Update profile information if user's change
+  // Update profile information if users change
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.location.state.user.id !== this.props.location.state.user.id) {
 
