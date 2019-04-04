@@ -179,7 +179,7 @@ class Home extends Component {
     API.likePost(postId, this.state.user.id).then(res => {
       //console.log(res.data)
       if (res.data[1] === false) {
-        API.unlikePost(postId).then(res => {
+         API.unlikePost(postId, this.state.user.id).then(res => {
           //console.log(res.data)
         })
       };
