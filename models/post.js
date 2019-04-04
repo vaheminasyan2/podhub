@@ -1,5 +1,11 @@
 module.exports = function(sequelize, DataTypes) {
   var post = sequelize.define("post", {
+
+    podcastId: {
+      type: DataTypes.STRING(2000),
+      allowNull: false
+    },
+
     podcastName: {
       type: DataTypes.STRING(2000),
       allowNull: false
@@ -7,6 +13,11 @@ module.exports = function(sequelize, DataTypes) {
 
     podcastLogo: {
       type: DataTypes.STRING(2000)
+    },
+
+    episodeId: {
+      type: DataTypes.STRING(2000),
+      allowNull: false
     },
 
     episodeName: {

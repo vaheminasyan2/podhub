@@ -1,15 +1,26 @@
 import React from "react";
 import "./postCard.css";
 import Delete from "../../pages/delete.png"
+import { Link } from "react-router-dom";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faComment, faHeart } from '@fortawesome/free-solid-svg-icons'
+import moment from "moment";
 
 library.add(faComment);
 library.add(faHeart);
+
 // POST COMPONENT
 
-function Card({ userPhoto, userName, date, podcastName, podcastLogo, episodeName, description, audioLink, userMessage, likes, comments, postId, handlePostDelete, handleLikeOrUnlike, handleShowLikes, handleShowComments }) {
+function Card({
+  userPhoto, userName, date,
+  podcastId, podcastName, podcastLogo,
+  episodeId, episodeName, description, audioLink,
+  userMessage, likes, comments,
+  postId, handlePostDelete, handleLikeOrUnlike,
+  handleShowLikes, handleShowComments
+}) {
+
   return (
     <div className="container rounded-0 border-top-0 border-left-0 border-right-0 card text-secondary bg-dark" id="top">
       <div className="row" id="post-top-row">
@@ -19,7 +30,7 @@ function Card({ userPhoto, userName, date, podcastName, podcastLogo, episodeName
         </div>
 
         <div className="col-md-10 col-xs-0" id="hide-when-small">
-          <div id="name-and-date">{userName} &nbsp; <strong>-</strong> &nbsp; {date}</div>
+        <div id="name-and-date">{userName} &nbsp; <strong>-</strong> &nbsp; {date}</div>
         </div>
 
         <div className="col-md-1 col-xs-6">
@@ -34,19 +45,48 @@ function Card({ userPhoto, userName, date, podcastName, podcastLogo, episodeName
 
         <div className="col-md-2 col-xs-2 p-0">
           <div id="img-post">
-            <img id="podcastIcon" src={podcastLogo} alt="Podcast Logo" className="border-white" />
+          
+            <Link to={{
+              pathname: "/episodeList",
+              state: {
+                podcastId: podcastId,
+                podcastName: podcastName,
+                podcastLogo: podcastLogo,
+                loadMore: true
+              }
+            }}
+            >
+              <span><img id="podcastIcon" src={podcastLogo} alt="Podcast Logo" className="border-white" /></span>
+            </Link>
+
           </div>
         </div>
 
         <div className="col-md-10 col-xs-10 p-0" id="middle-of-post">
+
+          <Link to={{
+            pathname: "/listen",
+            state: {
+              podcastId: podcastId,
+              podcastName: podcastName,
+              podcastLogo: podcastLogo,
+              episodeId: episodeId,
+              episodeName: episodeName,
+              date: moment(date).format("LLL"),
+              description: description,
+              audioLink: audioLink
+            }
+          }}
+          >
+
           <h4 id="podcast-name-home">{podcastName}</h4>
           <p id="episode-name-home">{episodeName}</p>
           <p id="episode-description-home" className="ellipses">{description}</p>
 
-          <a href={audioLink} />
+            <a href={audioLink} />
+          </Link>
 
         </div>
-
       </div>
 
       <div className="row">
@@ -56,7 +96,6 @@ function Card({ userPhoto, userName, date, podcastName, podcastLogo, episodeName
         </div>
         <div className="col-md-2 col-xs-1"></div>
       </div>
-
 
 
       <div className="row pb-1">
@@ -78,6 +117,7 @@ function Card({ userPhoto, userName, date, podcastName, podcastLogo, episodeName
               {likes}
             </a>
           </div>
+
           <div className="commentDiv">
             <a
               className="comments"

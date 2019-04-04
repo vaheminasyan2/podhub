@@ -286,8 +286,10 @@ class Home extends Component {
                   userPhoto={this.state.user.profileImage}
                   userName={this.state.user.name}
                   date={moment(post.createdAt).format("LLL")}
+                  podcastId={post.podcastId}
                   podcastName={post.podcastName}
                   podcastLogo={post.podcastLogo}
+                  episodeId={post.episodeId}
                   episodeName={post.episodeName}
                   description={post.description}
                   audioLink={post.audioLink}

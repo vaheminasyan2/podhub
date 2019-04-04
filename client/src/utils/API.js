@@ -158,12 +158,14 @@ export default {
         return axios.post("/api/users/follow/", data);
     },
 
-    sharePodcast: function(podcastName, podcastLogo, episodeName, description, audioLink, userMessage, userId) {
+    sharePodcast: function(podcastId, podcastName, podcastLogo, episodeId, episodeName, description, audioLink, userMessage, userId) {
         // console.log(arguments);
 
         let data = {
+            podcastId: podcastId,
             podcastName: podcastName,
             podcastLogo: podcastLogo,
+            episodeId: episodeId,
             episodeName: episodeName,
             description: description,
             audioLink: audioLink,
