@@ -5,7 +5,10 @@ import API from "../utils/API";
 import PostCard from "../components/PostCard/postCard";
 //import { Link } from "react-router-dom";
 import Modal from "react-responsive-modal";
-import "./Home.css"
+import "./Home.css";
+import Delete from "../pages/delete.png";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+//import { faComment, faHeart } from '@fortawesome/free-solid-svg-icons'
 import User from "../components/User/user";
 
 let moment = require("moment");
@@ -15,7 +18,10 @@ class Home extends Component {
         posts: [],
         message: "",
         showLikesModal: false,
+        showCommentsModal: false,
         likes: [],
+        comments: [],
+        currentComment:""
     };
 
     componentDidMount() {
@@ -83,8 +89,7 @@ class Home extends Component {
     handleLikeOrUnlike = postId => {
         API.likePost(postId, this.props.user.id).then(res => {
             //console.log(res.data)
-            if (res.data[1] === false)
-                {
+            if (res.data[1] === false) {
                 API.unlikePost(postId).then(res => {
                     //console.log(res.data)
                 })
@@ -100,6 +105,57 @@ class Home extends Component {
             showLikesModal: false
         });
     };
+
+    handleShowComments = postId => {
+
+        API.getComments(postId).then(res => {
+            console.log(res.data);
+            if (res.data.length === 0) {
+                this.setState({
+                    showCommentsModal: false
+                });
+            }
+            else {
+                this.setState({
+                    comments: res.data,
+                    showCommentsModal: true
+                });
+
+            }
+        });
+    };
+
+    addComment = postId => {
+        API.addComment(this.state.currentComment, postId, this.props.user.id).then(res => {
+            console.log(res.data)
+            this.getPosts();
+            //this.handleShowComments();
+        })
+    }
+
+    deleteComment = (commentId) => {
+        if (window.confirm("Delete post?")) {
+            API.deleteComment(commentId).then(res => {
+                console.log(res.data)
+                this.getPosts();
+                //this.handleShowComments();
+            });
+        }
+    };
+
+
+    closeCommentsModal = () => {
+        this.setState({
+            showCommentsModal: false
+        });
+    };
+
+    handleCommentChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value
+        });
+    }
 
     followUser = (id) => {
         API.followUser(this.props.user.id, id)
@@ -139,6 +195,7 @@ class Home extends Component {
                                         handlePostDelete={this.handlePostDelete}
                                         handleShowLikes={this.handleShowLikes}
                                         handleLikeOrUnlike={this.handleLikeOrUnlike}
+                                        handleShowComments={this.handleShowComments}
                                     />
                                 ))}
 
@@ -175,6 +232,51 @@ class Home extends Component {
                                         </div>
                                     ))}
                                 </Modal>
+
+                                <Modal
+                                    open={this.state.showCommentsModal}
+                                    onClose={this.closeCommentsModal}
+                                    center
+                                >
+                                    {this.state.comments.map(comment => (
+                                        <div className="commentBox rounded border border-top-0 border-left-0 border-right-0 bg-dark text-secondary" key={comment.id}>
+                                            <div
+                                                className="row comment-top-row"
+                                            >
+                                                <div className="col-1 mt-0">
+                                                    <img
+                                                        src={comment.profileImage}
+                                                        alt="User Icon"
+                                                        id="userImageCommentsModal"
+                                                        className="rounded border-white mt-2"
+                                                    />
+                                                </div>
+                                                <div className="col-10">
+                                                    <p>{comment.name}&nbsp;|&nbsp; {comment.createdAt}</p>
+                                                </div>
+                                                <div className="col-1">
+                                                    <button className="btn btn-sm deleteComment float-right" onClick={() => this.deleteComment(comment.id)}>
+                                                        <img src={Delete} alt="delete" className="x" />
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div
+                                                className="row comment-second-row"
+                                            >
+                                                <p className="userComment ml-3">{comment.comment}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+
+                                    <form>
+                                        <div className="form-group mt-4 bg-dark text-secondary">
+                                            <input type="comment" className="form-control" id="commentForm" placeholder="Enter your comment" value={this.state.currentComment} onChange={this.handleCommentChange}/>
+                                        </div>
+                                        <button type="submit" className="btn btn-light btn-sm mb-2" onClick={() => this.addComment(this.props.postId)}>Submit</button>
+                                    </form>
+                                </Modal>
+
                             </Container>
                         )
                         :
