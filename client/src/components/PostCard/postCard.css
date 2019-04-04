@@ -141,17 +141,6 @@ p#episode-name-home {
   margin-top: 0px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
 @media only screen and (max-width: 768px) {
   #hide-when-small {
     display: none;
@@ -166,4 +155,8 @@ p#episode-name-home {
   #post-top-row:after {
     display: none;
   }
+}
+
+.deletePost{
+  color: white
 }

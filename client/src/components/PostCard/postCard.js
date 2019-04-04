@@ -45,13 +45,6 @@ function Card({
         <div className="col-md-10 col-xs-0" id="hide-when-small">
           <div id="name-and-date">{userName} &nbsp; <strong>-</strong> &nbsp; {date}</div>
         </div>
-
-        <div className="col-md-1 col-xs-6">
-          <button className="btn btn-sm deletePost float-right" onClick={() => handlePostDelete(postId)}>
-            <img src={Delete} alt="delete" className="x" />
-          </button>
-        </div>
-
       </div>
 
       <div className="row" id="second-row-post">
@@ -143,7 +136,17 @@ function Card({
             </a>
           </div>
         </div>
-        <div className="col-md-7 col-sm-7"></div>
+        <div className="col-md-7 col-sm-7">
+        {userId === JSON.parse(localStorage.getItem("user")).id
+          ?
+          
+          <button className="btn btn-sm deletePost float-right" onClick={() => handlePostDelete(postId)}>
+            Delete
+          </button>
+        
+        : null
+          }
+        </div>
 
       </div>
     </div>

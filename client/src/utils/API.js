@@ -20,6 +20,18 @@ export default {
         return axios.delete("/api/posts/unlike/" + postId + "/" + userId)
     },
 
+    likeComment: function (commentId, userId) {
+        let data = {
+            commentId: commentId,
+            userId: userId
+        }
+        return axios.post("/api/comments/commentLikes/", data)
+    },
+
+    unlikePost: function (commentId,userId) {
+        return axios.delete("/api/comments/commentUnlikes/" + commentId + "/" + userId)
+    },
+
     getComments: function (postId) {
         return axios.get("/api/comments/commentedUserLikes/" + postId)
     },

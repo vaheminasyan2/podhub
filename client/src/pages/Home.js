@@ -7,9 +7,13 @@ import PostCard from "../components/PostCard/postCard";
 import Modal from "react-responsive-modal";
 import "./Home.css";
 import Delete from "../pages/delete.png";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-//import { faComment, faHeart } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faComment, faHeart } from '@fortawesome/free-solid-svg-icons'
 import User from "../components/User/user";
+import { library } from '@fortawesome/fontawesome-svg-core'
+library.add(faComment);
+library.add(faHeart);
+
 
 let moment = require("moment");
 
@@ -21,7 +25,7 @@ class Home extends Component {
         showCommentsModal: false,
         likes: [],
         comments: [],
-        currentComment: ""
+        currentComment: "",
     };
 
     componentDidMount() {
@@ -90,7 +94,7 @@ class Home extends Component {
         API.likePost(postId, this.props.user.id).then(res => {
             //console.log(res.data)
             if (res.data[1] === false) {
-                API.unlikePost(postId,this.props.user.id).then(res => {
+                API.unlikePost(postId, this.props.user.id).then(res => {
                     //console.log(res.data)
                 })
             };
@@ -106,13 +110,25 @@ class Home extends Component {
         });
     };
 
+    handleCommentLikeOrUnlike = commentId => {
+        API.likeComment(commentId, this.props.user.id).then(res =>{
+            if (res.data[1] === false) {
+                API.unlikeComment(commentId, this.props.user.id).then(res => {
+                    console.log(res.data)
+                })
+            };
+            this.getPosts();
+            this.getComments();
+        })
+    }
+
     handleShowComments = postId => {
 
         API.getComments(postId).then(res => {
             console.log(res.data);
             if (res.data.length === 0) {
                 this.setState({
-                    showCommentsModal: false
+                    showCommentsModal: true
                 });
             }
             else {
@@ -129,7 +145,8 @@ class Home extends Component {
         API.addComment(this.state.currentComment, postId, this.props.user.id).then(res => {
             console.log(res.data)
             this.getPosts();
-            //this.handleShowComments();
+            this.handleShowComments();
+            this.closeCommentsModal();
         })
     }
 
@@ -138,7 +155,8 @@ class Home extends Component {
             API.deleteComment(commentId).then(res => {
                 console.log(res.data)
                 this.getPosts();
-                //this.handleShowComments();
+                this.handleShowComments();
+                this.closeCommentsModal();
             });
         }
     };
@@ -150,25 +168,26 @@ class Home extends Component {
         });
     };
 
-    handleCommentChange = event => {
+    handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
             [name]: value
         });
-    }
+    };
 
     followUser = (id) => {
         API.followUser(this.props.user.id, id)
-            .then(function(response){
+            .then(function (response) {
                 console.log(response);
                 alert("Followed!");
             })
-             .catch((err) =>
-                 console.log(err)
-                )
-    }            
+            .catch((err) =>
+                console.log(err)
+            )
+    }
 
     render() {
+        console.log(this.state.currentComment)
         return (
             <div className="container bg-dark rounded" id="post-container">
                 <Row>
@@ -221,13 +240,14 @@ class Home extends Component {
                                             <div className="col-9">
                                                 <p>{like.name}</p>
                                                 <button
-                                                    className="btn btn-outline-light bPosition" 
-                                                     onClick={(event)=>{
-                                                     event.preventDefault();
-                                                    this.followUser(like.id)}
-                                                 }
-                                                 >
-                                                 Follow
+                                                    className="btn btn-outline-light bPosition"
+                                                    onClick={(event) => {
+                                                        event.preventDefault();
+                                                        this.followUser(like.id)
+                                                    }
+                                                    }
+                                                >
+                                                    Follow
                                                 </button>
                                             </div>
                                         </div>
@@ -244,37 +264,61 @@ class Home extends Component {
                                             <div
                                                 className="row comment-top-row"
                                             >
-                                                <div className="col-1 mt-0">
+                                                <div className="col-2 mt-0">
                                                     <img
                                                         src={comment.userImage}
                                                         alt="User Icon"
                                                         id="userImageCommentsModal"
-                                                        className="rounded border-white mt-2"
+                                                        className="rounded border-white mt-1"
                                                     />
                                                 </div>
                                                 <div className="col-10">
-                                                    <p>{comment.userName}&nbsp;|&nbsp; {comment.createdAt}</p>
-                                                </div>
-                                                <div className="col-1">
-                                                    <button className="btn btn-sm deleteComment float-right" onClick={() => this.deleteComment(comment.id)}>
-                                                        <img src={Delete} alt="delete" className="x" />
-                                                    </button>
+                                                    <p>{comment.userName}&nbsp;|&nbsp; {moment(comment.createdAt).format("LLL")}</p>
                                                 </div>
                                             </div>
 
                                             <div
                                                 className="row comment-second-row"
                                             >
-                                                <p className="userComment ml-3">{comment.comment}</p>
+                                                <p className="userComment pl-2 ml-3">{comment.comment}</p>
+                                            </div>
+                                            <div className="row comment-third-row">
+                                            <div className="col-4 mb-2">
+                                                <a
+                                                    className="likes ml-4"
+                                                onClick={() => this.handleCommentLikeOrUnlike(comment.id)}
+                                                >
+                                                    <FontAwesomeIcon icon="heart" />
+                                                </a>
+                                                <a
+                                                    className="likesNumber"
+                                                // onClick={() => handleShowLikes(postId)}
+                                                >
+                                                    {comment.numberOfLikes}
+                                                </a>
+                                                </div>
+                                                {this.props.user.id === comment.commentedBy
+                                                    ?
+                                                <div className="col-8">
+                                                <button className="btn btn-sm deleteComment float-right" onClick={() => this.deleteComment(comment.id)}>
+                                                    Delete
+                                                </button>
+                                                </div>
+                                                          : null
+                                                        }
                                             </div>
                                         </div>
                                     ))}
 
                                     <form>
                                         <div className="form-group mt-4 bg-dark text-secondary">
-                                            <input type="comment" className="form-control" id="commentForm" placeholder="Enter your comment" value={this.state.currentComment} onChange={this.handleCommentChange}/>
+                                            <input type="text" className="form-control" id="commentForm"
+                                                defaultValue=""
+                                                placeholder="Enter your comment" ref={this.state.currentComment} onChange={this.handleInputChange} />
                                         </div>
-                                        <button type="submit" className="btn btn-light btn-sm mb-2" onClick={() => this.addComment(this.props.postId)}>Submit</button>
+                                        <button type="submit" className="btn btn-light btn-sm mb-2" onClick={(event) => { event.preventDefault(); this.addComment(this.props.postId) }
+                                        }
+                                        >Submit</button>
                                     </form>
                                 </Modal>
 
