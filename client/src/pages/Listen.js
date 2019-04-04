@@ -127,10 +127,10 @@ class Listen extends Component {
 
 
     // Activates pop-out window with podcast audio
-    togglePortal = event => {
+    showPortal = event => {
         event.preventDefault();
         this.setState({
-            showPortal: !this.state.showPortal
+            showPortal: true
         });
     }
 
@@ -198,7 +198,7 @@ class Listen extends Component {
                         <div className="center-block" id="buttons-listen">
                             <button className="btn btn-primary" onClick={this.handleShowModal}>Share</button>
                             <button className="btn btn-danger" onClick={this.addToFavorites}>Favorite</button>
-                            <button className="btn btn-dark" onClick={this.togglePortal}>Open Portal</button>
+                            <button className="btn btn-dark" onClick={this.showPortal}>Open Portal</button>
                         </div>
                     </div>
                     <div className="col-md-3 col-xs-0"></div>
@@ -217,12 +217,6 @@ class Listen extends Component {
                         />
 
                         <br />
-                        <button
-                            className="btn btn-primary"
-                            onClick={this.togglePortal}
-                        >
-                            Close
-                        </button>
                     </Portal>
                 )}
 
