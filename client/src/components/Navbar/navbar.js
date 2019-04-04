@@ -102,12 +102,12 @@ function Navbar({ podcastSearch, handleInputChange, hidePodcasts, logout, user, 
           </form>
         </ul>
 
-        <GoogleLogout
-          buttonText="Logout"
-          onLogoutSuccess={logout}
-          className="googleButton"
+        <button
+          onClick={logout}
+          className="logoutButton btn btn-dark"
         >
-        </GoogleLogout>
+        Logout
+        </button>
 
       </div>
             </div>
