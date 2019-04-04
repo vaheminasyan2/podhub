@@ -13,11 +13,11 @@
     margin-top: 10%;
 }
 
-.tile{	.tile{
-    width: 250px;	    width: 250px;
-    border-radius : 25px;	    border-radius : 25px;
+.tile{
+    width: 250px;
+    border-radius : 25px;
     height:200px;	
-}	}
+}
 
 
 flexRow{	
