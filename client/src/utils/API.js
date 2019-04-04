@@ -21,7 +21,7 @@ export default {
     },
 
     getComments: function (postId) {
-        return axios.get("/api/comments/" + postId)
+        return axios.get("/api/comments/commentedUserLikes/" + postId)
     },
 
     addComment: function (comment, postId, userId) {

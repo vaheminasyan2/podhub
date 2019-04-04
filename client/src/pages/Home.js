@@ -246,14 +246,14 @@ class Home extends Component {
                                             >
                                                 <div className="col-1 mt-0">
                                                     <img
-                                                        src={comment.profileImage}
+                                                        src={comment.userImage}
                                                         alt="User Icon"
                                                         id="userImageCommentsModal"
                                                         className="rounded border-white mt-2"
                                                     />
                                                 </div>
                                                 <div className="col-10">
-                                                    <p>{comment.name}&nbsp;|&nbsp; {comment.createdAt}</p>
+                                                    <p>{comment.userName}&nbsp;|&nbsp; {comment.createdAt}</p>
                                                 </div>
                                                 <div className="col-1">
                                                     <button className="btn btn-sm deleteComment float-right" onClick={() => this.deleteComment(comment.id)}>

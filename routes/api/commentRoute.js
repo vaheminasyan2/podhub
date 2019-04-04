@@ -21,7 +21,7 @@ router.post("/commentLikes", (req, res) => controller.createCommentLikes(req, re
  * @param {*} req
  * @param {*} res
  */
-router.get("/getCommentedUser/:id", (req, res) => controller.getCommentedUser(req, res));
+router.get("/commentedUserLikes/:id", (req, res) => controller.getCommentedUser(req, res));
 
 /**
  * Route to update the existing comment
