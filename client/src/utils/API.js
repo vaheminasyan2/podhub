@@ -4,20 +4,37 @@ import axios from "axios";
 export default {
 
     // Show users how liked the post
-    getLikes: function(postId) {
+    getLikes: function (postId) {
         return axios.get("/api/posts/getUsersLikedPost/" + postId)
     },
 
-    likePost: function(postId, userId) {
+    likePost: function (postId, userId) {
         let data = {
             postId: postId,
-            userId:userId
+            userId: userId
         }
-        return axios.post("/api/posts/like/", data )
+        return axios.post("/api/posts/like/", data)
     },
 
-    unlikePost: function(postId) {
+    unlikePost: function (postId) {
         return axios.delete("/api/posts/unlike/" + postId)
+    },
+
+    getComments: function (postId) {
+        return axios.get("/api/comments/" + postId)
+    },
+
+    addComment: function (comment, postId, userId) {
+        let data = {
+            comment:comment,
+            commentedBy:userId,
+            postId:postId
+        }
+        return axios.post("/api/comments/", data)
+    },
+
+    deleteComment: function (commentId) {
+        return axios.delete("/api/comments/" + commentId)
     },
 
     // Gets all posts for specific user
@@ -26,14 +43,14 @@ export default {
     },
 
     getPostsOnlyByUser: function (userId) {
-        return axios.get("/api/posts/getPostsOnlyByUser/"+userId);
+        return axios.get("/api/posts/getPostsOnlyByUser/" + userId);
     },
 
     getUsers: function (user) {
         return axios.get("api/getUsers", user)
     },
 
- // Gets all episodes for a particular podcast
+    // Gets all episodes for a particular podcast
     getPodcasts: function (podcast) {
         var URL = "https://listennotes.p.rapidapi.com/api/v1/search?sort_by_date=0&type=podcast&only_in=title&language=English&q=" + podcast;
 
@@ -66,10 +83,10 @@ export default {
             return axios.get(URL, { 'headers': { 'X-RapidAPI-Key': "a063bce4f1msh0a4f44209d57a2fp1225adjsn3f80cc1cf1bb" } })
                 .then((response => {
                     numEpisodes = response.data.episodes.length;
-                    
+
                     if (numEpisodes > 0 && episodes.length < limit) {
 
-                        pagination = response.data.episodes[numEpisodes-1].pub_date_ms;
+                        pagination = response.data.episodes[numEpisodes - 1].pub_date_ms;
                         return request(podcastId, pagination, episodes.concat(response.data.episodes));
 
                     } else {
@@ -89,19 +106,19 @@ export default {
     },
 
     getFollowers: function (userId) {
-        return axios.get("/api/users/followedBy/"+userId);
+        return axios.get("/api/users/followedBy/" + userId);
     },
 
     getFollowing: function (userId) {
-        return axios.get("/api/users/isFollowing/"+userId);
+        return axios.get("/api/users/isFollowing/" + userId);
     },
 
     getFavorites: function (id) {
-        return axios.get("/api/favorites/"+id);
+        return axios.get("/api/favorites/" + id);
     },
 
     handleFavoriteDelete: function (id) {
-        console.log("api",id)
+        console.log("api", id)
         return axios.delete("/api/favorites/delete/" + id);
     },
 
@@ -109,7 +126,7 @@ export default {
         return axios.delete("/api/posts/delete/" + id);
     },
 
-    addEpisodeToFavorites: function(episodeId) {
+    addEpisodeToFavorites: function (episodeId) {
         // add episode to user's favorite episodes
         return episodeId;
     },
@@ -119,7 +136,7 @@ export default {
     //     return podcastId;
     // },
 
-    addPodcastToFavorites: function(podcastId, podcastName, podcastLogo, episodeId, episodeName, date, description, audioLink, userId) {
+    addPodcastToFavorites: function (podcastId, podcastName, podcastLogo, episodeId, episodeName, date, description, audioLink, userId) {
         // console.log(arguments);
 
         let data = {
@@ -138,16 +155,16 @@ export default {
         return axios.post("/api/favorites/", data);
     },
 
-    getFollowingsPosts: function(userId) {
+    getFollowingsPosts: function (userId) {
         // Get all user and user followings posts latest-first 
         return axios.get("/api/users/" + userId + "/followings/posts");
     },
 
-    getUsersToFollow: function(userId){
-        return axios.get("/api/users/" + userId );
+    getUsersToFollow: function (userId) {
+        return axios.get("/api/users/" + userId);
     },
 
-    followUser: function(userId, followUserId) {
+    followUser: function (userId, followUserId) {
         // console.log(arguments);
 
         let data = {
@@ -158,7 +175,7 @@ export default {
         return axios.post("/api/users/follow/", data);
     },
 
-    sharePodcast: function(podcastName, podcastLogo, episodeName, description, audioLink, userMessage, userId) {
+    sharePodcast: function (podcastName, podcastLogo, episodeName, description, audioLink, userMessage, userId) {
         // console.log(arguments);
 
         let data = {
