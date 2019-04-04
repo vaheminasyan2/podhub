@@ -47,11 +47,31 @@ class UserSearch extends Component {
     }
 
     getUsers = () => {
+        var usersToRender = [];
+        var followings = [];
         API.getUsersToFollow(this.props.user.id)
             .then(res => {
-                this.setState({
-                    allUsers: res.data
-                });
+                usersToRender = res.data;
+                console.log("users", res.data);
+                API.getUsersFollowed(this.props.user.id)
+                    .then(res => {
+                        followings = res.data;
+                        console.log("followings", res.data);
+                        usersToRender.forEach(user => {
+                            user["follow"] = false;
+                            followings.forEach(element => {
+                                if(user.id === element.id)
+                                {
+                                    user["follow"] = true;
+                                    return;
+                                }
+                            });
+                        });
+                        this.setState({
+                            allUsers: usersToRender
+                        });
+                        console.log(usersToRender);
+                    })
             })
             .catch(() => {
                 this.setState({
@@ -62,15 +82,42 @@ class UserSearch extends Component {
     }
 
     followUser = (id) => {
+        let that = this;
         API.followUser(this.props.user.id, id)
-            .then(function(response){
+            .then(function(response) {
                 console.log(response);
-                alert("Followed!");
+                var users = that.state.users;
+                users.forEach(element => {
+                    if(element.id === id)
+                    {
+                        element.follow = true;
+                    }        
+                });
+                that.setState({users: users});
             })
              .catch((err) =>
                  console.log(err)
                 )
-    }            
+    }    
+    unFollowUser = (id) => {
+        let that = this;
+        API.unFollowUser(this.props.user.id, id)
+            .then(function(response){
+                console.log(response);
+                var users = that.state.users;
+                users.forEach(element => {
+                    if(element.id === id)
+                    {
+                        element.follow = false;
+                    }        
+                });
+                that.setState({users: users});
+            })
+             .catch((err) =>
+                 console.log(err)
+                )
+    }        
+
     render() {
         var userId = JSON.parse(localStorage.getItem("user")).id;
         console.log("Render", userId);
@@ -102,15 +149,28 @@ class UserSearch extends Component {
                                     userImage={user.profileImage}
                                     handler={null}
                                 />
-                                <button
+                                {user.follow?(
+                                    <button
+                                    className="btn btn-outline-light buttonPosition" 
+                                    onClick={(event)=>{
+                                        event.preventDefault();
+                                        this.unFollowUser(user.id)}
+                                    }
+                                    >
+                                    Unfollow
+                                    </button>
+                                ):(
+                                    <button
                                     className="btn btn-outline-light buttonPosition" 
                                     onClick={(event)=>{
                                         event.preventDefault();
                                         this.followUser(user.id)}
                                     }
-                                >
+                                    >
                                     Follow
-                                </button>
+                                    </button>
+                                )}
+                                
                             </div>
                         ))}
                     </ul>

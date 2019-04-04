@@ -164,7 +164,11 @@ export default {
         return axios.get("/api/users/" + userId);
     },
 
-    followUser: function (userId, followUserId) {
+    getUsersFollowed: function(userId){
+        return axios.get("/api/users/followings/" + userId );
+    },
+
+    followUser: function(userId, followUserId) {
         // console.log(arguments);
 
         let data = {
@@ -174,7 +178,18 @@ export default {
 
         return axios.post("/api/users/follow/", data);
     },
-  
+
+    unFollowUser: function(userId, followUserId) {
+        // console.log(arguments);
+
+        let data = {
+            "followedBy": userId,
+            "isFollowing": followUserId
+        }
+        console.log(data);
+        return axios.post("/api/users/unfollow", data);
+    },
+
     sharePodcast: function(podcastId, podcastName, podcastLogo, episodeId, episodeName, description, audioLink, userMessage, userId) {
         // console.log(arguments);
 

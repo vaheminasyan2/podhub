@@ -11,14 +11,6 @@ router.get("/:id", (req, res) => {
     controller.getUsersList(req, res);
 });
 
-/**
- * Route to follow a user
- * @param {*} req
- * @param {*} res
- */
-router.post("/follow", (req, res) => {
-    controller.postFollowUser(req, res);
-});
 
 /**
  * Route to create a new user in database or get userDetails by userId for exisiting user
@@ -41,11 +33,19 @@ router.get("/isFollowing/:id", (req, res) => {
 });
 
 /**
- * Route to get followedBy by userId from database
+ * Route to get followedBy by users count
  * @param {*} req
  * @param {*} res
  */
 router.get("/followedBy/:id", (req, res) => controller.findFollowedBy(req, res));
+
+/**
+ * Route to get followings by user
+ * @param {*} req
+ * @param {*} res
+ */
+router.get("/followings/:id", (req, res) => controller.findFollowings(req, res));
+
 
 /**
  * Route to update the existing user
@@ -74,5 +74,21 @@ router.get("/:id/posts", (req, res) => controller.getPosts(req, res));
  * @param {*} res
  */
 router.get("/:id/followings/posts", (req, res) => controller.getFollowingsPosts(req, res));
+
+/**
+ * Route to follow a user
+ * @param {*} req
+ * @param {*} res
+ */
+router.post("/follow", (req, res) => {
+    controller.postFollowUser(req, res);
+});
+
+/**
+ * Route to remove user follow link - unfollow
+ * @param {*} req
+ * @param {*} res
+ */
+router.post("/unfollow", (req, res) => controller.unFollow(req, res));
 
 module.exports = router;

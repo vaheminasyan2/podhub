@@ -31,6 +31,19 @@ class UserController {
   }
 
   /**
+   * Remove following in database <----- user Search Page ----->
+   * @param {*} req
+   * @param {*} res
+   */
+  unFollow(req, res){
+    console.log(req.body);
+    db.follow.destroy({ 
+      where: req.body
+    }).then(following => res.json(following));
+  }
+
+
+  /**
    * Get the isFollowing by userId from database <----- user Profile Page ----->
    * @param {*} req
    * @param {*} res
@@ -67,6 +80,19 @@ class UserController {
     db.follow
       .findAll({ where: { isFollowing: req.params.id } })
       .then(dbfollow => res.json([{ count: dbfollow.length }]));
+  }
+
+  /**
+   * Get followings by user <----- user Search Page ----->
+   * @param {*} req
+   * @param {*} res
+   */
+  findFollowings(req, res){
+    db.user.findByPk(req.params.id).then(function(user) {
+      user.getFollowedBy().then(function(users){
+        res.json(users)
+      });
+    })
   }
 
   /**
