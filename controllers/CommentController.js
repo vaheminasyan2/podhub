@@ -22,6 +22,57 @@ class CommentController {
     db.commentLike.findOrCreate({ where: req.body }).then(commentLike => res.json(commentLike));
   }
 
+
+  /**
+   * get users who commented post and the post likes.
+   * @param {*} req
+   * @param {*} res
+   */
+  getCommentedUser(req, res){
+    var postPromises =[];
+    var commentLikes = {};
+    var commentuserName = {};
+    var commentuserImage = {};
+    db.post.findByPk(
+      req.params.id 
+  ).then(function(dbUser){
+      dbUser.getComments().then(function (comments) {
+        const sortedComments = comments.sort(function(a, b) {
+          if (a.updatedAt < b.updatedAt) return -1;
+          if (a.updatedAt > b.updatedAt) return 1;
+          return 0;
+        });
+        sortedComments.forEach(comment => {
+          const userDetailsPromise = db.user.findByPk(comment.commentedBy);
+          const commentLikePromise = comment.getCommentLikes();
+          postPromises.push(userDetailsPromise);
+          postPromises.push(commentLikePromise);
+          
+          userDetailsPromise.then(function(user){
+            commentuserName[comment.id] = user.name;
+            commentuserImage[comment.id] = user.profileImage;
+          })
+          commentLikePromise.then(function(likes) {
+            commentLikes[comment.id] = likes.length;
+          });
+        });
+
+        Promise.all(postPromises).then(function() {
+          sortedComments.forEach(comment => {
+            comment.dataValues.numberOfLikes = commentLikes[comment.id];
+            comment.dataValues.userName = commentuserName[comment.id];
+            comment.dataValues.userImage = commentuserImage[comment.id];
+          });
+          console.log(sortedComments)
+          res.json(sortedComments);
+        })
+      }).catch(function(error) {
+        res.status(400);
+      })
+
+    })
+  }
+ 
   /**
    * Update the comment in database
    * @param {*} req
