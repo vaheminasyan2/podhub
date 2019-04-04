@@ -27,3 +27,7 @@
   #userImageCommentsModal{
     width: 35px;
   }
+
+  .deleteComment{
+    color: blueviolet
+  }
