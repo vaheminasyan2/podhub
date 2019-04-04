@@ -6,7 +6,7 @@ const controller = new CommentController();
  * Route to create a new comment in database
  * @param {*} req
  * @param {*} res
- */
+*/
 router.post("/", (req, res) => controller.createComment(req, res));
 
 /**
@@ -15,6 +15,13 @@ router.post("/", (req, res) => controller.createComment(req, res));
  * @param {*} res
  */
 router.post("/commentLikes", (req, res) => controller.createCommentLikes(req, res));
+
+/**
+ * Get users who commented post
+ * @param {*} req
+ * @param {*} res
+ */
+router.get("/commentedUserLikes/:id", (req, res) => controller.getCommentedUser(req, res));
 
 /**
  * Route to update the existing comment
