@@ -178,8 +178,9 @@ class Home extends Component {
                                 {this.state.posts.map(post => (
                                     <PostCard
                                         key={post.id}
-                                        userPhoto={post.userImage}
+                                        userId={post.postedBy}
                                         userName={post.userName}
+                                        userImage={post.userImage}
                                         date={moment(post.createdAt).format("LLL")}
                                         podcastId={post.podcastId}
                                         podcastName={post.podcastName}

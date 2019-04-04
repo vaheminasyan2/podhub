@@ -13,24 +13,37 @@ library.add(faHeart);
 // POST COMPONENT
 
 function Card({
-  userPhoto, userName, date,
+  userId, userName, userImage, date,
   podcastId, podcastName, podcastLogo,
   episodeId, episodeName, description, audioLink,
   userMessage, likes, comments,
   postId, handlePostDelete, handleLikeOrUnlike,
   handleShowLikes, handleShowComments, handleClick
 }) {
-  
+
   return (
     <div className="container rounded-0 border-top-0 border-left-0 border-right-0 card text-secondary bg-dark" id="top">
       <div className="row" id="post-top-row">
 
         <div className="col-md-1 col-xs-1">
-          <img id="profileImage" src={userPhoto} alt="User" />
+          <Link
+            to={{
+              pathname: "/profile",
+              state: {
+                user: {
+                  id: userId,
+                  name: userName,
+                  profileImage: userImage
+                }
+              }
+            }}
+          >
+            <img id="profileImage" src={userImage} alt="User" />
+          </Link>
         </div>
 
         <div className="col-md-10 col-xs-0" id="hide-when-small">
-        <div id="name-and-date">{userName} &nbsp; <strong>-</strong> &nbsp; {date}</div>
+          <div id="name-and-date">{userName} &nbsp; <strong>-</strong> &nbsp; {date}</div>
         </div>
 
         <div className="col-md-1 col-xs-6">
@@ -45,7 +58,7 @@ function Card({
 
         <div className="col-md-2 col-xs-2 p-0">
           <div id="img-post">
-          
+
             <Link to={{
               pathname: "/episodeList",
               state: {
@@ -79,9 +92,9 @@ function Card({
           }}
           >
 
-          <h4 id="podcast-name-home">{podcastName}</h4>
-          <p id="episode-name-home">{episodeName}</p>
-          <p id="episode-description-home" className="ellipses">{description}</p>
+            <h4 id="podcast-name-home">{podcastName}</h4>
+            <p id="episode-name-home">{episodeName}</p>
+            <p id="episode-description-home" className="ellipses">{description}</p>
 
             <a href={audioLink} />
           </Link>
@@ -108,7 +121,7 @@ function Card({
               className="likes"
               onClick={() => handleLikeOrUnlike(postId)}
             >
-              <FontAwesomeIcon icon="heart"/>
+              <FontAwesomeIcon icon="heart" />
             </a>
             <a
               className="likesNumber"
