@@ -245,7 +245,7 @@ class Home extends Component {
                                                 className="row comment-top-row"
                                             >
                                                 <div className="col-1 mt-0">
-                                                    <img	                                                   
+                                                    <img
                                                         src={comment.userImage}
                                                         alt="User Icon"
                                                         id="userImageCommentsModal"
