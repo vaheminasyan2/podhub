@@ -37,7 +37,7 @@ class Home extends Component {
     });
   }
 
-  // Update profile information if users change
+  // Update profile information if user's change
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.location.state.user.id !== this.props.location.state.user.id) {
 
@@ -252,6 +252,7 @@ class Home extends Component {
                       <img src={Delete} alt="delete" className="size" />
                     </button>
 
+                    <p>{favorite.episodeName}</p>
                     <p>{moment(favorite.createdAt).format("LLL")}</p>
 
                     {/* <p>{favorite.podcastName}</p> */}
