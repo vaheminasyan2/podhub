@@ -21,7 +21,7 @@ class Home extends Component {
         showCommentsModal: false,
         likes: [],
         comments: [],
-        currentComment:""
+        currentComment: ""
     };
 
     componentDidMount() {
