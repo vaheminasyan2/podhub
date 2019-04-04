@@ -23,7 +23,7 @@ router.post("/", (req, res) => {
 });
 
 /**
- * Route to get isFollowing by userId from database
+ * Route to get isFollowing by userId from database <----- user Profile Page ----->
  * @param {*} req
  * @param {*} res
  */
@@ -33,11 +33,29 @@ router.get("/isFollowing/:id", (req, res) => {
 });
 
 /**
- * Route to get followedBy by users count
+ * Route to get followedBy by users count <----- user Profile Page ----->
  * @param {*} req
  * @param {*} res
  */
 router.get("/followedBy/:id", (req, res) => controller.findFollowedBy(req, res));
+
+
+/**
+ * Route to get isFollowing userDetails from database <----- user Profile Page ----->
+ * @param {*} req
+ * @param {*} res
+ */
+router.get("/isFollowingUsers/:id", (req, res) => {
+    console.log(req.params)
+    controller.findIsFollowingUser(req, res)
+});
+
+/**
+ * Route to get followedBy userDetails <----- user Profile Page ----->
+ * @param {*} req
+ * @param {*} res
+ */
+router.get("/followedByUsers/:id", (req, res) => controller.findFollowedByUser(req, res));
 
 /**
  * Route to get followings by user
