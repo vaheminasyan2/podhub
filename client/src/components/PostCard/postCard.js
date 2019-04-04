@@ -117,8 +117,7 @@ function Card({
               {likes}
             </a>
           </div>
-        </div>
-        <div>
+
           <div className="commentDiv">
             <a
               className="comments"
