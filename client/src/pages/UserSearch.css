@@ -19,19 +19,19 @@
     height:200px;
 }
 
-flexRow{	
+.flexRow{
     display:flex;
     flex-direction: row;
 }
 
-.buttonPosition {	
+.buttonPosition{
     position: relative;
-    left: 60%;	
-    bottom: 70%;	
+    left: 60%;
+    bottom: 70%;
     border-radius: 50px;
 }
 
- .searchName{
+.searchName{
     font-size: 12pt;
     color: white;
     width: 200px;
