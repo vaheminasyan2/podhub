@@ -43,7 +43,7 @@ router.post("/like", (req, res) => controller.createLikes(req, res));
  * @param {*} req
  * @param {*} res
  */
-router.delete("/unlike/:postId", (req, res) => controller.removeLikes(req, res));
+router.delete("/unlike/:postId/:userId", (req, res) => controller.removeLikes(req, res));
 
 
 /**
