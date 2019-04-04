@@ -18,9 +18,9 @@ function Card({
   episodeId, episodeName, description, audioLink,
   userMessage, likes, comments,
   postId, handlePostDelete, handleLikeOrUnlike,
-  handleShowLikes, handleShowComments
+  handleShowLikes, handleShowComments, handleClick
 }) {
-
+  
   return (
     <div className="container rounded-0 border-top-0 border-left-0 border-right-0 card text-secondary bg-dark" id="top">
       <div className="row" id="post-top-row">
@@ -108,7 +108,7 @@ function Card({
               className="likes"
               onClick={() => handleLikeOrUnlike(postId)}
             >
-              <FontAwesomeIcon icon="heart" />
+              <FontAwesomeIcon icon="heart"/>
             </a>
             <a
               className="likesNumber"
