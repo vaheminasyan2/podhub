@@ -24,21 +24,36 @@ class Home extends Component {
     redirect: false
   };
 
+  // Load user profile information
   componentDidMount() {
-    // console.log(this.props);
+
+    this.getFavorites();
+    this.getPostsOnlyByUser();
+    this.getFollowers();
+    this.getFollowing();
 
     this.setState({
       user: this.props.location.state.user
-    }, () => {
-      this.getPostsOnlyByUser();
-      this.getFavorites();
-      this.getFollowers();
-      this.getFollowing();
     });
   }
 
+  // Update profile information if user's change
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.location.state.user.id !== this.props.location.state.user.id) {
+
+      this.getFavorites();
+      this.getPostsOnlyByUser();
+      this.getFollowers();
+      this.getFollowing();
+  
+      this.setState({
+        user: this.props.location.state.user
+      });
+    }
+}
+
   getPostsOnlyByUser = () => {
-    API.getPostsOnlyByUser(this.state.user.id)
+    API.getPostsOnlyByUser(this.props.location.state.user.id)
       .then(res => {
         if (res.data.length === 0) {
           this.setState({
@@ -60,7 +75,7 @@ class Home extends Component {
   };
 
   getFavorites = () => {
-    API.getFavorites(this.state.user.id)
+    API.getFavorites(this.props.location.state.user.id)
       .then(res => {
         if (res.data.length === 0) {
           this.setState({
@@ -84,7 +99,7 @@ class Home extends Component {
   };
 
   getOrCreateUser = () => {
-    API.getOrCreateUser(this.state.user.id).then(res => {
+    API.getOrCreateUser(this.props.location.state.user.id).then(res => {
       this.setState({
         user: res.data
       });
@@ -92,7 +107,7 @@ class Home extends Component {
   };
 
   getFollowers = () => {
-    API.getFollowers(this.state.user.id)
+    API.getFollowers(this.props.location.state.user.id)
       .then(res => {
         this.setState({
           followers: res.data[0].count
@@ -106,7 +121,7 @@ class Home extends Component {
   };
 
   getFollowing = () => {
-    API.getFollowing(this.state.user.id)
+    API.getFollowing(this.props.location.state.user.id)
       .then(res => {
         this.setState({
           following: res.data[0].count
