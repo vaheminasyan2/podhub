@@ -169,6 +169,7 @@ class Home extends Component {
     }            
 
     render() {
+        console.log(this.state.currentComment)
         return (
             <div className="container bg-dark rounded" id="post-container">
                 <Row>
@@ -255,11 +256,15 @@ class Home extends Component {
                                                 <div className="col-9">
                                                     <p>{comment.userName}&nbsp;|&nbsp; {moment(comment.createdAt).format("LLL")}</p>
                                                 </div>
+                                                {this.props.user.id === comment.commentedBy 
+                                                ?
                                                 <div className="col-1">
                                                     <button className="btn btn-sm deleteComment float-right" onClick={() => this.deleteComment(comment.id)}>
                                                         <img src={Delete} alt="delete" className="x" />
                                                     </button>
                                                 </div>
+                                               : null
+                                            }
                                             </div>
 
                                             <div
@@ -272,9 +277,13 @@ class Home extends Component {
 
                                     <form>
                                         <div className="form-group mt-4 bg-dark text-secondary">
-                                            <input type="text" className="form-control" id="commentForm" placeholder="Enter your comment" value={this.state.currentComment} onChange={this.handleInputChange}/>
+                                            <input type="text" className="form-control" id="commentForm"
+                                            defaultValue=""
+                                            placeholder="Enter your comment" ref={this.state.currentComment} onChange={this.handleInputChange}/>
                                         </div>
-                                        <button type="submit" className="btn btn-light btn-sm mb-2" onClick={() => this.addComment(this.props.postId)}>Submit</button>
+                                        <button type="submit" className="btn btn-light btn-sm mb-2" onClick={(event) => {event.preventDefault(); this.addComment(this.props.postId)}
+                                        }
+                                        >Submit</button>
                                     </form>
                                 </Modal>
 
