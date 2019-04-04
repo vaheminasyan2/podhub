@@ -187,7 +187,7 @@ class Home extends Component {
     }
 
     render() {
-        console.log(this.state.currentComment)
+        //console.log(this.state.currentComment)
         return (
             <div className="container bg-dark rounded" id="post-container">
                 <Row>

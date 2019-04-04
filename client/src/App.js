@@ -174,10 +174,10 @@ class App extends Component {
       <Router>
 
         <div className="wrapper">
-          {this.state.redirect
-            ? <Redirect to="/home" />
+          {/* {this.state.redirect
+            ? <Redirect to="/" />
             : null
-          }
+          } */}
           {!this.isLoggedIn()
             ? <Route
               render={() =>
