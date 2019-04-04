@@ -245,14 +245,14 @@ class Home extends Component {
                                                 className="row comment-top-row"
                                             >
                                                 <div className="col-1 mt-0">
-                                                    <img	                                                    <img
-                                                        src={comment.userImage}	                                                        src={comment.profileImage}
-                                                        alt="User Icon"	                                                        alt="User Icon"
-                                                        id="userImageCommentsModal"	                                                        id="userImageCommentsModal"
-                                                        className="rounded border-white mt-2"	                                                        className="rounded border-white mt-2"
-                                                    />	                                                    />
-                                                </div>	                                                </div>
-                                                <div className="col-10">	                                                <div className="col-10">
+                                                    <img	                                                   
+                                                        src={comment.userImage}
+                                                        alt="User Icon"
+                                                        id="userImageCommentsModal"
+                                                        className="rounded border-white mt-2"
+                                                    />
+                                                </div>
+                                                <div className="col-10">
                                                     <p>{comment.userName}&nbsp;|&nbsp; {comment.createdAt}</p>
                                                 </div>
                                                 <div className="col-1">
