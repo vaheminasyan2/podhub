@@ -20,15 +20,10 @@
 }	}
 
 
- .flexRow{	.flexRow{
-@@ -27,13 +26,14 @@
-.buttonPosition{	.buttonPosition{
-    position: relative;	    position: relative;
-    left: 60%;	    left: 60%;
-    bottom: 70%;	    bottom: 45%;
-    border-radius: 50px;	    border-radius: 50px;
-}	}
-
+flexRow{	
+    display:flex;	
+    flex-direction: row;	
+}
 
  .searchName{	.searchName{
     position: relative;
