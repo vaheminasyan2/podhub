@@ -9,6 +9,7 @@ import "./Home.css";
 import Delete from "../pages/delete.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 //import { faComment, faHeart } from '@fortawesome/free-solid-svg-icons'
+import User from "../components/User/user";
 
 let moment = require("moment");
 
@@ -105,8 +106,6 @@ class Home extends Component {
         });
     };
 
-    //Opens the Likes modal
-    //Executed upon user clicking "Likes" button on page
     handleShowComments = postId => {
 
         API.getComments(postId).then(res => {
@@ -158,6 +157,17 @@ class Home extends Component {
         });
     }
 
+    followUser = (id) => {
+        API.followUser(this.props.user.id, id)
+            .then(function(response){
+                console.log(response);
+                alert("Followed!");
+            })
+             .catch((err) =>
+                 console.log(err)
+                )
+    }            
+
     render() {
         return (
             <div className="container bg-dark rounded" id="post-container">
@@ -171,8 +181,10 @@ class Home extends Component {
                                         userPhoto={post.userImage}
                                         userName={post.userName}
                                         date={moment(post.createdAt).format("LLL")}
+                                        podcastId={post.podcastId}
                                         podcastName={post.podcastName}
                                         podcastLogo={post.podcastLogo}
+                                        episodeId={post.episodeId}
                                         episodeName={post.episodeName}
                                         description={post.description}
                                         audioLink={post.audioLink}
@@ -207,6 +219,15 @@ class Home extends Component {
                                             </div>
                                             <div className="col-9">
                                                 <p>{like.name}</p>
+                                                <button
+                                                    className="btn btn-outline-light bPosition" 
+                                                     onClick={(event)=>{
+                                                     event.preventDefault();
+                                                    this.followUser(like.id)}
+                                                 }
+                                                 >
+                                                 Follow
+                                                </button>
                                             </div>
                                         </div>
                                     ))}

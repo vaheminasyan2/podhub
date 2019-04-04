@@ -205,8 +205,8 @@ class Home extends Component {
               <h2 className="paddingTop">{this.props.location.state.user.name}</h2>
             </Row>
             <Row>
-              Posts:&nbsp; {this.state.posts.length} &nbsp; | &nbsp;
-              Followers:&nbsp;{this.state.followers} &nbsp; | &nbsp;
+              Posts:&nbsp; {this.state.posts.length} &nbsp;&nbsp; <strong>-</strong> &nbsp;&nbsp;
+              Followers:&nbsp;{this.state.followers} &nbsp;&nbsp; <strong>-</strong> &nbsp;&nbsp;
               Following:&nbsp;{this.state.following}
             </Row>
           </div>
@@ -286,8 +286,10 @@ class Home extends Component {
                   userPhoto={this.state.user.profileImage}
                   userName={this.state.user.name}
                   date={moment(post.createdAt).format("LLL")}
+                  podcastId={post.podcastId}
                   podcastName={post.podcastName}
                   podcastLogo={post.podcastLogo}
+                  episodeId={post.episodeId}
                   episodeName={post.episodeName}
                   description={post.description}
                   audioLink={post.audioLink}
@@ -320,6 +322,15 @@ class Home extends Component {
                     </div>
                     <div className="col-9">
                       <p>{like.name}</p>
+                      <button
+                                                    className="btn btn-outline-light bPosition" 
+                                                     onClick={(event)=>{
+                                                     event.preventDefault();
+                                                    this.followUser(like.id)}
+                                                 }
+                                                 >
+                                                 Follow
+                                                </button>
                     </div>
                   </div>
                 ))}

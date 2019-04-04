@@ -18,8 +18,8 @@
 
 #podcastIcon {
   width: 80px;
-  margin: 5px 10px 5px 5px;
-  border: solid 3.4px rgb(255, 255, 255) !important;
+  margin: 0px 10px 0px 5px;
+  border: solid 3.4px rgb(212, 208, 208) !important;
 
 }
 
@@ -56,12 +56,21 @@
   cursor: pointer;
 }
 
-.likesDiv {
-  text-align: right;
+.likesDiv, .commentDiv {
+  display: inline-block;
+  padding: 5px;
 }
 
+.likesDiv {
+  margin-right: 5px;
+}
+.commentDiv {
+  margin-left: 5px;
+}
+
+
 #img-post {
-  text-align: right;
+  text-align: center;
   padding: 10px;
 }
 
@@ -77,9 +86,9 @@
   content: ""; /* This is necessary for the pseudo element to work. */ 
   display: block; /* This will put the pseudo element on its own line. */
   margin: 0 auto; /* This will center the border. */
-  width: 83%; /* Change this to whatever width you want. */
-  padding-top: 0px; /* This creates some space between the element and the border. */
-  border-bottom: 1px solid rgb(71, 70, 70); /* This creates the border. Replace black with whatever color you want. */
+  width: 95%; /* Change this to whatever width you want. */
+  padding-top: 8px; /* This creates some space between the element and the border. */
+  border-bottom: 1px solid rgb(46, 45, 45); /* This creates the border. Replace black with whatever color you want. */
 }
 
 
@@ -90,7 +99,7 @@
   margin: 0 auto; /* This will center the border. */
   width: 95%; /* Change this to whatever width you want. */
   padding-top: 0px; /* This creates some space between the element and the border. */
-  border-bottom: 1px solid rgb(71, 70, 70); 
+  border-bottom: 1px solid rgb(46, 45, 45); 
 }
 
 
@@ -98,6 +107,7 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  margin-bottom: 7px !important;
 }
 
 #top {
@@ -108,6 +118,28 @@
   max-height: 230px !important;
 }
 
+#bottom-first {
+  max-width: 20px;
+}
+
+#podcast-name-home, #episode-name-home, #episode-description-home {
+  color: rgb(214, 214, 214);
+}
+
+#podcast-name-home {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px !important;
+}
+
+p#episode-name-home {
+  font-size: 15px;
+}
+
+#episode-description-home {
+  font-size: 13px;
+  margin-top: 0px;
+}
 
 
 
@@ -120,3 +152,18 @@
 
 
 
+@media only screen and (max-width: 768px) {
+  #hide-when-small {
+    display: none;
+    height: 20px;
+  }
+  
+  #post-top-row {
+   display: grid;
+   grid-template-columns: 50% 50%;
+  }
+
+  #post-top-row:after {
+    display: none;
+  }
+}
