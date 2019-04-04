@@ -190,14 +190,14 @@ class Listen extends Component {
                 <Row>
                     <div className="col-md-3 col-xs-0"></div>
                     <div className="col-md-6 col-xs-12" id="third-row-listen">
-                        <div id="description-listen">
-                            <p>{this.state.description}</p>
-                        </div>
-
                         <div className="center-block" id="buttons-listen">
                             <button className="btn btn-primary" onClick={this.handleShowModal}>Share</button>
                             <button className="btn btn-danger" onClick={this.addToFavorites}>Favorite</button>
                             <button className="btn btn-dark" onClick={this.showAudioInNavbar}>Show in Nav</button>
+                        </div>
+
+                        <div id="description-listen">
+                            <p>{this.state.description}</p>
                         </div>
                     </div>
                     <div className="col-md-3 col-xs-0"></div>
