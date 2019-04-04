@@ -42,7 +42,7 @@ router.delete("/:id", (req, res) => controller.removeComment(req, res));
  * @param {*} req
  * @param {*} res
  */
-router.delete("/commentUnlikes/:id", (req, res) => controller.removeCommentLikes(req, res));
+router.delete("/commentUnlikes/:commentId/:userId", (req, res) => controller.removeCommentLikes(req, res));
 
 /**
  * Get Comment likes

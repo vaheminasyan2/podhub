@@ -10,7 +10,7 @@ class CommentController {
    * @param {*} res
    */
   createComment(req, res) {
-    db.comment.findOrCreate({ where: req.body }).then(comment => res.json(comment));
+    db.comment.create(req.body).then(comment => res.json(comment));
   }
 
   /**
@@ -19,7 +19,7 @@ class CommentController {
    * @param {*} res
    */
   createCommentLikes(req, res) {
-    db.commentLike.findOrCreate({ where: req.body }).then(commentLike => res.json(commentLike));
+    db.commentLike.findOrCreate({ where: req.body }).then(dbCommentLike => res.json(dbCommentLike));
   }
 
 
@@ -99,7 +99,7 @@ class CommentController {
    * @param {*} res
    */
   removeCommentLikes(req, res) {
-    db.commentLike.destroy({ where: req.params }).then(dbcommentLikes => res.json(dbcommentLikes));
+    db.commentLike.destroy({ where: req.params }).then(dbCommentLikes => res.json(dbCommentLikes));
   }
   
 
