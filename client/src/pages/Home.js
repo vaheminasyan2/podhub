@@ -21,7 +21,7 @@ class Home extends Component {
         showCommentsModal: false,
         likes: [],
         comments: [],
-        currentComment: ""
+        currentComment:""
     };
 
     componentDidMount() {
@@ -90,7 +90,7 @@ class Home extends Component {
         API.likePost(postId, this.props.user.id).then(res => {
             //console.log(res.data)
             if (res.data[1] === false) {
-                API.unlikePost(postId,this.props.user.id).then(res => {
+                API.unlikePost(postId).then(res => {
                     //console.log(res.data)
                 })
             };
@@ -246,14 +246,14 @@ class Home extends Component {
                                             >
                                                 <div className="col-1 mt-0">
                                                     <img
-                                                        src={comment.userImage}
+                                                        src={comment.profileImage}
                                                         alt="User Icon"
                                                         id="userImageCommentsModal"
                                                         className="rounded border-white mt-2"
                                                     />
                                                 </div>
                                                 <div className="col-10">
-                                                    <p>{comment.userName}&nbsp;|&nbsp; {comment.createdAt}</p>
+                                                    <p>{comment.name}&nbsp;|&nbsp; {comment.createdAt}</p>
                                                 </div>
                                                 <div className="col-1">
                                                     <button className="btn btn-sm deleteComment float-right" onClick={() => this.deleteComment(comment.id)}>

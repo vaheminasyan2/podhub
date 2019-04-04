@@ -23,8 +23,46 @@ class App extends Component {
       podcasts: [],
       showPodcasts: "hidePodcasts",
       redirect: false,
+      showAudioInNavbar: null,
+      audioLink: null
     };
   }
+
+  componentDidMount = () => {
+    this.loadUserFromLocalStorage();
+
+    setInterval(this.checkSessionStorage, 500);
+  }
+
+  checkSessionStorage = () => {
+
+    let storedAudioLink = null;
+
+    if (sessionStorage.getItem("audioSettings")) {
+      storedAudioLink = JSON.parse(sessionStorage.getItem("audioSettings")).audioLink;
+    } 
+    
+    if (!this.state.showAudioInNavbar || this.state.audioLink != storedAudioLink) {
+      this.setState({
+        audioLink: storedAudioLink,
+        showAudioInNavbar: true
+      });
+    }
+    else if (!sessionStorage.getItem("audioSettings")) {
+      this.setState({
+        audioLink: "",
+        showAudioInNavbar: false
+      })
+    }
+  }
+
+  hideAudio = () => {
+    sessionStorage.clear();
+    this.setState({
+      showAudioInNavbar: false
+    });
+  }
+
   // Listen for when user enters text into Podcast search fields
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -110,6 +148,7 @@ class App extends Component {
       //redirect: true
     });
     localStorage.clear();
+    sessionStorage.clear();
   }
 
   handleUser = (userData) => {
@@ -128,10 +167,6 @@ class App extends Component {
         user: JSON.parse(localStorage.getItem("user"))
       });
     }
-  }
-
-  componentDidMount() {
-    this.loadUserFromLocalStorage();
   }
 
   render() {
@@ -157,6 +192,8 @@ class App extends Component {
                 hidePodcasts={this.hidePodcasts}
                 logout={this.logout}
                 user={this.state.user}
+                showAudio={this.state.showAudioInNavbar}
+                hideAudio={this.hideAudio}
               />
               <PodcastSearch
                 show={this.state.showPodcasts}

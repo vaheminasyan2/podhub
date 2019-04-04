@@ -16,12 +16,12 @@ export default {
         return axios.post("/api/posts/like/", data)
     },
 
-    unlikePost: function (postId,userId) {
-        return axios.delete("/api/posts/unlike/" + postId + "/" + userId)
+    unlikePost: function (postId) {
+        return axios.delete("/api/posts/unlike/" + postId)
     },
 
     getComments: function (postId) {
-        return axios.get("/api/comments/commentedUserLikes/" + postId)
+        return axios.get("/api/comments/" + postId)
     },
 
     addComment: function (comment, postId, userId) {
@@ -164,11 +164,7 @@ export default {
         return axios.get("/api/users/" + userId);
     },
 
-    getUsersFollowed: function(userId){
-        return axios.get("/api/users/followings/" + userId );
-    },
-
-    followUser: function(userId, followUserId) {
+    followUser: function (userId, followUserId) {
         // console.log(arguments);
 
         let data = {
@@ -178,18 +174,7 @@ export default {
 
         return axios.post("/api/users/follow/", data);
     },
-
-    unFollowUser: function(userId, followUserId) {
-        // console.log(arguments);
-
-        let data = {
-            "followedBy": userId,
-            "isFollowing": followUserId
-        }
-        console.log(data);
-        return axios.post("/api/users/unfollow", data);
-    },
-
+  
     sharePodcast: function(podcastId, podcastName, podcastLogo, episodeId, episodeName, description, audioLink, userMessage, userId) {
         // console.log(arguments);
 

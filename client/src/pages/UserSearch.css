@@ -16,7 +16,6 @@
 .tile{
     width: 250px;
     border-radius : 25px;
-    height:200px;
 }
 
 .flexRow{
@@ -27,13 +26,14 @@
 .buttonPosition{
     position: relative;
     left: 60%;
-    bottom: 70%;
+    bottom: 45%;
     border-radius: 50px;
 }
 
 .searchName{
+    position: relative;
+    top: 50%;
+    right: 45%;
     font-size: 12pt;
     color: white;
-    width: 200px;
-    display: inline-block;
 }

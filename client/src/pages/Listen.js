@@ -141,6 +141,18 @@ class Listen extends Component {
         });
     }
 
+    showAudioInNavbar = () => {
+
+        sessionStorage.clear();
+
+        let audioSettings = {
+            showAudio: true,
+            audioLink: this.state.audioLink
+        }
+
+        sessionStorage.setItem("audioSettings", JSON.stringify(audioSettings));
+    }
+
     render() {
         return (
             <Container>
@@ -182,7 +194,7 @@ class Listen extends Component {
                                 changeSpeed={this.changeSpeed}
                                 initialSpeed={this.state.speed}
                             />
-
+                            <button className="btn btn-dark btn-sm" onClick={this.showAudioInNavbar}>Show in Nav</button>
                         </div>
                     </div>
                     <div className="col-md-2 col-xs-0"></div>
