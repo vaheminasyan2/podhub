@@ -4,6 +4,7 @@ import Row from "../components/Row/row";
 import List from "../components/List/list";
 import Episode from "../components/Episode/episode";
 import API from "../utils/API";
+import "./episodeList.css";
 
 // EPISODE LIST PAGE
 // This page displays a list of episodes for a particular podcast.
@@ -166,24 +167,26 @@ class EpisodeList extends Component {
                                     />
                                 ))}
                             </List>
-                            {this.state.loadMore ? (
-                                <button className="btn btn-dark" onClick={this.getEpisodes}>Load More</button>
-                            ) : (
-                                <></>
-                            )}
-                            <button className="btn btn-light" onClick={this.scrollToTop}>Back to Top</button>
+                            <div className="episodeListBtns">
+                                {this.state.loadMore ? (
+                                    <button className="btn btn-dark" onClick={this.getEpisodes}>Load More</button>
+                                ) : (
+                                    <></>
+                                )}
+                                <button className="btn btn-light" onClick={this.scrollToTop}>Back to Top</button>
+                            </div>
                         </div>
 
                     ) : (
                             this.state.message !== "Loading..." ? (
-                                <h2 className="text-center">No Episodes found.</h2>
+                                <h2 className="episodeListBtns">No episodes found.</h2>
                             ) :
                                 (
                                     <></>
                                 )
                         )}
 
-                    <h2 className="text-center">{this.state.message}</h2>
+                    <h2 className="episodeListBtns">{this.state.message}</h2>
                 </Row>
             </Container>
         )
