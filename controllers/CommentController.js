@@ -63,6 +63,7 @@ class CommentController {
             comment.dataValues.userName = commentuserName[comment.id];
             comment.dataValues.userImage = commentuserImage[comment.id];
           });
+          sortedComments.postId = req.params.id
           console.log(sortedComments)
           res.json(sortedComments);
         })

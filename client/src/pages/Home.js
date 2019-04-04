@@ -314,9 +314,9 @@ class Home extends Component {
                                         <div className="form-group mt-4 bg-dark text-secondary">
                                             <input type="text" className="form-control" id="commentForm"
                                                 defaultValue=""
-                                                placeholder="Enter your comment" ref={this.state.currentComment} onChange={this.handleInputChange} />
+                                                placeholder="Enter your comment" ref={this.state.currentComment} name="currentComment" onChange={this.handleInputChange} />
                                         </div>
-                                        <button type="submit" className="btn btn-light btn-sm mb-2" onClick={(event) => { event.preventDefault(); this.addComment(this.props.postId) }
+                                        <button type="submit" className="btn btn-light btn-sm mb-2" onClick={(event) => { event.preventDefault(); this.addComment(this.state.comments[0].postId) }
                                         }
                                         >Submit</button>
                                     </form>
