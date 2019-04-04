@@ -15,7 +15,6 @@ class AudioPlayer extends Component {
         this.timeline = React.createRef();
         this.playhead = React.createRef();
 
-
         this.state = {
             play: false,
             loaded: false,
@@ -96,7 +95,6 @@ class AudioPlayer extends Component {
             this.flipPlayPauseState();
         }
     }
-
 
     mouseDown = () => {
         const audioElement = this.audioElement.current;
@@ -219,8 +217,6 @@ class AudioPlayer extends Component {
                     </div>
                 </div>
 
-
-
                 <div className="second-row">
                     <div className="PLAY-BUTTON">
                         <img src={this.state.play ? pauseImg : playImg} alt="play button"
@@ -276,11 +272,7 @@ class AudioPlayer extends Component {
                             onClick={this.skipForward15}
                         />
                     </div>
-
                 </div>
-
-
-
 
                 <audio
                     id="music"
