@@ -26,6 +26,7 @@ class Home extends Component {
         likes: [],
         comments: [],
         currentComment: "",
+        currentPostId: "",
     };
 
     componentDidMount() {
@@ -118,33 +119,37 @@ class Home extends Component {
                 })
             };
             this.getPosts();
-            this.handleShowComments();
+            this.getComments();
         })
     }
 
     handleShowComments = postId => {
 
+        this.setState({
+            currentPostId:postId
+        });
+
         API.getComments(postId).then(res => {
             console.log(res.data);
             if (res.data.length === 0) {
                 this.setState({
-                    comments:[],
-                    showCommentsModal: true
+                    comments: res.data,
+                    showCommentsModal: true,
                 });
             }
             else {
                 this.setState({
                     comments: res.data,
-                    showCommentsModal: true
+                    showCommentsModal: true,
+                    currentPostId:postId
                 });
 
             }
         });
     };
 
-    addComment = postId => {
-        console.log("postId", postId)
-        API.addComment(this.state.currentComment, postId, this.props.user.id).then(res => {
+    addComment = () => {
+        API.addComment(this.state.currentComment, this.state.currentPostId, this.props.user.id).then(res => {
             console.log(res.data)
             this.getPosts();
             this.handleShowComments();
@@ -316,9 +321,10 @@ class Home extends Component {
                                         <div className="form-group mt-4 bg-dark text-secondary">
                                             <input type="text" className="form-control" id="commentForm"
                                                 defaultValue=""
-                                                placeholder="Enter your comment" ref={this.state.currentComment} name="currentComment" onChange={this.handleInputChange} />
+                                                name="currentComment"
+                                                placeholder="Enter your comment" ref={this.state.currentComment} onChange={this.handleInputChange} />
                                         </div>
-                                        <button type="submit" className="btn btn-light btn-sm mb-2" onClick={(event) => { event.preventDefault(); this.addComment(this.props.postId) }
+                                        <button type="submit" className="btn btn-light btn-sm mb-2" onClick={(event) => { event.preventDefault(); this.addComment() }
                                         }
                                         >Submit</button>
                                     </form>
