@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router";
+import { Link } from "react-router-dom";
 import Container from "../components/Container/container";
 import Row from "../components/Row/row";
 import API from "../utils/API";
@@ -45,12 +46,12 @@ class Home extends Component {
       this.getPostsOnlyByUser();
       this.getFollowers();
       this.getFollowing();
-  
+
       this.setState({
         user: this.props.location.state.user
       });
     }
-}
+  }
 
   getPostsOnlyByUser = () => {
     API.getPostsOnlyByUser(this.props.location.state.user.id)
@@ -236,12 +237,18 @@ class Home extends Component {
 
                 <div className="row rounded favorite bg-dark text-secondary" key={favorite.id}>
                   <div className="col-2 p-4 pad">
-                    <Podcast
-                      podcastId={favorite.podcastId}
-                      podcastName={favorite.podcastName}
-                      podcastLogo={favorite.podcastLogo}
-                      thumbnail={favorite.podcastLogo}
-                    />
+                    <Link to={{
+                      pathname: "/episodeList",
+                      state: {
+                        podcastId: favorite.podcastId,
+                        podcastName: favorite.podcastName,
+                        podcastLogo: favorite.podcastLogo,
+                        loadMore: true
+                      }
+                    }}
+                    >
+                      <span><img id="podcastIcon" src={favorite.podcastLogo} alt="Podcast Logo" className="border-white" /></span>
+                    </Link>
                   </div>
 
                   <div className="col p-0">
@@ -252,35 +259,29 @@ class Home extends Component {
                       <img src={Delete} alt="delete" className="size" />
                     </button>
 
-                    <p>{favorite.episodeName}</p>
-                    <p>{moment(favorite.createdAt).format("LLL")}</p>
+                    <Link to={{
+                      pathname: "/listen",
+                      state: {
+                        podcastId: favorite.podcastId,
+                        podcastName: favorite.podcastName,
+                        podcastLogo: favorite.podcastLogo,
+                        episodeId: favorite.episodeId,
+                        episodeName: favorite.episodeName,
+                        date: moment(favorite.date).format("LLL"),
+                        description: favorite.description,
+                        audioLink: favorite.audioLink
+                      }
+                    }}
+                    >
+                      <h4>{favorite.podcastName}</h4>
+                      <p>{favorite.episodeName}</p>
+                      <p>{moment(favorite.createdAt).format("LLL")}</p>
 
-                    {/* <p>{favorite.podcastName}</p> */}
-                    <div>
-                      <p className="ellipsis">{favorite.description}</p>
-                    </div>
-
-                    <button className="btn btn-light" onClick={this.listenToEpisode}>Listen</button>
-
-                    {this.state.redirect ? (
-                      <Redirect
-                        to={{
-                          pathname: "/listen",
-                          state: {
-                            podcastId: favorite.podcastId,
-                            podcastName: favorite.podcastName,
-                            podcastLogo: favorite.podcastLogo,
-                            episodeId: favorite.episodeId,
-                            episodeName: favorite.episodeName,
-                            date: moment(favorite.date).format("LLL"),
-                            description: favorite.description,
-                            audioLink: favorite.audioLink
-                          }
-                        }}
-                      />
-                    ) : (
-                        <></>
-                      )}
+                      {/* <p>{favorite.podcastName}</p> */}
+                      <div>
+                        <p className="ellipsis">{favorite.description}</p>
+                      </div>
+                    </Link>
 
                   </div>
                 </div>
@@ -339,13 +340,14 @@ class Home extends Component {
                     <div className="col-9">
                       <p>{like.name}</p>
                       <button
-                                                    className="btn btn-outline-light bPosition" 
-                                                     onClick={(event)=>{
-                                                     event.preventDefault();
-                                                    this.followUser(like.id)}
-                                                 }
-                                                 >
-                                                 Follow
+                        className="btn btn-outline-light bPosition"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          this.followUser(like.id)
+                        }
+                        }
+                      >
+                        Follow
                                                 </button>
                     </div>
                   </div>
