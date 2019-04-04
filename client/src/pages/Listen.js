@@ -79,7 +79,7 @@ class Listen extends Component {
             userId
         )
             .then(function (response) {
-                console.log(response);
+                //console.log(response);
             });
     }
 
@@ -117,7 +117,7 @@ class Listen extends Component {
             userId
         )
             .then(function (response) {
-                console.log(response);
+                //console.log(response);
                 alert("Favorited!");
             });
     }

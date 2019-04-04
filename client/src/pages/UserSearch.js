@@ -52,11 +52,11 @@ class UserSearch extends Component {
         API.getUsersToFollow(this.props.user.id)
             .then(res => {
                 usersToRender = res.data;
-                console.log("users", res.data);
+                //console.log("users", res.data);
                 API.getUsersFollowed(this.props.user.id)
                     .then(res => {
                         followings = res.data;
-                        console.log("followings", res.data);
+                       // console.log("followings", res.data);
                         usersToRender.forEach(user => {
                             user["follow"] = false;
                             followings.forEach(element => {
@@ -70,7 +70,7 @@ class UserSearch extends Component {
                         this.setState({
                             allUsers: usersToRender
                         });
-                        console.log(usersToRender);
+                        //console.log(usersToRender);
                     })
             })
             .catch(() => {
@@ -85,7 +85,7 @@ class UserSearch extends Component {
         let that = this;
         API.followUser(this.props.user.id, id)
             .then(function(response) {
-                console.log(response);
+               // console.log(response);
                 var users = that.state.users;
                 users.forEach(element => {
                     if(element.id === id)
@@ -120,7 +120,7 @@ class UserSearch extends Component {
 
     render() {
         var userId = JSON.parse(localStorage.getItem("user")).id;
-        console.log("Render", userId);
+        //console.log("Render", userId);
 
         return (
             <Container>
