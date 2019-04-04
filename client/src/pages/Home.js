@@ -21,7 +21,7 @@ class Home extends Component {
         showCommentsModal: false,
         likes: [],
         comments: [],
-        currentComment: ""
+        currentComment: "",
     };
 
     componentDidMount() {
@@ -112,7 +112,7 @@ class Home extends Component {
             console.log(res.data);
             if (res.data.length === 0) {
                 this.setState({
-                    showCommentsModal: false
+                    showCommentsModal: true
                 });
             }
             else {
@@ -150,12 +150,12 @@ class Home extends Component {
         });
     };
 
-    handleCommentChange = event => {
+    handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
-            [name]: value
+          [name]: value
         });
-    }
+      };
 
     followUser = (id) => {
         API.followUser(this.props.user.id, id)
@@ -272,7 +272,7 @@ class Home extends Component {
 
                                     <form>
                                         <div className="form-group mt-4 bg-dark text-secondary">
-                                            <input type="comment" className="form-control" id="commentForm" placeholder="Enter your comment" value={this.state.currentComment} onChange={this.handleCommentChange}/>
+                                            <input type="text" className="form-control" id="commentForm" placeholder="Enter your comment" value={this.state.currentComment} onChange={this.handleInputChange}/>
                                         </div>
                                         <button type="submit" className="btn btn-light btn-sm mb-2" onClick={() => this.addComment(this.props.postId)}>Submit</button>
                                     </form>
