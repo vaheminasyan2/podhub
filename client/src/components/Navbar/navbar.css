@@ -27,11 +27,10 @@
 #podcastInput {
     border-radius: 21px;
     width: 170px;
-    text-align: center;
+    text-align: left;
 }
 
-.googleButton{
-    border-radius:21px !important;
+.logoutButton{
     height: 38px !important
 }
 
