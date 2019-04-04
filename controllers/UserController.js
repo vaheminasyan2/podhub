@@ -1,5 +1,6 @@
 const db = require(`../models/index.js`);
 const axios = require('axios');
+const Op = db.Sequelize.Op;
 
 /**
  * Class User Controller
@@ -56,18 +57,6 @@ class UserController {
         where: { followedBy: req.params.id }
       })
       .then(dbfollow => res.json([{ count: dbfollow.length }]));
-
-    // db.follow
-    //   .findAll({
-    //     attributes: [
-    //       db.sequelize.fn("COUNT", db.sequelize.col("isFollowing")),
-    //       "isFollowing"
-    //     ],
-    //     where: {
-    //       followedBy: req.params.id
-    //     }
-    //   })
-    //   .then(dbfollow => res.json(dbfollow));
   }
 
   /**
@@ -80,6 +69,74 @@ class UserController {
     db.follow
       .findAll({ where: { isFollowing: req.params.id } })
       .then(dbfollow => res.json([{ count: dbfollow.length }]));
+  }
+
+
+  /**
+   * Get the isFollowing users details by userId from database <----- user Profile Page ----->
+   * @param {*} req
+   * @param {*} res
+   */
+  findIsFollowingUser(req, res) {
+    console.log(req.params.id);
+
+    db.follow
+      .findAll({
+        where: { followedBy: req.params.id }
+      })
+      .then(dbfollows => {
+        let userIds = dbfollows.map(dbfollow => dbfollow.isFollowing)
+        if(userIds.length){
+          db.user
+            .findAll({
+              where: {
+                id: {
+                  [Op.or]: userIds
+                }
+              }
+            })
+            .then(dbUser => {
+              let userDetails = dbUser.map(user=>{ return {id: user.id, name: user.name, image: user.profileImage}})
+              res.json(userDetails);
+            });
+          }
+          else{
+            res.json(userIds);
+          }
+      });
+  }
+
+  /**
+   * Get the isFollowed users details by userId from database <----- user Profile Page ----->
+   * @param {*} req
+   * @param {*} res
+   */
+  findFollowedByUser(req, res) {
+    console.log(req.params.id);
+    db.follow
+      .findAll({
+        where: { isFollowing: req.params.id }
+      })
+      .then(dbfollows => {
+        let userIds = dbfollows.map(dbfollow => dbfollow.followedBy)
+        if(userIds.length){
+          db.user
+            .findAll({
+              where: {
+                id: {
+                  [Op.or]: userIds
+                }
+              }
+            })
+            .then(dbUser => {
+              let userDetails = dbUser.map(user=>{ return {id: user.id, name: user.name, image: user.profileImage}})
+              res.json(userDetails);
+            });
+          }
+          else{
+            res.json(userIds);
+          }
+      });
   }
 
   /**
