@@ -6,6 +6,7 @@ import PostCard from "../components/PostCard/postCard";
 //import { Link } from "react-router-dom";
 import Modal from "react-responsive-modal";
 import "./Home.css"
+import User from "../components/User/user";
 
 let moment = require("moment");
 
@@ -14,7 +15,7 @@ class Home extends Component {
         posts: [],
         message: "",
         showLikesModal: false,
-        likes: []
+        likes: [],
     };
 
     componentDidMount() {
@@ -100,6 +101,17 @@ class Home extends Component {
         });
     };
 
+    followUser = (id) => {
+        API.followUser(this.props.user.id, id)
+            .then(function(response){
+                console.log(response);
+                alert("Followed!");
+            })
+             .catch((err) =>
+                 console.log(err)
+                )
+    }            
+
     render() {
         return (
             <div className="container bg-dark rounded" id="post-container">
@@ -150,6 +162,15 @@ class Home extends Component {
                                             </div>
                                             <div className="col-9">
                                                 <p>{like.name}</p>
+                                                <button
+                                                    className="btn btn-outline-light bPosition" 
+                                                     onClick={(event)=>{
+                                                     event.preventDefault();
+                                                    this.followUser(like.id)}
+                                                 }
+                                                 >
+                                                 Follow
+                                                </button>
                                             </div>
                                         </div>
                                     ))}
