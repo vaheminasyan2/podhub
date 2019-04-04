@@ -118,7 +118,7 @@ class Home extends Component {
                 })
             };
             this.getPosts();
-            this.getComments();
+            this.handleShowComments();
         })
     }
 
@@ -128,6 +128,7 @@ class Home extends Component {
             console.log(res.data);
             if (res.data.length === 0) {
                 this.setState({
+                    comments:[],
                     showCommentsModal: true
                 });
             }
@@ -142,6 +143,7 @@ class Home extends Component {
     };
 
     addComment = postId => {
+        console.log("postId", postId)
         API.addComment(this.state.currentComment, postId, this.props.user.id).then(res => {
             console.log(res.data)
             this.getPosts();
@@ -316,7 +318,7 @@ class Home extends Component {
                                                 defaultValue=""
                                                 placeholder="Enter your comment" ref={this.state.currentComment} name="currentComment" onChange={this.handleInputChange} />
                                         </div>
-                                        <button type="submit" className="btn btn-light btn-sm mb-2" onClick={(event) => { event.preventDefault(); this.addComment(this.state.comments[0].postId) }
+                                        <button type="submit" className="btn btn-light btn-sm mb-2" onClick={(event) => { event.preventDefault(); this.addComment(this.props.postId) }
                                         }
                                         >Submit</button>
                                     </form>
