@@ -110,6 +110,18 @@ class Home extends Component {
         });
     };
 
+    handleCommentLikeOrUnlike = commentId => {
+        API.likeComment(commentId, this.props.user.id).then(res =>{
+            if (res.data[1] === false) {
+                API.unlikeComment(commentId, this.props.user.id).then(res => {
+                    console.log(res.data)
+                })
+            };
+            this.getPosts();
+            this.getComments();
+        })
+    }
+
     handleShowComments = postId => {
 
         API.getComments(postId).then(res => {
@@ -133,7 +145,8 @@ class Home extends Component {
         API.addComment(this.state.currentComment, postId, this.props.user.id).then(res => {
             console.log(res.data)
             this.getPosts();
-            //this.handleShowComments();
+            this.handleShowComments();
+            this.closeCommentsModal();
         })
     }
 
@@ -273,7 +286,7 @@ class Home extends Component {
                                             <div className="col-4 mb-2">
                                                 <a
                                                     className="likes ml-4"
-                                                // onClick={() => handleLikeOrUnlike(postId)}
+                                                onClick={() => this.handleCommentLikeOrUnlike(comment.id)}
                                                 >
                                                     <FontAwesomeIcon icon="heart" />
                                                 </a>
