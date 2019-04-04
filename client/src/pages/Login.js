@@ -38,7 +38,8 @@ class Login extends Component {
                             clientId="940323765774-bpnsf77f8vksurn7gbv082gatubu97kl.apps.googleusercontent.com"
                             buttonText="Login"
                             onSuccess={responseGoogle}
-                            onFailure={responseGoogle} />
+                            onFailure={responseGoogle} 
+                            className="googleButton"/>
                     </div>
                     <br/><br/>
                     <h1 id="loginPageTitle" className="text-center">Welcome to PodHub!</h1>

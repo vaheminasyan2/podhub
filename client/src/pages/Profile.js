@@ -205,7 +205,12 @@ class Home extends Component {
 
   render() {
     return (
-      <Container>
+      <div className="container">
+      <Row>
+        <div class="col-md-2 col-xs-0"></div>
+        <div class="col-md-8 col-xs-12">
+        <Container>
+        
         <div className="row userProfile rounded bg-dark text-white">
           <div className="col-5">
             <img
@@ -236,7 +241,7 @@ class Home extends Component {
               {this.state.favorites.map(favorite => (
 
                 <div className="row rounded favorite bg-dark text-secondary" key={favorite.id}>
-                  <div className="col-2 p-4 pad">
+                  <div className="col-2 py-5 px-3 pad">
                     <Link to={{
                       pathname: "/episodeList",
                       state: {
@@ -251,7 +256,7 @@ class Home extends Component {
                     </Link>
                   </div>
 
-                  <div className="col p-0">
+                  <div className="col-10 p-1">
                     <button
                       className="btn btn-sm mb-1 float-right"
                       onClick={() => this.handleFavoriteDelete(favorite.id)}
@@ -364,6 +369,11 @@ class Home extends Component {
             )}
         </Row>
       </Container>
+        </div>
+        <div class="col-md-2 col-xs-0"></div>
+      </Row>
+      </div>    
+      
     );
   }
 }

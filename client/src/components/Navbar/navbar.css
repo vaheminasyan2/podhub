@@ -26,5 +26,19 @@
 
 #podcastInput {
     border-radius: 21px;
-    width: 160px;
+    width: 170px;
+    text-align: center;
+}
+
+.googleButton{
+    border-radius:21px !important;
+    height: 38px !important
+}
+
+button > div {
+    border-radius:21px !important;
+    height: 38px !important;
+    position:relative;
+    bottom: 2.5px;
+
 }
