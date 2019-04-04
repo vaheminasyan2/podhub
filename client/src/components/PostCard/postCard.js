@@ -118,7 +118,7 @@ function Card({
             </a>
           </div>
         </div>
-        <div className="col-md-7 col-sm-7">
+        <div>
           <div className="commentDiv">
             <a
               className="comments"
@@ -131,7 +131,7 @@ function Card({
             </a>
           </div>
         </div>
-        <div className="col-md-9 col-sm-9"></div>
+        <div className="col-md-7 col-sm-7"></div>
 
       </div>
     </div>
