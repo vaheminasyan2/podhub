@@ -1,7 +1,6 @@
 import React from "react";
 import Container from "../components/Container/container";
 import Row from "../components/Row/row";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 const textStyle = {
