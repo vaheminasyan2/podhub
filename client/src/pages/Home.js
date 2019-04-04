@@ -301,7 +301,7 @@ class Home extends Component {
                                                     ?
                                                 <div className="col-8">
                                                 <button className="btn btn-sm deleteComment float-right" onClick={() => this.deleteComment(comment.id)}>
-                                                    Remove
+                                                    Delete
                                                 </button>
                                                 </div>
                                                           : null
