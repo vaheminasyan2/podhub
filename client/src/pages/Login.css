@@ -3,9 +3,6 @@
     margin-top: 40px;
 } 
 
-#loginPageTitle{
-    margin-top: 250px;
-}
 
 .googleButton{
     border-radius:21px !important;
@@ -23,4 +20,13 @@ button > div {
 
 span {
     color:white;
+}
+
+.sizing{
+    margin: 150px auto;
+}
+
+.autoM{
+    display:block;
+    margin: 0 auto;
 }
