@@ -12,6 +12,7 @@ import moment from "moment";
 import Modal from "react-responsive-modal";
 import User from "../components/User/user";
 import List from "../components/List/list";
+import Popup from "reactjs-popup";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // USER PROFILE PAGE
@@ -34,7 +35,8 @@ class Profile extends Component {
     currentPostId: "",
     commentLikes: [],
     showFollowers: false,
-    showFollowingModal: false
+    showFollowingModal: false,
+    userListCommentLikes: []
   };
 
   // Load user profile information
@@ -83,6 +85,22 @@ class Profile extends Component {
         });
       });
   };
+  getUsersListCommentLikes = (commentId) =>{
+    API.getUsersLikedComment(commentId)
+    .then(res =>{
+        console.log(res.data)
+        if(res.data.length === 0){
+            this.setState({
+                userListCommentLikes: [],
+            });
+
+    }else{
+        this.setState({
+            userListCommentLikes: res.data,
+        });
+    }
+    })
+}
 
   getFavorites = () => {
     API.getFavorites(this.props.location.state.user.id)
@@ -608,12 +626,19 @@ showFollowingModal = () => {
                               >
                                 <FontAwesomeIcon icon="heart" />
                               </a>
-                              <a
-                                className="likesNumber"
-                                onClick={() => this.handleShowCommentsLikes(comment.id)}
+                              <Popup
+                                trigger={<div>{comment.numberOfLikes}</div>}
+                                on="hover"
+                                onOpen = {()=> this.getUsersListCommentLikes(comment.id)}
+                                position="top left"
+                                closeOnDocumentClick
                               >
-                                {comment.numberOfLikes}
-                              </a>
+                              {this.state.userListCommentLikes.map(user => (
+                                <div>
+                                <div>{user.name}</div>
+                                <img src={user.image}  alt="User Icon"/>
+                                </div>
+                            ))}</Popup>
                             </div>
                             {this.state.user.id === comment.commentedBy
                               ?
