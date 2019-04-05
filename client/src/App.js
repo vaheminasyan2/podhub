@@ -9,6 +9,8 @@ import Listen from "./pages/Listen";
 import UserSearch from "./pages/UserSearch";
 import API from "./utils/API"
 import Login from './pages/Login';
+import Followers from "./pages/Followers";
+import Following from "./pages/Following";
 import Error from "./pages/Error";
 import "./App.css";
 
@@ -250,6 +252,8 @@ class App extends Component {
                       />
                     }
                   />
+                  <Route exact path="/followers" component={Followers} />
+                  <Route exact path="/following" component={Following} />
                   <Route component={Error} />
                 </Switch>
               </>
