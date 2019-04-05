@@ -390,6 +390,7 @@ class Profile extends Component {
   // FOLLOW / UNFOLLOW USER
   // ===============================================
 
+  // Checks to see if user is following viewed user
   isUserFollowed = () => {
 
     // Get current user's ID
@@ -415,6 +416,7 @@ class Profile extends Component {
       });
   }
 
+  // Follows user if follow button is clicked
   followUser = (userId) => {
 
     let that = this;
@@ -431,6 +433,7 @@ class Profile extends Component {
       });
   }
 
+  // Unfollows user if unfollow button is clicked
   unfollowUser = (userId) => {
 
     let that = this;
