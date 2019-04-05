@@ -1,42 +1,43 @@
+button > div {
+    border-radius:21px !important;
+    bottom: 2.5px;
+    height: 38px !important;
+    position: relative;
+}
+
 .findUsers {
     margin-left: 5px;
     margin-top: 5px;
     width: 120px;
 }
 
-.navbarText {
-    font-weight: bold;
-    font-size: 20px;
-    color: white!important; 
-}
-
-.navbar {
-    margin-bottom: 20px; 
-    border-bottom: solid 3px rgb(167, 167, 167);
-}
-
-#size {
-    width: 50px;
-    height: 50px;
-    margin: 0px 15px 0px 0px;
-}
-
-#podcastInput {
-    border-radius: 21px;
-    width: 170px;
-    text-align: left;
+.hideAudioBtn {
+    float: right;
 }
 
 .logoutButton {
     height: 38px !important
 }
 
-button > div {
-    border-radius:21px !important;
-    height: 38px !important;
-    position:relative;
-    bottom: 2.5px;
-
+.navbar {
+    border-bottom: solid 3px rgb(167, 167, 167);
+    margin-bottom: 20px; 
 }
 
+.navbarText {
+    color: white !important; 
+    font-size: 20px;
+    font-weight: bold;
+}
 
+#podcastInput {
+    border-radius: 21px;
+    text-align: left;
+    width: 170px;
+}
+
+#size {
+    height: 50px;
+    margin: 0px 15px 0px 0px;
+    width: 50px;
+}

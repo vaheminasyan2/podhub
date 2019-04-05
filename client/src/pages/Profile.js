@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-//import { Redirect } from "react-router";
 import { Link } from "react-router-dom";
 import Container from "../components/Container/container";
 import Row from "../components/Row/row";
 import API from "../utils/API";
-//import Podcast from "../components/Podcast/podcast";
 import PostCard from "../components/PostCard/postCard";
-import "./Profile.css";
 import Delete from "./delete.png";
 import moment from "moment";
 import Modal from "react-responsive-modal";
@@ -14,94 +11,111 @@ import User from "../components/User/user";
 import List from "../components/List/list";
 import Popup from "reactjs-popup";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import "./Profile.css";
 
 // USER PROFILE PAGE
+
+// Contains info on user's # of posts, followers, and followings
+// Displays user's favorites
+// Displays user's posts
+// Has functionality to like/unlike a post
+// Has functionality to comment on post
+// Has functionality to like/unlike a comment
+// Has modals to display: likes, comments, followers, followings
+// Has functionality to redirect to Episode List and Listen page on post click
 
 class Profile extends Component {
   state = {
     user: [],
     posts: [],
-    followers: 0,
-    actualFollowers: [],
-    following: 0,
-    actualFollowing: [],
+    numFollowers: 0,
+    numFollowing: 0,
     favorites: [],
-    showLikesModal: false,
+    posts: [],
+    currentPostId: "",
     likes: [],
-    redirect: false,
-    showCommentsModal: false,
+    showLikesModal: false,
     comments: [],
     currentComment: "",
-    currentPostId: "",
+    showCommentsModal: false,
     commentLikes: [],
-    showFollowers: false,
+    userListCommentLikes: [],
+    followers: [],
+    following: [],
+    showFollowersModal: false,
     showFollowingModal: false,
-    userListCommentLikes: []
+    redirect: false
   };
 
   // Load user profile information
   componentDidMount() {
     this.getFavorites();
     this.getPostsOnlyByUser();
-    this.getFollowers();
-    this.getFollowing();
+    this.getNumFollowers();
+    this.getNumFollowing();
     this.setState({
       user: this.props.location.state.user
     });
   }
 
-  // Update profile information if user's change
+  // Update profile information if subject user changes
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.location.state.user.id !== this.props.location.state.user.id) {
 
       this.getFavorites();
       this.getPostsOnlyByUser();
-      this.getFollowers();
-      this.getFollowing();
+      this.getNumFollowers();
+      this.getNumFollowing();
       this.setState({
         user: this.props.location.state.user
       });
     }
   }
 
-  getPostsOnlyByUser = () => {
-    API.getPostsOnlyByUser(this.props.location.state.user.id)
+
+  // POPULATE USER PROFILE INFORMATION
+  // ===============================================
+
+  // Get user data and set it in state
+  getOrCreateUser = () => {
+    API.getOrCreateUser(this.props.location.state.user.id).then(res => {
+      this.setState({
+        user: res.data
+      });
+    });
+  };
+
+  // Get number of FOLLOWERS for user
+  getNumFollowers = () => {
+    API.getFollowers(this.props.location.state.user.id)
       .then(res => {
-        if (res.data.length === 0) {
-          this.setState({
-            posts: [],
-            messageNoPodcast: "No posts found."
-          });
-        } else {
-          this.setState({
-            posts: res.data
-          });
-        }
+        this.setState({
+          numFollowers: res.data[0].count
+        });
       })
       .catch(() => {
         this.setState({
-          posts: [],
-          messageNoPodcast: "No posts found."
+          numFollowers: 0
         });
       });
   };
-  getUsersListCommentLikes = (commentId) =>{
-    API.getUsersLikedComment(commentId)
-    .then(res =>{
-        console.log(res.data)
-        if(res.data.length === 0){
-            this.setState({
-                userListCommentLikes: [],
-            });
 
-    }else{
+  // Get number of other users that current user is FOLLOWING
+  getNumFollowing = () => {
+    API.getFollowing(this.props.location.state.user.id)
+      .then(res => {
         this.setState({
-            userListCommentLikes: res.data,
+          numFollowing: res.data[0].count
         });
-    }
-    })
-}
+      })
+      .catch(() => {
+        this.setState({
+          numFollowing: 0
+        });
+      });
+  };
 
+  // Get user's FAVORITES
   getFavorites = () => {
     API.getFavorites(this.props.location.state.user.id)
       .then(res => {
@@ -126,88 +140,125 @@ class Profile extends Component {
       });
   };
 
-  getOrCreateUser = () => {
-    API.getOrCreateUser(this.props.location.state.user.id).then(res => {
-      this.setState({
-        user: res.data
+  // Get user's own POSTS
+  getPostsOnlyByUser = () => {
+    API.getPostsOnlyByUser(this.props.location.state.user.id)
+      .then(res => {
+        if (res.data.length === 0) {
+          this.setState({
+            posts: [],
+            messageNoPodcast: "No posts found."
+          });
+        } else {
+          this.setState({
+            posts: res.data
+          });
+        }
+      })
+      .catch(() => {
+        this.setState({
+          posts: [],
+          messageNoPodcast: "No posts found."
+        });
       });
-    });
   };
 
-  getActualFollowers = () => {
 
+  // LIST OF FOLLOWERS / FOLLOWINGS, MODALS
+  // ===============================================
+
+  // Get list of user's followers
+  getFollowers = () => {
     API.isFollowedByUsers(this.state.user.id)
       .then(res => {
-        // console.log(res);
         this.setState({
-          actualFollowers: res.data,
+          followers: res.data,
         }, () => { this.showFollowersModal() });
       });
   }
 
+  // Get list of other users that user is following
   getUsersFollowed = () => {
-
     API.getUsersFollowed(this.state.user.id)
-        .then(res => {
-            this.setState({
-                actualFollowing: res.data
-            }, () => {this.showFollowingModal() });
-        });
-}     
-
-showFollowingModal = () => {
-  this.setState({
-    showFollowingModal: true
-  });
-}
-
-  getFollowers = () => {
-    API.getFollowers(this.props.location.state.user.id)
       .then(res => {
         this.setState({
-          followers: res.data[0].count
-        });
-      })
-      .catch(() => {
-        this.setState({
-          followers: 0
-        });
+          following: res.data
+        }, () => { this.showFollowingModal() });
       });
-  };
+  }
 
-  getFollowing = () => {
-    API.getFollowing(this.props.location.state.user.id)
-      .then(res => {
-        this.setState({
-          following: res.data[0].count
-        });
-      })
-      .catch(() => {
-        this.setState({
-          following: 0
-        });
-      });
-  };
+  // Show modal that displays followers
+  showFollowersModal = () => {
+    this.setState({
+      showFollowersModal: true
+    });
+  }
 
+  // Show modal that displays other users being followed
+  showFollowingModal = () => {
+    this.setState({
+      showFollowingModal: true
+    });
+  }
+
+  // Hide Followers and Followings modals
+  hideFollowersModal = () => {
+    this.setState({
+      showFollowersModal: false,
+      showFollowingModal: false
+    });
+  }
+
+
+  // POST AND FAVORITE FUNCTIONALITY
+  // ===============================================
+
+  // Executed when clicking on post content
+  // Redirects to the Listen page
+  listenToEpisode = event => {
+    event.preventDefault();
+
+    this.setState({
+      redirect: true
+    });
+  }
+
+  // DELETE POST if delete button is clicked
   handlePostDelete = (id) => {
-      API.handlePostDelete(id)
-        .then(res => {
-          this.getPostsOnlyByUser();
-        });
-  };
-
-  handleFavoriteDelete = id => {
-      API.handleFavoriteDelete(id).then(res => {
-        this.getFavorites();
+    API.handlePostDelete(id)
+      .then(res => {
+        this.getPostsOnlyByUser();
       });
   };
+
+  // DELETE FAVORITE if delete button is clicked
+  handleFavoriteDelete = id => {
+    API.handleFavoriteDelete(id).then(res => {
+      this.getFavorites();
+    });
+  };
+
+  
+  // LIKING AND UNLIKING
+  // ===============================================
+
+  // Likes or unlikes a post
+  handleLikeOrUnlike = (postId) => {
+    API.likePost(postId, this.state.user.id).then(res => {
+      if (res.data[1] === false) {
+        API.unlikePost(postId, this.state.user.id).then(res => {
+          this.getPostsOnlyByUser();
+        })
+      } else {
+        this.getPostsOnlyByUser();
+      }
+    });
+  }
 
   //Opens the Likes modal
-  //Executed upon user clicking "Likes" button on page
-  handleShowLikes = postId => {
-
+  //Executed upon user clicking heart icon on page
+  handleShowLikes = (postId) => {
     API.getLikes(postId).then(res => {
-      //console.log(res.data);
       if (res.data.length === 0) {
         this.setState({
           showLikesModal: false
@@ -222,75 +273,42 @@ showFollowingModal = () => {
     });
   };
 
-  handleLikeOrUnlike = postId => {
-    API.likePost(postId, this.state.user.id).then(res => {
-      //console.log(res.data)
-      if (res.data[1] === false) {
-        API.unlikePost(postId, this.state.user.id).then(res => {
-          //console.log(res.data)
-          this.getPostsOnlyByUser();
-        })
-      } else{
-        this.getPostsOnlyByUser();
-      }
-      
-    })
-  }
-
-  // Closes Likes Episode modal
-  // Executed upon user clicking "Likes" button in modal
+  // Closes Likes modal
   closeLikesModal = () => {
     this.setState({
       showLikesModal: false
     });
   };
 
-  listenToEpisode = event => {
-    event.preventDefault();
 
-    this.setState({
-      redirect: true
-    });
-  }
+  // COMMENTS
+  // ===============================================
 
-  handleCommentLikeOrUnlike = commentId => {
-    API.likeComment(commentId, this.state.user.id).then(res => {
-      if (res.data[1] === false) {
-        API.unlikeComment(commentId, this.state.user.id).then(res => {
-          // console.log(res.data)
-          this.handleShowComments(this.state.currentPostId);
-        })
-      }else{
-        this.handleShowComments(this.state.currentPostId);
-      }
-      // this.getPostsOnlyByUser();
-      // this.handleShowComments();
+  // Add a comment to post
+  addComment = () => {
+    API.addComment(this.state.currentComment, this.state.currentPostId, this.state.user.id).then(res => {
+      // console.log(res.data)
+      this.getPostsOnlyByUser();
+      this.handleShowComments();
+      this.closeCommentsModal();
     })
   }
 
-  handleShowCommentsLikes = commentId => {
-    API.getLikes(commentId).then(res => {
-      //console.log(res.data);
-      if (res.data.length === 0) {
-        this.setState({
-          showLikesModal: false
-        });
-      }
-      else {
-        this.setState({
-          commentLikes: res.data,
-          showLikesModal: true
-        });
-      }
+  // Delete a comment from post
+  deleteComment = (commentId) => {
+    API.deleteComment(commentId).then(res => {
+      this.getPostsOnlyByUser();
+      this.handleShowComments();
+      this.closeCommentsModal();
     });
-  }
+  };
 
+  // Show modal that displays comments
   handleShowComments = postId => {
     this.setState({
       currentPostId: postId
     });
     API.getComments(postId).then(res => {
-      // console.log(res.data);
       if (res.data.length === 0) {
         this.setState({
           comments: res.data,
@@ -307,29 +325,63 @@ showFollowingModal = () => {
     });
   };
 
-  addComment = () => {
-    API.addComment(this.state.currentComment, this.state.currentPostId, this.state.user.id).then(res => {
-      // console.log(res.data)
-      this.getPostsOnlyByUser();
-      this.handleShowComments();
-      this.closeCommentsModal();
-    })
-  }
-
-  deleteComment = (commentId) => {
-      API.deleteComment(commentId).then(res => {
-        // console.log(res.data)
-        this.getPostsOnlyByUser();
-        this.handleShowComments();
-        this.closeCommentsModal();
-      });
-  };
-
+  // Close modal that displays comments
   closeCommentsModal = () => {
     this.setState({
       showCommentsModal: false
     });
   };
+
+  // Likes or unlikes a comment
+  handleCommentLikeOrUnlike = (commentId) => {
+    API.likeComment(commentId, this.state.user.id).then(res => {
+      if (res.data[1] === false) {
+        API.unlikeComment(commentId, this.state.user.id).then(res => {
+          this.handleShowComments(this.state.currentPostId);
+        });
+      } else {
+        this.handleShowComments(this.state.currentPostId);
+      }
+    });
+  }
+
+  // Show modal that displays likes for comment
+  handleShowCommentsLikes = (commentId) => {
+    API.getLikes(commentId).then(res => {
+      if (res.data.length === 0) {
+        this.setState({
+          showLikesModal: false
+        });
+      }
+      else {
+        this.setState({
+          commentLikes: res.data,
+          showLikesModal: true
+        });
+      }
+    });
+  }
+
+  // Show pop up with list of users who have liked comment
+  getUsersListCommentLikes = (commentId) =>{
+    API.getUsersLikedComment(commentId)
+      .then(res =>{
+        if(res.data.length === 0){
+          this.setState({
+              userListCommentLikes: [],
+          });
+        }
+        else {
+          this.setState({
+              userListCommentLikes: res.data,
+          });
+        }
+      });
+  }
+
+
+  // OTHER
+  // ===============================================
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -338,22 +390,11 @@ showFollowingModal = () => {
     });
   };
 
-  showFollowersModal = () => {
-    this.setState({
-      showFollowers: true
-    });
-  }
-
-  hideFollowersModal = () => {
-    this.setState({
-      showFollowers: false,
-      showFollowingModal: false
-    });
-  }
-
+  // Scrolls to post section when Posts is clicked from profile header
   scrollTo = () => {
     window.scrollTo(0, 500);
   }
+
 
   render() {
     return (
@@ -386,21 +427,21 @@ showFollowingModal = () => {
 
                     <button
                       className="btn btn-dark"
-                      onClick={this.getActualFollowers}
+                      onClick={this.getFollowers}
                     >
-                      Followers:&nbsp;{this.state.followers}
+                      Followers:&nbsp;{this.state.numFollowers}
                     </button>
 
                     <Modal
-                      open={this.state.showFollowers}
+                      open={this.state.showFollowersModal}
                       onClose={this.hideFollowersModal}
                     // classNames={{ modal: "customModal", overlay: "customOverlay", closeButton: "customCloseButton" }}
                     >
                       <h2>Users following {this.props.location.state.user.name}</h2>
 
-                      {this.state.actualFollowers.length ? (
+                      {this.state.followers.length ? (
                         <List>
-                          {this.state.actualFollowers.map(user =>
+                          {this.state.followers.map(user =>
                             <div className="container tile m-2 userList" key={user.id}>
                               <User
                                 userId={user.id}
@@ -427,7 +468,7 @@ showFollowingModal = () => {
                       className="btn btn-dark"
                       onClick={this.getUsersFollowed}
                     >
-                      Following:&nbsp;{this.state.following}
+                      Following:&nbsp;{this.state.numFollowing}
                     </button>
 
                     <Modal
@@ -437,9 +478,9 @@ showFollowingModal = () => {
                     >
                       <h2>Users {this.props.location.state.user.name} follows</h2>
 
-                      {this.state.actualFollowing.length ? (
+                      {this.state.following.length ? (
                         <List>
-                          {this.state.actualFollowing.map(user =>
+                          {this.state.following.map(user =>
                             <div className="container tile m-2 userList" key={user.id}>
                               <User
                                 userId={user.id}
@@ -464,12 +505,12 @@ showFollowingModal = () => {
                   </Row>
                 </div>
               </div>
-              
+
               {/* FAVORITES SECTION */}
 
               <h4 id="favoritesTitle">Favorites</h4>
               <div className="row favorites rounded">
-                
+
                 {this.state.favorites.length ? (
                   <Container>
                     {this.state.favorites.map(favorite => (
@@ -503,7 +544,7 @@ showFollowingModal = () => {
                             </div>
                             : null
                           }
-                          <Link 
+                          <Link
                             to={{
                               pathname: "/listen",
                               state: {
@@ -541,28 +582,28 @@ showFollowingModal = () => {
                 {this.state.posts.length ? (
                   <div className="container bg-dark">
                     {this.state.posts.map(post => (
-                        <PostCard
-                          key={post.id}
-                          userId={post.postedBy}
-                          userName={this.state.user.name}
-                          userImage={this.state.user.profileImage}
-                          date={moment(post.createdAt).format("LLL")}
-                          podcastId={post.podcastId}
-                          podcastName={post.podcastName}
-                          podcastLogo={post.podcastLogo}
-                          episodeId={post.episodeId}
-                          episodeName={post.episodeName}
-                          description={post.description}
-                          audioLink={post.audioLink}
-                          userMessage={post.userMessage}
-                          likes={post.numberOfLikes}
-                          comments={post.numberOfComments}
-                          postId={post.id}
-                          handlePostDelete={this.handlePostDelete}
-                          handleShowLikes={this.handleShowLikes}
-                          handleLikeOrUnlike={this.handleLikeOrUnlike}
-                          handleShowComments={this.handleShowComments}
-                        />
+                      <PostCard
+                        key={post.id}
+                        userId={post.postedBy}
+                        userName={this.state.user.name}
+                        userImage={this.state.user.profileImage}
+                        date={moment(post.createdAt).format("LLL")}
+                        podcastId={post.podcastId}
+                        podcastName={post.podcastName}
+                        podcastLogo={post.podcastLogo}
+                        episodeId={post.episodeId}
+                        episodeName={post.episodeName}
+                        description={post.description}
+                        audioLink={post.audioLink}
+                        userMessage={post.userMessage}
+                        likes={post.numberOfLikes}
+                        comments={post.numberOfComments}
+                        postId={post.id}
+                        handlePostDelete={this.handlePostDelete}
+                        handleShowLikes={this.handleShowLikes}
+                        handleLikeOrUnlike={this.handleLikeOrUnlike}
+                        handleShowComments={this.handleShowComments}
+                      />
                     ))}
 
                     <Modal
@@ -626,6 +667,7 @@ showFollowingModal = () => {
                               >
                                 <FontAwesomeIcon icon="heart" />
                               </a>
+
                               <Popup
                                 trigger={<div>{comment.numberOfLikes}</div>}
                                 on="hover"
@@ -635,10 +677,13 @@ showFollowingModal = () => {
                               >
                               {this.state.userListCommentLikes.map(user => (
                                 <div>
-                                <div>{user.name}</div>
-                                <img src={user.image}  alt="User Icon"/>
+                                  <div>{user.name}</div>
+                                  <img src={user.image}  alt="User Icon"/>
                                 </div>
-                            ))}</Popup>
+                              ))
+                              }
+                            </Popup>
+                              
                             </div>
                             {this.state.user.id === comment.commentedBy
                               ?
