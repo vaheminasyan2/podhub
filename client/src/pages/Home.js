@@ -65,11 +65,11 @@ class Home extends Component {
 
     // Delete post
     handlePostDelete = id => {
-        if (window.confirm("Delete post?")) {
+       
             API.handlePostDelete(id).then(res => {
                 this.getPosts();
             });
-        }
+        
     };
 
     //Opens the Likes modal
@@ -173,14 +173,12 @@ class Home extends Component {
     }
 
     deleteComment = (commentId) => {
-        if (window.confirm("Delete post?")) {
             API.deleteComment(commentId).then(res => {
                 console.log(res.data)
                 this.getPosts();
                 this.handleShowComments();
                 this.closeCommentsModal();
             });
-        }
     };
 
 

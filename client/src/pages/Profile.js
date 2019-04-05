@@ -139,23 +139,16 @@ class Home extends Component {
   };
 
   handlePostDelete = (id) => {
-
-    if (window.confirm("Delete post?")) {
-
       API.handlePostDelete(id)
         .then(res => {
           this.getPostsOnlyByUser();
         });
-    }
   };
 
   handleFavoriteDelete = id => {
-
-    if (window.confirm("Delete favorite?")) {
       API.handleFavoriteDelete(id).then(res => {
         this.getFavorites();
       });
-    }
   };
 
   //Opens the Likes modal
@@ -267,14 +260,12 @@ class Home extends Component {
   }
 
   deleteComment = (commentId) => {
-    if (window.confirm("Delete post?")) {
       API.deleteComment(commentId).then(res => {
         console.log(res.data)
         this.getPostsOnlyByUser();
         this.handleShowComments();
         this.closeCommentsModal();
       });
-    }
   };
 
   closeCommentsModal = () => {
