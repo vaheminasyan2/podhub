@@ -98,9 +98,13 @@ class Home extends Component {
             if (res.data[1] === false) {
                 API.unlikePost(postId, this.props.user.id).then(res => {
                     //console.log(res.data)
+                    this.getPosts();
                 })
-            };
-            this.getPosts();
+            }else{
+                this.getPosts();
+            }
+
+            // this.getPosts();
         })
     }
 
@@ -117,10 +121,13 @@ class Home extends Component {
             if (res.data[1] === false) {
                 API.unlikeComment(commentId, this.props.user.id).then(res => {
                     console.log(res.data)
+                    this.handleShowComments(this.state.currentPostId);
                 })
-            };
-            this.getPosts();
-            this.handleShowComments();
+            }else{
+                this.handleShowComments(this.state.currentPostId);
+            }
+            // this.getPosts();
+            
         })
     }
 

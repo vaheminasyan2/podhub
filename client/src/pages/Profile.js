@@ -210,9 +210,12 @@ showFollowingModal = () => {
       if (res.data[1] === false) {
         API.unlikePost(postId, this.state.user.id).then(res => {
           //console.log(res.data)
+          this.getPostsOnlyByUser();
         })
-      };
-      this.getPostsOnlyByUser();
+      } else{
+        this.getPostsOnlyByUser();
+      }
+      
     })
   }
 
@@ -237,10 +240,13 @@ showFollowingModal = () => {
       if (res.data[1] === false) {
         API.unlikeComment(commentId, this.state.user.id).then(res => {
           // console.log(res.data)
+          this.handleShowComments(this.state.currentPostId);
         })
-      };
-      this.getPostsOnlyByUser();
-      this.handleShowComments();
+      }else{
+        this.handleShowComments(this.state.currentPostId);
+      }
+      // this.getPostsOnlyByUser();
+      // this.handleShowComments();
     })
   }
 
