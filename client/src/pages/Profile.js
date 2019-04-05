@@ -10,16 +10,20 @@ import "./Profile.css";
 import Delete from "./delete.png";
 import moment from "moment";
 import Modal from "react-responsive-modal";
+import User from "../components/User/user";
+import List from "../components/List/list";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // USER PROFILE PAGE
 
-class Home extends Component {
+class Profile extends Component {
   state = {
     user: [],
     posts: [],
     followers: 0,
+    actualFollowers: [],
     following: 0,
+    actualFollowing: [],
     favorites: [],
     showLikesModal: false,
     likes: [],
@@ -29,6 +33,8 @@ class Home extends Component {
     currentComment: "",
     currentPostId: "",
     commentLikes: [],
+    showFollowers: false,
+    showFollowingModal: false
   };
 
   // Load user profile information
@@ -109,6 +115,33 @@ class Home extends Component {
       });
     });
   };
+
+  getActualFollowers = () => {
+
+    API.isFollowedByUsers(this.state.user.id)
+      .then(res => {
+        // console.log(res);
+        this.setState({
+          actualFollowers: res.data,
+        }, () => { this.showFollowersModal() });
+      });
+  }
+
+  getUsersFollowed = () => {
+
+    API.getUsersFollowed(this.state.user.id)
+        .then(res => {
+            this.setState({
+                actualFollowing: res.data
+            }, () => {this.showFollowingModal() });
+        });
+}     
+
+showFollowingModal = () => {
+  this.setState({
+    showFollowingModal: true
+  });
+}
 
   getFollowers = () => {
     API.getFollowers(this.props.location.state.user.id)
@@ -281,16 +314,29 @@ class Home extends Component {
     });
   };
 
-  // followUser = (id) => {
-  //   API.followUser(this.state.user.id, id)
-  //     .then(function (response) {
-  //       console.log(response);
-  //       alert("Followed!");
-  //     })
-  //     .catch((err) =>
-  //       console.log(err)
-  //     )
-  // }
+{/* followUser = (id) => {
+    API.followUser(this.state.user.id, id)
+      .then(function (response) {
+        console.log(response);
+        alert("Followed!");
+      })
+      .catch((err) =>
+        console.log(err)
+      )
+  } */}
+
+  showFollowersModal = () => {
+    this.setState({
+      showFollowers: true
+    });
+  }
+
+  hideFollowersModal = () => {
+    this.setState({
+      showFollowers: false,
+      showFollowingModal: false
+    });
+  }
 
   render() {
     return (
@@ -311,40 +357,96 @@ class Home extends Component {
                 </div>
 
                 <div className="col">
+
                   <Row>
                     <h2 className="paddingTop">{this.props.location.state.user.name}</h2>
                   </Row>
+
                   <Row>
 
                     Posts:&nbsp; {this.state.posts.length}
 
                     &nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <Link 
-                      to={{
-                        pathname: "/followers",
-                        state: {
-                          user: this.state.user
-                        }
-                      }}
-                      className="followers"
+                    <button
+                      className="btn btn-dark"
+                      onClick={this.getActualFollowers}
                     >
                       Followers:&nbsp;{this.state.followers}
-                    </Link>
+                    </button>
+
+                    <Modal
+                      open={this.state.showFollowers}
+                      onClose={this.hideFollowersModal}
+                    // classNames={{ modal: "customModal", overlay: "customOverlay", closeButton: "customCloseButton" }}
+                    >
+                      <h2>Users following {this.props.location.state.user.name}</h2>
+
+                      {this.state.actualFollowers.length ? (
+                        <List>
+                          {this.state.actualFollowers.map(user =>
+                            <div className="container tile m-2 userList" key={user.id}>
+                              <User
+                                userId={user.id}
+                                userName={user.name}
+                                userImage={user.image}
+                                handler={null}
+                              />
+                            </div>
+                          )}
+                        </List>
+                      ) : (
+                          this.state.message != "Loading..." ? (
+                            <h2>No followers found.</h2>
+                          ) : (
+                              <></>
+                            )
+                        )}
+
+                      <h2>{this.state.message}</h2>
+
+                    </Modal>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <Link
-                      to={{
-                        pathname: "/following",
-                        state: {
-                          user: this.state.user
-                        }
-                      }}
-                      className="following"
+                    <button
+                      className="btn btn-dark"
+                      onClick={this.getUsersFollowed}
                     >
                       Following:&nbsp;{this.state.following}
-                    </Link>
+                    </button>
+
+                    <Modal
+                      open={this.state.showFollowingModal}
+                      onClose={this.hideFollowersModal}
+                    // classNames={{ modal: "customModal", overlay: "customOverlay", closeButton: "customCloseButton" }}
+                    >
+                      <h2>Users {this.props.location.state.user.name} follows</h2>
+
+                      {this.state.actualFollowing.length ? (
+                        <List>
+                          {this.state.actualFollowing.map(user =>
+                            <div className="container tile m-2 userList" key={user.id}>
+                              <User
+                                userId={user.id}
+                                userName={user.name}
+                                userImage={user.profileImage}
+                                handler={null}
+                              />
+                            </div>
+                          )}
+                        </List>
+                      ) : (
+                          this.state.message != "Loading..." ? (
+                            <h2>User is not following anyone.</h2>
+                          ) : (
+                              <></>
+                            )
+                        )}
+
+                      <h2>{this.state.message}</h2>
+
+                    </Modal>
                   </Row>
                 </div>
               </div>
@@ -355,8 +457,7 @@ class Home extends Component {
                 {this.state.favorites.length ? (
                   <Container>
                     {this.state.favorites.map(favorite => (
-                      //console.log(this.state.user.id),
-                      //console.log(favorite.userId),
+
                       <div className="row rounded favorite bg-dark text-secondary" key={favorite.id}>
                         <div className="col-2 py-5 px-3 pad">
                           <Link to={{
@@ -469,7 +570,7 @@ class Home extends Component {
                           </div>
                           <div className="col-9">
                             <p>{like.name}</p>
-                            {/* <button
+                            {/*<button
                               className="btn btn-outline-light bPosition"
                               onClick={(event) => {
                                 event.preventDefault();
@@ -478,7 +579,7 @@ class Home extends Component {
                               }
                             >
                               Follow
-                      </button> */}
+                      </button>*/}
                           </div>
                         </div>
                       ))}
@@ -572,5 +673,5 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default Profile;
 
