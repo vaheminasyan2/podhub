@@ -68,7 +68,7 @@ class Profile extends Component {
         if (res.data.length === 0) {
           this.setState({
             posts: [],
-            messageNoPodcast: "No posts found, post something."
+            messageNoPodcast: "No posts found."
           });
         } else {
           this.setState({
@@ -79,7 +79,7 @@ class Profile extends Component {
       .catch(() => {
         this.setState({
           posts: [],
-          messageNoPodcast: "No posts found, post something."
+          messageNoPodcast: "No posts found."
         });
       });
   };
@@ -91,7 +91,7 @@ class Profile extends Component {
           this.setState({
             favorites: [],
             messageNoFav:
-              "No favorites found. Search for a podcast and add it to your favorites."
+              "No favorites found."
           });
         } else {
           this.setState({
@@ -103,7 +103,7 @@ class Profile extends Component {
         this.setState({
           favorites: [],
           messageNoFav:
-            "No favorites found. Search for a podcast and add it to your favorites."
+            "No favorites found."
         });
       });
   };
@@ -236,7 +236,7 @@ showFollowingModal = () => {
     API.likeComment(commentId, this.state.user.id).then(res => {
       if (res.data[1] === false) {
         API.unlikeComment(commentId, this.state.user.id).then(res => {
-          console.log(res.data)
+          // console.log(res.data)
         })
       };
       this.getPostsOnlyByUser();
@@ -266,7 +266,7 @@ showFollowingModal = () => {
       currentPostId: postId
     });
     API.getComments(postId).then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.length === 0) {
         this.setState({
           comments: res.data,
@@ -285,7 +285,7 @@ showFollowingModal = () => {
 
   addComment = () => {
     API.addComment(this.state.currentComment, this.state.currentPostId, this.state.user.id).then(res => {
-      console.log(res.data)
+      // console.log(res.data)
       this.getPostsOnlyByUser();
       this.handleShowComments();
       this.closeCommentsModal();
@@ -294,7 +294,7 @@ showFollowingModal = () => {
 
   deleteComment = (commentId) => {
       API.deleteComment(commentId).then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         this.getPostsOnlyByUser();
         this.handleShowComments();
         this.closeCommentsModal();
@@ -314,17 +314,6 @@ showFollowingModal = () => {
     });
   };
 
-// followUser = (id) => {
-//     API.followUser(this.state.user.id, id)
-//       .then(function (response) {
-//         console.log(response);
-//         alert("Followed!");
-//       })
-//       .catch((err) =>
-//         console.log(err)
-//       )
-//   }
-
   showFollowersModal = () => {
     this.setState({
       showFollowers: true
@@ -338,6 +327,10 @@ showFollowingModal = () => {
     });
   }
 
+  scrollTo = () => {
+    window.scrollTo(0, 500);
+  }
+
   render() {
     return (
       <div className="container">
@@ -347,7 +340,7 @@ showFollowingModal = () => {
             <Container>
 
               <div className="row userProfile rounded bg-dark text-white">
-                <div className="col-5">
+                <div className="col-3">
                   <img
                     src={this.props.location.state.user.profileImage}
                     alt="User"
@@ -359,14 +352,13 @@ showFollowingModal = () => {
                 <div className="col">
 
                   <Row>
-                    <h2 className="paddingTop">{this.props.location.state.user.name}</h2>
+                    <h2 className="paddingTop userName">{this.props.location.state.user.name}</h2>
                   </Row>
 
                   <Row>
-
-                    Posts:&nbsp; {this.state.posts.length}
-
-                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <div className="btn btn-dark" onClick={this.scrollTo}>
+                      Posts:&nbsp; {this.state.posts.length}
+                    </div>
 
                     <button
                       className="btn btn-dark"
@@ -406,8 +398,6 @@ showFollowingModal = () => {
                       <h2>{this.state.message}</h2>
 
                     </Modal>
-
-                    &nbsp;&nbsp;&nbsp;&nbsp;
 
                     <button
                       className="btn btn-dark"
@@ -450,10 +440,12 @@ showFollowingModal = () => {
                   </Row>
                 </div>
               </div>
+              
+              {/* FAVORITES SECTION */}
 
+              <h4 id="favoritesTitle">Favorites</h4>
               <div className="row favorites rounded">
-                <h4>Favorites</h4>
-
+                
                 {this.state.favorites.length ? (
                   <Container>
                     {this.state.favorites.map(favorite => (
@@ -470,7 +462,7 @@ showFollowingModal = () => {
                             }
                           }}
                           >
-                            <span><img id="podcastIcon" src={favorite.podcastLogo} alt="Podcast Logo" className="border-white" /></span>
+                            <span><img id="podcastIcon" src={favorite.podcastLogo} alt="Podcast Logo" className="border-white favoriteIcon" /></span>
                           </Link>
                         </div>
 
@@ -487,28 +479,24 @@ showFollowingModal = () => {
                             </div>
                             : null
                           }
-                          <Link to={{
-                            pathname: "/listen",
-                            state: {
-                              podcastId: favorite.podcastId,
-                              podcastName: favorite.podcastName,
-                              podcastLogo: favorite.podcastLogo,
-                              episodeId: favorite.episodeId,
-                              episodeName: favorite.episodeName,
-                              date: moment(favorite.date).format("LLL"),
-                              description: favorite.description,
-                              audioLink: favorite.audioLink
-                            }
-                          }}
+                          <Link 
+                            to={{
+                              pathname: "/listen",
+                              state: {
+                                podcastId: favorite.podcastId,
+                                podcastName: favorite.podcastName,
+                                podcastLogo: favorite.podcastLogo,
+                                episodeId: favorite.episodeId,
+                                episodeName: favorite.episodeName,
+                                date: moment(favorite.date).format("LLL"),
+                                description: favorite.description,
+                                audioLink: favorite.audioLink
+                              }
+                            }}
+                            className="favoriteLink"
                           >
                             <h4>{favorite.podcastName}</h4>
-                            <p>{favorite.episodeName}</p>
-                            <p>{moment(favorite.createdAt).format("LLL")}</p>
-
-                            {/* <p>{favorite.podcastName}</p> */}
-                            <div>
-                              <p className="ellipsis">{favorite.description}</p>
-                            </div>
+                            <p class="favoriteDescription">{favorite.episodeName}</p>
                           </Link>
 
                         </div>
@@ -521,33 +509,36 @@ showFollowingModal = () => {
                     </div>
                   )}
               </div>
+
+              {/* POSTS SECTION */}
+
               <Row>
-                <h4>Recent posts</h4>
+                <h4>Posts</h4>
                 {this.state.posts.length ? (
                   <div className="container bg-dark">
                     {this.state.posts.map(post => (
-                      <PostCard
-                        key={post.id}
-                        userId={post.postedBy}
-                        userName={this.state.user.name}
-                        userImage={this.state.user.profileImage}
-                        date={moment(post.createdAt).format("LLL")}
-                        podcastId={post.podcastId}
-                        podcastName={post.podcastName}
-                        podcastLogo={post.podcastLogo}
-                        episodeId={post.episodeId}
-                        episodeName={post.episodeName}
-                        description={post.description}
-                        audioLink={post.audioLink}
-                        userMessage={post.userMessage}
-                        likes={post.numberOfLikes}
-                        comments={post.numberOfComments}
-                        postId={post.id}
-                        handlePostDelete={this.handlePostDelete}
-                        handleShowLikes={this.handleShowLikes}
-                        handleLikeOrUnlike={this.handleLikeOrUnlike}
-                        handleShowComments={this.handleShowComments}
-                      />
+                        <PostCard
+                          key={post.id}
+                          userId={post.postedBy}
+                          userName={this.state.user.name}
+                          userImage={this.state.user.profileImage}
+                          date={moment(post.createdAt).format("LLL")}
+                          podcastId={post.podcastId}
+                          podcastName={post.podcastName}
+                          podcastLogo={post.podcastLogo}
+                          episodeId={post.episodeId}
+                          episodeName={post.episodeName}
+                          description={post.description}
+                          audioLink={post.audioLink}
+                          userMessage={post.userMessage}
+                          likes={post.numberOfLikes}
+                          comments={post.numberOfComments}
+                          postId={post.id}
+                          handlePostDelete={this.handlePostDelete}
+                          handleShowLikes={this.handleShowLikes}
+                          handleLikeOrUnlike={this.handleLikeOrUnlike}
+                          handleShowComments={this.handleShowComments}
+                        />
                     ))}
 
                     <Modal
@@ -570,16 +561,6 @@ showFollowingModal = () => {
                           </div>
                           <div className="col-9">
                             <p>{like.name}</p>
-                            {/*<button
-                              className="btn btn-outline-light bPosition"
-                              onClick={(event) => {
-                                event.preventDefault();
-                                this.followUser(like.id)
-                              }
-                              }
-                            >
-                              Follow
-                      </button>*/}
                           </div>
                         </div>
                       ))}
@@ -633,7 +614,7 @@ showFollowingModal = () => {
                               <div className="col-8">
                                 <button className="btn btn-sm deleteComment float-right" onClick={() => this.deleteComment(comment.id)}>
                                   Delete
-                                                </button>
+                                </button>
                               </div>
                               : null
                             }
