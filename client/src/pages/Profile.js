@@ -91,7 +91,7 @@ class Profile extends Component {
           this.setState({
             favorites: [],
             messageNoFav:
-            "No favorites found."
+              "No favorites found."
           });
         } else {
           this.setState({
@@ -103,7 +103,7 @@ class Profile extends Component {
         this.setState({
           favorites: [],
           messageNoFav:
-          "No favorites found."
+            "No favorites found."
         });
       });
   };
@@ -143,7 +143,7 @@ showFollowingModal = () => {
   });
 }
 
-getFollowers = () => {
+  getFollowers = () => {
     API.getFollowers(this.props.location.state.user.id)
       .then(res => {
         this.setState({
@@ -172,23 +172,16 @@ getFollowers = () => {
   };
 
   handlePostDelete = (id) => {
-
-    if (window.confirm("Delete post?")) {
-
       API.handlePostDelete(id)
         .then(res => {
           this.getPostsOnlyByUser();
         });
-    }
   };
 
   handleFavoriteDelete = id => {
-
-    if (window.confirm("Delete favorite?")) {
       API.handleFavoriteDelete(id).then(res => {
         this.getFavorites();
       });
-    }
   };
 
   //Opens the Likes modal
@@ -492,22 +485,10 @@ getFollowers = () => {
                           event.preventDefault();
                           this.followUser(like.id)
                         }
+                        }
                       >
                         Follow
-                      </button>
-                    </div>
-
-                        >Submit</button>
-                      </form>
-                    </Modal>
-
-                  </div>
-                ) : (
-                    <div className="col">
-                      <h5 className="text-center">
-                        &nbsp;{this.state.messageNoPodcast}
-                      </h5>
-
+                       </button>
                     </div>
                   </div>
                 ))}
@@ -531,4 +512,8 @@ getFollowers = () => {
   }
 }
 
+<<<<<<< HEAD
 export default Profile;
+=======
+export default Home;
+>>>>>>> 30a15d9c188e7a5296577dd63469540ee3d9ff3c
