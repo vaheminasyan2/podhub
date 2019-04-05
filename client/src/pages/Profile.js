@@ -407,7 +407,7 @@ class Profile extends Component {
 
             this.setState({
               userIsFollowed: true
-            }, () => console.log(this.state));
+            });
 
             return;
           }
