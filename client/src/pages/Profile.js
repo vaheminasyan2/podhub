@@ -91,7 +91,7 @@ class Profile extends Component {
           this.setState({
             favorites: [],
             messageNoFav:
-              "No favorites found."
+            "No favorites found."
           });
         } else {
           this.setState({
@@ -103,7 +103,7 @@ class Profile extends Component {
         this.setState({
           favorites: [],
           messageNoFav:
-            "No favorites found."
+          "No favorites found."
         });
       });
   };
@@ -143,7 +143,7 @@ showFollowingModal = () => {
   });
 }
 
-  getFollowers = () => {
+getFollowers = () => {
     API.getFollowers(this.props.location.state.user.id)
       .then(res => {
         this.setState({
@@ -172,16 +172,23 @@ showFollowingModal = () => {
   };
 
   handlePostDelete = (id) => {
+
+    if (window.confirm("Delete post?")) {
+
       API.handlePostDelete(id)
         .then(res => {
           this.getPostsOnlyByUser();
         });
+    }
   };
 
   handleFavoriteDelete = id => {
+
+    if (window.confirm("Delete favorite?")) {
       API.handleFavoriteDelete(id).then(res => {
         this.getFavorites();
       });
+    }
   };
 
   //Opens the Likes modal
@@ -488,7 +495,7 @@ showFollowingModal = () => {
                         }
                       >
                         Follow
-                       </button>
+                      </button>
                     </div>
                   </div>
                 ))}
@@ -512,4 +519,4 @@ showFollowingModal = () => {
   }
 }
 
-export default Home;
+export default Profile;
