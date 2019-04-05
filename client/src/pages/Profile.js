@@ -579,16 +579,16 @@ showFollowingModal = () => {
                           </div>
                           <div className="col-9">
                             <p>{like.name}</p>
-//                             <button
-//                               className="btn btn-outline-light bPosition"
-//                               onClick={(event) => {
-//                                 event.preventDefault();
-//                                 this.followUser(like.id)
-//                               }
-//                               }
-//                             >
-//                               Follow
-//                       </button>
+                            {/*<button
+                              className="btn btn-outline-light bPosition"
+                              onClick={(event) => {
+                                event.preventDefault();
+                                this.followUser(like.id)
+                              }
+                              }
+                            >
+                              Follow
+                      </button>*/}
                           </div>
                         </div>
                       ))}
