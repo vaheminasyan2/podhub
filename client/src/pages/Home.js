@@ -98,9 +98,13 @@ class Home extends Component {
             if (res.data[1] === false) {
                 API.unlikePost(postId, this.props.user.id).then(res => {
                     //console.log(res.data)
+                    this.getPosts();
                 })
-            };
-            this.getPosts();
+            }else{
+                this.getPosts();
+            }
+
+            // this.getPosts();
         })
     }
 
