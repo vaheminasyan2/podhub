@@ -129,12 +129,15 @@ class Listen extends Component {
         });
     }
 
+    // Shows the Navbar Audio Player
     showAudioInNavbar = () => {
 
         sessionStorage.clear();
 
         let audioSettings = {
             showAudio: true,
+            podcastName: this.state.podcastName,
+            episodeName: this.state.episodeName,
             audioLink: this.state.audioLink
         }
 
