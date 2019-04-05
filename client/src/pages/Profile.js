@@ -205,176 +205,238 @@ class Home extends Component {
 
   render() {
     return (
-      <div className="container">
-      <Row>
-        <div class="col-md-2 col-xs-0"></div>
-        <div class="col-md-8 col-xs-12">
+      <div>
+
+
+
         <Container>
-        
-        <div className="row userProfile rounded bg-dark text-white">
-          <div className="col-5">
-            <img
-              src={this.props.location.state.user.profileImage}
-              alt="User"
-              id="userMainProfileImage"
-              className="rounded border-white"
-            />
-          </div>
-
-          <div className="col">
-            <Row>
-              <h2 className="paddingTop">{this.props.location.state.user.name}</h2>
-            </Row>
-            <Row>
-              Posts:&nbsp; {this.state.posts.length} &nbsp;&nbsp; <strong>-</strong> &nbsp;&nbsp;
-              Followers:&nbsp;{this.state.followers} &nbsp;&nbsp; <strong>-</strong> &nbsp;&nbsp;
-              Following:&nbsp;{this.state.following}
-            </Row>
-          </div>
-        </div>
-
-        <div className="row favorites rounded">
-          <h4>Favorites: </h4>
-
-          {this.state.favorites.length ? (
-            <Container>
-              {this.state.favorites.map(favorite => (
-
-                <div className="row rounded favorite bg-dark text-secondary" key={favorite.id}>
-                  <div className="col-2 py-5 px-3 pad">
-                    <Link to={{
-                      pathname: "/episodeList",
-                      state: {
-                        podcastId: favorite.podcastId,
-                        podcastName: favorite.podcastName,
-                        podcastLogo: favorite.podcastLogo,
-                        loadMore: true
-                      }
-                    }}
-                    >
-                      <span><img id="podcastIcon" src={favorite.podcastLogo} alt="Podcast Logo" className="border-white" /></span>
-                    </Link>
-                  </div>
-
-                  <div className="col-10 p-1">
-                    <button
-                      className="btn btn-sm mb-1 float-right"
-                      onClick={() => this.handleFavoriteDelete(favorite.id)}
-                    >
-                      <img src={Delete} alt="delete" className="size" />
-                    </button>
-
-                    <Link to={{
-                      pathname: "/listen",
-                      state: {
-                        podcastId: favorite.podcastId,
-                        podcastName: favorite.podcastName,
-                        podcastLogo: favorite.podcastLogo,
-                        episodeId: favorite.episodeId,
-                        episodeName: favorite.episodeName,
-                        date: moment(favorite.date).format("LLL"),
-                        description: favorite.description,
-                        audioLink: favorite.audioLink
-                      }
-                    }}
-                    >
-                      <h4>{favorite.podcastName}</h4>
-                      <p>{favorite.episodeName}</p>
-                      <p>{moment(favorite.createdAt).format("LLL")}</p>
-
-                      {/* <p>{favorite.podcastName}</p> */}
-                      <div>
-                        <p className="ellipsis">{favorite.description}</p>
-                      </div>
-                    </Link>
-
+          <Row>
+            <div class="col-md-2 col-xs-0"></div>
+            <div class="col-md-8 col-xs-12" id="user-info-profile">
+              <Row>
+                <div class="col-md-2">
+                  <div className="row userProfile rounded">
+                    <img
+                      src={this.props.location.state.user.profileImage}
+                      alt="User"
+                      id="userMainProfileImage"
+                      className="rounded border-white"
+                    />
                   </div>
                 </div>
-              ))}
-            </Container>
-          ) : (
-              <div className="col">
-                <h5 className="text-center">&nbsp;{this.state.messageNoFav}</h5>
-              </div>
-            )}
-        </div>
-        <Row>
-          <h4>Recent posts:</h4>
-          {this.state.posts.length ? (
-            <div className="container bg-dark">
-              {this.state.posts.map(post => (
-                <PostCard
-                  key={post.id}
-                  userId={post.postedBy}               
-                  userName={this.state.user.name}
-                  userImage={this.state.user.profileImage}
-                  date={moment(post.createdAt).format("LLL")}
-                  podcastId={post.podcastId}
-                  podcastName={post.podcastName}
-                  podcastLogo={post.podcastLogo}
-                  episodeId={post.episodeId}
-                  episodeName={post.episodeName}
-                  description={post.description}
-                  audioLink={post.audioLink}
-                  userMessage={post.userMessage}
-                  likes={post.numberOfLikes}
-                  comments={post.numberOfComments}
-                  postId={post.id}
-                  handlePostDelete={this.handlePostDelete}
-                  handleShowLikes={this.handleShowLikes}
-                  handleLikeOrUnlike={this.handleLikeOrUnlike}
-                />
-              ))}
-              <Modal
-                open={this.state.showLikesModal}
-                onClose={this.closeLikesModal}
-                center
-              >
-                {this.state.likes.map(like => (
-                  <div
-                    className="row rounded favorite bg-dark text-secondary"
-                    key={like.id}
-                  >
-                    <div className="col-3 mt-0">
-                      <img
-                        src={like.image}
-                        alt="User Icon"
-                        id="userImageLikesModal"
-                        className="rounded border-white"
-                      />
-                    </div>
-                    <div className="col-9">
-                      <p>{like.name}</p>
-                      <button
-                        className="btn btn-outline-light bPosition"
-                        onClick={(event) => {
-                          event.preventDefault();
-                          this.followUser(like.id)
-                        }
-                        }
-                      >
-                        Follow
-                                                </button>
-                    </div>
-                  </div>
-                ))}
-              </Modal>
+                <div class="col-md-8">
+                  <h2 id="user-name-profile">{this.props.location.state.user.name}</h2>
+                </div>
+              </Row>
+              <Row>
+                <div class="col-md-2 col-xs-0"></div>
+                <div class="col-md-8" id="posts-followers-following-div">
+                  Posts:&nbsp; {this.state.posts.length} &nbsp;&nbsp; <strong>-</strong> &nbsp;&nbsp;
+                Followers:&nbsp;{this.state.followers} &nbsp;&nbsp; <strong>-</strong> &nbsp;&nbsp;
+                Following:&nbsp;{this.state.following}
+                </div>
+                <div class="col-md-2 col-xs-0"></div>
+              </Row>
             </div>
-          ) : (
-              <div className="col">
-                <h5 className="text-center">
-                  &nbsp;{this.state.messageNoPodcast}
-                </h5>
+
+            <div class="col-md-2 col-xs-0"></div>
+          </Row>
+
+
+          <Row>
+            <div class="col-md-2 col-xs-0"></div>
+
+            {this.state.favorites.length ? (
+
+              <div class="col-md-8 col-xs-12">
+
+                <h4 id="favorite-episodes">Favorite Episodes</h4>
+
+                <Row>
+
+
+
+                  {this.state.favorites.map(favorite => (
+
+                    <div class="col-md-3 col-xs-3" id="outer-fav-div">
+                      <div class="row">
+                        <div className="col-md-9"></div>
+
+                        <div className="col-md-3" id="close-btn-fav-div">
+                          <button
+                            className="btn btn-sm"
+                            onClick={() => this.handleFavoriteDelete(favorite.id)}
+                            id="close-btn-fav"
+                          >
+                            <img src={Delete} alt="delete" className="size" />
+                          </button>
+                        </div>
+                      </div>
+
+                      <Row>
+                        <div className="col-md-12">
+                          <Link to={{
+                            pathname: "/listen",
+                            state: {
+                              podcastId: favorite.podcastId,
+                              podcastName: favorite.podcastName,
+                              podcastLogo: favorite.podcastLogo,
+                              episodeId: favorite.episodeId,
+                              episodeName: favorite.episodeName,
+                              date: moment(favorite.date).format("LLL"),
+                              description: favorite.description,
+                              audioLink: favorite.audioLink
+                            }
+                          }}
+                          >
+                            <h4 id="pod-name-fav">{favorite.podcastName}</h4>
+                          </Link>
+                        </div>
+                      </Row>
+
+                      <Row>
+                        <div className="col-md-12" id="pod-logo-fav-div">
+                          <Link to={{
+                            pathname: "/episodeList",
+                            state: {
+                              podcastId: favorite.podcastId,
+                              podcastName: favorite.podcastName,
+                              podcastLogo: favorite.podcastLogo,
+                              loadMore: true
+                            }
+                          }}
+                          >
+                            <span><img id="podcastIcon-fav" src={favorite.podcastLogo} alt="Podcast Logo" /></span>
+                          </Link>
+                        </div>
+                      </Row>
+
+                      <Row>
+                        <div className="col-md-12" id="episode-name-fav-div">
+                          <Link to={{
+                            pathname: "/listen",
+                            state: {
+                              podcastId: favorite.podcastId,
+                              podcastName: favorite.podcastName,
+                              podcastLogo: favorite.podcastLogo,
+                              episodeId: favorite.episodeId,
+                              episodeName: favorite.episodeName,
+                              date: moment(favorite.date).format("LLL"),
+                              description: favorite.description,
+                              audioLink: favorite.audioLink
+                            }
+                          }}
+                          >
+                            <p>{favorite.episodeName}</p>
+
+                          </Link>
+                        </div>
+                      </Row>
+
+
+
+                    </div>
+                  ))}
+
+
+
+                </Row>
               </div>
-            )}
-        </Row>
-      </Container>
-        </div>
-        <div class="col-md-2 col-xs-0"></div>
-      </Row>
-      </div>    
-      
-    );
+
+              // !!!!! END OF POSITIVE TERNARY RETURN
+
+            ) : (
+
+                <h5 className="text-center">&nbsp;{this.state.messageNoFav}</h5>
+
+              )}
+
+
+
+
+            <div class="col-md-2 col-xs-0"></div>
+          </Row>
+
+          {/* // !!!!! END OF NEGATIVE TERNARY RETURN */}
+
+
+
+
+
+          <Row>
+            <h4 id="recent-posts">Recent posts</h4>
+            {this.state.posts.length ? (
+              <div className="container bg-dark">
+                {this.state.posts.map(post => (
+                  <PostCard
+                    key={post.id}
+                    userId={post.postedBy}
+                    userName={this.state.user.name}
+                    userImage={this.state.user.profileImage}
+                    date={moment(post.createdAt).format("LLL")}
+                    podcastId={post.podcastId}
+                    podcastName={post.podcastName}
+                    podcastLogo={post.podcastLogo}
+                    episodeId={post.episodeId}
+                    episodeName={post.episodeName}
+                    description={post.description}
+                    audioLink={post.audioLink}
+                    userMessage={post.userMessage}
+                    likes={post.numberOfLikes}
+                    comments={post.numberOfComments}
+                    postId={post.id}
+                    handlePostDelete={this.handlePostDelete}
+                    handleShowLikes={this.handleShowLikes}
+                    handleLikeOrUnlike={this.handleLikeOrUnlike}
+                  />
+                ))}
+                <Modal
+                  open={this.state.showLikesModal}
+                  onClose={this.closeLikesModal}
+                  center
+                >
+                  {this.state.likes.map(like => (
+                    <div
+                      className="row rounded favorite bg-dark text-secondary"
+                      key={like.id}
+                    >
+                      <div className="col-3 mt-0">
+                        <img
+                          src={like.image}
+                          alt="User Icon"
+                          id="userImageLikesModal"
+                          className="rounded border-white"
+                        />
+                      </div>
+                      <div className="col-9">
+                        <p>{like.name}</p>
+                        <button
+                          className="btn btn-outline-light bPosition"
+                          onClick={(event) => {
+                            event.preventDefault();
+                            this.followUser(like.id)
+                          }
+                          }
+                        >
+                          Follow
+                                                </button>
+                      </div>
+                    </div>
+                  ))}
+                </Modal>
+              </div>
+            ) : (
+                <div className="col">
+                  <h5 className="text-center">
+                    &nbsp;{this.state.messageNoPodcast}
+                  </h5>
+                </div>
+              )}
+          </Row>
+        </Container>
+      </div >
+
+    )
   }
 }
 
