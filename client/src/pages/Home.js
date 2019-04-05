@@ -22,11 +22,12 @@ class Home extends Component {
         posts: [],
         message: "",
         showLikesModal: false,
-        showCommentsModal: false,
         likes: [],
+        showCommentsModal: false,
         comments: [],
         currentComment: "",
         currentPostId: "",
+        commentLikes:  [],
     };
 
     componentDidMount() {
@@ -119,16 +120,31 @@ class Home extends Component {
                 })
             };
             this.getPosts();
-            this.getComments();
+            this.handleShowComments();
         })
     }
 
-    handleShowComments = postId => {
+    handleShowCommentsLikes = commentId => {
+        API.getLikes(commentId).then(res => {
+            //console.log(res.data);
+            if (res.data.length === 0) {
+                this.setState({
+                    showLikesModal: false
+                });
+            }
+            else {
+                this.setState({
+                    commentLikes: res.data,
+                    showLikesModal: true
+                });
+            }
+        });
+    }
 
+    handleShowComments = postId => {
         this.setState({
             currentPostId:postId
         });
-
         API.getComments(postId).then(res => {
             console.log(res.data);
             if (res.data.length === 0) {
@@ -143,7 +159,6 @@ class Home extends Component {
                     showCommentsModal: true,
                     currentPostId:postId
                 });
-
             }
         });
     };
@@ -246,6 +261,7 @@ class Home extends Component {
                                             </div>
                                             <div className="col-9">
                                                 <p>{like.name}</p>
+                                            
                                                 <button
                                                     className="btn btn-outline-light bPosition"
                                                     onClick={(event) => {
@@ -299,7 +315,7 @@ class Home extends Component {
                                                 </a>
                                                 <a
                                                     className="likesNumber"
-                                                // onClick={() => handleShowLikes(postId)}
+                                                onClick={() => this.handleShowCommentsLikes(comment.id)}
                                                 >
                                                     {comment.numberOfLikes}
                                                 </a>
