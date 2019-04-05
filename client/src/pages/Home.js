@@ -7,6 +7,7 @@ import PostCard from "../components/PostCard/postCard";
 import Modal from "react-responsive-modal";
 import "./Home.css";
 //import Delete from "../pages/delete.png";
+import Popup from "reactjs-popup";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart } from '@fortawesome/free-solid-svg-icons'
 //import User from "../components/User/user";
@@ -28,6 +29,7 @@ class Home extends Component {
         currentComment: "",
         currentPostId: "",
         commentLikes:  [],
+        userListCommentLikes: []
     };
 
     componentDidMount() {
@@ -62,6 +64,24 @@ class Home extends Component {
                 });
             });
     };
+
+    getUsersListCommentLikes = (commentId) =>{
+        API.getUsersLikedComment(commentId)
+        .then(res =>{
+            console.log(res.data)
+            if(res.data.length === 0){
+                this.setState({
+                    userListCommentLikes: [],
+                });
+
+        }else{
+            this.setState({
+                userListCommentLikes: res.data,
+            });
+        }
+        })
+    }
+
 
     // Delete post
     handlePostDelete = id => {
@@ -202,23 +222,7 @@ class Home extends Component {
         });
     };
 
-    getUsersListCommentLikes = () => {
-        API.getPostsOnlyByUser(this.state.comment.id)
-          .then(res => {
-              if (res.data.length)
-             {
-              this.setState({
-                likedUsers: res.data
-              });
-            }
-          })
-          .catch(() => {
-            this.setState({
-              likedUsers: [],
-              messageNoPodcast: "No users found, post something."
-            });
-          });
-      };
+    
 
       
     // followUser = (id) => {
@@ -337,12 +341,20 @@ class Home extends Component {
                                                 >
                                                     <FontAwesomeIcon icon="heart" />
                                                 </a>
-                                                <a
-                                                    className="likesNumber"
-                                                onClick={() => this.handleShowCommentsLikes(comment.id)}
+                                                <Popup
+                                                    trigger={<div>{comment.numberOfLikes}</div>}
+                                                    on="hover"
+                                                    onOpen = {()=> this.getUsersListCommentLikes(comment.id)}
+                                                    position="top left"
+                                                    closeOnDocumentClick
                                                 >
-                                                    {comment.numberOfLikes}
-                                                </a>
+                                                {this.state.userListCommentLikes.map(user => (
+                                                    <div>
+                                                    <div>{user.name}</div>
+                                                    <img src={user.image}  alt="User Icon"/>
+                                                    </div>
+                                                ))}
+                                                </Popup>
                                                 </div>
                                                 {this.props.user.id === comment.commentedBy
                                                     ?
