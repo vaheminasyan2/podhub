@@ -27,6 +27,7 @@ import "./Profile.css";
 class Profile extends Component {
   state = {
     user: [],
+    userIsFollowed: null,
     posts: [],
     numFollowers: 0,
     numFollowing: 0,
@@ -53,6 +54,7 @@ class Profile extends Component {
     this.getPostsOnlyByUser();
     this.getNumFollowers();
     this.getNumFollowing();
+    this.isUserFollowed();
     this.setState({
       user: this.props.location.state.user
     });
@@ -66,9 +68,15 @@ class Profile extends Component {
       this.getPostsOnlyByUser();
       this.getNumFollowers();
       this.getNumFollowing();
+      this.isUserFollowed();
       this.setState({
         user: this.props.location.state.user
       });
+    }
+
+    if (prevState.userIsFollowed !== this.state.userIsFollowed) {
+      this.getNumFollowers();
+      this.getNumFollowing();
     }
   }
 
@@ -238,7 +246,7 @@ class Profile extends Component {
     });
   };
 
-  
+
   // LIKING AND UNLIKING
   // ===============================================
 
@@ -272,7 +280,7 @@ class Profile extends Component {
       }
     });
   };
- 
+
   // Closes Likes modal
   closeLikesModal = () => {
     this.setState({
@@ -363,20 +371,80 @@ class Profile extends Component {
   }
 
   // Show pop up with list of users who have liked comment
-  getUsersListCommentLikes = (commentId) =>{
+  getUsersListCommentLikes = (commentId) => {
     API.getUsersLikedComment(commentId)
-      .then(res =>{
-        if(res.data.length === 0){
+      .then(res => {
+        if (res.data.length === 0) {
           this.setState({
-              userListCommentLikes: [],
+            userListCommentLikes: [],
           });
         }
         else {
           this.setState({
-              userListCommentLikes: res.data,
+            userListCommentLikes: res.data,
           });
         }
       });
+  }
+
+  // FOLLOW / UNFOLLOW USER
+  // ===============================================
+
+  isUserFollowed = () => {
+
+    // Get current user's ID
+    let currUserId = JSON.parse(localStorage.getItem("user")).id;
+
+    // Get list of users followed by current user
+    API.getUsersFollowed(currUserId)
+      .then(res => {
+
+        let usersFollowed = res.data;
+
+        // Look for viewed user's ID in list of followed users
+        usersFollowed.forEach(element => {
+          if(this.state.user.id === element.id) {
+
+            this.setState({
+              userIsFollowed: true
+            }, () => console.log(this.state));
+
+            return;
+          }
+        });
+      });
+  }
+
+  followUser = (userId) => {
+
+    let that = this;
+    let currUserId = JSON.parse(localStorage.getItem("user")).id; 
+
+    API.followUser(currUserId, userId)
+      .then(function (response) {
+        that.setState({
+          userIsFollowed: true
+        }, () => console.log(that.state));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  unfollowUser = (userId) => {
+
+    let that = this;
+    let currUserId = JSON.parse(localStorage.getItem("user")).id; 
+
+    API.unFollowUser(currUserId, userId)
+      .then(function (response) {
+        that.setState({
+          userIsFollowed: false
+        }, () => console.log(that.state));
+      })
+      .catch((err) =>
+        console.log(err)
+      )
   }
 
 
@@ -416,9 +484,37 @@ class Profile extends Component {
 
                 <div className="col">
 
+                  {/* User Name */}
+
                   <Row>
                     <h2 className="paddingTop userName">{this.props.location.state.user.name}</h2>
                   </Row>
+
+                  {/* Follow Button */}
+
+                  {this.state.user.id != JSON.parse(localStorage.getItem("user")).id ? (
+                    this.state.userIsFollowed ? (
+                      <button
+                        className="btn btn-outline-light followBtn"
+                        onClick={(event) => {event.preventDefault(); this.unfollowUser(this.state.user.id)}}
+                      >
+                        Unfollow
+                        </button>
+                    ) : (
+                        <button
+                          className="btn btn-outline-light followBtn"
+                          onClick={(event) => {event.preventDefault(); this.followUser(this.state.user.id)}}
+                        >
+                          Follow
+                        </button>
+                      )
+                  
+                    ) : (
+                      <></>
+                    )
+                  }
+
+                  {/* User Info: Posts, Followers, Following */}
 
                   <Row>
                     <div className="btn btn-dark" onClick={this.scrollTo}>
@@ -667,7 +763,7 @@ class Profile extends Component {
                               >
                                 <FontAwesomeIcon icon="heart" />
                               </a>
-                
+
                             </div>
 
                             <div className="col-2 mb-2">

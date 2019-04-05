@@ -98,3 +98,7 @@ a:hover{
 h4{
   padding-top:1%;
 }
+
+.followBtn {
+  float: right;
+}
