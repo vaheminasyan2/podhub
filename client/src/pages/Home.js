@@ -22,10 +22,12 @@ class Home extends Component {
         posts: [],
         message: "",
         showLikesModal: false,
-        showCommentsModal: false,
         likes: [],
+        showCommentsModal: false,
         comments: [],
         currentComment: "",
+        currentPostId: "",
+        commentLikes:  [],
     };
 
     componentDidMount() {
@@ -63,11 +65,11 @@ class Home extends Component {
 
     // Delete post
     handlePostDelete = id => {
-        if (window.confirm("Delete post?")) {
+       
             API.handlePostDelete(id).then(res => {
                 this.getPosts();
             });
-        }
+        
     };
 
     //Opens the Likes modal
@@ -96,9 +98,13 @@ class Home extends Component {
             if (res.data[1] === false) {
                 API.unlikePost(postId, this.props.user.id).then(res => {
                     //console.log(res.data)
+                    this.getPosts();
                 })
-            };
-            this.getPosts();
+            }else{
+                this.getPosts();
+            }
+
+            // this.getPosts();
         })
     }
 
@@ -115,36 +121,57 @@ class Home extends Component {
             if (res.data[1] === false) {
                 API.unlikeComment(commentId, this.props.user.id).then(res => {
                     console.log(res.data)
+                    this.handleShowComments(this.state.currentPostId);
                 })
-            };
-            this.getPosts();
-            this.handleShowComments();
+            }else{
+                this.handleShowComments(this.state.currentPostId);
+            }
+            // this.getPosts();
+            
         })
     }
 
-    handleShowComments = postId => {
+    handleShowCommentsLikes = commentId => {
+        API.getLikes(commentId).then(res => {
+            //console.log(res.data);
+            if (res.data.length === 0) {
+                this.setState({
+                    showLikesModal: false
+                });
+            }
+            else {
+                this.setState({
+                    commentLikes: res.data,
+                    showLikesModal: true
+                });
+            }
+        });
+    }
 
+    handleShowComments = postId => {
+        this.setState({
+            currentPostId:postId
+        });
         API.getComments(postId).then(res => {
             console.log(res.data);
             if (res.data.length === 0) {
                 this.setState({
-                    comments:[],
-                    showCommentsModal: true
+                    comments: res.data,
+                    showCommentsModal: true,
                 });
             }
             else {
                 this.setState({
                     comments: res.data,
-                    showCommentsModal: true
+                    showCommentsModal: true,
+                    currentPostId:postId
                 });
-
             }
         });
     };
 
-    addComment = postId => {
-        console.log("postId", postId)
-        API.addComment(this.state.currentComment, postId, this.props.user.id).then(res => {
+    addComment = () => {
+        API.addComment(this.state.currentComment, this.state.currentPostId, this.props.user.id).then(res => {
             console.log(res.data)
             this.getPosts();
             this.handleShowComments();
@@ -153,14 +180,12 @@ class Home extends Component {
     }
 
     deleteComment = (commentId) => {
-        if (window.confirm("Delete post?")) {
             API.deleteComment(commentId).then(res => {
                 console.log(res.data)
                 this.getPosts();
                 this.handleShowComments();
                 this.closeCommentsModal();
             });
-        }
     };
 
 
@@ -177,16 +202,16 @@ class Home extends Component {
         });
     };
 
-    followUser = (id) => {
-        API.followUser(this.props.user.id, id)
-            .then(function (response) {
-                console.log(response);
-                alert("Followed!");
-            })
-            .catch((err) =>
-                console.log(err)
-            )
-    }
+    // followUser = (id) => {
+    //     API.followUser(this.props.user.id, id)
+    //         .then(function (response) {
+    //             console.log(response);
+    //             alert("Followed!");
+    //         })
+    //         .catch((err) =>
+    //             console.log(err)
+    //         )
+    // }
 
     render() {
         //console.log(this.state.currentComment)
@@ -241,7 +266,8 @@ class Home extends Component {
                                             </div>
                                             <div className="col-9">
                                                 <p>{like.name}</p>
-                                                <button
+                                            
+                                                {/* <button
                                                     className="btn btn-outline-light bPosition"
                                                     onClick={(event) => {
                                                         event.preventDefault();
@@ -250,7 +276,7 @@ class Home extends Component {
                                                     }
                                                 >
                                                     Follow
-                                                </button>
+                                                </button> */}
                                             </div>
                                         </div>
                                     ))}
@@ -294,7 +320,7 @@ class Home extends Component {
                                                 </a>
                                                 <a
                                                     className="likesNumber"
-                                                // onClick={() => handleShowLikes(postId)}
+                                                onClick={() => this.handleShowCommentsLikes(comment.id)}
                                                 >
                                                     {comment.numberOfLikes}
                                                 </a>
@@ -316,9 +342,10 @@ class Home extends Component {
                                         <div className="form-group mt-4 bg-dark text-secondary">
                                             <input type="text" className="form-control" id="commentForm"
                                                 defaultValue=""
-                                                placeholder="Enter your comment" ref={this.state.currentComment} name="currentComment" onChange={this.handleInputChange} />
+                                                name="currentComment"
+                                                placeholder="Enter your comment" ref={this.state.currentComment} onChange={this.handleInputChange} />
                                         </div>
-                                        <button type="submit" className="btn btn-light btn-sm mb-2" onClick={(event) => { event.preventDefault(); this.addComment(this.props.postId) }
+                                        <button type="submit" className="btn btn-light btn-sm mb-2" onClick={(event) => { event.preventDefault(); this.addComment() }
                                         }
                                         >Submit</button>
                                     </form>

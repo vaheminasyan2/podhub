@@ -16,6 +16,12 @@ class Navbar extends Component {
     speed: 1.0,
   };
 
+  suppressEnter = (event) => {
+    if (window.event.keyCode == 13) {
+      event.preventDefault();
+    }
+  }
+
   changeSpeed = (event) => {
     this.setState({
       speed: event.target.value
@@ -111,6 +117,7 @@ class Navbar extends Component {
                   name="podcastSearch"
                   autoComplete="off"
                   onBlur={hidePodcasts}
+                  onKeyPress={this.suppressEnter}
                   onChange={handleInputChange}
                   onFocus={handleInputChange}
                   required

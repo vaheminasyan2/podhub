@@ -127,7 +127,7 @@ class EpisodeList extends Component {
         event.preventDefault();
 
         API.addPodcastToFavorites(this.state.podcastId);
-        alert("Favorited!");
+        //alert("Favorited!");
     }
 
     // Scrolls to top of page

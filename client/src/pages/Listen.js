@@ -118,7 +118,7 @@ class Listen extends Component {
         )
             .then(function (response) {
                 //console.log(response);
-                alert("Favorited!");
+                //alert("Favorited!");
             });
     }
 

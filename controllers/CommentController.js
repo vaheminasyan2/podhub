@@ -1,4 +1,5 @@
 const db = require(`../models/index.js`);
+const Op = db.Sequelize.Op;
 
 /**
  * Class Comment Controller
@@ -73,6 +74,38 @@ class CommentController {
       })
 
     })
+  }
+
+  /**
+   * Get the users Details who liked comments  <----- Home and Profile Page ----->
+   * @param {*} req
+   * @param {*} res
+   */
+  getUsersLikedComment(req, res) {
+    console.log(req.params.id);
+    db.commentLike
+      .findAll({ where: { commentId: req.params.id } })
+      .then(dbCommentLike => {
+        let userIds = dbCommentLike.map(like => like.userId);
+        console.log(userIds);
+        if(userIds.length){
+        db.user
+          .findAll({
+            where: {
+              id: {
+                [Op.or]: userIds
+              }
+            }
+          })
+          .then(dbUser => {
+            let userDetails = dbUser.map(user=>{ return {id: user.id, name: user.name, image: user.profileImage}})
+            res.json(userDetails);
+          });
+        }
+        else{
+          res.json(userIds);
+        }
+      });
   }
  
   /**
