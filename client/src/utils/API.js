@@ -220,5 +220,11 @@ export default {
         return axios.post("/api/posts/", data);
     },
 
+    isFollowedByUsers: function(userId) {
+        return axios.get("api/users/followedByUsers/" + userId);
+    },
 
+    isFollowingUsers: function(userId) {
+        return axios.get("api/users/isFollowingUsers/" + userId);
+    },
 };

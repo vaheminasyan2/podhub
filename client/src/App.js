@@ -9,6 +9,8 @@ import Listen from "./pages/Listen";
 import UserSearch from "./pages/UserSearch";
 import API from "./utils/API"
 import Login from './pages/Login';
+import Followers from "./pages/Followers";
+import Following from "./pages/Following";
 import Error from "./pages/Error";
 import "./App.css";
 
@@ -22,7 +24,7 @@ class App extends Component {
       podcastSearch: "",
       podcasts: [],
       showPodcasts: "hidePodcasts",
-      redirect: false,
+      logout: false,
       showAudioInNavbar: null,
       audioLink: null
     };
@@ -40,8 +42,8 @@ class App extends Component {
 
     if (sessionStorage.getItem("audioSettings")) {
       storedAudioLink = JSON.parse(sessionStorage.getItem("audioSettings")).audioLink;
-    } 
-    
+    }
+
     if (!this.state.showAudioInNavbar || this.state.audioLink != storedAudioLink) {
       this.setState({
         audioLink: storedAudioLink,
@@ -143,17 +145,21 @@ class App extends Component {
   }
 
   logout = () => {
-    this.setState({
-      user: null,
-      //redirect: true
-    });
+
     localStorage.clear();
     sessionStorage.clear();
+
+    this.setState({
+      user: null,
+      logout: true
+    });
   }
 
   handleUser = (userData) => {
-    this.setState({ user: userData })
-    this.setState({ redirect: true })
+    this.setState({ 
+      user: userData,
+      logout: false 
+    });
   }
 
   isLoggedIn = () => this.state.user != null;
@@ -172,80 +178,86 @@ class App extends Component {
   render() {
     return (
       <Router>
-
         <div className="wrapper">
-          {/* {this.state.redirect
-            ? <Redirect to="/" />
-            : null
-          } */}
+          {this.state.logout && window.location.pathname != "/"? (
+            <Redirect
+              to={{
+                pathname: "/"
+              }}
+            />
+          ) : (
+              <></>
+            )}
           {!this.isLoggedIn()
-            ? <Route
+            ? (<Route
               render={() =>
                 <Login handleUser={this.handleUser}
                 />}
-            />
-            :
-            <>
-              <Navbar
-                podcastSearch={this.podcastSearch}
-                handleInputChange={this.handleInputChange}
-                hidePodcasts={this.hidePodcasts}
-                logout={this.logout}
-                user={this.state.user}
-                showAudio={this.state.showAudioInNavbar}
-                hideAudio={this.hideAudio}
-              />
-              <PodcastSearch
-                show={this.state.showPodcasts}
-                hide={this.hidePodcasts}
-                podcasts={this.state.podcasts}
-              />
+            />)
+            : (
+              <>
+                <Navbar
+                  podcastSearch={this.podcastSearch}
+                  handleInputChange={this.handleInputChange}
+                  hidePodcasts={this.hidePodcasts}
+                  logout={this.logout}
+                  user={this.state.user}
+                  showAudio={this.state.showAudioInNavbar}
+                  hideAudio={this.hideAudio}
+                />
+                <PodcastSearch
+                  show={this.state.showPodcasts}
+                  hide={this.hidePodcasts}
+                  podcasts={this.state.podcasts}
+                />
 
-              <Switch>
-                <Route exact path="/home"
-                  render={() =>
-                    <div className="container">
-                      <div className="row">
-                        <div className="col-md-2 col-xs-0"></div>
-                        <div className="col-md-8 col-xs-12">
-                          <Home
-                            user={this.state.user}
-                          />
+                <Switch>
+                  <Route exact path="/home"
+                    render={() =>
+                      <div className="container">
+                        <div className="row">
+                          <div className="col-md-2 col-xs-0"></div>
+                          <div className="col-md-8 col-xs-12">
+                            <Home
+                              user={this.state.user}
+                            />
+                          </div>
+                          <div className="col-md-2 col-xs-0"></div>
                         </div>
-                        <div className="col-md-2 col-xs-0"></div>
                       </div>
-                    </div>
-                  }
-                />
-                <Route exact path="/"
-                  render={() =>
-                    <div className="container">
-                      <div className="row">
-                        <div className="col-md-2 col-xs-0"></div>
-                        <div className="col-md-8 col-xs-12">
-                          <Home
-                            user={this.state.user}
-                          />
+                    }
+                  />
+                  <Route exact path="/"
+                    render={() =>
+                      <div className="container">
+                        <div className="row">
+                          <div className="col-md-2 col-xs-0"></div>
+                          <div className="col-md-8 col-xs-12">
+                            <Home
+                              user={this.state.user}
+                            />
+                          </div>
+                          <div className="col-md-2 col-xs-0"></div>
                         </div>
-                        <div className="col-md-2 col-xs-0"></div>
                       </div>
-                    </div>
-                  }
-                />
-                <Route exact path="/profile" component={Profile} />
-                <Route exact path="/episodeList" component={EpisodeList} />
-                <Route exact path="/listen" component={Listen} />
-                <Route exact path="/userSearch"
-                  render={() =>
-                    <UserSearch
-                      user={this.state.user}
-                    />
-                  }
-                />
-                <Route component={Error} />
-              </Switch>
-            </>
-          }
+                    }
+                  />
+                  <Route exact path="/profile" component={Profile} />
+                  <Route exact path="/episodeList" component={EpisodeList} />
+                  <Route exact path="/listen" component={Listen} />
+                  <Route exact path="/userSearch"
+                    render={() =>
+                      <UserSearch
+                        user={this.state.user}
+                      />
+                    }
+                  />
+                  <Route exact path="/followers" component={Followers} />
+                  <Route exact path="/following" component={Following} />
+                  <Route component={Error} />
+                </Switch>
+              </>
+            )}
         </div>
       </Router>
     )

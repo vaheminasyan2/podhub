@@ -290,16 +290,16 @@ class Home extends Component {
     });
   };
 
-  followUser = (id) => {
-    API.followUser(this.state.user.id, id)
-      .then(function (response) {
-        console.log(response);
-        alert("Followed!");
-      })
-      .catch((err) =>
-        console.log(err)
-      )
-  }
+  // followUser = (id) => {
+  //   API.followUser(this.state.user.id, id)
+  //     .then(function (response) {
+  //       console.log(response);
+  //       alert("Followed!");
+  //     })
+  //     .catch((err) =>
+  //       console.log(err)
+  //     )
+  // }
 
   render() {
     return (
@@ -324,9 +324,36 @@ class Home extends Component {
                     <h2 className="paddingTop">{this.props.location.state.user.name}</h2>
                   </Row>
                   <Row>
-                    Posts:&nbsp; {this.state.posts.length} &nbsp;&nbsp; <strong>-</strong> &nbsp;&nbsp;
-              Followers:&nbsp;{this.state.followers} &nbsp;&nbsp; <strong>-</strong> &nbsp;&nbsp;
-              Following:&nbsp;{this.state.following}
+
+                    Posts:&nbsp; {this.state.posts.length}
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <Link 
+                      to={{
+                        pathname: "/followers",
+                        state: {
+                          user: this.state.user
+                        }
+                      }}
+                      className="followers"
+                    >
+                      Followers:&nbsp;{this.state.followers}
+                    </Link>
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <Link
+                      to={{
+                        pathname: "/following",
+                        state: {
+                          user: this.state.user
+                        }
+                      }}
+                      className="following"
+                    >
+                      Following:&nbsp;{this.state.following}
+                    </Link>
                   </Row>
                 </div>
               </div>
@@ -337,7 +364,8 @@ class Home extends Component {
                 {this.state.favorites.length ? (
                   <Container>
                     {this.state.favorites.map(favorite => (
-
+                      //console.log(this.state.user.id),
+                      //console.log(favorite.userId),
                       <div className="row rounded favorite bg-dark text-secondary" key={favorite.id}>
                         <div className="col-2 py-5 px-3 pad">
                           <Link to={{
@@ -355,13 +383,18 @@ class Home extends Component {
                         </div>
 
                         <div className="col-10 p-1">
-                          <button
-                            className="btn btn-sm mb-1 float-right"
-                            onClick={() => this.handleFavoriteDelete(favorite.id)}
-                          >
-                            <img src={Delete} alt="delete" className="size" />
-                          </button>
-
+                          {JSON.parse(localStorage.getItem("user")).id === favorite.userId
+                            ?
+                            <div>
+                              <button
+                                className="btn btn-sm mb-1 float-right"
+                                onClick={() => this.handleFavoriteDelete(favorite.id)}
+                              >
+                                <img src={Delete} alt="delete" className="size" />
+                              </button>
+                            </div>
+                            : null
+                          }
                           <Link to={{
                             pathname: "/listen",
                             state: {
@@ -445,7 +478,7 @@ class Home extends Component {
                           </div>
                           <div className="col-9">
                             <p>{like.name}</p>
-                            <button
+                            {/* <button
                               className="btn btn-outline-light bPosition"
                               onClick={(event) => {
                                 event.preventDefault();
@@ -454,7 +487,7 @@ class Home extends Component {
                               }
                             >
                               Follow
-                      </button>
+                      </button> */}
                           </div>
                         </div>
                       ))}
