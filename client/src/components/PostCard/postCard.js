@@ -139,10 +139,7 @@ function Card({
               className="comments"
               onClick={() => handleShowComments(postId)}
             >
-              <FontAwesomeIcon icon="comment" />
-            </a>
-            <a>
-              {comments}
+              <FontAwesomeIcon icon="comment" /> &nbsp; {comments}
             </a>
           </div>
         </div>

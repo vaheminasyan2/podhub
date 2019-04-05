@@ -28,7 +28,7 @@ class Home extends Component {
         comments: [],
         currentComment: "",
         currentPostId: "",
-        commentLikes:  [],
+        commentLikes: [],
         userListCommentLikes: []
     };
 
@@ -65,31 +65,31 @@ class Home extends Component {
             });
     };
 
-    getUsersListCommentLikes = (commentId) =>{
+    getUsersListCommentLikes = (commentId) => {
         API.getUsersLikedComment(commentId)
-        .then(res =>{
-            console.log(res.data)
-            if(res.data.length === 0){
-                this.setState({
-                    userListCommentLikes: [],
-                });
+            .then(res => {
+                console.log(res.data)
+                if (res.data.length === 0) {
+                    this.setState({
+                        userListCommentLikes: [],
+                    });
 
-        }else{
-            this.setState({
-                userListCommentLikes: res.data,
-            });
-        }
-        })
+                } else {
+                    this.setState({
+                        userListCommentLikes: res.data,
+                    });
+                }
+            })
     }
 
 
     // Delete post
     handlePostDelete = id => {
-       
-            API.handlePostDelete(id).then(res => {
-                this.getPosts();
-            });
-        
+
+        API.handlePostDelete(id).then(res => {
+            this.getPosts();
+        });
+
     };
 
     //Opens the Likes modal
@@ -120,7 +120,7 @@ class Home extends Component {
                     //console.log(res.data)
                     this.getPosts();
                 })
-            }else{
+            } else {
                 this.getPosts();
             }
 
@@ -137,17 +137,17 @@ class Home extends Component {
     };
 
     handleCommentLikeOrUnlike = commentId => {
-        API.likeComment(commentId, this.props.user.id).then(res =>{
+        API.likeComment(commentId, this.props.user.id).then(res => {
             if (res.data[1] === false) {
                 API.unlikeComment(commentId, this.props.user.id).then(res => {
                     console.log(res.data)
                     this.handleShowComments(this.state.currentPostId);
                 })
-            }else{
+            } else {
                 this.handleShowComments(this.state.currentPostId);
             }
             // this.getPosts();
-            
+
         })
     }
 
@@ -170,7 +170,7 @@ class Home extends Component {
 
     handleShowComments = postId => {
         this.setState({
-            currentPostId:postId
+            currentPostId: postId
         });
         API.getComments(postId).then(res => {
             console.log(res.data);
@@ -184,7 +184,7 @@ class Home extends Component {
                 this.setState({
                     comments: res.data,
                     showCommentsModal: true,
-                    currentPostId:postId
+                    currentPostId: postId
                 });
             }
         });
@@ -200,12 +200,12 @@ class Home extends Component {
     }
 
     deleteComment = (commentId) => {
-            API.deleteComment(commentId).then(res => {
-                console.log(res.data)
-                this.getPosts();
-                this.handleShowComments();
-                this.closeCommentsModal();
-            });
+        API.deleteComment(commentId).then(res => {
+            console.log(res.data)
+            this.getPosts();
+            this.handleShowComments();
+            this.closeCommentsModal();
+        });
     };
 
 
@@ -222,9 +222,6 @@ class Home extends Component {
         });
     };
 
-    
-
-      
     // followUser = (id) => {
     //     API.followUser(this.props.user.id, id)
     //         .then(function (response) {
@@ -289,7 +286,7 @@ class Home extends Component {
                                             </div>
                                             <div className="col-9">
                                                 <p>{like.name}</p>
-                                            
+
                                                 {/* <button
                                                     className="btn btn-outline-light bPosition"
                                                     onClick={(event) => {
@@ -304,6 +301,8 @@ class Home extends Component {
                                         </div>
                                     ))}
                                 </Modal>
+
+
 
                                 <Modal
                                     open={this.state.showCommentsModal}
@@ -334,37 +333,48 @@ class Home extends Component {
                                                 <p className="userComment pl-2 ml-3">{comment.comment}</p>
                                             </div>
                                             <div className="row comment-third-row">
-                                            <div className="col-4 mb-2">
-                                                <a
-                                                    className="likes ml-4"
-                                                onClick={() => this.handleCommentLikeOrUnlike(comment.id)}
-                                                >
-                                                    <FontAwesomeIcon icon="heart" />
-                                                </a>
-                                                <Popup
-                                                    trigger={<div>{comment.numberOfLikes}</div>}
-                                                    on="hover"
-                                                    onOpen = {()=> this.getUsersListCommentLikes(comment.id)}
-                                                    position="top left"
-                                                    closeOnDocumentClick
-                                                >
-                                                {this.state.userListCommentLikes.map(user => (
-                                                    <div>
-                                                    <div>{user.name}</div>
-                                                    <img src={user.image}  alt="User Icon"/>
-                                                    </div>
-                                                ))}
-                                                </Popup>
+                                                <div className="col-2 mb-2">
+                                                    <a
+                                                        className="likes ml-4"
+                                                        onClick={() => this.handleCommentLikeOrUnlike(comment.id)}
+                                                    >
+                                                        <FontAwesomeIcon icon="heart" />
+                                                    </a>
+                                                </div>
+                                                <div className="col-2 mb-2">
+                                                    {comment.numberOfLikes > 0
+                                                        ?
+                                                        <Popup
+                                                            trigger={<div>{comment.numberOfLikes}</div>}
+                                                            on="hover"
+                                                            onOpen={() => this.getUsersListCommentLikes(comment.id)}
+                                                            position="top left"
+                                                            closeOnDocumentClick
+                                                            className="popup"
+                                                        >
+                                                            {this.state.userListCommentLikes.map(user => (
+                                                                <div className="row" key={user.id}>
+                                                                    <div className="col-3 m-0">
+                                                                        <img src={user.image} alt="User Icon" className="userIconPopup rounded border-white" />
+                                                                    </div>
+                                                                    <div className="col-9 m-0">
+                                                                        <p>{user.name}</p>
+                                                                    </div>
+                                                                </div>
+                                                            ))}
+                                                        </Popup>
+                                                        :
+                                                        0}
                                                 </div>
                                                 {this.props.user.id === comment.commentedBy
                                                     ?
-                                                <div className="col-8">
-                                                <button className="btn btn-sm deleteComment float-right" onClick={() => this.deleteComment(comment.id)}>
-                                                    Delete
+                                                    <div className="col-8">
+                                                        <button className="btn btn-sm deleteComment float-right" onClick={() => this.deleteComment(comment.id)}>
+                                                            Delete
                                                 </button>
-                                                </div>
-                                                          : null
-                                                        }
+                                                    </div>
+                                                    : null
+                                                }
                                             </div>
                                         </div>
                                     ))}

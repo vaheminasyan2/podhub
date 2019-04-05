@@ -272,7 +272,7 @@ class Profile extends Component {
       }
     });
   };
-
+ 
   // Closes Likes modal
   closeLikesModal = () => {
     this.setState({
@@ -660,31 +660,42 @@ class Profile extends Component {
                             <p className="userComment pl-2 ml-3">{comment.comment}</p>
                           </div>
                           <div className="row comment-third-row">
-                            <div className="col-4 mb-2">
+                            <div className="col-2 mb-2">
                               <a
                                 className="likes ml-4"
                                 onClick={() => this.handleCommentLikeOrUnlike(comment.id)}
                               >
                                 <FontAwesomeIcon icon="heart" />
                               </a>
-
-                              <Popup
-                                trigger={<div>{comment.numberOfLikes}</div>}
-                                on="hover"
-                                onOpen = {()=> this.getUsersListCommentLikes(comment.id)}
-                                position="top left"
-                                closeOnDocumentClick
-                              >
-                              {this.state.userListCommentLikes.map(user => (
-                                <div>
-                                  <div>{user.name}</div>
-                                  <img src={user.image}  alt="User Icon"/>
-                                </div>
-                              ))
-                              }
-                            </Popup>
-                              
+                
                             </div>
+
+                            <div className="col-2 mb-2">
+                              {comment.numberOfLikes > 0
+                                ?
+                                <Popup
+                                  trigger={<div>{comment.numberOfLikes}</div>}
+                                  on="hover"
+                                  onOpen={() => this.getUsersListCommentLikes(comment.id)}
+                                  position="top left"
+                                  closeOnDocumentClick
+                                  className="popup"
+                                >
+                                  {this.state.userListCommentLikes.map(user => (
+                                    <div className="row" key={user.id}>
+                                      <div className="col-3 m-0">
+                                        <img src={user.image} alt="User Icon" className="userIconPopup rounded border-white" />
+                                      </div>
+                                      <div className="col-9 m-0">
+                                        <p>{user.name}</p>
+                                      </div>
+                                    </div>
+                                  ))}
+                                </Popup>
+                                :
+                                0}
+                            </div>
+
                             {this.state.user.id === comment.commentedBy
                               ?
                               <div className="col-8">
