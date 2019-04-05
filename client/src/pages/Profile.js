@@ -340,174 +340,322 @@ showFollowingModal = () => {
   render() {
     return (
       <div className="container">
-      <Row>
-        <div class="col-md-2 col-xs-0"></div>
-        <div class="col-md-8 col-xs-12">
-        <Container>
-        
-        <div className="row userProfile rounded bg-dark text-white">
-          <div className="col-5">
-            <img
-              src={this.props.location.state.user.profileImage}
-              alt="User"
-              id="userMainProfileImage"
-              className="rounded border-white"
-            />
-          </div>
-
-          <div className="col">
-            <Row>
-              <h2 className="paddingTop">{this.props.location.state.user.name}</h2>
-            </Row>
-            <Row>
-              Posts:&nbsp; {this.state.posts.length} &nbsp;&nbsp; <strong>-</strong> &nbsp;&nbsp;
-              Followers:&nbsp;{this.state.followers} &nbsp;&nbsp; <strong>-</strong> &nbsp;&nbsp;
-              Following:&nbsp;{this.state.following}
-            </Row>
-          </div>
-        </div>
-
-        <div className="row favorites rounded">
-          <h4>Favorites: </h4>
-
-          {this.state.favorites.length ? (
+        <Row>
+          <div className="col-md-2 col-xs-0"></div>
+          <div className="col-md-8 col-xs-12">
             <Container>
-              {this.state.favorites.map(favorite => (
 
-                <div className="row rounded favorite bg-dark text-secondary" key={favorite.id}>
-                  <div className="col-2 py-5 px-3 pad">
-                    <Link to={{
-                      pathname: "/episodeList",
-                      state: {
-                        podcastId: favorite.podcastId,
-                        podcastName: favorite.podcastName,
-                        podcastLogo: favorite.podcastLogo,
-                        loadMore: true
-                      }
-                    }}
-                    >
-                      <span><img id="podcastIcon" src={favorite.podcastLogo} alt="Podcast Logo" className="border-white" /></span>
-                    </Link>
-                  </div>
+              <div className="row userProfile rounded bg-dark text-white">
+                <div className="col-3">
+                  <img
+                    src={this.props.location.state.user.profileImage}
+                    alt="User"
+                    id="userMainProfileImage"
+                    className="rounded border-white"
+                  />
+                </div>
 
-                  <div className="col-10 p-1">
+                <div className="col">
+
+                  <Row>
+                    <h2 className="paddingTop userName">{this.props.location.state.user.name}</h2>
+                  </Row>
+
+                  <Row>
+                    <div className="btn btn-dark" onClick={this.scrollTo}>
+                      Posts:&nbsp; {this.state.posts.length}
+                    </div>
+
                     <button
-                      className="btn btn-sm mb-1 float-right"
-                      onClick={() => this.handleFavoriteDelete(favorite.id)}
+                      className="btn btn-dark"
+                      onClick={this.getActualFollowers}
                     >
-                      <img src={Delete} alt="delete" className="size" />
+                      Followers:&nbsp;{this.state.followers}
                     </button>
 
-                    <Link to={{
-                      pathname: "/listen",
-                      state: {
-                        podcastId: favorite.podcastId,
-                        podcastName: favorite.podcastName,
-                        podcastLogo: favorite.podcastLogo,
-                        episodeId: favorite.episodeId,
-                        episodeName: favorite.episodeName,
-                        date: moment(favorite.date).format("LLL"),
-                        description: favorite.description,
-                        audioLink: favorite.audioLink
-                      }
-                    }}
+                    <Modal
+                      open={this.state.showFollowers}
+                      onClose={this.hideFollowersModal}
+                    // classNames={{ modal: "customModal", overlay: "customOverlay", closeButton: "customCloseButton" }}
                     >
-                      <h4>{favorite.podcastName}</h4>
-                      <p>{favorite.episodeName}</p>
-                      <p>{moment(favorite.createdAt).format("LLL")}</p>
+                      <h2>Users following {this.props.location.state.user.name}</h2>
 
-                      {/* <p>{favorite.podcastName}</p> */}
-                      <div>
-                        <p className="ellipsis">{favorite.description}</p>
-                      </div>
-                    </Link>
+                      {this.state.actualFollowers.length ? (
+                        <List>
+                          {this.state.actualFollowers.map(user =>
+                            <div className="container tile m-2 userList" key={user.id}>
+                              <User
+                                userId={user.id}
+                                userName={user.name}
+                                userImage={user.image}
+                                handler={null}
+                              />
+                            </div>
+                          )}
+                        </List>
+                      ) : (
+                          this.state.message != "Loading..." ? (
+                            <h2>No followers found.</h2>
+                          ) : (
+                              <></>
+                            )
+                        )}
 
-                  </div>
+                      <h2>{this.state.message}</h2>
+
+                    </Modal>
+
+                    <button
+                      className="btn btn-dark"
+                      onClick={this.getUsersFollowed}
+                    >
+                      Following:&nbsp;{this.state.following}
+                    </button>
+
+                    <Modal
+                      open={this.state.showFollowingModal}
+                      onClose={this.hideFollowersModal}
+                    // classNames={{ modal: "customModal", overlay: "customOverlay", closeButton: "customCloseButton" }}
+                    >
+                      <h2>Users {this.props.location.state.user.name} follows</h2>
+
+                      {this.state.actualFollowing.length ? (
+                        <List>
+                          {this.state.actualFollowing.map(user =>
+                            <div className="container tile m-2 userList" key={user.id}>
+                              <User
+                                userId={user.id}
+                                userName={user.name}
+                                userImage={user.profileImage}
+                                handler={null}
+                              />
+                            </div>
+                          )}
+                        </List>
+                      ) : (
+                          this.state.message != "Loading..." ? (
+                            <h2>User is not following anyone.</h2>
+                          ) : (
+                              <></>
+                            )
+                        )}
+
+                      <h2>{this.state.message}</h2>
+
+                    </Modal>
+                  </Row>
                 </div>
-              ))}
-            </Container>
-          ) : (
-              <div className="col">
-                <h5 className="text-center">&nbsp;{this.state.messageNoFav}</h5>
               </div>
-            )}
-        </div>
-        <Row>
-          <h4>Recent posts:</h4>
-          {this.state.posts.length ? (
-            <div className="container bg-dark">
-              {this.state.posts.map(post => (
-                <PostCard
-                  key={post.id}
-                  userId={post.postedBy}               
-                  userName={this.state.user.name}
-                  userImage={this.state.user.profileImage}
-                  date={moment(post.createdAt).format("LLL")}
-                  podcastId={post.podcastId}
-                  podcastName={post.podcastName}
-                  podcastLogo={post.podcastLogo}
-                  episodeId={post.episodeId}
-                  episodeName={post.episodeName}
-                  description={post.description}
-                  audioLink={post.audioLink}
-                  userMessage={post.userMessage}
-                  likes={post.numberOfLikes}
-                  comments={post.numberOfComments}
-                  postId={post.id}
-                  handlePostDelete={this.handlePostDelete}
-                  handleShowLikes={this.handleShowLikes}
-                  handleLikeOrUnlike={this.handleLikeOrUnlike}
-                />
-              ))}
-              <Modal
-                open={this.state.showLikesModal}
-                onClose={this.closeLikesModal}
-                center
-              >
-                {this.state.likes.map(like => (
-                  <div
-                    className="row rounded favorite bg-dark text-secondary"
-                    key={like.id}
-                  >
-                    <div className="col-3 mt-0">
-                      <img
-                        src={like.image}
-                        alt="User Icon"
-                        id="userImageLikesModal"
-                        className="rounded border-white"
-                      />
+              
+              {/* FAVORITES SECTION */}
+
+              <h4 id="favoritesTitle">Favorites</h4>
+              <div className="row favorites rounded">
+                
+                {this.state.favorites.length ? (
+                  <Container>
+                    {this.state.favorites.map(favorite => (
+
+                      <div className="row rounded favorite bg-dark text-secondary" key={favorite.id}>
+                        <div className="col-2 py-5 px-3 pad">
+                          <Link to={{
+                            pathname: "/episodeList",
+                            state: {
+                              podcastId: favorite.podcastId,
+                              podcastName: favorite.podcastName,
+                              podcastLogo: favorite.podcastLogo,
+                              loadMore: true
+                            }
+                          }}
+                          >
+                            <span><img id="podcastIcon" src={favorite.podcastLogo} alt="Podcast Logo" className="border-white favoriteIcon" /></span>
+                          </Link>
+                        </div>
+
+                        <div className="col-10 p-1">
+                          {JSON.parse(localStorage.getItem("user")).id === favorite.userId
+                            ?
+                            <div>
+                              <button
+                                className="btn btn-sm mb-1 float-right"
+                                onClick={() => this.handleFavoriteDelete(favorite.id)}
+                              >
+                                <img src={Delete} alt="delete" className="size" />
+                              </button>
+                            </div>
+                            : null
+                          }
+                          <Link 
+                            to={{
+                              pathname: "/listen",
+                              state: {
+                                podcastId: favorite.podcastId,
+                                podcastName: favorite.podcastName,
+                                podcastLogo: favorite.podcastLogo,
+                                episodeId: favorite.episodeId,
+                                episodeName: favorite.episodeName,
+                                date: moment(favorite.date).format("LLL"),
+                                description: favorite.description,
+                                audioLink: favorite.audioLink
+                              }
+                            }}
+                            className="favoriteLink"
+                          >
+                            <h4>{favorite.podcastName}</h4>
+                            <p className="favoriteDescription">{favorite.episodeName}</p>
+                          </Link>
+
+                        </div>
+                      </div>
+                    ))}
+                  </Container>
+                ) : (
+                    <div className="col">
+                      <h5 className="text-center">&nbsp;{this.state.messageNoFav}</h5>
                     </div>
-                    <div className="col-9">
-                      <p>{like.name}</p>
-                      <button
-                        className="btn btn-outline-light bPosition"
-                        onClick={(event) => {
-                          event.preventDefault();
-                          this.followUser(like.id)
+                  )}
+              </div>
+
+              {/* POSTS SECTION */}
+
+              <Row>
+                <h4>Posts</h4>
+                {this.state.posts.length ? (
+                  <div className="container bg-dark">
+                    {this.state.posts.map(post => (
+                        <PostCard
+                          key={post.id}
+                          userId={post.postedBy}
+                          userName={this.state.user.name}
+                          userImage={this.state.user.profileImage}
+                          date={moment(post.createdAt).format("LLL")}
+                          podcastId={post.podcastId}
+                          podcastName={post.podcastName}
+                          podcastLogo={post.podcastLogo}
+                          episodeId={post.episodeId}
+                          episodeName={post.episodeName}
+                          description={post.description}
+                          audioLink={post.audioLink}
+                          userMessage={post.userMessage}
+                          likes={post.numberOfLikes}
+                          comments={post.numberOfComments}
+                          postId={post.id}
+                          handlePostDelete={this.handlePostDelete}
+                          handleShowLikes={this.handleShowLikes}
+                          handleLikeOrUnlike={this.handleLikeOrUnlike}
+                          handleShowComments={this.handleShowComments}
+                        />
+                    ))}
+
+                    <Modal
+                      open={this.state.showLikesModal}
+                      onClose={this.closeLikesModal}
+                      center
+                    >
+                      {this.state.likes.map(like => (
+                        <div
+                          className="row rounded favorite bg-dark text-secondary"
+                          key={like.id}
+                        >
+                          <div className="col-3 mt-0">
+                            <img
+                              src={like.image}
+                              alt="User Icon"
+                              id="userImageLikesModal"
+                              className="rounded border-white"
+                            />
+                          </div>
+                          <div className="col-9">
+                            <p>{like.name}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </Modal>
+
+                    <Modal
+                      open={this.state.showCommentsModal}
+                      onClose={this.closeCommentsModal}
+                      center
+                    >
+                      {this.state.comments.map(comment => (
+                        <div className="commentBox rounded border border-top-0 border-left-0 border-right-0 bg-dark text-secondary" key={comment.id}>
+                          <div
+                            className="row comment-top-row"
+                          >
+                            <div className="col-2 mt-0">
+                              <img
+                                src={comment.userImage}
+                                alt="User Icon"
+                                id="userImageCommentsModal"
+                                className="rounded border-white mt-1"
+                              />
+                            </div>
+                            <div className="col-10">
+                              <p>{comment.userName}&nbsp;|&nbsp; {moment(comment.createdAt).format("LLL")}</p>
+                            </div>
+                          </div>
+
+                          <div
+                            className="row comment-second-row"
+                          >
+                            <p className="userComment pl-2 ml-3">{comment.comment}</p>
+                          </div>
+                          <div className="row comment-third-row">
+                            <div className="col-4 mb-2">
+                              <a
+                                className="likes ml-4"
+                                onClick={() => this.handleCommentLikeOrUnlike(comment.id)}
+                              >
+                                <FontAwesomeIcon icon="heart" />
+                              </a>
+                              <a
+                                className="likesNumber"
+                                onClick={() => this.handleShowCommentsLikes(comment.id)}
+                              >
+                                {comment.numberOfLikes}
+                              </a>
+                            </div>
+                            {this.state.user.id === comment.commentedBy
+                              ?
+                              <div className="col-8">
+                                <button className="btn btn-sm deleteComment float-right" onClick={() => this.deleteComment(comment.id)}>
+                                  Delete
+                                </button>
+                              </div>
+                              : null
+                            }
+                          </div>
+                        </div>
+                      ))}
+
+                      <form>
+                        <div className="form-group mt-4 bg-dark text-secondary">
+                          <input type="text" className="form-control" id="commentForm"
+                            defaultValue=""
+                            name="currentComment"
+                            placeholder="Enter your comment" ref={this.state.currentComment} onChange={this.handleInputChange} />
+                        </div>
+                        <button type="submit" className="btn btn-light btn-sm mb-2" onClick={(event) => { event.preventDefault(); this.addComment() }
                         }
-                        }
-                      >
-                        Follow
-                       </button>
-                    </div>
+                        >Submit</button>
+                      </form>
+                    </Modal>
+
                   </div>
-                ))}
-              </Modal>
-            </div>
-          ) : (
-              <div className="col">
-                <h5 className="text-center">
-                  &nbsp;{this.state.messageNoPodcast}
-                </h5>
-              </div>
-            )}
+                ) : (
+                    <div className="col">
+                      <h5 className="text-center">
+                        &nbsp;{this.state.messageNoPodcast}
+                      </h5>
+                    </div>
+                  )}
+              </Row>
+            </Container>
+          </div>
+          <div className="col-md-2 col-xs-0"></div>
         </Row>
-      </Container>
-        </div>
-        <div class="col-md-2 col-xs-0"></div>
-      </Row>
-      </div>    
-      
+      </div>
+
     );
   }
 }
