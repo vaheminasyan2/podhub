@@ -28,12 +28,20 @@ class App extends Component {
     };
   }
 
+  // Load user from local storage
+  // Check Session Storage for Audio Settings every 500ms to display audio player in navbar
   componentDidMount = () => {
     this.loadUserFromLocalStorage();
 
     setInterval(this.checkSessionStorage, 500);
   }
 
+
+  // AUDIO PLAYER IN NAVBAR
+  // ==========================================
+
+  // Check Session Storage for Audio Settings
+  // This will show or hide audio player in navbar
   checkSessionStorage = () => {
 
     let storedAudioLink = null;
@@ -56,12 +64,17 @@ class App extends Component {
     }
   }
 
+  // Hide audio player in navbar
   hideAudio = () => {
     sessionStorage.clear();
     this.setState({
       showAudioInNavbar: false
     });
   }
+
+
+  // PODCAST SEARCH
+  // ==========================================
 
   // Listen for when user enters text into Podcast search fields
   handleInputChange = event => {
@@ -126,7 +139,7 @@ class App extends Component {
         })
       })
       .catch((error) => {
-        console.log(error);
+        console.log("Error getting podcasts", error);
         this.setState({
           podcasts: [],
           message: "We couldn't find a match."
@@ -134,7 +147,6 @@ class App extends Component {
       });
   };
 
-  // Passed to children as prop
   // Hides podcast search results
   hidePodcasts = () => {
     this.setState({
@@ -142,6 +154,22 @@ class App extends Component {
     });
   }
 
+
+  // USER LOGIN/LOGOUT
+  // ==========================================
+
+  // Check if user is logged in
+  isLoggedIn = () => this.state.user != null;
+
+  // Log the user into the site
+  handleUser = (userData) => {
+    this.setState({ 
+      user: userData,
+      logout: false 
+    });
+  }
+
+  // Logout current user
   logout = () => {
 
     localStorage.clear();
@@ -153,15 +181,7 @@ class App extends Component {
     });
   }
 
-  handleUser = (userData) => {
-    this.setState({ 
-      user: userData,
-      logout: false 
-    });
-  }
-
-  isLoggedIn = () => this.state.user != null;
-
+  // Load user from local storage if available
   loadUserFromLocalStorage() {
     if (this.state.user) {
       return;
@@ -175,85 +195,105 @@ class App extends Component {
 
   render() {
     return (
+
       <Router>
         <div className="wrapper">
+
+          {/* Redirect to Login page if user logged out */}
+
           {this.state.logout && window.location.pathname !== "/"? (
             <Redirect
               to={{
                 pathname: "/"
               }}
             />
-          ) : (
+            ) : (
               <></>
-            )}
-          {!this.isLoggedIn()
-            ? (<Route
+            )
+          }
+
+          {/* Render Home page and navbar if user logged in */}
+
+          {!this.isLoggedIn() ? (
+            
+            <Route
               render={() =>
-                <Login handleUser={this.handleUser}
-                />}
-            />)
-            : (
-              <>
-                <Navbar
-                  podcastSearch={this.podcastSearch}
-                  handleInputChange={this.handleInputChange}
-                  hidePodcasts={this.hidePodcasts}
-                  logout={this.logout}
-                  user={this.state.user}
-                  showAudio={this.state.showAudioInNavbar}
-                  hideAudio={this.hideAudio}
+                <Login 
+                  handleUser={this.handleUser}
                 />
-                <PodcastSearch
-                  show={this.state.showPodcasts}
-                  hide={this.hidePodcasts}
-                  podcasts={this.state.podcasts}
+              }
+            />
+
+          ) : (
+            
+            <>
+              <Navbar
+                podcastSearch={this.podcastSearch}
+                handleInputChange={this.handleInputChange}
+                hidePodcasts={this.hidePodcasts}
+                logout={this.logout}
+                user={this.state.user}
+                showAudio={this.state.showAudioInNavbar}
+                hideAudio={this.hideAudio}
+              />
+              <PodcastSearch
+                show={this.state.showPodcasts}
+                hide={this.hidePodcasts}
+                podcasts={this.state.podcasts}
+              />
+
+              <Switch>
+
+                <Route exact path="/"
+                  render={() =>
+                    <div className="container">
+                      <div className="row">
+                        <div className="col-md-2 col-xs-0"></div>
+                        <div className="col-md-8 col-xs-12">
+                          <Home
+                            user={this.state.user}
+                          />
+                        </div>
+                        <div className="col-md-2 col-xs-0"></div>
+                      </div>
+                    </div>
+                  }
+                />
+                
+                <Route exact path="/home"
+                  render={() =>
+                    <div className="container">
+                      <div className="row">
+                        <div className="col-md-2 col-xs-0"></div>
+                        <div className="col-md-8 col-xs-12">
+                          <Home
+                            user={this.state.user}
+                          />
+                        </div>
+                        <div className="col-md-2 col-xs-0"></div>
+                      </div>
+                    </div>
+                  }
+                />
+                
+                <Route exact path="/profile" component={Profile} />
+                <Route exact path="/episodeList" component={EpisodeList} />
+                <Route exact path="/listen" component={Listen} />
+
+                <Route exact path="/userSearch"
+                  render={() =>
+                    <UserSearch
+                      user={this.state.user}
+                    />
+                  }
                 />
 
-                <Switch>
-                  <Route exact path="/home"
-                    render={() =>
-                      <div className="container">
-                        <div className="row">
-                          <div className="col-md-2 col-xs-0"></div>
-                          <div className="col-md-8 col-xs-12">
-                            <Home
-                              user={this.state.user}
-                            />
-                          </div>
-                          <div className="col-md-2 col-xs-0"></div>
-                        </div>
-                      </div>
-                    }
-                  />
-                  <Route exact path="/"
-                    render={() =>
-                      <div className="container">
-                        <div className="row">
-                          <div className="col-md-2 col-xs-0"></div>
-                          <div className="col-md-8 col-xs-12">
-                            <Home
-                              user={this.state.user}
-                            />
-                          </div>
-                          <div className="col-md-2 col-xs-0"></div>
-                        </div>
-                      </div>
-                    }
-                  />
-                  <Route exact path="/profile" component={Profile} />
-                  <Route exact path="/episodeList" component={EpisodeList} />
-                  <Route exact path="/listen" component={Listen} />
-                  <Route exact path="/userSearch"
-                    render={() =>
-                      <UserSearch
-                        user={this.state.user}
-                      />
-                    }
-                  />
-                  <Route component={Error} />
-                </Switch>
-              </>
-            )}
+                <Route component={Error} />
+              </Switch>
+            </>
+            )
+          }
+
         </div>
       </Router>
     )
