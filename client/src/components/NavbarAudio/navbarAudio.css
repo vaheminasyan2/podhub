@@ -1,0 +1,65 @@
+#nav-skip-forward-15, #nav-skip-backward-15 {
+    width: 26px;
+    height: 26px;
+    margin-top: 0px !important;
+    margin-left: 0px !important;
+  }
+#nav-skip-forward-15:hover, #nav-skip-backward-15:hover {
+    cursor: pointer;
+  }
+  
+
+
+#nav-pButton {
+    width: 30px; 
+    height: 30px;
+    border-radius: 15px;
+    border-color: transparent;
+    margin-top: 0px !important;
+    margin-left: 0px !important;
+}
+
+#nav-pButton:hover {
+    cursor: pointer;
+}
+
+
+#nav-speed-label {
+    font-size: 12px;
+    font-weight: bold;
+    color: #000000;
+    margin: 0px;
+    padding-left: 4px;
+    }
+
+#nav-audio-player-container {
+    min-width: 300px;
+    margin: 0px 0px 0px 90px;
+    /* background-color: rgb(43, 41, 41); */
+}
+
+#nav-row-1 {
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+    margin-bottom: 5px;
+    padding-top: 0px;
+}
+
+.NAV-SKIP-FORWARD-15 {
+    justify-self: start;
+}
+
+.NAV-SKIP-BACKWARD-15 {
+    justify-self: end;
+}
+
+.NAV-PLAY-BUTTON {
+    justify-self: center;
+}
+
+#nav-speed-slider-container {
+    text-align: center;
+    height: 10px;
+}
+
+
