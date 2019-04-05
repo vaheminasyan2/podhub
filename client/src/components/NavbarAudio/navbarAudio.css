@@ -63,3 +63,10 @@
 }
 
 
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    
+    #nav-speed-slider-container input[type='range']::-webkit-slider-thumb {
+      background: #e7e5e5 !important;     
+    }
+  
+  }
