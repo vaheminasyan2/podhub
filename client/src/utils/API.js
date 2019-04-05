@@ -36,6 +36,10 @@ export default {
         return axios.get("/api/comments/commentedUserLikes/" + postId)
     },
 
+    // getUsersListCommentLikes: function (commentId) {
+    //     return axios.get("/api/comments/getUsersLikedComment/" + commentId)
+    // },
+
     addComment: function (comment, postId, userId) {
         let data = {
             comment:comment,
