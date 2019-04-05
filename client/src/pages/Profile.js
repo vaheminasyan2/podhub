@@ -341,8 +341,8 @@ showFollowingModal = () => {
     return (
       <div className="container">
         <Row>
-          <div class="col-md-2 col-xs-0"></div>
-          <div class="col-md-8 col-xs-12">
+          <div className="col-md-2 col-xs-0"></div>
+          <div className="col-md-8 col-xs-12">
             <Container>
 
               <div className="row userProfile rounded bg-dark text-white">
@@ -502,7 +502,7 @@ showFollowingModal = () => {
                             className="favoriteLink"
                           >
                             <h4>{favorite.podcastName}</h4>
-                            <p class="favoriteDescription">{favorite.episodeName}</p>
+                            <p className="favoriteDescription">{favorite.episodeName}</p>
                           </Link>
 
                         </div>
@@ -652,7 +652,7 @@ showFollowingModal = () => {
               </Row>
             </Container>
           </div>
-          <div class="col-md-2 col-xs-0"></div>
+          <div className="col-md-2 col-xs-0"></div>
         </Row>
       </div>
 

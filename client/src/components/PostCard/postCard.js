@@ -91,7 +91,7 @@ function Card({
             <p id="episode-name-home">{episodeName}</p>
             <p id="episode-description-home" className="ellipses">{description}</p>
 
-            <a href={audioLink} />
+            {/* <a href={audioLink} /> */}
           </Link>
 
         </div>
@@ -118,7 +118,7 @@ function Card({
               
               
             >
-              <i class="fas fa-heart animated" onClick={(e) => {
+              <i className="fas fa-heart animated" onClick={(e) => {
                 var targ = e.target;
                 targ.classList.add("bounce");      
                 setTimeout(()=>{targ.classList.remove("bounce")},1000)         
