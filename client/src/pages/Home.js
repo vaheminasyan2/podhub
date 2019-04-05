@@ -343,6 +343,8 @@ class Home extends Component {
                                                 </a>
                                                 </div>
                                                 <div className="col-2 mb-2">
+                                                {comment.numberOfLikes > 0
+                                                ?
                                                 <Popup
                                                     trigger={<div>{comment.numberOfLikes}</div>}
                                                     on="hover"
@@ -357,6 +359,9 @@ class Home extends Component {
                                                     </div>
                                                 ))}
                                                 </Popup>
+                                                : 
+                                                0 }
+
                                                 </div>
                                                 {this.props.user.id === comment.commentedBy
                                                     ?
