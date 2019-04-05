@@ -1,7 +1,27 @@
-.userProfile {
-    height: 150px;
-    margin-bottom: 20px;
-  }
+
+
+#user-info-profile {
+  padding-left: 40px;
+}
+
+#user-info-profile:after {
+  content: ""; /* This is necessary for the pseudo element to work. */ 
+  display: block; /* This will put the pseudo element on its own line. */
+  margin: 0 auto; /* This will center the border. */
+  width: 100%; /* Change this to whatever width you want. */
+  padding-top: 8px; /* This creates some space between the element and the border. */
+  border-bottom: 1px solid rgb(56, 54, 54); /* This creates the border. Replace black with whatever color you want. */
+}
+
+#user-name-profile {
+  color: white;
+  margin-left: 17px;
+  padding: 16px 0px 0px 10px;
+}
+
+#posts-followers-following-div {
+  color: white;
+}
 
   .userName {
     font-size: 32px;
@@ -11,6 +31,10 @@
 
   #userMainProfileImage{
     width: 100px;
+    margin-left: 30px;
+    height: 72px;
+    width: 70px;
+    margin: 0px 0px 0px 35px;
   }
 
   #favoriteIcon{
@@ -78,14 +102,14 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-    
   }
 
   .pad{
     padding:1em;
   }
 
-  a{
+
+a{
     color:rgb(15, 15, 15);
     text-decoration:none !important;
   }
@@ -98,3 +122,103 @@ a:hover{
 h4{
   padding-top:1%;
 }
+
+#podcastIcon-fav {
+  height: 55px;
+  width: 55px;
+  border: 3px solid white !important;
+  border-radius: 5px !important;
+  margin: 3px 0px 0px 0px !important;
+}
+
+#outer-fav-div {
+  border: 3px solid white !important;
+  margin: 10px 25px 10px 25px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 3px rgb(31, 30, 30);
+}
+
+#outer-fav-div:hover {
+  box-shadow: 3px 3px 9px rgb(31, 30, 30);
+}
+
+#close-btn-fav-div {
+  padding: 0px;
+}
+
+#pod-name-fav {
+  font-size: 11px;
+  font-weight: bold;
+  text-align: center;
+
+}
+
+#pod-name-fav:after {
+  content: ""; /* This is necessary for the pseudo element to work. */ 
+  display: block; /* This will put the pseudo element on its own line. */
+  margin: 0 auto; /* This will center the border. */
+  width: 64%; /* Change this to whatever width you want. */
+  padding-top: 8px; /* This creates some space between the element and the border. */
+  border-bottom: 1px solid rgb(56, 54, 54); /* This creates the border. Replace black with whatever color you want. */
+}
+
+#pod-logo-fav-div {
+  text-align: center;
+  margin: 0px !important;
+}
+
+
+#episode-name-fav-div {
+  font-size: 12px;
+}
+
+#created-time-fav-div {
+  font-size: 10px;
+  text-align: center;
+}
+
+
+#close-btn-fav-div {
+  text-align: right;
+}
+
+
+#favorite-episodes, #recent-posts {
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bolder;
+  color: rgb(39, 25, 39);
+  margin: 0px 29px 14px 29px;  
+  text-shadow: 1px 1px #2c1c29;
+}
+
+#favorite-episodes {
+  margin-top: 40px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
