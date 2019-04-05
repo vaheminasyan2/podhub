@@ -96,7 +96,7 @@ class Listen extends Component {
     // addToFavorites = event => {
     //     event.preventDefault();
     //     API.addEpisodeToFavorites(this.state.episodeId);
-    //     alert("Favorited!");
+    //     git("Favorited!");
     // }
 
     addToFavorites = event => {
