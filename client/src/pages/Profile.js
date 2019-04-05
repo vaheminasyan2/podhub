@@ -290,16 +290,16 @@ class Home extends Component {
     });
   };
 
-  followUser = (id) => {
-    API.followUser(this.state.user.id, id)
-      .then(function (response) {
-        console.log(response);
-        alert("Followed!");
-      })
-      .catch((err) =>
-        console.log(err)
-      )
-  }
+  // followUser = (id) => {
+  //   API.followUser(this.state.user.id, id)
+  //     .then(function (response) {
+  //       console.log(response);
+  //       alert("Followed!");
+  //     })
+  //     .catch((err) =>
+  //       console.log(err)
+  //     )
+  // }
 
   render() {
     return (
@@ -451,7 +451,7 @@ class Home extends Component {
                           </div>
                           <div className="col-9">
                             <p>{like.name}</p>
-                            <button
+                            {/* <button
                               className="btn btn-outline-light bPosition"
                               onClick={(event) => {
                                 event.preventDefault();
@@ -460,7 +460,7 @@ class Home extends Component {
                               }
                             >
                               Follow
-                      </button>
+                      </button> */}
                           </div>
                         </div>
                       ))}
