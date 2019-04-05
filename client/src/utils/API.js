@@ -224,8 +224,6 @@ export default {
         return axios.post("/api/posts/", data);
     },
 
-    animate: () => this.classList.add("animated", "tada"),
-
     isFollowedByUsers: function(userId) {
         return axios.get("api/users/followedByUsers/" + userId);
     },

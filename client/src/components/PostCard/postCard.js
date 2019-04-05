@@ -11,6 +11,8 @@ library.add(faComment);
 library.add(faHeart);
 
 // POST COMPONENT
+var alerter = () => {
+  alert(this);}
 
 function Card({
   userId, userName, userImage, date,
@@ -18,9 +20,10 @@ function Card({
   episodeId, episodeName, description, audioLink,
   userMessage, likes, comments,
   postId, handlePostDelete, handleLikeOrUnlike,
-  handleShowLikes, handleShowComments, handleClick
+  handleShowLikes, handleShowComments, 
 }) {
 
+ 
   return (
     <div className="container rounded-0 border-top-0 border-left-0 border-right-0 card text-secondary bg-dark" id="top">
       <div className="row" id="post-top-row">
@@ -113,8 +116,13 @@ function Card({
             <a
               className="likes"
               onClick={() => handleLikeOrUnlike(postId)}
+              
+              
             >
-              <FontAwesomeIcon icon="heart" />
+              <i class="fas fa-heart animated" onClick={(e) => {
+                e.target.classList.toggle("bounce");
+                
+              }}></i>
             </a>
             <a
               className="likesNumber"
