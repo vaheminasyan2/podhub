@@ -323,16 +323,16 @@ showFollowingModal = () => {
     });
   };
 
-//   followUser = (id) => {
-//     API.followUser(this.state.user.id, id)
-//       .then(function (response) {
-//         console.log(response);
-//         alert("Followed!");
-//       })
-//       .catch((err) =>
-//         console.log(err)
-//       )
-//   }
+{/* followUser = (id) => {
+    API.followUser(this.state.user.id, id)
+      .then(function (response) {
+        console.log(response);
+        alert("Followed!");
+      })
+      .catch((err) =>
+        console.log(err)
+      )
+  } */}
 
   showFollowersModal = () => {
     this.setState({
