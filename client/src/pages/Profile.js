@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router";
+//import { Redirect } from "react-router";
 import { Link } from "react-router-dom";
 import Container from "../components/Container/container";
 import Row from "../components/Row/row";
 import API from "../utils/API";
-import Podcast from "../components/Podcast/podcast";
+//import Podcast from "../components/Podcast/podcast";
 import PostCard from "../components/PostCard/postCard";
 import "./Profile.css";
 import Delete from "./delete.png";
@@ -394,7 +394,7 @@ showFollowingModal = () => {
                           )}
                         </List>
                       ) : (
-                          this.state.message != "Loading..." ? (
+                          this.state.message !== "Loading..." ? (
                             <h2>No followers found.</h2>
                           ) : (
                               <></>
@@ -433,7 +433,7 @@ showFollowingModal = () => {
                           )}
                         </List>
                       ) : (
-                          this.state.message != "Loading..." ? (
+                          this.state.message !== "Loading..." ? (
                             <h2>User is not following anyone.</h2>
                           ) : (
                               <></>
@@ -660,13 +660,5 @@ showFollowingModal = () => {
   }
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-export default Profile;
-=======
-export default Home;
->>>>>>> 30a15d9c188e7a5296577dd63469540ee3d9ff3c
-=======
 export default Profile;
 
->>>>>>> dadff4bc5066d95ae54063f93bcfb8a4b402a8ce

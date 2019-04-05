@@ -42,7 +42,7 @@ class App extends Component {
       storedAudioLink = JSON.parse(sessionStorage.getItem("audioSettings")).audioLink;
     }
 
-    if (!this.state.showAudioInNavbar || this.state.audioLink != storedAudioLink) {
+    if (!this.state.showAudioInNavbar || this.state.audioLink !== storedAudioLink) {
       this.setState({
         audioLink: storedAudioLink,
         showAudioInNavbar: true
@@ -177,7 +177,7 @@ class App extends Component {
     return (
       <Router>
         <div className="wrapper">
-          {this.state.logout && window.location.pathname != "/"? (
+          {this.state.logout && window.location.pathname !== "/"? (
             <Redirect
               to={{
                 pathname: "/"

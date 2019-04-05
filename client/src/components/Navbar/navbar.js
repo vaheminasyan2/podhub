@@ -4,7 +4,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faUser, faHome } from '@fortawesome/free-solid-svg-icons'
 import "./navbar.css";
-import { GoogleLogout } from 'react-google-login';
+//import { GoogleLogout } from 'react-google-login';
 import Logo from "./purple_back.png";
 import AudioPlayer from "../AudioPlayer/audioPlayer";
 
@@ -17,7 +17,7 @@ class Navbar extends Component {
   };
 
   suppressEnter = (event) => {
-    if (window.event.keyCode == 13) {
+    if (window.event.keyCode === 13) {
       event.preventDefault();
     }
   }

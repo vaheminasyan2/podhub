@@ -1,6 +1,6 @@
 import React from "react";
 import "./postCard.css";
-import Delete from "../../pages/delete.png"
+//import Delete from "../../pages/delete.png"
 import { Link } from "react-router-dom";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

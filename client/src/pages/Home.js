@@ -6,10 +6,10 @@ import PostCard from "../components/PostCard/postCard";
 //import { Link } from "react-router-dom";
 import Modal from "react-responsive-modal";
 import "./Home.css";
-import Delete from "../pages/delete.png";
+//import Delete from "../pages/delete.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart } from '@fortawesome/free-solid-svg-icons'
-import User from "../components/User/user";
+//import User from "../components/User/user";
 import { library } from '@fortawesome/fontawesome-svg-core'
 library.add(faComment);
 library.add(faHeart);
