@@ -120,9 +120,12 @@ function Card({
               
             >
               <i class="fas fa-heart animated" onClick={(e) => {
-                e.target.classList.toggle("bounce");
-                
-              }}></i>
+                var targ = e.target;
+                targ.classList.add("bounce");      
+                setTimeout(()=>{targ.classList.remove("bounce")},1000)         
+              }}
+
+              ></i>
             </a>
             <a
               className="likesNumber"
