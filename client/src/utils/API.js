@@ -44,6 +44,9 @@ export default {
         }
         return axios.post("/api/comments/", data)
     },
+    getUsersLikedComment: function (commentId){
+        return axios.get("/api/comments/getUsersLikedComment/" + commentId)
+    },
 
     deleteComment: function (commentId) {
         return axios.delete("/api/comments/" + commentId)
