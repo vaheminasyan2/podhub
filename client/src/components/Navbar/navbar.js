@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faUser, faHome } from '@fortawesome/free-solid-svg-icons'
 import Logo from "./purple_back.png";
 import NavbarAudio from "../NavbarAudio/navbarAudio";
+import Popup from "reactjs-popup";
 import "./navbar.css";
 
 library.add(faSearch, faUser, faHome);
@@ -118,17 +119,41 @@ class Navbar extends Component {
             {/* Show Audio Player in Nav Bar */}
 
             {sessionStorage.getItem("audioSettings") && showAudio ? (
-              <span>
-                <NavbarAudio
-                  audioLink={JSON.parse(sessionStorage.getItem("audioSettings")).audioLink}
-                  playbackRate={this.state.speed}
-                  changeSpeed={this.changeSpeed}
-                  initialSpeed={this.state.speed}
-                  remove={this.state.remove}
-                />
-                <button className="btn btn-dark btn-sm hideAudioBtn" onClick={hideAudio}>Hide</button>
-              </span>
+              <div>        
+                <Popup
+                  trigger={
+                    <span>
+                      <NavbarAudio
+                        audioLink={JSON.parse(sessionStorage.getItem("audioSettings")).audioLink}
+                        playbackRate={this.state.speed}
+                        changeSpeed={this.changeSpeed}
+                        initialSpeed={this.state.speed}
+                        remove={this.state.remove}
+                      />
+                    </span>
+                  }
+                  on="hover"
+                  position="bottom center"
+                  className="navbarAudioPopup"
+                  closeDocumentOnClick
+                >
+                  <span>
+                    <p className="navbarPopupText">
+                      <strong>
+                        {JSON.parse(sessionStorage.getItem("audioSettings")).podcastName}
+                      </strong>
+                    </p>
+                    
+                    <p className="navbarPopupText">
+                      {JSON.parse(sessionStorage.getItem("audioSettings")).episodeName}
+                    </p>
 
+                    <button className="btn btn-dark btn-sm hideAudioBtn" onClick={hideAudio}>
+                      Hide Audio Player
+                    </button>
+                  </span>
+                </Popup>
+              </div>
               ) : (
                 <></>
               )
