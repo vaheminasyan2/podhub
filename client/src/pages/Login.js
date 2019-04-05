@@ -3,7 +3,8 @@ import Container from "../components/Container/container";
 import API from "../utils/API";
 import GoogleLogin from 'react-google-login';
 import "./Login.css";
-import Logo from "../components/Navbar/purple_back.png"
+import Logo from "../components/Navbar/purple_back.png";
+require("dotenv").config();
 
 class Login extends Component {
 
@@ -36,6 +37,7 @@ class Login extends Component {
                 <div className="header">
                     <div className="googleSignIn">
                         <GoogleLogin
+                            //clientId={process.env.clientId}
                             clientId="940323765774-bpnsf77f8vksurn7gbv082gatubu97kl.apps.googleusercontent.com"
                             buttonText="Login"
                             onSuccess={responseGoogle}
