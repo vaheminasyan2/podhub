@@ -424,7 +424,7 @@ class Profile extends Component {
       .then(function (response) {
         that.setState({
           userIsFollowed: true
-        }, () => console.log(that.state));
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -440,7 +440,7 @@ class Profile extends Component {
       .then(function (response) {
         that.setState({
           userIsFollowed: false
-        }, () => console.log(that.state));
+        });
       })
       .catch((err) =>
         console.log(err)
