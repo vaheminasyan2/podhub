@@ -324,9 +324,36 @@ class Home extends Component {
                     <h2 className="paddingTop">{this.props.location.state.user.name}</h2>
                   </Row>
                   <Row>
-                    Posts:&nbsp; {this.state.posts.length} &nbsp;&nbsp; <strong>-</strong> &nbsp;&nbsp;
-              Followers:&nbsp;{this.state.followers} &nbsp;&nbsp; <strong>-</strong> &nbsp;&nbsp;
-              Following:&nbsp;{this.state.following}
+
+                    Posts:&nbsp; {this.state.posts.length}
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <Link 
+                      to={{
+                        pathname: "/followers",
+                        state: {
+                          user: this.state.user
+                        }
+                      }}
+                      className="followers"
+                    >
+                      Followers:&nbsp;{this.state.followers}
+                    </Link>
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <Link
+                      to={{
+                        pathname: "/following",
+                        state: {
+                          user: this.state.user
+                        }
+                      }}
+                      className="following"
+                    >
+                      Following:&nbsp;{this.state.following}
+                    </Link>
                   </Row>
                 </div>
               </div>
