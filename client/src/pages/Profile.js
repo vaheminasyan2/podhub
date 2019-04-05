@@ -211,10 +211,10 @@ class Home extends Component {
 
         <Container>
           <Row>
-            <div class="col-md-2 col-xs-0"></div>
-            <div class="col-md-8 col-xs-12" id="user-info-profile">
+            <div className="col-md-2 col-xs-0"></div>
+            <div className="col-md-8 col-xs-12" id="user-info-profile">
               <Row>
-                <div class="col-md-2">
+                <div className="col-md-2">
                   <div className="row userProfile rounded">
                     <img
                       src={this.props.location.state.user.profileImage}
@@ -224,31 +224,31 @@ class Home extends Component {
                     />
                   </div>
                 </div>
-                <div class="col-md-8">
+                <div className="col-md-8">
                   <h2 id="user-name-profile">{this.props.location.state.user.name}</h2>
                 </div>
               </Row>
               <Row>
-                <div class="col-md-2 col-xs-0"></div>
-                <div class="col-md-8" id="posts-followers-following-div">
+                <div className="col-md-2 col-xs-0"></div>
+                <div className="col-md-8" id="posts-followers-following-div">
                   Posts:&nbsp; {this.state.posts.length} &nbsp;&nbsp; <strong>-</strong> &nbsp;&nbsp;
                 Followers:&nbsp;{this.state.followers} &nbsp;&nbsp; <strong>-</strong> &nbsp;&nbsp;
                 Following:&nbsp;{this.state.following}
                 </div>
-                <div class="col-md-2 col-xs-0"></div>
+                <div className="col-md-2 col-xs-0"></div>
               </Row>
             </div>
 
-            <div class="col-md-2 col-xs-0"></div>
+            <div className="col-md-2 col-xs-0"></div>
           </Row>
 
 
           <Row>
-            <div class="col-md-2 col-xs-0"></div>
+            <div className="col-md-2 col-xs-0"></div>
 
             {this.state.favorites.length ? (
 
-              <div class="col-md-8 col-xs-12">
+              <div className="col-md-8 col-xs-12">
 
                 <h4 id="favorite-episodes">Favorite Episodes</h4>
 
@@ -258,8 +258,8 @@ class Home extends Component {
 
                   {this.state.favorites.map(favorite => (
 
-                    <div class="col-md-3 col-xs-3" id="outer-fav-div">
-                      <div class="row">
+                    <div className="col-md-3 col-xs-3" id="outer-fav-div">
+                      <div className="row">
                         <div className="col-md-9"></div>
 
                         <div className="col-md-3" id="close-btn-fav-div">
@@ -354,7 +354,7 @@ class Home extends Component {
 
 
 
-            <div class="col-md-2 col-xs-0"></div>
+            <div className="col-md-2 col-xs-0"></div>
           </Row>
 
           {/* // !!!!! END OF NEGATIVE TERNARY RETURN */}
