@@ -484,13 +484,18 @@ showFollowingModal = () => {
                         </div>
 
                         <div className="col-10 p-1">
-                          <button
-                            className="btn btn-sm mb-1 float-right"
-                            onClick={() => this.handleFavoriteDelete(favorite.id)}
-                          >
-                            <img src={Delete} alt="delete" className="size" />
-                          </button>
-
+                          {JSON.parse(localStorage.getItem("user")).id === favorite.userId
+                            ?
+                            <div>
+                              <button
+                                className="btn btn-sm mb-1 float-right"
+                                onClick={() => this.handleFavoriteDelete(favorite.id)}
+                              >
+                                <img src={Delete} alt="delete" className="size" />
+                              </button>
+                            </div>
+                            : null
+                          }
                           <Link to={{
                             pathname: "/listen",
                             state: {
