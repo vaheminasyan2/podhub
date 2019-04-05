@@ -9,9 +9,8 @@ import PostCard from "../components/PostCard/postCard";
 import "./Profile.css";
 import Delete from "./delete.png";
 import moment from "moment";
-import List from "../components/List";
 import Modal from "react-responsive-modal";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // USER PROFILE PAGE
 
@@ -30,7 +29,6 @@ class Home extends Component {
     currentComment: "",
     currentPostId: "",
     commentLikes: [],
-    // likedUsers: []
   };
 
   // Load user profile information
@@ -46,9 +44,8 @@ class Home extends Component {
 
   // Update profile information if user's change
   componentDidUpdate(prevProps, prevState) {
-    if (
-      prevProps.location.state.user.id !== this.props.location.state.user.id
-    ) {
+    if (prevProps.location.state.user.id !== this.props.location.state.user.id) {
+
       this.getFavorites();
       this.getPostsOnlyByUser();
       this.getFollowers();
@@ -80,24 +77,6 @@ class Home extends Component {
         });
       });
   };
-
-  // getUsersListCommentLikes = () => {
-  //   API.getPostsOnlyByUser(this.state.comment.id)
-  //     .then(res => {
-  //         if (res.data.length)
-  //        {
-  //         this.setState({
-  //           likedUsers: res.data
-  //         });
-  //       }
-  //     })
-  //     .catch(() => {
-  //       this.setState({
-  //         likedUsers: [],
-  //         messageNoPodcast: "No users found, post something."
-  //       });
-  //     });
-  // };
 
   getFavorites = () => {
     API.getFavorites(this.props.location.state.user.id)
@@ -159,15 +138,19 @@ class Home extends Component {
       });
   };
 
-  handlePostDelete = id => {
+  handlePostDelete = (id) => {
+
     if (window.confirm("Delete post?")) {
-      API.handlePostDelete(id).then(res => {
-        this.getPostsOnlyByUser();
-      });
+
+      API.handlePostDelete(id)
+        .then(res => {
+          this.getPostsOnlyByUser();
+        });
     }
   };
 
   handleFavoriteDelete = id => {
+
     if (window.confirm("Delete favorite?")) {
       API.handleFavoriteDelete(id).then(res => {
         this.getFavorites();
@@ -178,13 +161,15 @@ class Home extends Component {
   //Opens the Likes modal
   //Executed upon user clicking "Likes" button on page
   handleShowLikes = postId => {
+
     API.getLikes(postId).then(res => {
       //console.log(res.data);
       if (res.data.length === 0) {
         this.setState({
           showLikesModal: false
         });
-      } else {
+      }
+      else {
         this.setState({
           likes: res.data,
           showLikesModal: true
@@ -199,11 +184,11 @@ class Home extends Component {
       if (res.data[1] === false) {
         API.unlikePost(postId, this.state.user.id).then(res => {
           //console.log(res.data)
-        });
-      }
+        })
+      };
       this.getPostsOnlyByUser();
-    });
-  };
+    })
+  }
 
   // Closes Likes Episode modal
   // Executed upon user clicking "Likes" button in modal
@@ -219,19 +204,19 @@ class Home extends Component {
     this.setState({
       redirect: true
     });
-  };
+  }
 
   handleCommentLikeOrUnlike = commentId => {
     API.likeComment(commentId, this.state.user.id).then(res => {
       if (res.data[1] === false) {
         API.unlikeComment(commentId, this.state.user.id).then(res => {
-          console.log(res.data);
-        });
-      }
+          console.log(res.data)
+        })
+      };
       this.getPostsOnlyByUser();
       this.handleShowComments();
-    });
-  };
+    })
+  }
 
   handleShowCommentsLikes = commentId => {
     API.getLikes(commentId).then(res => {
@@ -240,14 +225,15 @@ class Home extends Component {
         this.setState({
           showLikesModal: false
         });
-      } else {
+      }
+      else {
         this.setState({
           commentLikes: res.data,
           showLikesModal: true
         });
       }
     });
-  };
+  }
 
   handleShowComments = postId => {
     this.setState({
@@ -258,9 +244,10 @@ class Home extends Component {
       if (res.data.length === 0) {
         this.setState({
           comments: res.data,
-          showCommentsModal: true
+          showCommentsModal: true,
         });
-      } else {
+      }
+      else {
         this.setState({
           comments: res.data,
           showCommentsModal: true,
@@ -271,22 +258,18 @@ class Home extends Component {
   };
 
   addComment = () => {
-    API.addComment(
-      this.state.currentComment,
-      this.state.currentPostId,
-      this.state.user.id
-    ).then(res => {
-      console.log(res.data);
+    API.addComment(this.state.currentComment, this.state.currentPostId, this.state.user.id).then(res => {
+      console.log(res.data)
       this.getPostsOnlyByUser();
       this.handleShowComments();
       this.closeCommentsModal();
-    });
-  };
+    })
+  }
 
-  deleteComment = commentId => {
+  deleteComment = (commentId) => {
     if (window.confirm("Delete post?")) {
       API.deleteComment(commentId).then(res => {
-        console.log(res.data);
+        console.log(res.data)
         this.getPostsOnlyByUser();
         this.handleShowComments();
         this.closeCommentsModal();
@@ -307,7 +290,6 @@ class Home extends Component {
     });
   };
 
-
   // followUser = (id) => {
   //   API.followUser(this.state.user.id, id)
   //     .then(function (response) {
@@ -323,9 +305,10 @@ class Home extends Component {
     return (
       <div className="container">
         <Row>
-          <div class="col-md-2 col-xs-0" />
+          <div class="col-md-2 col-xs-0"></div>
           <div class="col-md-8 col-xs-12">
             <Container>
+
               <div className="row userProfile rounded bg-dark text-white">
                 <div className="col-5">
                   <img
@@ -338,9 +321,7 @@ class Home extends Component {
 
                 <div className="col">
                   <Row>
-                    <h2 className="paddingTop">
-                      {this.props.location.state.user.name}
-                    </h2>
+                    <h2 className="paddingTop">{this.props.location.state.user.name}</h2>
                   </Row>
                   <Row>
 
@@ -383,34 +364,21 @@ class Home extends Component {
                 {this.state.favorites.length ? (
                   <Container>
                     {this.state.favorites.map(favorite => (
-                      <div
-                        className="row rounded favorite bg-dark text-secondary"
-                        key={favorite.id}
-                      >
-
                       //console.log(this.state.user.id),
                       //console.log(favorite.userId),
                       <div className="row rounded favorite bg-dark text-secondary" key={favorite.id}>
                         <div className="col-2 py-5 px-3 pad">
-                          <Link
-                            to={{
-                              pathname: "/episodeList",
-                              state: {
-                                podcastId: favorite.podcastId,
-                                podcastName: favorite.podcastName,
-                                podcastLogo: favorite.podcastLogo,
-                                loadMore: true
-                              }
-                            }}
+                          <Link to={{
+                            pathname: "/episodeList",
+                            state: {
+                              podcastId: favorite.podcastId,
+                              podcastName: favorite.podcastName,
+                              podcastLogo: favorite.podcastLogo,
+                              loadMore: true
+                            }
+                          }}
                           >
-                            <span>
-                              <img
-                                id="podcastIcon"
-                                src={favorite.podcastLogo}
-                                alt="Podcast Logo"
-                                className="border-white"
-                              />
-                            </span>
+                            <span><img id="podcastIcon" src={favorite.podcastLogo} alt="Podcast Logo" className="border-white" /></span>
                           </Link>
                         </div>
 
@@ -450,17 +418,16 @@ class Home extends Component {
                               <p className="ellipsis">{favorite.description}</p>
                             </div>
                           </Link>
+
                         </div>
                       </div>
                     ))}
                   </Container>
                 ) : (
-                  <div className="col">
-                    <h5 className="text-center">
-                      &nbsp;{this.state.messageNoFav}
-                    </h5>
-                  </div>
-                )}
+                    <div className="col">
+                      <h5 className="text-center">&nbsp;{this.state.messageNoFav}</h5>
+                    </div>
+                  )}
               </div>
               <Row>
                 <h4>Recent posts</h4>
@@ -513,10 +480,11 @@ class Home extends Component {
                             <p>{like.name}</p>
                             {/* <button
                               className="btn btn-outline-light bPosition"
-                              onClick={event => {
+                              onClick={(event) => {
                                 event.preventDefault();
-                                this.followUser(like.id);
-                              }}
+                                this.followUser(like.id)
+                              }
+                              }
                             >
                               Follow
                       </button> */}
@@ -531,11 +499,10 @@ class Home extends Component {
                       center
                     >
                       {this.state.comments.map(comment => (
-                        <div
-                          className="commentBox rounded border border-top-0 border-left-0 border-right-0 bg-dark text-secondary"
-                          key={comment.id}
-                        >
-                          <div className="row comment-top-row">
+                        <div className="commentBox rounded border border-top-0 border-left-0 border-right-0 bg-dark text-secondary" key={comment.id}>
+                          <div
+                            className="row comment-top-row"
+                          >
                             <div className="col-2 mt-0">
                               <img
                                 src={comment.userImage}
@@ -545,92 +512,74 @@ class Home extends Component {
                               />
                             </div>
                             <div className="col-10">
-                              <p>
-                                {comment.userName}&nbsp;|&nbsp;{" "}
-                                {moment(comment.createdAt).format("LLL")}
-                              </p>
+                              <p>{comment.userName}&nbsp;|&nbsp; {moment(comment.createdAt).format("LLL")}</p>
                             </div>
                           </div>
 
-                          <div className="row comment-second-row">
-                            <p className="userComment pl-2 ml-3">
-                              {comment.comment}
-                            </p>
+                          <div
+                            className="row comment-second-row"
+                          >
+                            <p className="userComment pl-2 ml-3">{comment.comment}</p>
                           </div>
                           <div className="row comment-third-row">
                             <div className="col-4 mb-2">
                               <a
                                 className="likes ml-4"
-                                onClick={() =>
-                                  this.handleCommentLikeOrUnlike(comment.id)
-                                }
+                                onClick={() => this.handleCommentLikeOrUnlike(comment.id)}
                               >
                                 <FontAwesomeIcon icon="heart" />
                               </a>
                               <a
                                 className="likesNumber"
-                                onClick={() =>
-                                  this.handleShowCommentsLikes(comment.id)
-                                }
+                                onClick={() => this.handleShowCommentsLikes(comment.id)}
                               >
                                 {comment.numberOfLikes}
                               </a>
                             </div>
-                            {this.state.user.id === comment.commentedBy ? (
+                            {this.state.user.id === comment.commentedBy
+                              ?
                               <div className="col-8">
-                                <button
-                                  className="btn btn-sm deleteComment float-right"
-                                  onClick={() => this.deleteComment(comment.id)}
-                                >
+                                <button className="btn btn-sm deleteComment float-right" onClick={() => this.deleteComment(comment.id)}>
                                   Delete
-                                </button>
+                                                </button>
                               </div>
-                            ) : null}
+                              : null
+                            }
                           </div>
                         </div>
                       ))}
 
                       <form>
                         <div className="form-group mt-4 bg-dark text-secondary">
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="commentForm"
+                          <input type="text" className="form-control" id="commentForm"
                             defaultValue=""
                             name="currentComment"
-                            placeholder="Enter your comment"
-                            ref={this.state.currentComment}
-                            onChange={this.handleInputChange}
-                          />
+                            placeholder="Enter your comment" ref={this.state.currentComment} onChange={this.handleInputChange} />
                         </div>
-                        <button
-                          type="submit"
-                          className="btn btn-light btn-sm mb-2"
-                          onClick={event => {
-                            event.preventDefault();
-                            this.addComment();
-                          }}
-                        >
-                          Submit
-                        </button>
+                        <button type="submit" className="btn btn-light btn-sm mb-2" onClick={(event) => { event.preventDefault(); this.addComment() }
+                        }
+                        >Submit</button>
                       </form>
                     </Modal>
+
                   </div>
                 ) : (
-                  <div className="col">
-                    <h5 className="text-center">
-                      &nbsp;{this.state.messageNoPodcast}
-                    </h5>
-                  </div>
-                )}
+                    <div className="col">
+                      <h5 className="text-center">
+                        &nbsp;{this.state.messageNoPodcast}
+                      </h5>
+                    </div>
+                  )}
               </Row>
             </Container>
           </div>
-          <div class="col-md-2 col-xs-0" />
+          <div class="col-md-2 col-xs-0"></div>
         </Row>
       </div>
+
     );
   }
 }
 
 export default Home;
+
