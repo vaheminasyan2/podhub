@@ -337,7 +337,8 @@ class Home extends Component {
                 {this.state.favorites.length ? (
                   <Container>
                     {this.state.favorites.map(favorite => (
-
+                      //console.log(this.state.user.id),
+                      //console.log(favorite.userId),
                       <div className="row rounded favorite bg-dark text-secondary" key={favorite.id}>
                         <div className="col-2 py-5 px-3 pad">
                           <Link to={{
@@ -355,13 +356,18 @@ class Home extends Component {
                         </div>
 
                         <div className="col-10 p-1">
-                          <button
-                            className="btn btn-sm mb-1 float-right"
-                            onClick={() => this.handleFavoriteDelete(favorite.id)}
-                          >
-                            <img src={Delete} alt="delete" className="size" />
-                          </button>
-
+                          {JSON.parse(localStorage.getItem("user")).id === favorite.userId
+                            ?
+                            <div>
+                              <button
+                                className="btn btn-sm mb-1 float-right"
+                                onClick={() => this.handleFavoriteDelete(favorite.id)}
+                              >
+                                <img src={Delete} alt="delete" className="size" />
+                              </button>
+                            </div>
+                            : null
+                          }
                           <Link to={{
                             pathname: "/listen",
                             state: {
