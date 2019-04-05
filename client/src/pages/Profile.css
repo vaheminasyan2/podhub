@@ -1,224 +1,100 @@
-
-
-#user-info-profile {
-  padding-left: 40px;
+.userProfile {
+  height: 150px;
+  margin-bottom: 20px;
 }
 
-#user-info-profile:after {
-  content: ""; /* This is necessary for the pseudo element to work. */ 
-  display: block; /* This will put the pseudo element on its own line. */
-  margin: 0 auto; /* This will center the border. */
-  width: 100%; /* Change this to whatever width you want. */
-  padding-top: 8px; /* This creates some space between the element and the border. */
-  border-bottom: 1px solid rgb(56, 54, 54); /* This creates the border. Replace black with whatever color you want. */
+.userName {
+  font-size: 32px;
+  text-align: left;
+  width: 100%;
 }
 
-#user-name-profile {
-  color: white;
-  margin-left: 17px;
-  padding: 16px 0px 0px 10px;
+#userMainProfileImage{
+  width: 100px;
 }
 
-#posts-followers-following-div {
-  color: white;
+#favoriteIcon{
+  width: 100px;
 }
 
-  .userName {
-    font-size: 32px;
-    text-align: left;
-    width: 100%;
-  }
-
-  #userMainProfileImage{
-    width: 100px;
-    margin-left: 30px;
-    height: 72px;
-    width: 70px;
-    margin: 0px 0px 0px 35px;
-  }
-
-  #favoriteIcon{
-    width: 100px;
-  }
-
-  #favoritesTitle {
-    margin-left: -15px;
-    padding-left: 0px;
-  }
-
-  /* Favorite Container */
-  .favorites {
-    margin-bottom: 20px;
-    max-height: 300px;
-    overflow-y: scroll;
-    padding: 0px;
-  }
-
-  ::-webkit-scrollbar {
-    width: 0px;  /* Remove scrollbar space */
-    background: transparent;  /* Optional: just make scrollbar invisible */
-  }
-
-  .favorite {
-    border: 1px solid black;
-    border-left: 0px;
-    border-right: 0px;
-    height: 100px;
-    margin-bottom: 10px;
-  }
-
-  .favoriteIcon {
-    margin-left: -5px !important;
-    margin-top: -38px !important;
-  }
-
-  .favoriteDescription {
-    font-size: 12px;
-  }
-
-  .favoriteLink {
-    color: white;
-  }
-
-  .size{
-    width: 20px;
-    margin:0;
-    float:right;
-    padding-top: 0.5em;
-  }
-
-  .border-white{
-    border-radius: 20px !important;
-    border: 3px solid white !important;
-  }
-
-  .paddingTop{
-    padding-top:1em;
-  }
-
-  .ellipsis{
-      max-lines: 2;
-      width: 95%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-  }
-
-  .pad{
-    padding:1em;
-  }
-
-
-a{
-    color:rgb(15, 15, 15);
-    text-decoration:none !important;
-  }
-
-a:hover{
-  text-decoration:none !important;
-  color: rgb(15, 15, 15);
-}
- 
-h4{
-  padding-top:1%;
+#favoritesTitle {
+  margin-left: -15px;
+  padding-left: 0px;
 }
 
-#podcastIcon-fav {
-  height: 55px;
-  width: 55px;
-  border: 3px solid white !important;
-  border-radius: 5px !important;
-  margin: 3px 0px 0px 0px !important;
-}
-
-#outer-fav-div {
-  border: 3px solid white !important;
-  margin: 10px 25px 10px 25px;
-  border-radius: 8px;
-  box-shadow: 2px 2px 3px rgb(31, 30, 30);
-}
-
-#outer-fav-div:hover {
-  box-shadow: 3px 3px 9px rgb(31, 30, 30);
-}
-
-#close-btn-fav-div {
+/* Favorite Container */
+.favorites {
+  margin-bottom: 20px;
+  max-height: 300px;
+  overflow-y: scroll;
   padding: 0px;
 }
 
-#pod-name-fav {
-  font-size: 11px;
-  font-weight: bold;
-  text-align: center;
-
+::-webkit-scrollbar {
+  width: 0px;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
 }
 
-#pod-name-fav:after {
-  content: ""; /* This is necessary for the pseudo element to work. */ 
-  display: block; /* This will put the pseudo element on its own line. */
-  margin: 0 auto; /* This will center the border. */
-  width: 64%; /* Change this to whatever width you want. */
-  padding-top: 8px; /* This creates some space between the element and the border. */
-  border-bottom: 1px solid rgb(56, 54, 54); /* This creates the border. Replace black with whatever color you want. */
+.favorite {
+  border: 1px solid black;
+  border-left: 0px;
+  border-right: 0px;
+  height: 100px;
+  margin-bottom: 10px;
 }
 
-#pod-logo-fav-div {
-  text-align: center;
-  margin: 0px !important;
+.favoriteIcon {
+  margin-left: -5px !important;
+  margin-top: -38px !important;
 }
 
-
-#episode-name-fav-div {
+.favoriteDescription {
   font-size: 12px;
 }
 
-#created-time-fav-div {
-  font-size: 10px;
-  text-align: center;
+.favoriteLink {
+  color: white;
 }
 
-
-#close-btn-fav-div {
-  text-align: right;
+.size{
+  width: 20px;
+  margin:0;
+  float:right;
+  padding-top: 0.5em;
 }
 
-
-#favorite-episodes, #recent-posts {
-  text-transform: uppercase;
-  font-size: 14px;
-  font-weight: bolder;
-  color: rgb(39, 25, 39);
-  margin: 0px 29px 14px 29px;  
-  text-shadow: 1px 1px #2c1c29;
+.border-white{
+  border-radius: 20px !important;
+  border: 3px solid white !important;
 }
 
-#favorite-episodes {
-  margin-top: 40px;
+.paddingTop{
+  padding-top:1em;
 }
 
+.ellipsis{
+    max-lines: 2;
+    width: 95%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  
+}
 
+.pad{
+  padding:1em;
+}
 
+a{
+  color:rgb(15, 15, 15);
+  text-decoration:none !important;
+}
 
+a:hover{
+text-decoration:none !important;
+color: rgb(15, 15, 15);
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+h4{
+padding-top:1%;
+}
