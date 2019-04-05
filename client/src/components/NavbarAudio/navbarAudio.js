@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "./navbarAudio.css";
-import skipForwardImage from "../../images/skip-forward.png";
-import skipBackwardImage from "../../images/skip-backward.png";
-import playImg from "../../images/play.png";
-import pauseImg from "../../images/pause.png";
+import skipForwardImage from "../../images/skip-forward-white.png";
+import skipBackwardImage from "../../images/skip-back-white.png";
+import playImg from "../../images/play-white.png";
+import pauseImg from "../../images/pause-white.png";
 
 // AUDIO PLAYER COMPONENT
 
@@ -131,7 +131,7 @@ class NavbarAudio extends Component {
                 <div className="NAV-SPEED-SLIDER"
                     id="nav-speed-slider-container">
                     <input
-                        id="speed-slider"
+                        id="nav-speed-slider"
                         type="range"
                         min="1"
                         max="2.35"
