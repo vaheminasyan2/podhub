@@ -332,7 +332,7 @@ class Home extends Component {
               </div>
 
               <div className="row favorites rounded">
-                <h4>Favorites: </h4>
+                <h4>Favorites</h4>
 
                 {this.state.favorites.length ? (
                   <Container>
@@ -397,7 +397,7 @@ class Home extends Component {
                   )}
               </div>
               <Row>
-                <h4>Recent posts:</h4>
+                <h4>Recent posts</h4>
                 {this.state.posts.length ? (
                   <div className="container bg-dark">
                     {this.state.posts.map(post => (
