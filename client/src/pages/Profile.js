@@ -85,22 +85,22 @@ class Profile extends Component {
         });
       });
   };
-  getUsersListCommentLikes = (commentId) =>{
+  getUsersListCommentLikes = (commentId) => {
     API.getUsersLikedComment(commentId)
-    .then(res =>{
+      .then(res => {
         console.log(res.data)
-        if(res.data.length === 0){
-            this.setState({
-                userListCommentLikes: [],
-            });
+        if (res.data.length === 0) {
+          this.setState({
+            userListCommentLikes: [],
+          });
 
-    }else{
-        this.setState({
+        } else {
+          this.setState({
             userListCommentLikes: res.data,
-        });
-    }
-    })
-}
+          });
+        }
+      })
+  }
 
   getFavorites = () => {
     API.getFavorites(this.props.location.state.user.id)
@@ -148,18 +148,18 @@ class Profile extends Component {
   getUsersFollowed = () => {
 
     API.getUsersFollowed(this.state.user.id)
-        .then(res => {
-            this.setState({
-                actualFollowing: res.data
-            }, () => {this.showFollowingModal() });
-        });
-}     
+      .then(res => {
+        this.setState({
+          actualFollowing: res.data
+        }, () => { this.showFollowingModal() });
+      });
+  }
 
-showFollowingModal = () => {
-  this.setState({
-    showFollowingModal: true
-  });
-}
+  showFollowingModal = () => {
+    this.setState({
+      showFollowingModal: true
+    });
+  }
 
   getFollowers = () => {
     API.getFollowers(this.props.location.state.user.id)
@@ -190,16 +190,16 @@ showFollowingModal = () => {
   };
 
   handlePostDelete = (id) => {
-      API.handlePostDelete(id)
-        .then(res => {
-          this.getPostsOnlyByUser();
-        });
+    API.handlePostDelete(id)
+      .then(res => {
+        this.getPostsOnlyByUser();
+      });
   };
 
   handleFavoriteDelete = id => {
-      API.handleFavoriteDelete(id).then(res => {
-        this.getFavorites();
-      });
+    API.handleFavoriteDelete(id).then(res => {
+      this.getFavorites();
+    });
   };
 
   //Opens the Likes modal
@@ -230,10 +230,10 @@ showFollowingModal = () => {
           //console.log(res.data)
           this.getPostsOnlyByUser();
         })
-      } else{
+      } else {
         this.getPostsOnlyByUser();
       }
-      
+
     })
   }
 
@@ -260,7 +260,7 @@ showFollowingModal = () => {
           // console.log(res.data)
           this.handleShowComments(this.state.currentPostId);
         })
-      }else{
+      } else {
         this.handleShowComments(this.state.currentPostId);
       }
       // this.getPostsOnlyByUser();
@@ -317,12 +317,12 @@ showFollowingModal = () => {
   }
 
   deleteComment = (commentId) => {
-      API.deleteComment(commentId).then(res => {
-        // console.log(res.data)
-        this.getPostsOnlyByUser();
-        this.handleShowComments();
-        this.closeCommentsModal();
-      });
+    API.deleteComment(commentId).then(res => {
+      // console.log(res.data)
+      this.getPostsOnlyByUser();
+      this.handleShowComments();
+      this.closeCommentsModal();
+    });
   };
 
   closeCommentsModal = () => {
@@ -464,12 +464,12 @@ showFollowingModal = () => {
                   </Row>
                 </div>
               </div>
-              
+
               {/* FAVORITES SECTION */}
 
               <h4 id="favoritesTitle">Favorites</h4>
               <div className="row favorites rounded">
-                
+
                 {this.state.favorites.length ? (
                   <Container>
                     {this.state.favorites.map(favorite => (
@@ -503,7 +503,7 @@ showFollowingModal = () => {
                             </div>
                             : null
                           }
-                          <Link 
+                          <Link
                             to={{
                               pathname: "/listen",
                               state: {
@@ -541,28 +541,28 @@ showFollowingModal = () => {
                 {this.state.posts.length ? (
                   <div className="container bg-dark">
                     {this.state.posts.map(post => (
-                        <PostCard
-                          key={post.id}
-                          userId={post.postedBy}
-                          userName={this.state.user.name}
-                          userImage={this.state.user.profileImage}
-                          date={moment(post.createdAt).format("LLL")}
-                          podcastId={post.podcastId}
-                          podcastName={post.podcastName}
-                          podcastLogo={post.podcastLogo}
-                          episodeId={post.episodeId}
-                          episodeName={post.episodeName}
-                          description={post.description}
-                          audioLink={post.audioLink}
-                          userMessage={post.userMessage}
-                          likes={post.numberOfLikes}
-                          comments={post.numberOfComments}
-                          postId={post.id}
-                          handlePostDelete={this.handlePostDelete}
-                          handleShowLikes={this.handleShowLikes}
-                          handleLikeOrUnlike={this.handleLikeOrUnlike}
-                          handleShowComments={this.handleShowComments}
-                        />
+                      <PostCard
+                        key={post.id}
+                        userId={post.postedBy}
+                        userName={this.state.user.name}
+                        userImage={this.state.user.profileImage}
+                        date={moment(post.createdAt).format("LLL")}
+                        podcastId={post.podcastId}
+                        podcastName={post.podcastName}
+                        podcastLogo={post.podcastLogo}
+                        episodeId={post.episodeId}
+                        episodeName={post.episodeName}
+                        description={post.description}
+                        audioLink={post.audioLink}
+                        userMessage={post.userMessage}
+                        likes={post.numberOfLikes}
+                        comments={post.numberOfComments}
+                        postId={post.id}
+                        handlePostDelete={this.handlePostDelete}
+                        handleShowLikes={this.handleShowLikes}
+                        handleLikeOrUnlike={this.handleLikeOrUnlike}
+                        handleShowComments={this.handleShowComments}
+                      />
                     ))}
 
                     <Modal
@@ -619,26 +619,39 @@ showFollowingModal = () => {
                             <p className="userComment pl-2 ml-3">{comment.comment}</p>
                           </div>
                           <div className="row comment-third-row">
-                            <div className="col-4 mb-2">
+                            <div className="col-2 mb-2">
                               <a
                                 className="likes ml-4"
                                 onClick={() => this.handleCommentLikeOrUnlike(comment.id)}
                               >
                                 <FontAwesomeIcon icon="heart" />
                               </a>
-                              <Popup
-                                trigger={<div>{comment.numberOfLikes}</div>}
-                                on="hover"
-                                onOpen = {()=> this.getUsersListCommentLikes(comment.id)}
-                                position="top left"
-                                closeOnDocumentClick
-                              >
-                              {this.state.userListCommentLikes.map(user => (
-                                <div>
-                                <div>{user.name}</div>
-                                <img src={user.image}  alt="User Icon"/>
-                                </div>
-                            ))}</Popup>
+                            </div>
+
+                            <div className="col-2 mb-2">
+                              {comment.numberOfLikes > 0
+                                ?
+                                <Popup
+                                  trigger={<div>{comment.numberOfLikes}</div>}
+                                  on="hover"
+                                  onOpen={() => this.getUsersListCommentLikes(comment.id)}
+                                  position="top left"
+                                  closeOnDocumentClick
+                                  className="popup"
+                                >
+                                  {this.state.userListCommentLikes.map(user => (
+                                    <div className="row" key={user.id}>
+                                      <div className="col-3 m-0">
+                                        <img src={user.image} alt="User Icon" className="userIconPopup rounded border-white" />
+                                      </div>
+                                      <div className="col-9 m-0">
+                                        <p>{user.name}</p>
+                                      </div>
+                                    </div>
+                                  ))}
+                                </Popup>
+                                :
+                                0}
                             </div>
                             {this.state.user.id === comment.commentedBy
                               ?

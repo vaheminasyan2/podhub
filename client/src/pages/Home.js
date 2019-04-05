@@ -222,9 +222,6 @@ class Home extends Component {
         });
     };
 
-
-
-
     // followUser = (id) => {
     //     API.followUser(this.props.user.id, id)
     //         .then(function (response) {
@@ -305,6 +302,8 @@ class Home extends Component {
                                     ))}
                                 </Modal>
 
+
+
                                 <Modal
                                     open={this.state.showCommentsModal}
                                     onClose={this.closeCommentsModal}
@@ -366,7 +365,6 @@ class Home extends Component {
                                                         </Popup>
                                                         :
                                                         0}
-
                                                 </div>
                                                 {this.props.user.id === comment.commentedBy
                                                     ?

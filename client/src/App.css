@@ -37,3 +37,15 @@ body {
     transform: rotate(360deg);
   }
 }
+
+.popup {
+  background: #747a80;
+  padding: 1.2rem 2rem 0.7rem;
+  border-radius:15px;
+  color: black
+}
+
+.userIconPopup {
+  width: 35px;
+  margin-top: 0 !important
+}
