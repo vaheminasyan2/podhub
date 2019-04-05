@@ -210,10 +210,12 @@ showFollowingModal = () => {
       if (res.data[1] === false) {
         API.unlikePost(postId, this.state.user.id).then(res => {
           //console.log(res.data)
-          
+          this.getPostsOnlyByUser();
         })
-      } 
-      this.getPostsOnlyByUser();
+      } else{
+        this.getPostsOnlyByUser();
+      }
+      
     })
   }
 
