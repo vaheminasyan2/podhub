@@ -6,3 +6,21 @@
 #loginPageTitle{
     margin-top: 250px;
 }
+
+.googleButton{
+    border-radius:21px !important;
+   background-color:black !important;
+}
+
+button > div {
+    border-radius:21px !important;
+    background-color:black !important;
+    position:relative;
+    
+
+}
+
+
+span {
+    color:white;
+}
