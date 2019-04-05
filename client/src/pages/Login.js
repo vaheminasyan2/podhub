@@ -3,6 +3,7 @@ import Container from "../components/Container/container";
 import API from "../utils/API";
 import GoogleLogin from 'react-google-login';
 import "./Login.css";
+import Logo from "../components/Navbar/purple_back.png"
 
 class Login extends Component {
 
@@ -42,8 +43,11 @@ class Login extends Component {
                             className="googleButton"/>
                     </div>
                     <br/><br/>
-                    <h1 id="loginPageTitle" className="text-center">Welcome to PodHub</h1>
-                    <h4 id="slogan" className="text-center">Share what you care about</h4>
+                    <div className="sizing">
+                    <img src={Logo} alt="logo" className="autoM"/>
+                    <h1 id="loginPageTitle" className="text-center font-weight-bold">Welcome to PodHub</h1>
+                    <h4 id="slogan" className="text-center font-weight-bold">Share what you care about</h4>
+                    </div>
                 </div>
             </Container>
 
