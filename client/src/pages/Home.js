@@ -334,13 +334,15 @@ class Home extends Component {
                                                 <p className="userComment pl-2 ml-3">{comment.comment}</p>
                                             </div>
                                             <div className="row comment-third-row">
-                                            <div className="col-4 mb-2">
+                                            <div className="col-2 mb-2">
                                                 <a
                                                     className="likes ml-4"
                                                 onClick={() => this.handleCommentLikeOrUnlike(comment.id)}
                                                 >
                                                     <FontAwesomeIcon icon="heart" />
                                                 </a>
+                                                </div>
+                                                <div className="col-2 mb-2">
                                                 <Popup
                                                     trigger={<div>{comment.numberOfLikes}</div>}
                                                     on="hover"
