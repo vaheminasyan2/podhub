@@ -202,6 +202,25 @@ class Home extends Component {
         });
     };
 
+    getUsersListCommentLikes = () => {
+        API.getPostsOnlyByUser(this.state.comment.id)
+          .then(res => {
+              if (res.data.length)
+             {
+              this.setState({
+                likedUsers: res.data
+              });
+            }
+          })
+          .catch(() => {
+            this.setState({
+              likedUsers: [],
+              messageNoPodcast: "No users found, post something."
+            });
+          });
+      };
+
+      
     // followUser = (id) => {
     //     API.followUser(this.props.user.id, id)
     //         .then(function (response) {

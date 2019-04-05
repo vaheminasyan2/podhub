@@ -512,4 +512,4 @@ showFollowingModal = () => {
   }
 }
 
-export default Home;
+export default Profile;
