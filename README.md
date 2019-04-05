@@ -1,5 +1,7 @@
 # PodHub
-Social media site for Podcast listeners
+Social media site for Podcast listeners. **Check it out** [**here**](https://arcane-river-90894.herokuapp.com/).
+
+![image](/index-image.PNG)
 
 ## Overview
 **Project Description:** Create a Twitter-like site for sharing podcasts/pod episodes.
