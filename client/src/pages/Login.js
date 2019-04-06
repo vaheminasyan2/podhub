@@ -46,14 +46,14 @@ class Login extends Component {
                     </div>
                     <br/><br/>
                     <div className="sizing">
-                    <img src={Logo} alt="logo" className="autoM"/>
-            
-                    <br />
+                        <img src={Logo} alt="logo" className="autoM"/>
 
-                    <div class="loginText">
-                        <h1 id="loginPageTitle" className="text-center font-weight-bold">PodHub</h1>
-                        <h4 id="slogan" className="text-center font-weight-bold">Share what you care about</h4>
-                    </div>
+                        <br />
+
+                        <div class="loginText">
+                            <h1 id="loginPageTitle" className="text-center font-weight-bold">PodHub</h1>
+                            <h4 id="slogan" className="text-center font-weight-bold">Share what you care about</h4>
+                        </div>
                     </div>
                 </div>
             </Container>
