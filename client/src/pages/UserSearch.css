@@ -14,9 +14,10 @@
 }
 
 .tile{
-    width: 250px;
     border-radius : 25px;
-    height:200px;
+    height: 150px;
+    padding-top: 12px;
+    width: 250px;
 }
 
 .flexRow{
@@ -27,7 +28,7 @@
 .buttonPosition{
     position: relative;
     left: 60%;
-    bottom: 70%;
+    bottom: 80%;
     border-radius: 50px;
 }
 
