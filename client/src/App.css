@@ -69,3 +69,7 @@ body {
   max-height: 500px;
   overflow-y: scroll;
 }
+
+.episodeDescription {
+  word-wrap: break-word; 
+ }
