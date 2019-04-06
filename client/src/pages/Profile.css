@@ -150,8 +150,6 @@ h4 {
   float: right;
 }
 
-<<<<<<< HEAD
-=======
 .favorite:after {
   content: ""; /* This is necessary for the pseudo element to work. */ 
   display: block; /* This will put the pseudo element on its own line. */
@@ -160,4 +158,3 @@ h4 {
   padding-top: 0px; /* This creates some space between the element and the border. */
   border-bottom: 1px solid rgb(46, 45, 45); 
 }
->>>>>>> bcc974e93a6d588f396e6a1845665c62f94ce938
