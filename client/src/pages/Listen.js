@@ -199,7 +199,7 @@ class Listen extends Component {
                             <button className="btn btn-dark" id="black-btn" onClick={this.showAudioInNavbar}>Show in Nav</button>
                         </div>
 
-                        <div id="description-listen">
+                        <div className="episodeDescription" id="description-listen">
                             <p>{this.state.description}</p>
                         </div>
                     </div>
