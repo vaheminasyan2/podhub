@@ -608,7 +608,7 @@ class Profile extends Component {
               {/* FAVORITES SECTION */}
 
               <h4 id="favoritesTitle">Favorites</h4>
-              <div className="row favorites rounded">
+              <div className="row favorites rounded bg-dark">
 
                 {this.state.favorites.length ? (
                   <Container>
@@ -676,10 +676,11 @@ class Profile extends Component {
 
               {/* POSTS SECTION */}
 
-              <Row>
-                <h4>Posts</h4>
+              
+                <h4 id="postsTitle">Posts</h4>
+                <div className="row posts rounded bg-dark">
                 {this.state.posts.length ? (
-                  <div className="container bg-dark">
+                  <Container>
                     {this.state.posts.map(post => (
                       <PostCard
                         key={post.id}
@@ -820,8 +821,8 @@ class Profile extends Component {
                         >Submit</button>
                       </form>
                     </Modal>
-
-                  </div>
+                    </Container>
+                  
                 ) : (
                     <div className="col">
                       <h5 className="text-center">
@@ -829,7 +830,8 @@ class Profile extends Component {
                       </h5>
                     </div>
                   )}
-              </Row>
+                  
+              </div>
             </Container>
           </div>
           <div className="col-md-2 col-xs-0"></div>
