@@ -38,11 +38,11 @@ class UserSearch extends Component {
         if (this.state.userSearch !== "" && this.state.userSearch.length > 1) {
             let filteredUsers = [];
             this.state.allUsers.forEach(u => {
-                if(u.name.toLowerCase().includes(this.state.userSearch.toLowerCase())) {
+                if (u.name.toLowerCase().includes(this.state.userSearch.toLowerCase())) {
                     filteredUsers.push(u);
                 }
-            }); 
-            this.setState({users: filteredUsers});
+            });
+            this.setState({ users: filteredUsers });
         }
     }
 
@@ -52,25 +52,22 @@ class UserSearch extends Component {
         API.getUsersToFollow(this.props.user.id)
             .then(res => {
                 usersToRender = res.data;
-                //console.log("users", res.data);
                 API.getUsersFollowed(this.props.user.id)
                     .then(res => {
                         followings = res.data;
-                       // console.log("followings", res.data);
                         usersToRender.forEach(user => {
                             user["follow"] = false;
                             followings.forEach(element => {
-                                if(user.id === element.id)
-                                {
+                                if (user.id === element.id) {
                                     user["follow"] = true;
                                     return;
                                 }
                             });
                         });
                         this.setState({
+                            users: usersToRender,
                             allUsers: usersToRender
                         });
-                        //console.log(usersToRender);
                     })
             })
             .catch(() => {
@@ -84,39 +81,37 @@ class UserSearch extends Component {
     followUser = (id) => {
         let that = this;
         API.followUser(this.props.user.id, id)
-            .then(function(response) {
-               // console.log(response);
+            .then(function (response) {
+                // console.log(response);
                 var users = that.state.users;
                 users.forEach(element => {
-                    if(element.id === id)
-                    {
+                    if (element.id === id) {
                         element.follow = true;
-                    }        
+                    }
                 });
-                that.setState({users: users});
+                that.setState({ users: users });
             })
-             .catch((err) =>
-                 console.log(err)
-                )
-    }    
+            .catch((err) =>
+                console.log(err)
+            )
+    }
     unFollowUser = (id) => {
         let that = this;
         API.unFollowUser(this.props.user.id, id)
-            .then(function(response){
+            .then(function (response) {
                 console.log(response);
                 var users = that.state.users;
                 users.forEach(element => {
-                    if(element.id === id)
-                    {
+                    if (element.id === id) {
                         element.follow = false;
-                    }        
+                    }
                 });
-                that.setState({users: users});
+                that.setState({ users: users });
             })
-             .catch((err) =>
-                 console.log(err)
-                )
-    }        
+            .catch((err) =>
+                console.log(err)
+            )
+    }
 
     render() {
         //var userId = JSON.parse(localStorage.getItem("user")).id;
@@ -140,7 +135,7 @@ class UserSearch extends Component {
                 </form>
 
                 {this.state.users.length ? (
-                    <ul className="flexRow">
+                    <ul className="row userContainer">
                         {this.state.users.map(user => (
                             <div className="container bg-dark tile m-2" key={user.id}>
                                 <User
@@ -149,34 +144,37 @@ class UserSearch extends Component {
                                     userImage={user.profileImage}
                                     handler={null}
                                 />
-                                {user.follow?(
+                                {user.follow ? (
                                     <button
-                                    className="btn btn-outline-light buttonPosition" 
-                                    onClick={(event)=>{
-                                        event.preventDefault();
-                                        this.unFollowUser(user.id)}
-                                    }
+                                        className="btn btn-outline-light buttonPosition"
+                                        onClick={(event) => {
+                                            event.preventDefault();
+                                            this.unFollowUser(user.id)
+                                        }
+                                        }
                                     >
-                                    Unfollow
+                                        Unfollow
                                     </button>
-                                ):(
-                                    <button
-                                    className="btn btn-outline-light buttonPosition" 
-                                    onClick={(event)=>{
-                                        event.preventDefault();
-                                        this.followUser(user.id)}
-                                    }
-                                    >
-                                    Follow
+                                ) : (
+                                        <button
+                                            className="btn btn-outline-light buttonPosition"
+                                            onClick={(event) => {
+                                                event.preventDefault();
+                                                this.followUser(user.id)
+                                            }
+                                            }
+                                        >
+                                            Follow
                                     </button>
-                                )}
-                                
+                                    )
+                                }
+
                             </div>
                         ))}
                     </ul>
                 ) : (
-                    <h2>{this.state.message}</h2>
-                )}
+                        <h2>{this.state.message}</h2>
+                    )}
             </Container>
         )
     }
