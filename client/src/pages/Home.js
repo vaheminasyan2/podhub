@@ -269,6 +269,7 @@ class Home extends Component {
                                 <Modal
                                     open={this.state.showLikesModal}
                                     onClose={this.closeLikesModal}
+                                    classNames={{ modal: "standardModal"}}
                                     center
                                 >
                                     {this.state.likes.map(like => (
@@ -307,6 +308,7 @@ class Home extends Component {
                                 <Modal
                                     open={this.state.showCommentsModal}
                                     onClose={this.closeCommentsModal}
+                                    classNames={{ modal: "standardModal"}}
                                     center
                                 >
                                     {this.state.comments.map(comment => (

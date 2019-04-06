@@ -38,6 +38,11 @@
   max-width: 600px;
 }
 
+.standardModal {
+  max-height: 500px;
+  overflow-y: scroll;
+}
+
 /* Favorite Container */
 
 .favorites {
