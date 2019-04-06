@@ -1,6 +1,6 @@
 import React from "react";
 import "./postCard.css";
-//import Delete from "../../pages/delete.png"
+import Delete from "../../pages/delete-1.png"
 import { Link } from "react-router-dom";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -47,6 +47,18 @@ function Card({
         <div className="col-md-10 col-xs-0" id="hide-when-small">
           <div id="name-and-date">{userName} &nbsp; <strong>-</strong> &nbsp; {date}</div>
         </div>
+        <div className="col-md-1 col-xs-0">
+        {userId === JSON.parse(localStorage.getItem("user")).id
+          ?
+          <button
+          className="btn btn-sm mb-1 float-right"
+          onClick={() => handlePostDelete(postId)}>
+          <img src={Delete} alt="delete" className="size" />
+        </button>        
+        : null
+          }
+        </div>
+
       </div>
 
       <div className="row" id="second-row-post">
@@ -109,9 +121,9 @@ function Card({
 
       <div className="row pb-1">
 
-        <div className="col-md-1 col-sm-1" id="bottom-first"></div>
+        {/* <div className="col-md-1 col-sm-1" id="bottom-first"></div> */}
 
-        <div className="col-md-4 col-sm-2">
+        <div className="col-md text-center col-sm-2">
           <div className="likesDiv">
             <a
               className="likes"
@@ -144,17 +156,7 @@ function Card({
             </a>
           </div>
         </div>
-        <div className="col-md-7 col-sm-7">
-        {userId === JSON.parse(localStorage.getItem("user")).id
-          ?
-          
-          <button className="btn btn-sm deletePost float-right" onClick={() => handlePostDelete(postId)}>
-            Delete
-          </button>
-        
-        : null
-          }
-        </div>
+
 
       </div>
     </div>

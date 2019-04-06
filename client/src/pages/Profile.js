@@ -4,7 +4,7 @@ import Container from "../components/Container/container";
 import Row from "../components/Row/row";
 import API from "../utils/API";
 import PostCard from "../components/PostCard/postCard";
-import Delete from "./delete.png";
+import Delete from "./delete-1.png";
 import moment from "moment";
 import Modal from "react-responsive-modal";
 import User from "../components/User/user";
@@ -404,7 +404,7 @@ class Profile extends Component {
 
         // Look for viewed user's ID in list of followed users
         usersFollowed.forEach(element => {
-          if(this.state.user.id === element.id) {
+          if (this.state.user.id === element.id) {
 
             this.setState({
               userIsFollowed: true
@@ -420,7 +420,7 @@ class Profile extends Component {
   followUser = (userId) => {
 
     let that = this;
-    let currUserId = JSON.parse(localStorage.getItem("user")).id; 
+    let currUserId = JSON.parse(localStorage.getItem("user")).id;
 
     API.followUser(currUserId, userId)
       .then(function (response) {
@@ -437,7 +437,7 @@ class Profile extends Component {
   unfollowUser = (userId) => {
 
     let that = this;
-    let currUserId = JSON.parse(localStorage.getItem("user")).id; 
+    let currUserId = JSON.parse(localStorage.getItem("user")).id;
 
     API.unFollowUser(currUserId, userId)
       .then(function (response) {
@@ -499,20 +499,20 @@ class Profile extends Component {
                     this.state.userIsFollowed ? (
                       <button
                         className="btn btn-outline-light followBtn"
-                        onClick={(event) => {event.preventDefault(); this.unfollowUser(this.state.user.id)}}
+                        onClick={(event) => { event.preventDefault(); this.unfollowUser(this.state.user.id) }}
                       >
                         Unfollow
                         </button>
                     ) : (
                         <button
                           className="btn btn-outline-light followBtn"
-                          onClick={(event) => {event.preventDefault(); this.followUser(this.state.user.id)}}
+                          onClick={(event) => { event.preventDefault(); this.followUser(this.state.user.id) }}
                         >
                           Follow
                         </button>
                       )
-                  
-                    ) : (
+
+                  ) : (
                       <></>
                     )
                   }
@@ -630,19 +630,7 @@ class Profile extends Component {
                           </Link>
                         </div>
 
-                        <div className="col-10 p-1">
-                          {JSON.parse(localStorage.getItem("user")).id === favorite.userId
-                            ?
-                            <div>
-                              <button
-                                className="btn btn-sm mb-1 float-right"
-                                onClick={() => this.handleFavoriteDelete(favorite.id)}
-                              >
-                                <img src={Delete} alt="delete" className="size" />
-                              </button>
-                            </div>
-                            : null
-                          }
+                        <div className="col-7 p-1">
                           <Link
                             to={{
                               pathname: "/listen",
@@ -662,8 +650,22 @@ class Profile extends Component {
                             <h4>{favorite.podcastName}</h4>
                             <p className="favoriteDescription">{favorite.episodeName}</p>
                           </Link>
-
                         </div>
+                        <div className="col-3 pr-4">
+                          {JSON.parse(localStorage.getItem("user")).id === favorite.userId
+                            ?
+                            <div>
+                              <button
+                                className="btn btn-sm mb-1 float-right"
+                                onClick={() => this.handleFavoriteDelete(favorite.id)}
+                              >
+                                <img src={Delete} alt="delete" className="size" />
+                              </button>
+                            </div>
+                            : null
+                          }
+                        </div>
+
                       </div>
                     ))}
                   </Container>
@@ -676,9 +678,9 @@ class Profile extends Component {
 
               {/* POSTS SECTION */}
 
-              
-                <h4 id="postsTitle">Posts</h4>
-                <div className="row posts rounded bg-dark">
+
+              <h4 id="postsTitle">Posts</h4>
+              <div className="row posts rounded bg-dark">
                 {this.state.posts.length ? (
                   <Container>
                     {this.state.posts.map(post => (
@@ -821,8 +823,8 @@ class Profile extends Component {
                         >Submit</button>
                       </form>
                     </Modal>
-                    </Container>
-                  
+                  </Container>
+
                 ) : (
                     <div className="col">
                       <h5 className="text-center">
@@ -830,7 +832,7 @@ class Profile extends Component {
                       </h5>
                     </div>
                   )}
-                  
+
               </div>
             </Container>
           </div>
