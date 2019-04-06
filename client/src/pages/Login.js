@@ -50,7 +50,7 @@ class Login extends Component {
 
                         <br />
 
-                        <div class="loginText">
+                        <div className="loginText">
                             <h1 id="loginPageTitle" className="text-center font-weight-bold">PodHub</h1>
                             <h4 id="slogan" className="text-center font-weight-bold">Share what you care about</h4>
                         </div>
