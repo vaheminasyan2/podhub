@@ -531,12 +531,14 @@ class Profile extends Component {
                       Followers:&nbsp;{this.state.numFollowers}
                     </button>
 
+                    {/* FOLLOWERS MODAL */}
+
                     <Modal
                       open={this.state.showFollowersModal}
                       onClose={this.hideFollowersModal}
-                    // classNames={{ modal: "customModal", overlay: "customOverlay", closeButton: "customCloseButton" }}
+                      classNames={{ modal: "followersModal"}}
                     >
-                      <h4 class="modalTitle">Followers</h4>
+                      <h4 className="modalTitle">Followers</h4>
 
                       {this.state.followers.length ? (
                         <List>
@@ -573,7 +575,7 @@ class Profile extends Component {
                     <Modal
                       open={this.state.showFollowingModal}
                       onClose={this.hideFollowersModal}
-                    // classNames={{ modal: "customModal", overlay: "customOverlay", closeButton: "customCloseButton" }}
+                      classNames={{ modal: "followersModal"}}
                     >
                       <h4 className="modalTitle">Following</h4>
 
@@ -678,7 +680,6 @@ class Profile extends Component {
 
               {/* POSTS SECTION */}
 
-
               <h4 id="postsTitle">Posts</h4>
               <div className="row posts rounded bg-dark">
                 {this.state.posts.length ? (
@@ -708,6 +709,8 @@ class Profile extends Component {
                       />
                     ))}
 
+                    {/* LIKES MODAL */}
+
                     <Modal
                       open={this.state.showLikesModal}
                       onClose={this.closeLikesModal}
@@ -732,6 +735,8 @@ class Profile extends Component {
                         </div>
                       ))}
                     </Modal>
+
+                    {/* COMMENTS MODAL */}
 
                     <Modal
                       open={this.state.showCommentsModal}
