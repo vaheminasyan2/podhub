@@ -105,7 +105,9 @@
 }
 
 #top {
-  border-bottom: 4px solid #020202;
+  border-bottom: 1px solid #020202;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
 }
 
 #second-row-post {
