@@ -126,7 +126,7 @@
   margin-bottom: 5px !important;
 }
 
-p#episode-name-home {
+#episode-name-home {
   font-size: 15px;
 }
 
@@ -153,4 +153,14 @@ p#episode-name-home {
 
 .deletePost{
   color: white
+}
+
+.postText:hover {
+  /* text-decoration:none !important;
+  color: rgb(15, 15, 15) !important; */
+  opacity:0.9;
+}
+
+.postText {
+  opacity:1;
 }

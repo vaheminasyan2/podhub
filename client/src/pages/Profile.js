@@ -614,7 +614,7 @@ class Profile extends Component {
                   <Container>
                     {this.state.favorites.map(favorite => (
 
-                      <div className="row rounded favorite bg-dark text-secondary" key={favorite.id}>
+                      <div className="row rounded border-0 favorite bg-dark text-secondary" key={favorite.id}>
                         <div className="col-2 py-5 px-3 pad">
                           <Link to={{
                             pathname: "/episodeList",

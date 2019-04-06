@@ -27,7 +27,8 @@
     margin-bottom: 20px;
     max-height: 300px;
     overflow-y: scroll;
-    padding: 0px;
+    padding: 5px;
+    padding-top: 10px;
     color: white;
   }
 
@@ -54,7 +55,7 @@
   }
 
   .favoriteLink {
-    color: white;
+    color: white
   }
 
   .size{
@@ -62,6 +63,7 @@
     margin:0;
     float:right;
     padding-top: 0.5em;
+    color: white !important
   }
 
   .border-white{

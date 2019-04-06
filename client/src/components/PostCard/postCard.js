@@ -86,10 +86,11 @@ function Card({
             }
           }}
           >
-
+            <div className="postText">
             <h4 id="podcast-name-home">{podcastName}</h4>
             <p id="episode-name-home">{episodeName}</p>
             <p id="episode-description-home" className="ellipses">{description}</p>
+            </div>
 
             {/* <a href={audioLink} /> */}
           </Link>
