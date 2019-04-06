@@ -526,7 +526,7 @@ class Profile extends Component {
                   {/* User Info: Posts, Followers, Following */}
 
                   <Row>
-                    <div className="btn btn-dark" onClick={this.scrollTo}>
+                    <div className="btn btn-dark postsBtn" onClick={this.scrollTo}>
                       Posts:&nbsp; {this.state.posts.length}
                     </div>
 
