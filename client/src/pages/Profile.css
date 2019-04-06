@@ -89,6 +89,11 @@ a:hover {
 
 /* Modal  */
 
+.followersModal {
+  max-height: 400px;
+  overflow: scroll;
+}
+
 .modalTitle {
   border-bottom: 1px solid rgb(75, 75, 75);
   font-size: 24px;
