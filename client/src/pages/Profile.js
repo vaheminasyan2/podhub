@@ -252,9 +252,12 @@ class Profile extends Component {
 
   // Likes or unlikes a post
   handleLikeOrUnlike = (postId) => {
-    API.likePost(postId, this.state.user.id).then(res => {
+
+    let currUserId = JSON.parse(localStorage.getItem("user")).id;
+
+    API.likePost(postId, currUserId).then(res => {
       if (res.data[1] === false) {
-        API.unlikePost(postId, this.state.user.id).then(res => {
+        API.unlikePost(postId, currUserId).then(res => {
           this.getPostsOnlyByUser();
         })
       } else {
