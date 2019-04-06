@@ -26,6 +26,18 @@
   width: 100px;
 }
 
+/* Comments */
+
+.userComment {
+  max-width: 500px;
+  padding: 0px 20px;
+  word-wrap: break-word;
+}
+
+.commentBox {
+  max-width: 600px;
+}
+
 /* Favorite Container */
 
 .favorites {
