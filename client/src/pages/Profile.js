@@ -536,7 +536,7 @@ class Profile extends Component {
                       onClose={this.hideFollowersModal}
                     // classNames={{ modal: "customModal", overlay: "customOverlay", closeButton: "customCloseButton" }}
                     >
-                      <h2>Users following {this.props.location.state.user.name}</h2>
+                      <h4 class="modalTitle">Followers</h4>
 
                       {this.state.followers.length ? (
                         <List>
@@ -546,7 +546,7 @@ class Profile extends Component {
                                 userId={user.id}
                                 userName={user.name}
                                 userImage={user.image}
-                                handler={null}
+                                handler={this.hideFollowersModal}
                               />
                             </div>
                           )}
@@ -575,7 +575,7 @@ class Profile extends Component {
                       onClose={this.hideFollowersModal}
                     // classNames={{ modal: "customModal", overlay: "customOverlay", closeButton: "customCloseButton" }}
                     >
-                      <h2>Users {this.props.location.state.user.name} follows</h2>
+                      <h4 className="modalTitle">Following</h4>
 
                       {this.state.following.length ? (
                         <List>
@@ -585,7 +585,7 @@ class Profile extends Component {
                                 userId={user.id}
                                 userName={user.name}
                                 userImage={user.profileImage}
-                                handler={null}
+                                handler={this.hideFollowersModal}
                               />
                             </div>
                           )}
@@ -614,7 +614,7 @@ class Profile extends Component {
                   <Container>
                     {this.state.favorites.map(favorite => (
 
-                      <div className="row rounded border-0 favorite bg-dark text-secondary" key={favorite.id}>
+                      <div className="row rounded favorite text-secondary" key={favorite.id}>
                         <div className="col-2 py-5 px-3 pad">
                           <Link to={{
                             pathname: "/episodeList",
