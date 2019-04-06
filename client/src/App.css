@@ -49,3 +49,7 @@ body {
   width: 35px;
   margin-top: 0 !important
 }
+
+.deleteButtonX:hover{
+  opacity: 0.5;
+}

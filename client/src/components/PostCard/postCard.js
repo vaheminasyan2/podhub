@@ -51,7 +51,7 @@ function Card({
           {userId === JSON.parse(localStorage.getItem("user")).id
             ?
             <button
-              className="btn btn-sm mb-1 float-right"
+              className="btn btn-sm mb-1 float-right deleteButtonX"
               onClick={() => handlePostDelete(postId)}>
               <img src={Delete} alt="delete" className="size" />
             </button>

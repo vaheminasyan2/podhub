@@ -656,7 +656,7 @@ class Profile extends Component {
                             ?
                             <div>
                               <button
-                                className="btn btn-sm mb-1 float-right"
+                                className="btn btn-sm mb-1 float-right deleteButtonX"
                                 onClick={() => this.handleFavoriteDelete(favorite.id)}
                               >
                                 <img src={Delete} alt="delete" className="size" />
