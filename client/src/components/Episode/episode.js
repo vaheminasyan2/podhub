@@ -58,7 +58,7 @@ class Episode extends Component {
           <div className="pt-2 line pb-4">
 
             {/* Episode Description */}
-            <span>{this.props.description.replace(/<\/?[^>]+(>|$)/g, "")}<br /></span>
+            <span className="episodeDescription">{this.props.description.replace(/<\/?[^>]+(>|$)/g, "")}<br /></span>
 
           </div>
         </div>

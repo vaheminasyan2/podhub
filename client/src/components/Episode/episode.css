@@ -21,3 +21,8 @@ img {
 .line{
   border-bottom: 1px solid rgb(54, 54, 54);
 }
+
+.episodeDescription {
+ word-wrap: break-word; 
+  width: 100px
+}
