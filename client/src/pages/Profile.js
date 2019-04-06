@@ -345,9 +345,12 @@ class Profile extends Component {
 
   // Likes or unlikes a comment
   handleCommentLikeOrUnlike = (commentId) => {
-    API.likeComment(commentId, this.state.user.id).then(res => {
+
+    let currUserId = JSON.parse(localStorage.getItem("user")).id;
+
+    API.likeComment(commentId, currUserId).then(res => {
       if (res.data[1] === false) {
-        API.unlikeComment(commentId, this.state.user.id).then(res => {
+        API.unlikeComment(commentId, currUserId).then(res => {
           this.handleShowComments(this.state.currentPostId);
         });
       } else {
