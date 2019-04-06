@@ -13,10 +13,7 @@ button > div {
     border-radius:21px !important;
     background-color:black !important;
     position:relative;
-    
-
 }
-
 
 span {
     color:white;
@@ -29,4 +26,12 @@ span {
 .autoM{
     display:block;
     margin: 0 auto;
+}
+
+.loginText {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#slogan {
+    font-size: 20px;
 }
