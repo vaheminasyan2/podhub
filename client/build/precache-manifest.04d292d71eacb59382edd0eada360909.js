@@ -16,23 +16,27 @@ self.__precacheManifest = [
     "url": "/static/media/skip-back-white.54a799f0.png"
   },
   {
+    "revision": "69488adb050450224002598b8f8719b4",
+    "url": "/static/media/delete-1.69488adb.png"
+  },
+  {
     "revision": "42ac5946195a7306e2a5",
     "url": "/static/js/runtime~main.a8a9905a.js"
   },
   {
-    "revision": "8980000e563b75536e69",
-    "url": "/static/js/main.940c7b26.chunk.js"
+    "revision": "925140f2f9a94cb6ecbc",
+    "url": "/static/js/main.755e3e66.chunk.js"
   },
   {
-    "revision": "f83b35b596492807b5c8",
-    "url": "/static/js/2.68d57a22.chunk.js"
+    "revision": "218a48c7e52054dee724",
+    "url": "/static/js/2.9a945a17.chunk.js"
   },
   {
-    "revision": "8980000e563b75536e69",
-    "url": "/static/css/main.e1fe8880.chunk.css"
+    "revision": "925140f2f9a94cb6ecbc",
+    "url": "/static/css/main.f6845a5f.chunk.css"
   },
   {
-    "revision": "7f76dda3464efd4c79cf4616ac1456a1",
+    "revision": "1e3092f25712fa182d94218dc3bc2ce8",
     "url": "/index.html"
   }
 ];
