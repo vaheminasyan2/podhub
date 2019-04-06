@@ -20,7 +20,7 @@ function Card({
   episodeId, episodeName, description, audioLink,
   userMessage, likes, comments,
   postId, handlePostDelete, handleLikeOrUnlike,
-  handleShowLikes, handleShowComments, 
+  handleShowLikes, handleShowComments,
 }) {
 
   return (
@@ -48,14 +48,14 @@ function Card({
           <div id="name-and-date">{userName} &nbsp; <strong>-</strong> &nbsp; {date}</div>
         </div>
         <div className="col-md-1 col-xs-0">
-        {userId === JSON.parse(localStorage.getItem("user")).id
-          ?
-          <button
-          className="btn btn-sm mb-1 float-right"
-          onClick={() => handlePostDelete(postId)}>
-          <img src={Delete} alt="delete" className="size" />
-        </button>        
-        : null
+          {userId === JSON.parse(localStorage.getItem("user")).id
+            ?
+            <button
+              className="btn btn-sm mb-1 float-right"
+              onClick={() => handlePostDelete(postId)}>
+              <img src={Delete} alt="delete" className="size" />
+            </button>
+            : null
           }
         </div>
 
@@ -99,9 +99,9 @@ function Card({
           }}
           >
             <div className="postText">
-            <h4 id="podcast-name-home">{podcastName}</h4>
-            <p id="episode-name-home">{episodeName}</p>
-            <p id="episode-description-home" className="ellipses">{description}</p>
+              <h4 id="podcast-name-home">{podcastName}</h4>
+              <p id="episode-name-home">{episodeName}</p>
+              <p id="episode-description-home" className="ellipses">{description}</p>
             </div>
 
             {/* <a href={audioLink} /> */}
@@ -128,13 +128,13 @@ function Card({
             <a
               className="likes"
               onClick={() => handleLikeOrUnlike(postId)}
-              
-              
+
+
             >
               <i className="fas fa-heart animated" onClick={(e) => {
                 var targ = e.target;
-                targ.classList.add("bounce");      
-                setTimeout(()=>{targ.classList.remove("bounce")},1000)         
+                targ.classList.add("bounce");
+                setTimeout(() => { targ.classList.remove("bounce") }, 1000)
               }}
 
               ></i>
