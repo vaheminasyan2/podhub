@@ -19,13 +19,19 @@ Social media site for Podcast listeners. **Check it out** [**here**](https://pod
 - https://twitter.com
 
 **Technology used:**
--   Node.js
--   JavaScript
--   React.js
--   jQuery
--   Bootstrap
--   Heroku
--   MySQl
+- ReactJS
+- Bootstrap
+- JavaScript
+- Listen Notes for Podcast search
+- Node.js
+- React Router
+- Express
+- Axios
+- MySQL
+- Sequelize
+- Heroku
+- Google OAuth
+- Moment.js
 
 **Resources and Roles:**
 - [User Stories](https://github.com/vaheminasyan2/podhub/issues/4)
