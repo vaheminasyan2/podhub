@@ -105,7 +105,7 @@ class Listen extends Component {
 
         let userId = JSON.parse(localStorage.getItem("user")).id;
 
-        API.addPodcastToFavorites(
+        API.addEpisodeToFavorites(
             this.state.podcastId,
             this.state.podcastName,
             this.state.podcastLogo,
