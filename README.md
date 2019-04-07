@@ -1,5 +1,5 @@
 # PodHub
-Social media site for Podcast listeners. **Check it out** [**here**](https://arcane-river-90894.herokuapp.com/).
+Social media site for Podcast listeners. **Check it out** [**here**](https://podhub.herokuapp.com/).
 
 ![image](/index-image.PNG)
 
