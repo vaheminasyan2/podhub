@@ -19,7 +19,7 @@ Steps to reproduce the behavior:
 
 **Actual result**
 
-**Expected behavior (how it's supposed to work) **
+**Expected behavior (how it's supposed to work)**
 A clear and concise description of what you expected to happen.
 
 **Screenshots**
