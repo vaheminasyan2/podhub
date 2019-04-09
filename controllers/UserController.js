@@ -12,7 +12,11 @@ class UserController {
    * @param {*} res
    */
   getUsersList(req, res){
-    db.user.findAll().then(function(users){
+    db.user.findAll({
+      order: [
+        ['name', 'ASC'],
+      ],
+    }).then(function(users){
       for( var i = 0; i < users.length; i++){ 
         if ( users[i].id == req.params.id) {
           users.splice(i, 1); 
