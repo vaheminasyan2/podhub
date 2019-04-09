@@ -11,8 +11,6 @@ library.add(faComment);
 library.add(faHeart);
 
 // POST COMPONENT
-// var alerter = () => {
-//   alert(this);}
 
 function Card({
   userId, userName, userImage, date,
