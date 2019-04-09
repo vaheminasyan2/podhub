@@ -151,6 +151,7 @@ class Listen extends Component {
                     <div className="col-md-3 col-xs-0"></div>
                     <div className="col-md-6 col-xs-12 text-center" id="first-row-listen">
                         <div id="pod-name">
+                            {this.state.podcastName}<br/>
                             <Link
                                 to={{
                                     pathname: "/episodeList",
@@ -162,11 +163,8 @@ class Listen extends Component {
                                     }
                                 }}
                             >
-                                {this.state.podcastName}
+                                <img src={this.state.podcastLogo} alt="Podcast Logo" id="pod-logo" />
                             </Link>
-                        </div>
-                        <div>
-                            <img src={this.state.podcastLogo} alt="Podcast Logo" id="pod-logo" />
                         </div>
                     </div>
                     <div className="col-md-3 col-xs-0"></div>
