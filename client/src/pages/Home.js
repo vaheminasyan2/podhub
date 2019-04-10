@@ -67,6 +67,10 @@ class Home extends Component {
         });
     };
 
+    // Takes (True, Audio Link) and passes them to App.js
+    toHomeAndProfile = (value, link, podName, epName) => {
+        this.props.toApp(value, link, podName, epName);
+    }
 
     render() {
         return (
@@ -94,6 +98,7 @@ class Home extends Component {
                                         numComments={post.numberOfComments}
                                         postId={post.id}
                                         updateParentState={this.getPosts}
+                                        toHomeAndProfile={this.toHomeAndProfile}
                                   />
                                 ))}
                             </Container>
