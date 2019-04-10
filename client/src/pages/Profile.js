@@ -308,6 +308,11 @@ class Profile extends Component {
     window.scrollTo(0, 500);
   }
 
+  // Takes (True, Audio Link) and passes them to App.js
+  toHomeAndProfile = (value, link, podName, epName) => {
+    this.props.toApp(value, link, podName, epName);
+}
+
 
   render() {
     return (
@@ -378,7 +383,7 @@ class Profile extends Component {
                     <Modal
                       open={this.state.showFollowersModal}
                       onClose={this.hideFollowersModal}
-                      classNames={{ modal: "followersModal"}}
+                      classNames={{ modal: "followersModal" }}
                     >
                       <h4 className="modalTitle">Followers</h4>
 
@@ -419,7 +424,7 @@ class Profile extends Component {
                     <Modal
                       open={this.state.showFollowingModal}
                       onClose={this.hideFollowersModal}
-                      classNames={{ modal: "followersModal"}}
+                      classNames={{ modal: "followersModal" }}
                     >
                       <h4 className="modalTitle">Following</h4>
 
@@ -466,7 +471,7 @@ class Profile extends Component {
                       <div className="row rounded favorite text-secondary" key={favorite.id}>
                         <div className="col-2 py-5 px-3 pad">
 
-                          <Link 
+                          <Link
                             to={{
                               pathname: "/episodeList",
                               state: {
@@ -478,11 +483,11 @@ class Profile extends Component {
                             }}
                           >
                             <span>
-                              <img 
-                                id="podcastIcon" 
-                                src={favorite.podcastLogo} 
-                                alt="Podcast Logo" 
-                                className="border-white favoriteIcon" 
+                              <img
+                                id="podcastIcon"
+                                src={favorite.podcastLogo}
+                                alt="Podcast Logo"
+                                className="border-white favoriteIcon"
                               />
                             </span>
                           </Link>
@@ -511,7 +516,7 @@ class Profile extends Component {
                             <h4>{favorite.podcastName}</h4>
                             <p className="favoriteDescription">{favorite.episodeName}</p>
                           </Link>
-                          
+
                         </div>
 
                         {/* FAVORITES: DELETE BUTTON */}
@@ -565,6 +570,7 @@ class Profile extends Component {
                         numComments={post.numberOfComments}
                         postId={post.id}
                         updateParentState={this.getPostsOnlyByUser}
+                        toHomeAndProfile={this.toHomeAndProfile}
                       />
                     ))}
                   </Container>
