@@ -528,6 +528,7 @@ class Post extends Component {
                                             position="top left"
                                             closeOnDocumentClick
                                             className="popup"
+                                            arrow={false}
                                         >
                                             {this.state.userListCommentLikes.map(user => (
                                                 <div className="row" key={user.id}>
