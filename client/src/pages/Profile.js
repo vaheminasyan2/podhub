@@ -9,6 +9,7 @@ import moment from "moment";
 import Modal from "react-responsive-modal";
 import User from "../components/User/user";
 import List from "../components/List/list";
+import AboutMe from "../components/AboutMe/aboutMe";
 import "./Profile.css";
 
 // USER PROFILE PAGE
@@ -455,6 +456,12 @@ class Profile extends Component {
                   </Row>
                 </div>
               </div>
+
+              {/* ABOUT ME SECTION */}
+
+              <AboutMe 
+                user={this.props.location.state.user}
+              />
 
               {/* FAVORITES SECTION */}
 
