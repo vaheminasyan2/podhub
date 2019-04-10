@@ -133,6 +133,7 @@ class Post extends Component {
         });
     };
 
+    // Checks if current user has liked post
     checkUserLike = (postId) => {
 
         let currUserId = JSON.parse(localStorage.getItem("user")).id;
