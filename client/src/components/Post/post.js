@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faComment, faHeart } from '@fortawesome/free-solid-svg-icons'
 import moment from "moment";
 import API from "../../utils/API";
-import "./postCard.css";
+import "./post.css";
 
 library.add(faComment);
 library.add(faHeart);
@@ -135,7 +135,7 @@ class Post extends Component {
 
     // Add a comment to post
     addComment = () => {
-        API.addComment(this.state.currentComment, this.state.postId, this.state.userId).then(res => {
+        API.addComment(this.state.currentComment, this.state.postId, JSON.parse(localStorage.getItem("user")).id).then(res => {
             this.props.updateParentState();
             this.handleShowCommentsModal();
             this.closeCommentsModal();
@@ -509,7 +509,7 @@ class Post extends Component {
 
                                 {/* COMMENT DELETE BUTTON */}
 
-                                {this.state.userId === comment.commentedBy
+                                {JSON.parse(localStorage.getItem("user")).id === comment.commentedBy
                                     ?
                                     <div className="col-8">
                                         <button

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Container from "../components/Container/container";
 import Row from "../components/Row/row";
 import API from "../utils/API";
-import Post from "../components/PostCard/post";
+import Post from "../components/Post/post";
 import Delete from "./delete-1.png";
 import moment from "moment";
 import Modal from "react-responsive-modal";

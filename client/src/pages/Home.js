@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Container from "../components/Container/container";
 import Row from "../components/Row/row";
-import Post from "../components/PostCard/post";
+import Post from "../components/Post/post";
 import API from "../utils/API";
 import { faComment, faHeart } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
