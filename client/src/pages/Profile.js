@@ -47,8 +47,7 @@ class Profile extends Component {
     this.getNumFollowing();
     this.isUserFollowed();
     this.setState({
-      user: this.props.location.state.user,
-      aboutMe: "My name is " + this.props.location.state.user.name
+      user: this.props.location.state.user
     });
   }
 
