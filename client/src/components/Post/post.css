@@ -1,56 +1,56 @@
-.card {
-  margin-top: 10px;
-}
-
 .btn {
   margin-right: 2%;
   right: 0;
 }
 
-#profileImage {
-  width: 35px;
-  margin: 0px;
-  border-radius: 35px;
+.card {
+  margin-top: 10px;
 }
 
-#podcastIcon {
-  width: 80px;
-  margin: 0px 10px 0px 5px;
-  border: solid 3.4px rgb(212, 208, 208) !important;
+.commentDiv {
+  margin-left: 5px;
+}
 
+.commentDiv, .likes, .likesNumber:hover {
+  cursor: pointer;
 }
 
 .deletePost {
+  color: white;
   float: right;
   position: absolute;
   margin:0 !important;
 }
 
-.padding{
-  padding-right:1em;
+.ellipses {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-bottom: 7px !important;
 }
 
-.fa-heart{
-  color:red;
-}
-
-.fa-comment{
+.fa-comment {
   color:white;
 }
 
-.x{
-  width: 20px;
-  margin:0;
-  float:right;
-  
+/* .fa-heart {
+  color:red;
+} */
+
+.fa-heart-liked {
+  color: red;
+}
+
+.fa-heart-unliked {
+  color: lightgray;
 }
 
 .likes, .comments {
   padding-right: 0.8em;
 }
 
-.commentDiv, .likes, .likesNumber:hover {
-  cursor: pointer;
+.likesDiv {
+  margin-right: 5px;
 }
 
 .likesDiv, .commentDiv {
@@ -58,11 +58,35 @@
   padding: 5px;
 }
 
-.likesDiv {
-  margin-right: 5px;
+.padding {
+  padding-right:1em;
 }
-.commentDiv {
-  margin-left: 5px;
+
+.postText {
+  opacity:1;
+}
+
+.postText:hover {
+  opacity:0.8;
+}
+
+.x {
+  width: 20px;
+  margin:0;
+  float:right;
+}
+
+#bottom-first {
+  max-width: 20px;
+}
+
+#episode-description-home {
+  font-size: 13px;
+  margin-top: 0px;
+}
+
+#episode-name-home {
+  font-size: 15px;
 }
 
 #img-post {
@@ -72,6 +96,22 @@
 
 #name-and-date {
   text-align: center;
+}
+
+#podcastIcon {
+  width: 80px;
+  margin: 0px 10px 0px 5px;
+  border: solid 3.4px rgb(212, 208, 208) !important;
+}
+
+#podcast-name-home {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px !important;
+}
+
+#podcast-name-home, #episode-name-home, #episode-description-home {
+  color: rgb(214, 214, 214);
 }
 
 #post-top-row {
@@ -87,6 +127,16 @@
   border-bottom: 1px solid rgb(46, 45, 45); /* This creates the border. Replace black with whatever color you want. */
 }
 
+#profileImage {
+  width: 35px;
+  margin: 0px;
+  border-radius: 35px;
+}
+
+#second-row-post {
+  max-height: 230px !important;
+}
+
 #second-row-post:after {
   content: ""; /* This is necessary for the pseudo element to work. */ 
   display: block; /* This will put the pseudo element on its own line. */
@@ -96,45 +146,10 @@
   border-bottom: 1px solid rgb(46, 45, 45); 
 }
 
-
-.ellipses {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  margin-bottom: 7px !important;
-}
-
 #top {
   border-bottom: 1px solid #020202;
   margin-bottom: 20px;
   padding-bottom: 15px;
-}
-
-#second-row-post {
-  max-height: 230px !important;
-}
-
-#bottom-first {
-  max-width: 20px;
-}
-
-#podcast-name-home, #episode-name-home, #episode-description-home {
-  color: rgb(214, 214, 214);
-}
-
-#podcast-name-home {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 5px !important;
-}
-
-#episode-name-home {
-  font-size: 15px;
-}
-
-#episode-description-home {
-  font-size: 13px;
-  margin-top: 0px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -151,18 +166,4 @@
   #post-top-row:after {
     display: none;
   }
-}
-
-.deletePost{
-  color: white
-}
-
-.postText:hover {
-  /* text-decoration:none !important;
-  color: rgb(15, 15, 15) !important; */
-  opacity:0.8;
-}
-
-.postText {
-  opacity:1;
 }

@@ -30,7 +30,6 @@ class Profile extends Component {
     numFollowers: 0,
     numFollowing: 0,
     favorites: [],
-    posts: [],
     currentPostId: "",
     followers: [],
     following: [],
@@ -338,7 +337,7 @@ class Profile extends Component {
 
                   {/* Follow Button */}
 
-                  {this.state.user.id != JSON.parse(localStorage.getItem("user")).id ? (
+                  {this.state.user.id !== JSON.parse(localStorage.getItem("user")).id ? (
                     this.state.userIsFollowed ? (
                       <button
                         className="btn btn-outline-light followBtn"

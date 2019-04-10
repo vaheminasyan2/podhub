@@ -46,7 +46,6 @@ class Home extends Component {
                     message: message,
                     posts: res.data
                 });
-                //console.log(res.data);
             })
             .catch(error => {
                 console.log(error);

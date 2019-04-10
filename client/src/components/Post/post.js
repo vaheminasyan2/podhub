@@ -40,11 +40,13 @@ class Post extends Component {
             userListCommentLikes: [],
             postId: "",
             showLikesModal: false,
-            showCommentsModal: false
+            showCommentsModal: false,
+            heartClasses: "fa-heart-unliked fas fa-heart animated"
         }
     }
 
     componentWillMount = () => {
+
         this.setState({
             userId: this.props.userId,
             userName: this.props.userName,
@@ -61,7 +63,7 @@ class Post extends Component {
             userMessage: this.props.userMessage,
             numLikes: this.props.numLikes,
             numComments: this.props.numComments
-        });
+        }, () => {this.checkUserLike(this.state.postId)});
     }
 
     // Deletes a post and updates parent state
@@ -70,7 +72,7 @@ class Post extends Component {
         API.handlePostDelete(this.state.postId)
             .then(function () {
                 that.props.updateParentState();
-            });            
+            });
     }
 
 
@@ -89,9 +91,9 @@ class Post extends Component {
             if (res.data[1] === false) {
                 API.unlikePost(this.state.postId, currUserId)
                     .then(res => {
-
                         that.setState({
-                            numLikes: that.state.numLikes - 1
+                            numLikes: that.state.numLikes - 1,
+                            heartClasses: "fa-heart-unliked fas fa-heart"
                         });
                     });
             }
@@ -99,7 +101,8 @@ class Post extends Component {
             // LIKE POST
             else {
                 that.setState({
-                    numLikes: that.state.numLikes + 1
+                    numLikes: that.state.numLikes + 1,
+                    heartClasses: "fa-heart-liked fas fa-heart animated bounce"
                 });
             }
         });
@@ -107,19 +110,20 @@ class Post extends Component {
 
     // Shows modal that displays users who have liked a post
     handleShowLikesModal = () => {
-        API.getLikes(this.state.postId).then(res => {
-            if (res.data.length === 0) {
-                this.setState({
-                    showLikesModal: false
-                });
-            }
-            else {
-                this.setState({
-                    likes: res.data,
-                    showLikesModal: true
-                });
-            }
-        });
+        API.getLikes(this.state.postId)
+            .then(res => {
+                if (res.data.length === 0) {
+                    this.setState({
+                        showLikesModal: false
+                    });
+                }
+                else {
+                    this.setState({
+                        likes: res.data,
+                        showLikesModal: true
+                    });
+                }
+            });
     }
 
     // Closes Likes modal
@@ -129,6 +133,21 @@ class Post extends Component {
         });
     };
 
+    checkUserLike = (postId) => {
+
+        let currUserId = JSON.parse(localStorage.getItem("user")).id;
+
+        API.getLikes(postId)
+            .then(res => {
+                for (var like in res.data) {
+                    if (currUserId === res.data[like].id) {
+                        this.setState({
+                            heartClasses: "fa-heart-liked fas fa-heart animated"
+                        });
+                    }
+                }
+            });
+    }
 
     // COMMENTS
     // ===============================================
@@ -361,41 +380,41 @@ class Post extends Component {
                         {/* LIKES */}
 
                         <div className="likesDiv">
-                            <a
+                            <span
                                 className="likes"
                                 onClick={() => this.handleLikeOrUnlike(this.state.postId)}
                             >
                                 {/* HEART ANIMATION */}
 
                                 <i
-                                    className="fas fa-heart animated"
-                                    onClick={(e) => {
-                                        var targ = e.target;
-                                        targ.classList.add("bounce");
-                                        setTimeout(() => { targ.classList.remove("bounce") }, 1000)
-                                    }}
+                                    className={this.state.heartClasses}
+                                    // onClick={(e) => {
+                                    //     var targ = e.target;
+                                    //     targ.classList.add("bounce");
+                                    //     setTimeout(() => { targ.classList.remove("bounce") }, 1000);
+                                    // }}
                                 >
                                 </i>
-                            </a>
+                            </span>
 
-                            <a
+                            <span
                                 className="likesNumber"
                                 onClick={() => this.handleShowLikesModal(this.state.postId)}
                             >
                                 {this.state.numLikes}
-                            </a>
+                            </span>
                         </div>
 
                         {/* COMMENTS */}
 
                         <div className="commentDiv">
-                            <a
+                            <span
                                 className="comments"
                                 onClick={() => this.handleShowCommentsModal(this.state.postId)}
                             >
                                 <FontAwesomeIcon icon="comment" /> &nbsp;
                                 {this.state.numComments}
-                            </a>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -470,12 +489,12 @@ class Post extends Component {
 
                             <div className="row comment-third-row">
                                 <div className="col-2 mb-2">
-                                    <a
+                                    <span
                                         className="likes ml-4"
                                         onClick={() => this.handleCommentLikeOrUnlike(comment.id)}
                                     >
                                         <FontAwesomeIcon icon="heart" />
-                                    </a>
+                                    </span>
 
                                 </div>
 
