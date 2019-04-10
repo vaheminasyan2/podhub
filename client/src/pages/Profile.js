@@ -9,7 +9,6 @@ import moment from "moment";
 import Modal from "react-responsive-modal";
 import User from "../components/User/user";
 import List from "../components/List/list";
-import AboutMe from "../components/AboutMe/aboutMe";
 import "./Profile.css";
 
 // USER PROFILE PAGE
@@ -309,6 +308,11 @@ class Profile extends Component {
     window.scrollTo(0, 500);
   }
 
+  // Takes (True, Audio Link) and passes them to App.js
+  toHomeAndProfile = (value, link, podName, epName) => {
+    this.props.toApp(value, link, podName, epName);
+}
+
 
   render() {
     return (
@@ -379,7 +383,7 @@ class Profile extends Component {
                     <Modal
                       open={this.state.showFollowersModal}
                       onClose={this.hideFollowersModal}
-                      classNames={{ modal: "followersModal"}}
+                      classNames={{ modal: "followersModal" }}
                     >
                       <h4 className="modalTitle">Followers</h4>
 
@@ -420,7 +424,7 @@ class Profile extends Component {
                     <Modal
                       open={this.state.showFollowingModal}
                       onClose={this.hideFollowersModal}
-                      classNames={{ modal: "followersModal"}}
+                      classNames={{ modal: "followersModal" }}
                     >
                       <h4 className="modalTitle">Following</h4>
 
@@ -452,12 +456,6 @@ class Profile extends Component {
                 </div>
               </div>
 
-              {/* ABOUT ME SECTION */}
-
-              <AboutMe 
-                user = {this.props.location.state.user}
-              />
-
               {/* FAVORITES SECTION */}
 
               <h4 id="favoritesTitle">Favorites</h4>
@@ -470,11 +468,10 @@ class Profile extends Component {
                     {this.state.favorites.map(favorite => (
 
                       // FAVORITES: PODCAST LOGO, LINK TO EPISODE LIST PAGE
-
                       <div className="row rounded favorite text-secondary" key={favorite.id}>
                         <div className="col-2 py-5 px-3 pad">
 
-                          <Link 
+                          <Link
                             to={{
                               pathname: "/episodeList",
                               state: {
@@ -486,11 +483,11 @@ class Profile extends Component {
                             }}
                           >
                             <span>
-                              <img 
-                                id="podcastIcon" 
-                                src={favorite.podcastLogo} 
-                                alt="Podcast Logo" 
-                                className="border-white favoriteIcon" 
+                              <img
+                                id="podcastIcon"
+                                src={favorite.podcastLogo}
+                                alt="Podcast Logo"
+                                className="border-white favoriteIcon"
                               />
                             </span>
                           </Link>
@@ -498,7 +495,6 @@ class Profile extends Component {
                         </div>
 
                         {/* FAVORITES: BODY, LINK TO LISTEN PAGE */}
-
                         <div className="col-7 p-1">
 
                           <Link
@@ -520,11 +516,10 @@ class Profile extends Component {
                             <h4>{favorite.podcastName}</h4>
                             <p className="favoriteDescription">{favorite.episodeName}</p>
                           </Link>
-                          
+
                         </div>
 
                         {/* FAVORITES: DELETE BUTTON */}
-
                         <div className="col-3 pr-4">
                           {JSON.parse(localStorage.getItem("user")).id === favorite.userId
                             ?
@@ -575,6 +570,7 @@ class Profile extends Component {
                         numComments={post.numberOfComments}
                         postId={post.id}
                         updateParentState={this.getPostsOnlyByUser}
+                        toHomeAndProfile={this.toHomeAndProfile}
                       />
                     ))}
                   </Container>
