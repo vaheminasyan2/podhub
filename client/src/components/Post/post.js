@@ -133,8 +133,6 @@ class Post extends Component {
         });
     };
 
-    // Executes on page load only
-    // Checks if user has already liked post. Updates state if user has liked.
     checkUserLike = (postId) => {
 
         let currUserId = JSON.parse(localStorage.getItem("user")).id;
@@ -150,7 +148,6 @@ class Post extends Component {
                 }
             });
     }
-
 
     // COMMENTS
     // ===============================================
@@ -393,10 +390,17 @@ class Post extends Component {
                                 className="likes"
                                 onClick={() => this.handleLikeOrUnlike(this.state.postId)}
                             >
-                                {/* HEART ICON */}
+                                {/* HEART ANIMATION */}
 
-                                <i className={this.state.heartClasses}></i>
-
+                                <i
+                                    className={this.state.heartClasses}
+                                // onClick={(e) => {
+                                //     var targ = e.target;
+                                //     targ.classList.add("bounce");
+                                //     setTimeout(() => { targ.classList.remove("bounce") }, 1000);
+                                // }}
+                                >
+                                </i>
                             </span>
 
                             <span
@@ -576,8 +580,9 @@ class Post extends Component {
                             className="btn btn-light btn-sm mb-2"
                             onClick={(event) => {
                                 event.preventDefault();
-                                this.addComment();
-                            }}
+                                this.addComment()
+                            }
+                            }
                         >
                             Submit
                         </button>
