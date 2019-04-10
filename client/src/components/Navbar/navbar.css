@@ -26,19 +26,32 @@ button > div {
 }
 
 .navbarAudioPopup {
-    background: gray;
+    background: white;
     color: black !important;
     font-size: 12px;
-    opacity: 0.85;
+    font-weight: bold;
+    opacity: 1;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: wrap;
-    width: 400px;
+    width: 350px;
+    border-radius: 10px;
+    margin: 8px 0px 0px 40px;
 }
 
 .navbarPopupText {
     color: black !important;
+    text-align: center;
 }
+
+#topPopupText:after {
+    content: ""; /* This is necessary for the pseudo element to work. */ 
+    display: block; /* This will put the pseudo element on its own line. */
+    margin: 0 auto; /* This will center the border. */
+    width: 70%; /* Change this to whatever width you want. */
+    padding-top: 0px; /* This creates some space between the element and the border. */
+    border-bottom: 1px solid rgb(141, 139, 139); /* This creates the border. Replace black with whatever color you want. */
+  }
 
 .navbarText {
     color: white !important; 

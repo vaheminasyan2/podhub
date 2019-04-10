@@ -63,7 +63,7 @@ class Post extends Component {
             userMessage: this.props.userMessage,
             numLikes: this.props.numLikes,
             numComments: this.props.numComments
-        }, () => {this.checkUserLike(this.state.postId)});
+        }, () => { this.checkUserLike(this.state.postId) });
     }
 
     // Deletes a post and updates parent state
@@ -256,6 +256,11 @@ class Post extends Component {
         });
     };
 
+    // On click of "Play from Nav", sends (True, Audio Link) to Home.js & Profile.js props
+    playFromNav = () => {
+        this.props.toHomeAndProfile(true, this.state.audioLink, this.state.podcastName, this.state.episodeName);
+    }
+
 
     render() {
         return (
@@ -357,7 +362,8 @@ class Post extends Component {
                         >
                             <div className="postText">
                                 <h4 id="podcast-name-home">{this.state.podcastName}</h4>
-                                <p id="episode-name-home">{this.state.episodeName}</p>
+                                <p id="episode-name-home">{this.state.episodeName}
+                                </p>
                                 <p id="episode-description-home" className="ellipses">{this.state.description}</p>
                             </div>
                         </Link>
@@ -390,6 +396,7 @@ class Post extends Component {
                                 {/* HEART ICON */}
 
                                 <i className={this.state.heartClasses}></i>
+
                             </span>
 
                             <span
@@ -411,6 +418,18 @@ class Post extends Component {
                                 {this.state.numComments}
                             </span>
                         </div>
+
+                        <span>
+
+                            {/* PLAY FROM NAVBAR BUTTTON */}
+                            <button id="playFromNavButton"
+                                onClick={this.playFromNav}
+                            >
+                                Play from Navbar
+                                        </button>
+
+                        </span>
+                        
                     </div>
                 </div>
 

@@ -24,7 +24,9 @@ class App extends Component {
       showPodcasts: "hidePodcasts",
       logout: false,
       showAudioInNavbar: null,
-      audioLink: null
+      audioLink: null,
+      podcastName: null,
+      episodeName: null
     };
   }
 
@@ -42,31 +44,30 @@ class App extends Component {
 
   // Check Session Storage for Audio Settings
   // This will show or hide audio player in navbar
-  checkSessionStorage = () => {
+  // checkSessionStorage = () => {
 
-    let storedAudioLink = null;
+  //   let storedAudioLink = null;
 
-    if (sessionStorage.getItem("audioSettings")) {
-      storedAudioLink = JSON.parse(sessionStorage.getItem("audioSettings")).audioLink;
-    }
+  //   if (sessionStorage.getItem("audioSettings")) {
+  //     storedAudioLink = JSON.parse(sessionStorage.getItem("audioSettings")).audioLink;
+  //   }
 
-    if (!this.state.showAudioInNavbar || this.state.audioLink !== storedAudioLink) {
-      this.setState({
-        audioLink: storedAudioLink,
-        showAudioInNavbar: true
-      });
-    }
-    else if (!sessionStorage.getItem("audioSettings")) {
-      this.setState({
-        audioLink: "",
-        showAudioInNavbar: false
-      })
-    }
-  }
+  //   if (!this.state.showAudioInNavbar || this.state.audioLink !== storedAudioLink) {
+  //     this.setState({
+  //       audioLink: storedAudioLink,
+  //       showAudioInNavbar: true
+  //     });
+  //   }
+  //   else if (!sessionStorage.getItem("audioSettings")) {
+  //     this.setState({
+  //       audioLink: "",
+  //       showAudioInNavbar: false
+  //     })
+  //   }
+  // }
 
   // Hide audio player in navbar
   hideAudio = () => {
-    sessionStorage.clear();
     this.setState({
       showAudioInNavbar: false
     });
@@ -193,6 +194,16 @@ class App extends Component {
     }
   }
 
+  // Updates showAudioInNavbar and audioLink using (True, Audio Link) from Home.js & Profile.js
+  toApp = (value, link, podName, epName) => {
+    this.setState({
+      showAudioInNavbar: value,
+      audioLink: link,
+      podcastName: podName,
+      episodeName: epName
+    });
+  }
+
   render() {
     return (
 
@@ -235,6 +246,9 @@ class App extends Component {
                   user={this.state.user}
                   showAudio={this.state.showAudioInNavbar}
                   hideAudio={this.hideAudio}
+                  audioLink={this.state.audioLink}
+                  podcastName={this.state.podcastName}
+                  episodeName={this.state.episodeName}
                 />
                 <PodcastSearch
                   show={this.state.showPodcasts}
@@ -252,6 +266,7 @@ class App extends Component {
                           <div className="col-md-8 col-xs-12">
                             <Home
                               user={this.state.user}
+                              toApp={this.toApp}
                             />
                           </div>
                           <div className="col-md-2 col-xs-0"></div>
@@ -268,6 +283,7 @@ class App extends Component {
                           <div className="col-md-8 col-xs-12">
                             <Home
                               user={this.state.user}
+                              toApp={this.toApp}
                             />
                           </div>
                           <div className="col-md-2 col-xs-0"></div>
@@ -276,7 +292,16 @@ class App extends Component {
                     }
                   />
 
-                  <Route exact path="/profile" component={Profile} />
+                  <Route exact path="/profile"
+                    render={(props) =>
+                        <Profile {...props} 
+                          toApp={this.toApp}
+                        />
+                    }
+                  />
+
+
+
                   <Route exact path="/episodeList" component={EpisodeList} />
                   <Route exact path="/listen" component={Listen} />
 

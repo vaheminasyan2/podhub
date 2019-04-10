@@ -152,6 +152,20 @@
   padding-bottom: 15px;
 }
 
+#playFromNavButton {
+  color: white;
+  border-radius: 8px;
+  float: right;
+  margin-right: 20px;
+  background-color: rgb(37, 37, 37);
+  border: none;
+  padding: 4px 6px 4px 6px;
+}
+
+#playFromNavButton:focus {
+  outline:0;
+}
+
 @media only screen and (max-width: 768px) {
   #hide-when-small {
     display: none;
