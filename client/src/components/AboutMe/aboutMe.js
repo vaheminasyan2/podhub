@@ -102,7 +102,7 @@ class AboutMe extends Component {
 
                             <textarea
                                 className="aboutMeTextarea"
-                                maxlength="500"
+                                maxLength="500"
                                 onChange={this.setNewAboutMe}
                                 value={this.state.newText}
                             >
