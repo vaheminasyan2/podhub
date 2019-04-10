@@ -430,7 +430,7 @@ class Post extends Component {
                                 onClick={this.playFromNav}
                             >
                                 Play from Navbar
-                                        </button>
+                            </button>
 
                         </span>
                         

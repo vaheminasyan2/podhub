@@ -195,9 +195,9 @@ class App extends Component {
   }
 
   // Updates showAudioInNavbar and audioLink using (True, Audio Link) from Home.js & Profile.js
-  toApp = (value, link, podName, epName) => {
+  toApp = (trueBool, link, podName, epName) => {
     this.setState({
-      showAudioInNavbar: value,
+      showAudioInNavbar: trueBool,
       audioLink: link,
       podcastName: podName,
       episodeName: epName
@@ -294,16 +294,23 @@ class App extends Component {
 
                   <Route exact path="/profile"
                     render={(props) =>
-                        <Profile {...props} 
-                          toApp={this.toApp}
-                        />
+                      <Profile {...props}
+                        toApp={this.toApp}
+                      />
                     }
                   />
 
 
 
                   <Route exact path="/episodeList" component={EpisodeList} />
-                  <Route exact path="/listen" component={Listen} />
+                  <Route exact path="/listen"
+                    render={(props) =>
+                      <Listen {...props}
+                        toApp={this.toApp}
+                      />
+                    }
+
+                  />
 
                   <Route exact path="/userSearch"
                     render={() =>

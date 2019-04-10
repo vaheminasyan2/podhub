@@ -131,17 +131,7 @@ class Listen extends Component {
 
     // Shows the Navbar Audio Player
     showAudioInNavbar = () => {
-
-        sessionStorage.clear();
-
-        let audioSettings = {
-            showAudio: true,
-            podcastName: this.state.podcastName,
-            episodeName: this.state.episodeName,
-            audioLink: this.state.audioLink
-        }
-
-        sessionStorage.setItem("audioSettings", JSON.stringify(audioSettings));
+        this.props.toApp(true, this.state.audioLink, this.state.podcastName, this.state.episodeName)
     }
 
     render() {
@@ -194,7 +184,7 @@ class Listen extends Component {
                         <div className="center-block" id="buttons-listen">
                             <button className="btn btn-primary" id="black-btn" onClick={this.handleShowModal}>Share</button>
                             <button className="btn btn-danger" id="black-btn" onClick={this.addToFavorites}>Favorite</button>
-                            <button className="btn btn-dark" id="black-btn" onClick={this.showAudioInNavbar}>Show in Nav</button>
+                            <button className="btn btn-dark" id="black-btn" onClick={this.showAudioInNavbar}>Play from Navbar</button>
                         </div>
 
                         <div className="episodeDescription" id="description-listen">
