@@ -122,12 +122,17 @@ export default {
         return axios.get("api/getUsers", user);
     },
 
+    // Gets About Me section for user
+    getAboutMe: function(userId) {
+        return axios.get("/api/getAboutMe", userId);
+    },
+
     // Gets existing user; creates user if doesn't exist
     getOrCreateUser: function (id_token) {
         return axios.post("/api/users?id_token=" + id_token);
     },
 
-
+    
     // PODCAST, EPISODE SEARCH
     // =====================================
 

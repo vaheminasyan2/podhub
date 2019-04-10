@@ -9,6 +9,7 @@ import moment from "moment";
 import Modal from "react-responsive-modal";
 import User from "../components/User/user";
 import List from "../components/List/list";
+import AboutMe from "../components/AboutMe/aboutMe";
 import "./Profile.css";
 
 // USER PROFILE PAGE
@@ -46,7 +47,8 @@ class Profile extends Component {
     this.getNumFollowing();
     this.isUserFollowed();
     this.setState({
-      user: this.props.location.state.user
+      user: this.props.location.state.user,
+      aboutMe: "My name is " + this.props.location.state.user.name
     });
   }
 
@@ -451,6 +453,12 @@ class Profile extends Component {
                 </div>
               </div>
 
+              {/* ABOUT ME SECTION */}
+
+              <AboutMe 
+                user = {this.props.location.state.user}
+              />
+
               {/* FAVORITES SECTION */}
 
               <h4 id="favoritesTitle">Favorites</h4>
@@ -463,6 +471,7 @@ class Profile extends Component {
                     {this.state.favorites.map(favorite => (
 
                       // FAVORITES: PODCAST LOGO, LINK TO EPISODE LIST PAGE
+
                       <div className="row rounded favorite text-secondary" key={favorite.id}>
                         <div className="col-2 py-5 px-3 pad">
 
@@ -490,6 +499,7 @@ class Profile extends Component {
                         </div>
 
                         {/* FAVORITES: BODY, LINK TO LISTEN PAGE */}
+
                         <div className="col-7 p-1">
 
                           <Link
@@ -515,6 +525,7 @@ class Profile extends Component {
                         </div>
 
                         {/* FAVORITES: DELETE BUTTON */}
+
                         <div className="col-3 pr-4">
                           {JSON.parse(localStorage.getItem("user")).id === favorite.userId
                             ?

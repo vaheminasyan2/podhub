@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faComment, faHeart } from '@fortawesome/free-solid-svg-icons'
 import moment from "moment";
 import API from "../../utils/API";
-import "./post.css";
+import "./postCard.css";
 
 library.add(faComment);
 library.add(faHeart);
@@ -41,12 +41,11 @@ class Post extends Component {
             postId: "",
             showLikesModal: false,
             showCommentsModal: false,
-            heartClasses: "fa-heart-unliked fas fa-heart animated"
+            refreshState: false,
         }
     }
 
     componentWillMount = () => {
-
         this.setState({
             userId: this.props.userId,
             userName: this.props.userName,
@@ -63,7 +62,7 @@ class Post extends Component {
             userMessage: this.props.userMessage,
             numLikes: this.props.numLikes,
             numComments: this.props.numComments
-        }, () => {this.checkUserLike(this.state.postId)});
+        });
     }
 
     // Deletes a post and updates parent state
@@ -87,43 +86,39 @@ class Post extends Component {
 
         API.likePost(this.state.postId, currUserId).then(res => {
 
-            // UNLIKE POST
+            console.log(that);
+
             if (res.data[1] === false) {
                 API.unlikePost(this.state.postId, currUserId)
                     .then(res => {
-                        that.setState({
-                            numLikes: that.state.numLikes - 1,
-                            heartClasses: "fa-heart-unliked fas fa-heart"
+                        this.setState({
+                            refreshState: !this.state.refreshState
                         });
                     });
             }
-
-            // LIKE POST
             else {
-                that.setState({
-                    numLikes: that.state.numLikes + 1,
-                    heartClasses: "fa-heart-liked fas fa-heart animated bounce"
+                this.setState({
+                    refreshState: !this.state.refreshState
                 });
             }
         });
     }
 
     // Shows modal that displays users who have liked a post
-    handleShowLikesModal = () => {
-        API.getLikes(this.state.postId)
-            .then(res => {
-                if (res.data.length === 0) {
-                    this.setState({
-                        showLikesModal: false
-                    });
-                }
-                else {
-                    this.setState({
-                        likes: res.data,
-                        showLikesModal: true
-                    });
-                }
-            });
+    handleShowLikes = () => {
+        API.getLikes(this.state.postId).then(res => {
+            if (res.data.length === 0) {
+                this.setState({
+                    showLikesModal: false
+                });
+            }
+            else {
+                this.setState({
+                    likes: res.data,
+                    showLikesModal: true
+                });
+            }
+        });
     }
 
     // Closes Likes modal
@@ -133,33 +128,15 @@ class Post extends Component {
         });
     };
 
-    // Executes on page load only
-    // Checks if user has already liked post. Updates state if user has liked.
-    checkUserLike = (postId) => {
-
-        let currUserId = JSON.parse(localStorage.getItem("user")).id;
-
-        API.getLikes(postId)
-            .then(res => {
-                for (var like in res.data) {
-                    if (currUserId === res.data[like].id) {
-                        this.setState({
-                            heartClasses: "fa-heart-liked fas fa-heart animated"
-                        });
-                    }
-                }
-            });
-    }
-
 
     // COMMENTS
     // ===============================================
 
     // Add a comment to post
     addComment = () => {
-        API.addComment(this.state.currentComment, this.state.postId, JSON.parse(localStorage.getItem("user")).id).then(res => {
+        API.addComment(this.state.currentComment, this.state.postId, this.state.userId).then(res => {
             this.props.updateParentState();
-            this.handleShowCommentsModal();
+            this.handleShowComments();
             this.closeCommentsModal();
         })
     }
@@ -168,13 +145,13 @@ class Post extends Component {
     deleteComment = (commentId) => {
         API.deleteComment(commentId).then(res => {
             this.props.updateParentState();
-            this.handleShowCommentsModal();
+            this.handleShowComments();
             this.closeCommentsModal();
         });
     };
 
     // Opens modal that displays comments
-    handleShowCommentsModal = () => {
+    handleShowComments = () => {
         API.getComments(this.state.postId).then(res => {
             this.setState({
                 comments: res.data,
@@ -200,13 +177,13 @@ class Post extends Component {
             // UNLIKE COMMENT
             if (res.data[1] === false) {
                 API.unlikeComment(commentId, currUserId).then(res => {
-                    this.handleShowCommentsModal(this.state.currentPostId);
+                    this.handleShowComments(this.state.currentPostId);
                 });
             }
 
             // LIKE COMMENT
             else {
-                this.handleShowCommentsModal(this.state.currentPostId);
+                this.handleShowComments(this.state.currentPostId);
             }
         });
     }
@@ -383,33 +360,41 @@ class Post extends Component {
                         {/* LIKES */}
 
                         <div className="likesDiv">
-                            <span
+                            <a
                                 className="likes"
                                 onClick={() => this.handleLikeOrUnlike(this.state.postId)}
                             >
-                                {/* HEART ICON */}
+                                {/* HEART ANIMATION */}
 
-                                <i className={this.state.heartClasses}></i>
-                            </span>
+                                <i
+                                    className="fas fa-heart animated"
+                                    onClick={(e) => {
+                                        var targ = e.target;
+                                        targ.classList.add("bounce");
+                                        setTimeout(() => { targ.classList.remove("bounce") }, 1000)
+                                    }}
+                                >
+                                </i>
+                            </a>
 
-                            <span
+                            <a
                                 className="likesNumber"
-                                onClick={() => this.handleShowLikesModal(this.state.postId)}
+                                onClick={() => this.handleShowLikes(this.state.postId)}
                             >
                                 {this.state.numLikes}
-                            </span>
+                            </a>
                         </div>
 
                         {/* COMMENTS */}
 
                         <div className="commentDiv">
-                            <span
+                            <a
                                 className="comments"
-                                onClick={() => this.handleShowCommentsModal(this.state.postId)}
+                                onClick={() => this.handleShowComments(this.state.postId)}
                             >
                                 <FontAwesomeIcon icon="comment" /> &nbsp;
                                 {this.state.numComments}
-                            </span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -484,12 +469,12 @@ class Post extends Component {
 
                             <div className="row comment-third-row">
                                 <div className="col-2 mb-2">
-                                    <span
+                                    <a
                                         className="likes ml-4"
                                         onClick={() => this.handleCommentLikeOrUnlike(comment.id)}
                                     >
                                         <FontAwesomeIcon icon="heart" />
-                                    </span>
+                                    </a>
 
                                 </div>
 
@@ -523,7 +508,7 @@ class Post extends Component {
 
                                 {/* COMMENT DELETE BUTTON */}
 
-                                {JSON.parse(localStorage.getItem("user")).id === comment.commentedBy
+                                {this.state.userId === comment.commentedBy
                                     ?
                                     <div className="col-8">
                                         <button
@@ -557,8 +542,9 @@ class Post extends Component {
                             className="btn btn-light btn-sm mb-2"
                             onClick={(event) => {
                                 event.preventDefault();
-                                this.addComment();
-                            }}
+                                this.addComment()
+                            }
+                            }
                         >
                             Submit
                         </button>
