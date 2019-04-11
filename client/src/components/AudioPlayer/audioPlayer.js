@@ -16,7 +16,6 @@ class AudioPlayer extends Component {
         this.playhead = React.createRef();
 
         this.state = {
-            play: false,
             loaded: false,
             headPosition: 0,
             currentTime: '0:00',
@@ -89,11 +88,16 @@ class AudioPlayer extends Component {
         if (currentTimeSeconds < 10) {
             currentTimeSeconds = "0" + currentTimeSeconds
         }
-        this.setAudioState(marginLeft, currentTimeMinutes, currentTimeSeconds);
+        this.setAudioState(marginLeft, currentTimeMinutes, currentTimeSeconds, audioElement.currentTime);
 
         if (audioElement.currentTime === audioElement.duration) {
-            this.flipPlayPauseState();
+            this.props.flipPlayPauseState();
         }
+
+        if (!this.props.play) {
+            audioElement.pause();
+        }
+
     }
 
     mouseDown = () => {
@@ -122,11 +126,12 @@ class AudioPlayer extends Component {
         this.setState({ mouseOnPlayhead: false });
     }
 
-    setAudioState = (marginLeft, minutes, seconds) => {
+    setAudioState = (marginLeft, minutes, seconds, rawCurrentTime) => {
         this.setState({
             headPosition: marginLeft,
             currentTime: `${minutes}:${seconds}`
         });
+        this.props.setRawCurrentTime(rawCurrentTime);
     }
 
     setDuration = (minutes, seconds) => {
@@ -144,19 +149,18 @@ class AudioPlayer extends Component {
         }
     }
 
-    flipPlayPauseState = () => {
-        this.setState({ play: !this.state.play });
-    };
+
 
     playAudio = () => {
         const audioElement = this.audioElement.current;
-        if (!this.state.play) {
-            audioElement.play();
-            this.flipPlayPauseState();
+        if (this.props.play) {
+            console.log('true')
+            audioElement.pause();
+            this.props.flipPlayPauseState();
         }
         else {
-            audioElement.pause();
-            this.flipPlayPauseState();
+            audioElement.play();
+            this.props.flipPlayPauseState();
         }
     }
 
@@ -194,9 +198,13 @@ class AudioPlayer extends Component {
         audioElement.currentTime -= 15;
     }
 
+    componentWillUnmount() {
+        console.log("resetting raw")
+        this.props.setRawCurrentTime(0);
+    }
+
     render() {
-        const { audioLink } = this.props;
-        const { initialSpeed, changeSpeed } = this.props;
+        const {audioLink, initialSpeed, changeSpeed } = this.props;
 
         return (
             <div id="audio-player-container">
@@ -219,7 +227,7 @@ class AudioPlayer extends Component {
 
                 <div className="second-row">
                     <div className="PLAY-BUTTON">
-                        <img src={this.state.play ? pauseImg : playImg} alt="play button"
+                        <img src={this.props.play ? pauseImg : playImg} alt="play button"
                             id="pButton"
                             onClick={this.playAudio}
                         />
@@ -273,6 +281,7 @@ class AudioPlayer extends Component {
                         />
                     </div>
                 </div>
+
 
                 <audio
                     id="music"

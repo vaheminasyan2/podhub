@@ -129,6 +129,7 @@ class Navbar extends Component {
                         changeSpeed={this.changeSpeed}
                         initialSpeed={this.state.speed}
                         remove={this.state.remove}
+                        aCurrentTime={this.props.rawCurrentTime}
                       />
                     </span>
                   }

@@ -24,7 +24,8 @@ class Listen extends Component {
         audioLink: "",
         showModal: false,
         speed: 1.0,
-        userMessage: ""
+        userMessage: "",
+        play: false
     };
 
     componentDidMount = () => {
@@ -131,8 +132,19 @@ class Listen extends Component {
 
     // Shows the Navbar Audio Player
     showAudioInNavbar = () => {
-        this.props.toApp(true, this.state.audioLink, this.state.podcastName, this.state.episodeName)
+        if (this.state.play) {
+            this.flipPlayPauseState()
+        }
+        this.props.toApp(true, this.state.audioLink, this.state.podcastName, this.state.episodeName);
     }
+
+    setRawCurrentTime = (rawTime) => {
+        this.props.rawCurrentTime(rawTime);
+    }
+
+    flipPlayPauseState = () => {
+        this.setState({ play: !this.state.play });
+    };
 
     render() {
         return (
@@ -172,6 +184,9 @@ class Listen extends Component {
                                 playbackRate={this.state.speed}
                                 changeSpeed={this.changeSpeed}
                                 initialSpeed={this.state.speed}
+                                setRawCurrentTime={this.setRawCurrentTime}
+                                flipPlayPauseState={this.flipPlayPauseState}
+                                play={this.state.play}
                             />
                         </div>
                     </div>

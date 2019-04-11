@@ -42,6 +42,9 @@ class NavbarAudio extends Component {
     componentDidMount() {
         const audioElement = this.audioElement.current;
         audioElement.addEventListener('loadedmetadata', () => {
+            if (this.props.aCurrentTime) {
+                audioElement.currentTime = this.props.aCurrentTime - 0.3;
+            }
             this.playAudio();
         })
 
@@ -73,12 +76,12 @@ class NavbarAudio extends Component {
 
     playAudio = () => {
         const audioElement = this.audioElement.current;
-        if (!this.state.play) {
-            audioElement.play();
+        if (this.state.play) {
+            audioElement.pause();
             this.flipPlayPauseState();
         }
         else {
-            audioElement.pause();
+            audioElement.play();
             this.flipPlayPauseState();
         }
     }
@@ -99,10 +102,6 @@ class NavbarAudio extends Component {
 
         return (
             <div id="nav-audio-player-container">
-
-
-
-
 
                 <div id="nav-row-1">
                     <div className="NAV-SKIP-BACKWARD-15">
@@ -141,17 +140,6 @@ class NavbarAudio extends Component {
                         list="steplist"
                     />
                 </div>
-
-
-
-
-
-
-
-
-
-
-
 
 
 

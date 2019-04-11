@@ -25,6 +25,7 @@ class App extends Component {
       logout: false,
       showAudioInNavbar: null,
       audioLink: null,
+      rawCurrentTime: 0,
       podcastName: null,
       episodeName: null
     };
@@ -38,33 +39,6 @@ class App extends Component {
     setInterval(this.checkSessionStorage, 500);
   }
 
-
-  // AUDIO PLAYER IN NAVBAR
-  // ==========================================
-
-  // Check Session Storage for Audio Settings
-  // This will show or hide audio player in navbar
-  // checkSessionStorage = () => {
-
-  //   let storedAudioLink = null;
-
-  //   if (sessionStorage.getItem("audioSettings")) {
-  //     storedAudioLink = JSON.parse(sessionStorage.getItem("audioSettings")).audioLink;
-  //   }
-
-  //   if (!this.state.showAudioInNavbar || this.state.audioLink !== storedAudioLink) {
-  //     this.setState({
-  //       audioLink: storedAudioLink,
-  //       showAudioInNavbar: true
-  //     });
-  //   }
-  //   else if (!sessionStorage.getItem("audioSettings")) {
-  //     this.setState({
-  //       audioLink: "",
-  //       showAudioInNavbar: false
-  //     })
-  //   }
-  // }
 
   // Hide audio player in navbar
   hideAudio = () => {
@@ -204,6 +178,12 @@ class App extends Component {
     });
   }
 
+  rawCurrentTime = (rawTime) => {
+    this.setState({
+      rawCurrentTime: rawTime
+    });
+  }
+
   render() {
     return (
 
@@ -249,6 +229,7 @@ class App extends Component {
                   audioLink={this.state.audioLink}
                   podcastName={this.state.podcastName}
                   episodeName={this.state.episodeName}
+                  rawCurrentTime={this.state.rawCurrentTime}
                 />
                 <PodcastSearch
                   show={this.state.showPodcasts}
@@ -307,6 +288,7 @@ class App extends Component {
                     render={(props) =>
                       <Listen {...props}
                         toApp={this.toApp}
+                        rawCurrentTime={this.rawCurrentTime}
                       />
                     }
 
