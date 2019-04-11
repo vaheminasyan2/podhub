@@ -506,7 +506,8 @@ class Post extends Component {
                             {/* COMMENT LIKE BUTTON */}
 
                             <div className="row comment-third-row">
-                                <div className="col-2 mb-2">
+                    
+                                <div className="col-4 mb-2 commentLikes">
                                     <span
                                         className="likes ml-4"
                                         onClick={() => this.handleCommentLikeOrUnlike(comment.id)}
@@ -514,15 +515,15 @@ class Post extends Component {
                                         <FontAwesomeIcon icon="heart" />
                                     </span>
 
-                                </div>
+                                {/* </div> */}
 
                                 {/* COMMENT LIKES POP UP */}
 
-                                <div className="col-2 mb-2">
+                                {/* <div className="col-2 mb-2"> */}
                                     {comment.numberOfLikes > 0
                                         ?
                                         <Popup
-                                            trigger={<div>{comment.numberOfLikes}</div>}
+                                            trigger={<span>{comment.numberOfLikes}</span>}
                                             on="hover"
                                             onOpen={() => this.getUsersListCommentLikes(comment.id)}
                                             position="top left"
