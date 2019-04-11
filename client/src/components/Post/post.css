@@ -185,3 +185,13 @@
 #commentForm {
   min-width: 300px;
 }
+
+#userImageCommentsModal{
+  width: 35px;
+}
+
+#userImageLikesModal{
+  width: 35px;
+  margin-top: 5px;
+  margin-left: 0;
+}

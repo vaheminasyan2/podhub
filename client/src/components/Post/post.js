@@ -484,16 +484,15 @@ class Post extends Component {
                             <div
                                 className="row comment-top-row"
                             >
-                                <div className="col-2 mt-0">
+                            <div className="col pt-1">
+                              
                                     <img
                                         src={comment.userImage}
                                         alt="User Icon"
                                         id="userImageCommentsModal"
-                                        className="rounded border-white mt-1"
+                                        className="rounded border-white mt-2 ml-3 mb-2"
                                     />
-                                </div>
-                                <div className="col-10">
-                                    <p>{comment.userName}&nbsp;|&nbsp; {moment(comment.createdAt).format("LLL")}</p>
+                                    <span className="ml-3 mr-3">{comment.userName} &nbsp;&nbsp;|&nbsp; {moment(comment.createdAt).format("LLL")}</span>
                                 </div>
                             </div>
 
