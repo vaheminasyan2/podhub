@@ -571,7 +571,9 @@ class Post extends Component {
 
                     <form>
                         <div className="form-group mt-4 bg-dark text-secondary">
-                            <textarea type="text" className="form-control"                  rows="3"
+                            <textarea type="text" 
+                                className="form-control"                  
+                                rows="3"
                                 id="commentForm"
                                 defaultValue=""
                                 name="currentComment"
@@ -584,7 +586,7 @@ class Post extends Component {
                             type="submit"
                             className="btn btn-light btn-sm mb-2"
                             onClick={(event) => {
-                                //event.preventDefault();
+                                event.preventDefault();
                                 this.addComment()
                             }
                             }
