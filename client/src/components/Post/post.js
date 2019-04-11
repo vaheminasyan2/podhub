@@ -169,6 +169,7 @@ class Post extends Component {
             this.closeCommentsModal();
         });
     };
+    
 
     // Opens modal that displays comments
     handleShowCommentsModal = () => {
@@ -418,7 +419,7 @@ class Post extends Component {
                                 className="comments"
                                 onClick={() => this.handleShowCommentsModal(this.state.postId)}
                             >
-                                <FontAwesomeIcon icon="comment" /> &nbsp;
+                                <FontAwesomeIcon icon="comment" /> &nbsp;&nbsp;
                                 {this.state.numComments}
                             </span>
                         </div>
@@ -484,16 +485,15 @@ class Post extends Component {
                             <div
                                 className="row comment-top-row"
                             >
-                                <div className="col-2 mt-0">
+                            <div className="col ml-2">
+                              
                                     <img
                                         src={comment.userImage}
                                         alt="User Icon"
                                         id="userImageCommentsModal"
-                                        className="rounded border-white mt-1"
+                                        className="rounded border-white mt-2 ml-2 mb-2"
                                     />
-                                </div>
-                                <div className="col-10">
-                                    <p>{comment.userName}&nbsp;|&nbsp; {moment(comment.createdAt).format("LLL")}</p>
+                                    <span className="ml-3 mr-3 pl-2 pr-2">{comment.userName} &nbsp;&nbsp;|&nbsp; {moment(comment.createdAt).format("LLL")}</span>
                                 </div>
                             </div>
 
@@ -506,7 +506,8 @@ class Post extends Component {
                             {/* COMMENT LIKE BUTTON */}
 
                             <div className="row comment-third-row">
-                                <div className="col-2 mb-2">
+                    
+                                <div className="col-4 mb-2 commentLikes">
                                     <span
                                         className="likes ml-4"
                                         onClick={() => this.handleCommentLikeOrUnlike(comment.id)}
@@ -514,15 +515,15 @@ class Post extends Component {
                                         <FontAwesomeIcon icon="heart" />
                                     </span>
 
-                                </div>
+                                {/* </div> */}
 
                                 {/* COMMENT LIKES POP UP */}
 
-                                <div className="col-2 mb-2">
+                                {/* <div className="col-2 mb-2"> */}
                                     {comment.numberOfLikes > 0
                                         ?
                                         <Popup
-                                            trigger={<div>{comment.numberOfLikes}</div>}
+                                            trigger={<span>{comment.numberOfLikes}</span>}
                                             on="hover"
                                             onOpen={() => this.getUsersListCommentLikes(comment.id)}
                                             position="top left"
@@ -552,8 +553,10 @@ class Post extends Component {
                                     <div className="col-8">
                                         <button
                                             className="btn btn-sm deleteComment float-right"
-                                            onClick={() =>
+                                            onClick={(event) =>{
+                                                //event.preventDefault();
                                                 this.deleteComment(comment.id)
+                                            }
                                             }>
                                             Delete
                                         </button>
@@ -568,7 +571,10 @@ class Post extends Component {
 
                     <form>
                         <div className="form-group mt-4 bg-dark text-secondary">
-                            <input type="text" className="form-control" id="commentForm"
+                            <textarea type="text" 
+                                className="form-control"                  
+                                rows="3"
+                                id="commentForm"
                                 defaultValue=""
                                 name="currentComment"
                                 placeholder="Enter your comment"

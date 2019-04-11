@@ -181,3 +181,17 @@
     display: none;
   }
 }
+
+#commentForm {
+  min-width: 200px;
+}
+
+#userImageCommentsModal{
+  width: 35px;
+}
+
+#userImageLikesModal{
+  width: 35px;
+  margin-top: 5px;
+  margin-left: 0;
+}
