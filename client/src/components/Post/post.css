@@ -181,3 +181,7 @@
     display: none;
   }
 }
+
+#commentForm {
+  min-width: 300px;
+}
