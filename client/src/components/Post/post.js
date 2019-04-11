@@ -169,6 +169,7 @@ class Post extends Component {
             this.closeCommentsModal();
         });
     };
+    
 
     // Opens modal that displays comments
     handleShowCommentsModal = () => {
@@ -418,7 +419,7 @@ class Post extends Component {
                                 className="comments"
                                 onClick={() => this.handleShowCommentsModal(this.state.postId)}
                             >
-                                <FontAwesomeIcon icon="comment" /> &nbsp;
+                                <FontAwesomeIcon icon="comment" /> &nbsp;&nbsp;
                                 {this.state.numComments}
                             </span>
                         </div>
@@ -552,8 +553,10 @@ class Post extends Component {
                                     <div className="col-8">
                                         <button
                                             className="btn btn-sm deleteComment float-right"
-                                            onClick={() =>
+                                            onClick={(event) =>{
+                                                //event.preventDefault();
                                                 this.deleteComment(comment.id)
+                                            }
                                             }>
                                             Delete
                                         </button>
