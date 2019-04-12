@@ -1,29 +1,10 @@
 /* User Info */
 
-.userImage {
-  margin-top: 0px !important;
-}
-
 .userList {
   height: 100px !important;
   padding-top: 0px !important;
   text-align: center;
   width: 100% !important;
-}
-
-.userName {
-  font-size: 32px;
-  width: 100%;
-}
-
-.userProfile {
-  border: 1px solid black;
-  height: 150px;
-  margin-bottom: 20px;
-}
-
-#userMainProfileImage{
-  width: 100px;
 }
 
 /* Favorite Container */
@@ -88,19 +69,6 @@ a:hover {
   padding-left: 0px;
 }
 
-/* Modal  */
-
-.followersModal {
-  max-height: 400px;
-  overflow: scroll;
-}
-
-.modalTitle {
-  border-bottom: 1px solid rgb(75, 75, 75);
-  font-size: 24px;
-  padding-bottom: 10px;
-}
-
 .size {
   width: 20px;
   margin:0;
@@ -135,10 +103,6 @@ h4 {
   padding-top:1%;
 }
 
-.followBtn {
-  float: right;
-}
-
 .favorite:after {
   content: ""; /* This is necessary for the pseudo element to work. */ 
   display: block; /* This will put the pseudo element on its own line. */
@@ -148,6 +112,4 @@ h4 {
   border-bottom: 1px solid rgb(46, 45, 45); 
 }
 
-.postsBtn {
-  cursor: pointer;
-}
+
