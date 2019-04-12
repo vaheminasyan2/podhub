@@ -1,6 +1,7 @@
 .followBtn,
 .editProfileBtn {
   float: right;
+  margin-top: -40px;
 }
 
 .postsBtn {
@@ -23,7 +24,6 @@
 .userName {
   font-size: 32px;
   margin-top: -10px;
-  width: 100%;
 }
 
 .userProfile {
@@ -59,6 +59,17 @@
   width: 500px;
 }
 
+#usernameTextarea {
+  background: rgb(70, 70, 70);
+  color: white;
+  display: block;
+  font-size: 22px;
+  margin-bottom: 5px;
+  margin-top: 25px;
+  max-height: 35px;
+  width: 300px;
+}
+
 #userBioTextarea, 
 #userLocationTextarea {
   background: rgb(70, 70, 70);
@@ -66,7 +77,7 @@
   display: block;
   font-size: 13px;
   height: 25px;
-  max-height: 25x;
+  max-height: 25px;
   width: 500px;
 }
 
