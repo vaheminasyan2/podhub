@@ -27,7 +27,9 @@ class App extends Component {
       audioLink: null,
       rawCurrentTime: 0,
       podcastName: null,
-      episodeName: null
+      episodeName: null,
+      isMounted: false,
+      isPlaying: false
     };
   }
 
@@ -35,15 +37,14 @@ class App extends Component {
   // Check Session Storage for Audio Settings every 500ms to display audio player in navbar
   componentDidMount = () => {
     this.loadUserFromLocalStorage();
-
-    setInterval(this.checkSessionStorage, 500);
   }
 
 
   // Hide audio player in navbar
   hideAudio = () => {
     this.setState({
-      showAudioInNavbar: false
+      showAudioInNavbar: false,
+      isPlaying: false
     });
   }
 
@@ -184,6 +185,26 @@ class App extends Component {
     });
   }
 
+  itIsMountedApp = (bool) => {
+    this.setState({
+      isMounted: bool
+    });
+  }
+
+  isPlayingApp = (opposite) => {
+    this.setState({
+      isPlaying: opposite
+    });
+  }
+
+  // changeToPlay = (trueBool) => {
+  //   this.setState({
+  //     isPlaying: trueBool
+  //   });
+  //   console.log(this.state.isPlaying)
+  // }
+
+
   render() {
     return (
 
@@ -230,6 +251,10 @@ class App extends Component {
                   podcastName={this.state.podcastName}
                   episodeName={this.state.episodeName}
                   rawCurrentTime={this.state.rawCurrentTime}
+                  itIsMountedApp={this.itIsMountedApp}
+                  isPlayingApp={this.isPlayingApp}
+                  isItPlaying={this.state.isPlaying}
+                  isMounted={this.state.isMounted}
                 />
                 <PodcastSearch
                   show={this.state.showPodcasts}
@@ -289,6 +314,9 @@ class App extends Component {
                       <Listen {...props}
                         toApp={this.toApp}
                         rawCurrentTime={this.rawCurrentTime}
+                        isMounted={this.state.isMounted}
+                        changeToPlay={this.changeToPlay}
+                        itIsPlaying={this.state.isPlaying}
                       />
                     }
 

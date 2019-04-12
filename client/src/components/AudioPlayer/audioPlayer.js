@@ -154,7 +154,6 @@ class AudioPlayer extends Component {
     playAudio = () => {
         const audioElement = this.audioElement.current;
         if (this.props.play) {
-            console.log('true')
             audioElement.pause();
             this.props.flipPlayPauseState();
         }
@@ -199,7 +198,6 @@ class AudioPlayer extends Component {
     }
 
     componentWillUnmount() {
-        console.log("resetting raw")
         this.props.setRawCurrentTime(0);
     }
 
