@@ -36,6 +36,15 @@ class Navbar extends Component {
     });
   }
 
+  itIsMountedNav = (bool) => {
+    this.props.itIsMountedApp(bool);
+  }
+
+  isPlaying = (opposite) => {
+    this.props.isPlayingApp(opposite);
+  }
+
+
   render() {
 
     const { podcastSearch, handleInputChange, hidePodcasts, logout, user, showAudio, hideAudio } = this.props;
@@ -130,6 +139,10 @@ class Navbar extends Component {
                         initialSpeed={this.state.speed}
                         remove={this.state.remove}
                         aCurrentTime={this.props.rawCurrentTime}
+                        itIsMounted={this.itIsMountedNav}
+                        isPlaying={this.isPlaying}
+                        isItPlaying={this.props.isItPlaying}
+                        isMounted={this.props.isMounted}
                       />
                     </span>
                   }

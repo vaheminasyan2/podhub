@@ -16,7 +16,6 @@ class NavbarAudio extends Component {
         this.playhead = React.createRef();
 
         this.state = {
-            play: false,
             loaded: false
         };
     }
@@ -40,6 +39,7 @@ class NavbarAudio extends Component {
     }
 
     componentDidMount() {
+        this.props.itIsMounted(true);
         const audioElement = this.audioElement.current;
         audioElement.addEventListener('loadedmetadata', () => {
             if (this.props.aCurrentTime) {
@@ -68,15 +68,20 @@ class NavbarAudio extends Component {
             // We've got a new playback rate.
             this.setPlaybackRate();
         }
+
     }
 
     flipPlayPauseState = () => {
-        this.setState({ play: !this.state.play });
+        const audioElement = this.audioElement.current;
+        audioElement.addEventListener('loadedmetadata', () => {
+            this.playAudio();
+        })
+        this.props.isPlaying(!this.props.isItPlaying);
     };
 
     playAudio = () => {
         const audioElement = this.audioElement.current;
-        if (this.state.play) {
+        if (this.props.isItPlaying) {
             audioElement.pause();
             this.flipPlayPauseState();
         }
@@ -96,9 +101,13 @@ class NavbarAudio extends Component {
         audioElement.currentTime -= 15;
     }
 
+    componentWillUnmount() {
+        this.props.itIsMounted(false);
+    }
+
     render() {
-        const { audioLink } = this.props;
-        const { initialSpeed, changeSpeed } = this.props;
+
+        const { audioLink, initialSpeed, changeSpeed } = this.props;
 
         return (
             <div id="nav-audio-player-container">
@@ -112,7 +121,7 @@ class NavbarAudio extends Component {
                     </div>
 
                     <div className="NAV-PLAY-BUTTON">
-                        <img src={this.state.play ? pauseImg : playImg} alt="play button"
+                        <img src={this.props.isItPlaying ? pauseImg : playImg} alt="play button"
                             id="nav-pButton"
                             onClick={this.playAudio}
                         />

@@ -29,7 +29,6 @@ class Listen extends Component {
     };
 
     componentDidMount = () => {
-
         this.setState({
             podcastId: this.props.location.state.podcastId,
             podcastName: this.props.location.state.podcastName,
@@ -132,10 +131,20 @@ class Listen extends Component {
 
     // Shows the Navbar Audio Player
     showAudioInNavbar = () => {
-        if (this.state.play) {
-            this.flipPlayPauseState()
-        }
+
         this.props.toApp(true, this.state.audioLink, this.state.podcastName, this.state.episodeName);
+
+        // // if navbarAudio is already mounted & paused, we want 'Play from Navbar' to start playing again
+        // if (this.props.isMounted && !this.props.itIsPlaying) {
+        //     console.log("true")
+        //     this.props.changeToPlay(true);
+        // }
+
+        // if listen page's audio player is playing, pause it
+        if (this.state.play) {
+            this.flipPlayPauseState();
+        }
+
     }
 
     setRawCurrentTime = (rawTime) => {
