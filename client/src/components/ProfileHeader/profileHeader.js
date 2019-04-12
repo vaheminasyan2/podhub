@@ -14,6 +14,8 @@ class ProfileHeader extends Component {
 
         this.state = {
             user: null,
+            userName: null,
+            newUsername: null,
             userLocation: "",
             userBio: "",
             editProfile: false,
@@ -111,8 +113,15 @@ class ProfileHeader extends Component {
         });
     }
 
+    setNewUsername = (event) => {
+        this.setState({
+            newUsername: event.target.value
+        });
+    }
+
     saveProfile = () => {
         this.setState({
+            userName: this.state.newUsername,
             userBio: this.state.newBio,
             userLocation: this.state.newLocation,
             editProfile: false
@@ -262,7 +271,21 @@ class ProfileHeader extends Component {
                         {/* User Name */}
 
                         <Row>
-                            <h2 className="paddingTop userName">{this.props.user.name}</h2>
+                            {!this.state.editProfile ? (
+                                <h2 className="paddingTop userName">{this.state.userName || this.props.user.name}</h2>
+                            ) : (
+                                <form>
+                                    <textarea
+                                        className="rounded"
+                                        id="usernameTextarea"
+                                        maxLength="75"
+                                        onChange={this.setNewUsername}
+                                        value={this.state.newUsername || this.props.user.name}
+                                    >
+                                        {this.state.userName || this.props.user.name}
+                                    </textarea>
+                                </form>
+                            )}
                         </Row>
 
                         {/* Follow / Edit Profile Button */}
@@ -326,6 +349,7 @@ class ProfileHeader extends Component {
                                     <textarea
                                         className="rounded"
                                         id="userLocationTextarea"
+                                        maxLength="100"
                                         onChange={this.setNewLocation}
                                         placeholder="Seattle, WA"
                                         value={this.state.newLocation}
