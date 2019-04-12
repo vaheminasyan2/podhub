@@ -1,0 +1,105 @@
+.followBtn,
+.editProfileBtn {
+  float: right;
+}
+
+.postsBtn {
+  cursor: pointer;
+}
+
+/* Modal  */
+
+.followersModal {
+  max-height: 400px;
+  overflow: scroll;
+}
+
+.modalTitle {
+  border-bottom: 1px solid rgb(75, 75, 75);
+  font-size: 24px;
+  padding-bottom: 10px;
+}
+
+.userName {
+  font-size: 32px;
+  margin-top: -10px;
+  width: 100%;
+}
+
+.userProfile {
+  border: 1px solid black;
+  height: 150px;
+  margin-bottom: 20px;
+}
+
+#userMainProfileImage{
+  width: 100px;
+}
+
+.userImage {
+  margin-top: 0px !important;
+}
+
+.userStats {
+  border: 1px solid black;
+  margin-bottom: 20px;
+  margin-top: -10px;
+  text-align: center;
+}
+
+#statsBtns {
+  text-align: center;
+  width: 100%;
+}
+
+/* EDIT PROFILE HEADER */
+
+#editProfileHeader {
+  margin-top: 10px;
+  width: 500px;
+}
+
+#userBioTextarea, 
+#userLocationTextarea {
+  background: rgb(70, 70, 70);
+  color: white;
+  display: block;
+  font-size: 13px;
+  height: 25px;
+  max-height: 25x;
+  width: 500px;
+}
+
+#userBioTextarea {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  max-height: 50px;
+}
+
+#userLocation,
+#userBio {
+  color: white;
+  display: block;
+  font-size: 13px;
+  max-width: 400px;
+  word-wrap: break-word;
+}
+
+#editButtons {
+  margin-bottom: 40px;
+  margin-top: -50px;
+}
+
+.cancelBtn {
+  float: right;
+  margin-right: 0px !important;
+}
+
+.saveBtn {
+  float: right;
+}
+
+textarea::placeholder {
+  color: lightgray;
+  opacity: 1;
+}
