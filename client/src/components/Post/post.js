@@ -152,43 +152,41 @@ class Post extends Component {
     // COMMENTS
     // ===============================================    
 
-    // Add a comment to post
-    addComment = () => {
-        API.addComment(this.state.currentComment, this.state.postId, JSON.parse(localStorage.getItem("user")).id)
-        .then(res => {
-            this.props.updateParentState();
-            this.handleShowCommentsModal();
-            this.closeCommentsModal();
-
-            this.setState({
-                numComments: this.state.numComments + 1
-            });
-        });
-    }
-
-    // Delete a comment from post
-    deleteComment = (commentId) => {
-        API.deleteComment(commentId).then(res => {
-            this.props.updateParentState();
-            this.handleShowCommentsModal();
-            this.closeCommentsModal();
-
-            this.setState({
-                numComments: this.state.numComments - 1
-            });
-
-        });
-    };
-
     // Opens modal that displays comments
     handleShowCommentsModal = () => {
         API.getComments(this.state.postId).then(res => {
+
             this.setState({
                 comments: res.data,
                 showCommentsModal: true,
             });
         });
     }
+
+
+    // Add a comment to post
+    addComment = () => {
+        API.addComment(this.state.currentComment, this.state.postId, JSON.parse(localStorage.getItem("user")).id)
+            .then(res => {
+                this.props.updateParentState();
+                this.closeCommentsModal();
+                this.setState({
+                    numComments: this.state.numComments + 1,
+                });
+            });
+    }
+
+    // Delete a comment from post
+    deleteComment = (commentId) => {
+        API.deleteComment(commentId).then(res => {
+            this.props.updateParentState();
+            this.closeCommentsModal();
+            this.setState({
+                numComments: this.state.numComments - 1
+            });
+
+        });
+    };
 
     // Close modal that displays comments
     closeCommentsModal = () => {
@@ -446,7 +444,7 @@ class Post extends Component {
                             className="btn btn-light btn-sm mb-2"
                             onClick={(event) => {
                                 event.preventDefault();
-                                this.addComment()
+                                this.addComment();
                             }
                             }
                         >

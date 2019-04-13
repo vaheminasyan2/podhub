@@ -106,7 +106,7 @@ class Comment extends Component {
                                 className="rounded border-white mt-2 ml-2 mb-2"
                             />
                             <span className="ml-3 mr-3 pl-2 pr-2">
-                                {this.props.comment.userName} &nbsp;&nbsp;|&nbsp;
+                                {this.props.comment.userName} &nbsp;&nbsp;|&nbsp;&nbsp;
                                     {moment(this.props.comment.createdAt).format("LLL")}
                             </span>
                         </div>
