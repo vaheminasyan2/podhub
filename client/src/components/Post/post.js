@@ -414,6 +414,9 @@ class Post extends Component {
                                     className="rounded border-white"
                                 />
                             </Link>
+                            <div className="col-9">	
+                                <p>{like.name}</p>	
+                            </div>
                         </div>
                     ))}
                 </Modal>
