@@ -396,17 +396,18 @@ class Post extends Component {
                             key={like.id}
                         >
                             <Link 
-                            to={{
-                                pathname: "/profile",
-                                state: {
-                                    user: {
-                                        id: this.state.userId,
-                                        name: this.state.userName,
-                                        profileImage: this.state.userImage
+                                className="col-3 mt-0"
+                                to={{
+                                    pathname: "/profile",
+                                    state: {
+                                        user: {
+                                            id: like.id,
+                                            name: like.name,
+                                            profileImage: like.image
+                                        }
                                     }
-                                }
-                            }}
-                                className="col-3 mt-0">
+                                }}
+                                >
                                 <img
                                     src={like.image}
                                     alt="User Icon"
@@ -414,6 +415,7 @@ class Post extends Component {
                                     className="rounded border-white"
                                 />
                             </Link>
+
                             <div className="col-9">	
                                 <p>{like.name}</p>	
                             </div>
