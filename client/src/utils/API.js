@@ -4,13 +4,13 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 console.log(process.env.REACT_APP_PODCAST_API_KEY)
-var API_KEY = process.env.REACT_APP_PODCAST_API_KEY;
+var API_KEY = "";
 
-// if (process.env.REACT_APP_PODCAST_API_KEY === undefined) {
-//     API_KEY = secrets.listenNotesAPIKey
-// } else {
-//     API_KEY = process.env.REACT_APP_PODCAST_API_KEY
-// };
+if (process.env.REACT_APP_PODCAST_API_KEY === undefined) {
+    API_KEY = secrets.listenNotesAPIKey
+} else {
+    API_KEY = process.env.REACT_APP_PODCAST_API_KEY
+};
 
 export default {
 
