@@ -4,7 +4,7 @@ import API from "../utils/API";
 import GoogleLogin from 'react-google-login';
 import "./Login.css";
 import Logo from "../components/Navbar/purple_back.png";
-//import secrets from "../config_keys";
+import secrets from "../config_keys";
 import dotenv from 'dotenv';
 dotenv.config();
 
