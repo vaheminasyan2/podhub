@@ -156,37 +156,24 @@ class Post extends Component {
     addComment = () => {
         API.addComment(this.state.currentComment, this.state.postId, JSON.parse(localStorage.getItem("user")).id)
             .then(res => {
-                
-                API.getComments(this.state.postId).then(res => {
-                    
-                    this.setState({
-                        comments: res.data,
-                        currentComment: "",
-                        numComments: res.data.length
-                    });
-                });
-
                 this.props.updateParentState();
+                this.closeCommentsModal();
+                this.setState({
+                    numComments: this.state.numComments + 1,
+                });
             });
     }
 
     // Delete a comment from post
     deleteComment = (commentId) => {
-        API.deleteComment(commentId)
-            .then(res => {
-
-                API.getComments(this.state.postId).then(res => {
-                    this.setState({
-                        comments: res.data,
-                        currentComment: "",
-                        numComments: res.data.length
-                    });
-                });
-
-                this.props.updateParentState();
-                this.handleShowCommentsModal();
-                this.closeCommentsModal();
+        API.deleteComment(commentId).then(res => {
+            this.props.updateParentState();
+            this.closeCommentsModal();
+            this.setState({
+                numComments: this.state.numComments - 1
             });
+
+        });
     };
 
     // Opens modal that displays comments
