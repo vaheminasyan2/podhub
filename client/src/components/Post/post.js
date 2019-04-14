@@ -160,6 +160,7 @@ class Post extends Component {
                 this.closeCommentsModal();
                 this.setState({
                     numComments: this.state.numComments + 1,
+                    currentComment:"",
                 });
             });
     }
@@ -173,7 +174,8 @@ class Post extends Component {
                 numComments: this.state.numComments - 1
             });
 
-            this.handleShowCommentsModal();
+            if (this.state.numComments > 0) 
+            {this.handleShowCommentsModal();}
             
         });
     };

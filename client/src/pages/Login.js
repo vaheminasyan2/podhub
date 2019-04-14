@@ -5,10 +5,14 @@ import GoogleLogin from 'react-google-login';
 import "./Login.css";
 import Logo from "../components/Navbar/purple_back.png";
 import secrets from "../config_keys";
+import dotenv from 'dotenv'
+dotenv.config();
 
 var CLIENT_ID = "";
 
-if (process.env.G_CLIENT_ID == undefined) {
+//console.log(process.env.G_CLIENT_ID)
+
+if (process.env.G_CLIENT_ID === undefined) {
     CLIENT_ID = secrets.googleClientId
 } else {
     CLIENT_ID = process.env.G_CLIENT_ID
