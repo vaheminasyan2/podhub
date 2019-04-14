@@ -62,7 +62,6 @@ class Comment extends Component {
     getUsersListCommentLikes = (commentId) => {
         API.getUsersLikedComment(commentId)
             .then(res => {
-                console.log(res);
                 if (res.data.length === 0) {
                     this.setState({
                         userListCommentLikes: []
