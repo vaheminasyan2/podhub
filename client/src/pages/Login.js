@@ -14,9 +14,6 @@ if (process.env.REACT_APP_G_CLIENT_ID === undefined) {
     CLIENT_ID = process.env.REACT_APP_G_CLIENT_ID
 }
 
-console.log(CLIENT_ID)
-
-
 class Login extends Component {
 
     state = {

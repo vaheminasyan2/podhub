@@ -9,8 +9,6 @@ if (process.env.REACT_APP_PODCAST_API_KEY === undefined) {
     API_KEY = process.env.REACT_APP_PODCAST_API_KEY
 };
 
-console.log(API_KEY)
-
 export default {
 
     // LIKING AND UNLIKING POSTS
