@@ -156,11 +156,17 @@ class Post extends Component {
     addComment = () => {
         API.addComment(this.state.currentComment, this.state.postId, JSON.parse(localStorage.getItem("user")).id)
             .then(res => {
-                this.props.updateParentState();
-                this.closeCommentsModal();
-                this.setState({
-                    numComments: this.state.numComments + 1,
+                
+                API.getComments(this.state.postId).then(res => {
+                    
+                    this.setState({
+                        comments: res.data,
+                        currentComment: "",
+                        numComments: res.data.length
+                    });
                 });
+
+                this.props.updateParentState();
             });
     }
 
@@ -396,17 +402,18 @@ class Post extends Component {
                             key={like.id}
                         >
                             <Link 
-                            to={{
-                                pathname: "/profile",
-                                state: {
-                                    user: {
-                                        id: this.state.userId,
-                                        name: this.state.userName,
-                                        profileImage: this.state.userImage
+                                className="col-3 mt-0"
+                                to={{
+                                    pathname: "/profile",
+                                    state: {
+                                        user: {
+                                            id: like.id,
+                                            name: like.name,
+                                            profileImage: like.image
+                                        }
                                     }
-                                }
-                            }}
-                                className="col-3 mt-0">
+                                }}
+                                >
                                 <img
                                     src={like.image}
                                     alt="User Icon"
@@ -414,8 +421,9 @@ class Post extends Component {
                                     className="rounded border-white"
                                 />
                             </Link>
-                            <div className="col-9">	
-                                <p>{like.name}</p>	
+
+                            <div className="col-9">
+                                <p>{like.name}</p>
                             </div>
                         </div>
                     ))}
