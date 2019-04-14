@@ -2,3 +2,5 @@ node_modules
 .DS_Store
 .env
 *.log
+config_keys
+config_keys.js
