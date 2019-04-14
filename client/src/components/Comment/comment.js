@@ -142,7 +142,7 @@ class Comment extends Component {
                                     trigger={<span>{this.state.numberOfLikes || this.props.comment.numberOfLikes}</span>}
                                     on="hover"
                                     onOpen={() => this.getUsersListCommentLikes(this.state.comment.id)}
-                                    position="top left"
+                                    position="bottom left"
                                     closeOnDocumentClick
                                     className="popup"
                                     arrow={false}
