@@ -156,11 +156,17 @@ class Post extends Component {
     addComment = () => {
         API.addComment(this.state.currentComment, this.state.postId, JSON.parse(localStorage.getItem("user")).id)
             .then(res => {
-                this.props.updateParentState();
-                this.closeCommentsModal();
-                this.setState({
-                    numComments: this.state.numComments + 1,
+                
+                API.getComments(this.state.postId).then(res => {
+                    
+                    this.setState({
+                        comments: res.data,
+                        currentComment: "",
+                        numComments: res.data.length
+                    });
                 });
+
+                this.props.updateParentState();
             });
     }
 
@@ -395,14 +401,26 @@ class Post extends Component {
                             className="row rounded favorite bg-dark text-secondary"
                             key={like.id}
                         >
-                            <div className="col-3 mt-0">
+                            <Link 
+                            to={{
+                                pathname: "/profile",
+                                state: {
+                                    user: {
+                                        id: this.state.userId,
+                                        name: this.state.userName,
+                                        profileImage: this.state.userImage
+                                    }
+                                }
+                            }}
+                                className="col-3 mt-0">
                                 <img
                                     src={like.image}
                                     alt="User Icon"
                                     id="userImageLikesModal"
                                     className="rounded border-white"
                                 />
-                            </div>
+                            </Link>
+                            
                             <div className="col-9">
                                 <p>{like.name}</p>
                             </div>
