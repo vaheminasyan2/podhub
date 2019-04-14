@@ -5,7 +5,7 @@ module.exports = {
     password: process.env.DB_PASSWORD,
     database: "podHub",
     host: process.env.DB_HOST,
-    dialect: "mysql"
+    dialect: "mysql",
   },
   test: {
     username: "root",

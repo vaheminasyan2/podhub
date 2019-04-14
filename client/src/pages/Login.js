@@ -4,7 +4,8 @@ import API from "../utils/API";
 import GoogleLogin from 'react-google-login';
 import "./Login.css";
 import Logo from "../components/Navbar/purple_back.png";
-require("dotenv").config();
+import secrets from "../config_keys";
+const CLIENT_ID = secrets.googleClientId || process.env.googleClientId;
 
 class Login extends Component {
 
@@ -22,7 +23,6 @@ class Login extends Component {
     };
 
     render() {
-
         const responseGoogle = (response) => {
             this.setState({
                 id_token: response.tokenObj.id_token,
@@ -37,8 +37,7 @@ class Login extends Component {
                 <div className="header">
                     <div className="googleSignIn">
                         <GoogleLogin
-                            //clientId={process.env.clientId}
-                            clientId="940323765774-bpnsf77f8vksurn7gbv082gatubu97kl.apps.googleusercontent.com"
+                            clientId={CLIENT_ID}
                             buttonText="Login"
                             onSuccess={responseGoogle}
                             onFailure={responseGoogle} 

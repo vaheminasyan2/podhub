@@ -11,7 +11,6 @@ import API from "./utils/API"
 import Login from './pages/Login';
 import Error from "./pages/Error";
 import "./App.css";
-
 class App extends Component {
 
   constructor(props) {
