@@ -19,14 +19,15 @@ class Comment extends Component {
             comment: "",
             userListCommentLikes: [],
             commentHeartClasses: "fa-heart-unliked fas fa-heart",
-            numberOfLikes: 0
+            numberOfLikes: null
         }
     }
 
     componentDidMount = () => {
         this.setState({
             comment: this.props.comment,
-            numberOfLikes: this.props.comment.numberOfLikes
+            numberOfLikes: this.props.comment.numberOfLikes,
+            userListCommentLikes: []
         }, () => {this.getUsersListCommentLikes(this.state.comment.id)});
     }
 
@@ -63,12 +64,12 @@ class Comment extends Component {
             .then(res => {
                 if (res.data.length === 0) {
                     this.setState({
-                        userListCommentLikes: [],
+                        userListCommentLikes: []
                     });
                 }
                 else {
 
-                    let heartClasses = "fa-heart-unliked fas fa-heart animated";
+                    let heartClasses = "fa-heart-unliked fas fa-heart";
 
                     for (var like in res.data) {
                         if (res.data[like].id === JSON.parse(localStorage.getItem("user")).id) {
@@ -138,10 +139,10 @@ class Comment extends Component {
                             {this.state.numberOfLikes > 0
                                 ?
                                 <Popup
-                                    trigger={<span>{this.state.numberOfLikes}</span>}
+                                    trigger={<span>{this.state.numberOfLikes || this.props.comment.numberOfLikes}</span>}
                                     on="hover"
                                     onOpen={() => this.getUsersListCommentLikes(this.state.comment.id)}
-                                    position="top left"
+                                    position="bottom left"
                                     closeOnDocumentClick
                                     className="popup"
                                     arrow={false}

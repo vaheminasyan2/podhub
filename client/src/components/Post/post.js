@@ -152,18 +152,6 @@ class Post extends Component {
     // COMMENTS
     // ===============================================    
 
-    // Opens modal that displays comments
-    handleShowCommentsModal = () => {
-        API.getComments(this.state.postId).then(res => {
-
-            this.setState({
-                comments: res.data,
-                showCommentsModal: true,
-            });
-        });
-    }
-
-
     // Add a comment to post
     addComment = () => {
         API.addComment(this.state.currentComment, this.state.postId, JSON.parse(localStorage.getItem("user")).id)
@@ -185,8 +173,21 @@ class Post extends Component {
                 numComments: this.state.numComments - 1
             });
 
+            this.handleShowCommentsModal();
+            
         });
     };
+
+    // Opens modal that displays comments
+    handleShowCommentsModal = () => {
+        API.getComments(this.state.postId)
+            .then(res => {
+                this.setState({
+                    comments: res.data,
+                    showCommentsModal: true,
+                });
+            });
+    }
 
     // Close modal that displays comments
     closeCommentsModal = () => {
@@ -428,7 +429,8 @@ class Post extends Component {
 
                     <form>
                         <div className="form-group mt-4 bg-dark text-secondary">
-                            <textarea type="text"
+                            <textarea 
+                                type="text"
                                 className="form-control"
                                 rows="3"
                                 id="commentForm"
@@ -437,6 +439,7 @@ class Post extends Component {
                                 placeholder="Enter your comment"
                                 ref={this.state.currentComment}
                                 onChange={this.handleInputChange}
+                                value={this.state.currentComment}
                             />
                         </div>
                         <button
@@ -445,8 +448,7 @@ class Post extends Component {
                             onClick={(event) => {
                                 event.preventDefault();
                                 this.addComment();
-                            }
-                            }
+                            }}
                         >
                             Submit
                     </button>
