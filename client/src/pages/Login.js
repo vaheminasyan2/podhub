@@ -5,7 +5,14 @@ import GoogleLogin from 'react-google-login';
 import "./Login.css";
 import Logo from "../components/Navbar/purple_back.png";
 import secrets from "../config_keys";
-const CLIENT_ID = secrets.googleClientId || process.env.googleClientId;
+
+var CLIENT_ID = "";
+
+if (process.env.REACT_APP_G_CLIENT_ID === undefined) {
+    CLIENT_ID = secrets.googleClientId
+} else {
+    CLIENT_ID = process.env.REACT_APP_G_CLIENT_ID
+}
 
 class Login extends Component {
 
@@ -40,12 +47,12 @@ class Login extends Component {
                             clientId={CLIENT_ID}
                             buttonText="Login"
                             onSuccess={responseGoogle}
-                            onFailure={responseGoogle} 
-                            className="googleButton"/>
+                            onFailure={responseGoogle}
+                            className="googleButton" />
                     </div>
-                    <br/><br/>
+                    <br /><br />
                     <div className="sizing">
-                        <img src={Logo} alt="logo" className="autoM"/>
+                        <img src={Logo} alt="logo" className="autoM" />
 
                         <br />
 
