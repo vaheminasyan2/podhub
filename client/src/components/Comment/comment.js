@@ -98,7 +98,19 @@ class Comment extends Component {
                     <div
                         className="row comment-top-row"
                     >
-                        <div className="col ml-2">
+                        <Link 
+                            to={{
+                                pathname: "/profile",
+                                state: {
+                                    user: {
+                                        id: this.props.comment.commentedBy,
+                                        name: this.props.comment.userName,
+                                        profileImage: this.props.comment.userImage
+                                    }
+                                }
+                            }}
+                            className="col ml-2"
+                        >
 
                             <img
                                 src={this.props.comment.userImage}
@@ -107,10 +119,10 @@ class Comment extends Component {
                                 className="rounded border-white mt-2 ml-2 mb-2"
                             />
                             <span className="ml-3 mr-3 pl-2 pr-2">
-                                {this.props.comment.userName} &nbsp;&nbsp;|&nbsp;&nbsp;
+                                {this.props.comment.userName} &nbsp;&nbsp;|&nbsp;
                                     {moment(this.props.comment.createdAt).format("LLL")}
                             </span>
-                        </div>
+                        </Link>
                     </div>
 
                     <div
