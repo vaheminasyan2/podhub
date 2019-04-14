@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Popup from "reactjs-popup";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -62,6 +62,7 @@ class Comment extends Component {
     getUsersListCommentLikes = (commentId) => {
         API.getUsersLikedComment(commentId)
             .then(res => {
+                console.log(res);
                 if (res.data.length === 0) {
                     this.setState({
                         userListCommentLikes: []
@@ -107,7 +108,7 @@ class Comment extends Component {
                                 className="rounded border-white mt-2 ml-2 mb-2"
                             />
                             <span className="ml-3 mr-3 pl-2 pr-2">
-                                {this.props.comment.userName} &nbsp;&nbsp;|&nbsp;&nbsp;
+                                {this.props.comment.userName} &nbsp;&nbsp;|&nbsp;
                                     {moment(this.props.comment.createdAt).format("LLL")}
                             </span>
                         </div>
@@ -148,7 +149,20 @@ class Comment extends Component {
                                     arrow={false}
                                 >
                                     {this.state.userListCommentLikes.map(user => (
-                                        <div className="row" key={user.id}>
+                                        <Link 
+                                            to={{
+                                                pathname: "/profile",
+                                                state: {
+                                                    user: {
+                                                            id: user.id,
+                                                            name: user.name,
+                                                            profileImage: user.image,
+                                                        }
+                                                }
+                                            }}
+                                            className="row" 
+                                            key={user.id}
+                                        >
                                             <div className="col-3 m-0">
                                                 <img
                                                     src={user.image}
@@ -159,7 +173,7 @@ class Comment extends Component {
                                             <div className="col-9 m-0">
                                                 <p>{user.name}</p>
                                             </div>
-                                        </div>
+                                        </Link>
                                     ))}
                                 </Popup>
                                 :
