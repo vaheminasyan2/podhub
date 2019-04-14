@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Container from "../Container/container";
+//import Container from "../Container/container";
 import Row from "../Row/row";
 import Modal from "react-responsive-modal";
 import User from "../User/user";
