@@ -5,7 +5,7 @@ import GoogleLogin from 'react-google-login';
 import "./Login.css";
 import Logo from "../components/Navbar/purple_back.png";
 import secrets from "../config_keys";
-const CLIENT_ID = secrets.googleClientId
+const CLIENT_ID = secrets.googleClientId || process.env.googleClientId;
 
 class Login extends Component {
 

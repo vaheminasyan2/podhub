@@ -1,6 +1,6 @@
 import axios from "axios";
 import secrets from "../config_keys";
-const API_KEY = secrets.listenNotesAPIKey;
+const API_KEY = secrets.listenNotesAPIKey || process.env.listenNotesAPIKey;
 
 export default {
 
