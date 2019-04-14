@@ -173,6 +173,8 @@ class Post extends Component {
                 numComments: this.state.numComments - 1
             });
 
+            this.handleShowCommentsModal();
+            
         });
     };
 
