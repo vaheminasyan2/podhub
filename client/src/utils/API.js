@@ -3,10 +3,10 @@ import secrets from "../config_keys";
 
 var API_KEY = "";
 
-if (process.env.REACT_APP_PODCAST_API_KEY === undefined) {
+if (process.env.PODCAST_API_KEY == undefined) {
     API_KEY = secrets.listenNotesAPIKey
 } else {
-    API_KEY = process.env.REACT_APP_PODCAST_API_KEY
+    API_KEY = process.env.PODCAST_API_KEY
 };
 
 export default {

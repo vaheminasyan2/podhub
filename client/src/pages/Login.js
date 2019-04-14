@@ -8,10 +8,10 @@ import secrets from "../config_keys";
 
 var CLIENT_ID = "";
 
-if (process.env.REACT_APP_G_CLIENT_ID === undefined) {
+if (process.env.G_CLIENT_ID == undefined) {
     CLIENT_ID = secrets.googleClientId
 } else {
-    CLIENT_ID = process.env.REACT_APP_G_CLIENT_ID
+    CLIENT_ID = process.env.G_CLIENT_ID
 }
 
 class Login extends Component {
