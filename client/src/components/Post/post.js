@@ -395,17 +395,25 @@ class Post extends Component {
                             className="row rounded favorite bg-dark text-secondary"
                             key={like.id}
                         >
-                            <div className="col-3 mt-0">
+                            <Link 
+                            to={{
+                                pathname: "/profile",
+                                state: {
+                                    user: {
+                                        id: this.state.userId,
+                                        name: this.state.userName,
+                                        profileImage: this.state.userImage
+                                    }
+                                }
+                            }}
+                                className="col-3 mt-0">
                                 <img
                                     src={like.image}
                                     alt="User Icon"
                                     id="userImageLikesModal"
                                     className="rounded border-white"
                                 />
-                            </div>
-                            <div className="col-9">
-                                <p>{like.name}</p>
-                            </div>
+                            </Link>
                         </div>
                     ))}
                 </Modal>
