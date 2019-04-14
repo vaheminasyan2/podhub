@@ -413,10 +413,11 @@ class Post extends Component {
                                     id="userImageLikesModal"
                                     className="rounded border-white"
                                 />
+                            
+                                <div className="col-9">	
+                                    <p>{like.name}</p>	
+                                </div>
                             </Link>
-                            <div className="col-9">	
-                                <p>{like.name}</p>	
-                            </div>
                         </div>
                     ))}
                 </Modal>
