@@ -10,15 +10,6 @@ dotenv.config();
 
 var CLIENT_ID = "";
 
-componentDidMount = () => {
-    this.loadSecrets();
-  }
-
-loadSecrets = () => {
-    console.log(process.env.REACT_APP_G_CLIENT_ID);
-    CLIENT_ID = process.env.REACT_APP_G_CLIENT_ID;
-}
-
 
 // if (process.env.REACT_APP_G_CLIENT_ID === undefined) {
 //     CLIENT_ID = secrets.googleClientId
@@ -32,6 +23,15 @@ class Login extends Component {
         id_token: "",
         redirect: false,
     };
+
+    componentDidMount = () => {
+        this.loadSecrets();
+      }
+    
+    loadSecrets = () => {
+        console.log(process.env.REACT_APP_G_CLIENT_ID);
+        CLIENT_ID = process.env.REACT_APP_G_CLIENT_ID;
+    }
 
     getOrCreateUser = () => {
         API.getOrCreateUser(this.state.id_token)
