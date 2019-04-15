@@ -8,8 +8,6 @@ import Logo from "../components/Navbar/purple_back.png";
 import dotenv from 'dotenv';
 dotenv.config();
 
-var CLIENT_ID = "";
-
 
 // if (process.env.REACT_APP_G_CLIENT_ID === undefined) {
 //     CLIENT_ID = secrets.googleClientId
@@ -22,15 +20,18 @@ class Login extends Component {
     state = {
         id_token: "",
         redirect: false,
+        CLIENT_ID = ""
     };
 
     componentDidMount = () => {
         this.loadSecrets();
-        console.log(CLIENT_ID)
+        console.log(this.state.CLIENT_ID)
       }
     
     loadSecrets = () => {
-        CLIENT_ID = process.env.REACT_APP_G_CLIENT_ID;
+        this.setState({
+            CLIENT_ID:process.env.REACT_APP_G_CLIENT_ID
+        })
     }
 
     getOrCreateUser = () => {
@@ -57,7 +58,7 @@ class Login extends Component {
                 <div className="header">
                     <div className="googleSignIn">
                         <GoogleLogin
-                            clientId={CLIENT_ID}
+                            clientId={this.state.CLIENT_ID}
                             buttonText="Login"
                             onSuccess={responseGoogle}
                             onFailure={responseGoogle}
