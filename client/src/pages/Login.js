@@ -46,15 +46,15 @@ class Login extends Component {
             <Container>
                 <div className="header">
                     <div className="googleSignIn">
-                    {this.props.CLIENT_ID === ""
-                    ? null
-                    :
+                    {this.props.CLIENT_ID !== ""
+                    ?
                         <GoogleLogin
                             clientId={this.props.CLIENT_ID}
                             buttonText="Login"
                             onSuccess={responseGoogle}
                             onFailure={responseGoogle}
                             className="googleButton" />
+                    :null
                     }
                     </div>
                     <br /><br />
