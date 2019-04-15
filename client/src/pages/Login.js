@@ -26,10 +26,10 @@ class Login extends Component {
 
     componentDidMount = () => {
         this.loadSecrets();
+        console.log(CLIENT_ID)
       }
     
     loadSecrets = () => {
-        console.log(process.env.REACT_APP_G_CLIENT_ID);
         CLIENT_ID = process.env.REACT_APP_G_CLIENT_ID;
     }
 
