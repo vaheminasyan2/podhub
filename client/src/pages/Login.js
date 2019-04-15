@@ -20,20 +20,8 @@ class Login extends Component {
     state = {
         id_token: "",
         redirect: false,
-        CLIENT_ID: ""
     };
-
-    componentDidMount = () => {
-        this.loadSecrets();
-        console.log(this.state.CLIENT_ID)
-      }
     
-    loadSecrets = () => {
-        this.setState({
-            CLIENT_ID:process.env.REACT_APP_G_CLIENT_ID
-        })
-    }
-
     getOrCreateUser = () => {
         API.getOrCreateUser(this.state.id_token)
             .then(res => {
@@ -57,12 +45,16 @@ class Login extends Component {
             <Container>
                 <div className="header">
                     <div className="googleSignIn">
+                    {this.props.CLIENT_ID === ""
+                    ? null
+                    :
                         <GoogleLogin
-                            clientId={this.state.CLIENT_ID}
+                            clientId={this.props.CLIENT_ID}
                             buttonText="Login"
                             onSuccess={responseGoogle}
                             onFailure={responseGoogle}
                             className="googleButton" />
+                    }
                     </div>
                     <br /><br />
                     <div className="sizing">
