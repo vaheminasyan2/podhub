@@ -4,19 +4,19 @@ import API from "../utils/API";
 import GoogleLogin from 'react-google-login';
 import "./Login.css";
 import Logo from "../components/Navbar/purple_back.png";
-//import secrets from "../config_keys";
+import secrets from "../config_keys";
 import dotenv from 'dotenv';
 dotenv.config();
 
-//var CLIENT_ID = process.env.REACT_APP_G_CLIENT_ID;
+var CLIENT_ID = "";
 
-// if (process.env.REACT_APP_G_CLIENT_ID === undefined) {
-//     CLIENT_ID = secrets.googleClientId
-// } else {
-//     CLIENT_ID = process.env.REACT_APP_G_CLIENT_ID
-// }
+if (process.env.REACT_APP_G_CLIENT_ID === undefined) {
+    CLIENT_ID = secrets.googleClientId
+} else {
+    CLIENT_ID = process.env.REACT_APP_G_CLIENT_ID
+}
 
-//console.log(process.env.REACT_APP_G_CLIENT_ID);
+console.log(process.env.REACT_APP_G_CLIENT_ID);
 
 class Login extends Component {
 
@@ -48,7 +48,7 @@ class Login extends Component {
                 <div className="header">
                     <div className="googleSignIn">
                         <GoogleLogin
-                            clientId="940323765774-bpnsf77f8vksurn7gbv082gatubu97kl.apps.googleusercontent.com"
+                            clientId={CLIENT_ID}
                             buttonText="Login"
                             onSuccess={responseGoogle}
                             onFailure={responseGoogle}

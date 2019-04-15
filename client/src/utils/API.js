@@ -1,19 +1,19 @@
 import axios from "axios";
-//import secrets from "../config_keys";
+import secrets from "../config_keys";
 import dotenv from 'dotenv';
 dotenv.config();
 
 
 
-//var API_KEY = process.env.REACT_APP_PODCAST_API_KEY;
+var API_KEY = "";
 
-// if (process.env.REACT_APP_PODCAST_API_KEY === undefined) {
-//     API_KEY = secrets.listenNotesAPIKey
-// } else {
-//     API_KEY = process.env.REACT_APP_PODCAST_API_KEY
-// };
+if (process.env.REACT_APP_PODCAST_API_KEY === undefined) {
+    API_KEY = secrets.listenNotesAPIKey
+} else {
+    API_KEY = process.env.REACT_APP_PODCAST_API_KEY
+};
 
-//console.log(process.env.REACT_APP_PODCAST_API_KEY);
+console.log(process.env.REACT_APP_PODCAST_API_KEY);
 
 export default {
 
@@ -155,7 +155,7 @@ export default {
     getPodcasts: function (userQuery) {
         var URL = "https://listennotes.p.rapidapi.com/api/v1/search?sort_by_date=0&type=podcast&only_in=title&language=English&q=" + userQuery;
 
-        return axios.get(URL, { 'headers': { 'X-RapidAPI-Key': "a063bce4f1msh0a4f44209d57a2fp1225adjsn3f80cc1cf1bb"} })
+        return axios.get(URL, { 'headers': { 'X-RapidAPI-Key': API_KEY } })
             .then((response) => {
                 return response;
             })
