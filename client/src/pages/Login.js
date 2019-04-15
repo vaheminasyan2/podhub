@@ -20,7 +20,7 @@ class Login extends Component {
     state = {
         id_token: "",
         redirect: false,
-        CLIENT_ID = ""
+        CLIENT_ID: ""
     };
 
     componentDidMount = () => {
