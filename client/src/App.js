@@ -11,9 +11,6 @@ import API from "./utils/API"
 import Login from './pages/Login';
 import Error from "./pages/Error";
 import "./App.css";
-import dotenv from 'dotenv';
-dotenv.config();
-
 class App extends Component {
 
   constructor(props) {
@@ -31,8 +28,7 @@ class App extends Component {
       podcastName: null,
       episodeName: null,
       isMounted: false,
-      isPlaying: false,
-      CLIENT_ID: "",
+      isPlaying: false
     };
   }
 
@@ -40,11 +36,6 @@ class App extends Component {
   // Check Session Storage for Audio Settings every 500ms to display audio player in navbar
   componentDidMount = () => {
     this.loadUserFromLocalStorage();
-    this.setState({
-      CLIENT_ID: process.env.REACT_APP_G_CLIENT_ID
-      //process.env.REACT_APP_G_CLIENT_ID
-    }, function () { console.log(this.state.CLIENT_ID) }
-    );
   }
 
 
@@ -240,7 +231,6 @@ class App extends Component {
               render={() =>
                 <Login
                   handleUser={this.handleUser}
-                  CLIENT_ID={this.state.CLIENT_ID}
                 />
               }
             />

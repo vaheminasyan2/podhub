@@ -8,6 +8,7 @@ import Logo from "../components/Navbar/purple_back.png";
 import dotenv from 'dotenv';
 dotenv.config();
 
+var CLIENT_ID = process.env.REACT_APP_G_CLIENT_ID;
 
 // if (process.env.REACT_APP_G_CLIENT_ID === undefined) {
 //     CLIENT_ID = secrets.googleClientId
@@ -15,13 +16,15 @@ dotenv.config();
 //     CLIENT_ID = process.env.REACT_APP_G_CLIENT_ID
 // }
 
+console.log(process.env.REACT_APP_G_CLIENT_ID);
+
 class Login extends Component {
 
     state = {
         id_token: "",
         redirect: false,
     };
-    
+
     getOrCreateUser = () => {
         API.getOrCreateUser(this.state.id_token)
             .then(res => {
@@ -32,8 +35,6 @@ class Login extends Component {
 
     render() {
         const responseGoogle = (response) => {
-            console.log(response);
-            console.log(this.props.CLIENT_ID)
             this.setState({
                 id_token: response.tokenObj.id_token,
             });
@@ -46,16 +47,12 @@ class Login extends Component {
             <Container>
                 <div className="header">
                     <div className="googleSignIn">
-                    {this.props.CLIENT_ID !== ""
-                    ?
                         <GoogleLogin
-                            clientId={this.props.CLIENT_ID}
+                            clientId={CLIENT_ID}
                             buttonText="Login"
                             onSuccess={responseGoogle}
                             onFailure={responseGoogle}
                             className="googleButton" />
-                    :null
-                    }
                     </div>
                     <br /><br />
                     <div className="sizing">

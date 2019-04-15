@@ -3,7 +3,7 @@ import axios from "axios";
 import dotenv from 'dotenv';
 dotenv.config();
 
-console.log(process.env.REACT_APP_PODCAST_API_KEY);
+
 
 var API_KEY = process.env.REACT_APP_PODCAST_API_KEY;
 
@@ -12,6 +12,8 @@ var API_KEY = process.env.REACT_APP_PODCAST_API_KEY;
 // } else {
 //     API_KEY = process.env.REACT_APP_PODCAST_API_KEY
 // };
+
+console.log(process.env.REACT_APP_PODCAST_API_KEY);
 
 export default {
 
