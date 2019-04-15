@@ -16,7 +16,7 @@ dotenv.config();
 //     CLIENT_ID = process.env.REACT_APP_G_CLIENT_ID
 // }
 
-console.log(process.env.REACT_APP_G_CLIENT_ID);
+//console.log(process.env.REACT_APP_G_CLIENT_ID);
 
 class Login extends Component {
 
