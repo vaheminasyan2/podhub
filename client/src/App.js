@@ -42,7 +42,7 @@ class App extends Component {
     this.loadUserFromLocalStorage();
     this.setState({
       CLIENT_ID: process.env.REACT_APP_G_CLIENT_ID
-    }, function () { console.log(this.state.CLIENT_ID) }
+    }
     );
   }
 

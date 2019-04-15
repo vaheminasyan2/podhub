@@ -33,6 +33,7 @@ class Login extends Component {
     render() {
         const responseGoogle = (response) => {
             console.log(response);
+            console.log(this.props.CLIENT_ID)
             this.setState({
                 id_token: response.tokenObj.id_token,
             });
