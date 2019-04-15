@@ -8,7 +8,7 @@ import Logo from "../components/Navbar/purple_back.png";
 import dotenv from 'dotenv';
 dotenv.config();
 
-var CLIENT_ID = process.env.REACT_APP_G_CLIENT_ID;
+//var CLIENT_ID = process.env.REACT_APP_G_CLIENT_ID;
 
 // if (process.env.REACT_APP_G_CLIENT_ID === undefined) {
 //     CLIENT_ID = secrets.googleClientId
@@ -48,7 +48,7 @@ class Login extends Component {
                 <div className="header">
                     <div className="googleSignIn">
                         <GoogleLogin
-                            clientId={CLIENT_ID}
+                            clientId="940323765774-bpnsf77f8vksurn7gbv082gatubu97kl.apps.googleusercontent.com"
                             buttonText="Login"
                             onSuccess={responseGoogle}
                             onFailure={responseGoogle}
