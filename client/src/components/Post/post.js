@@ -9,6 +9,7 @@ import moment from "moment";
 import Comment from "../Comment/comment";
 import API from "../../utils/API";
 import "./post.css";
+//import { cpus } from "os";
 
 library.add(faComment);
 library.add(faHeart);
@@ -172,6 +173,7 @@ class Post extends Component {
             this.closeCommentsModal();
             this.setState({
                 numComments: this.state.numComments - 1
+                
             });
 
             if (this.state.numComments > 0) 
@@ -435,6 +437,7 @@ class Post extends Component {
                 >
                     {this.state.comments.map(comment => (
                         <Comment
+                            key={comment.id}
                             comment={comment}
                             delete={this.deleteComment}
                         />
@@ -454,7 +457,7 @@ class Post extends Component {
                                 placeholder="Enter your comment"
                                 ref={this.state.currentComment}
                                 onChange={this.handleInputChange}
-                                value={this.state.currentComment}
+                                //value={this.state.currentComment}
                             />
                         </div>
                         <button
