@@ -3,7 +3,8 @@ import secrets from "../config_keys";
 import dotenv from 'dotenv';
 dotenv.config();
 
-console.log(process.env.REACT_APP_PODCAST_API_KEY)
+console.log(process.env.REACT_APP_PODCAST_API_KEY);
+
 var API_KEY = "";
 
 if (process.env.REACT_APP_PODCAST_API_KEY === undefined) {
