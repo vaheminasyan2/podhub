@@ -41,8 +41,8 @@ class App extends Component {
   componentDidMount = () => {
     this.loadUserFromLocalStorage();
     this.setState({
-      CLIENT_ID: "940323765774-bpnsf77f8vksurn7gbv082gatubu97kl.apps.googleusercontent.com"
-      //
+      CLIENT_ID: process.env.REACT_APP_G_CLIENT_ID
+      //process.env.REACT_APP_G_CLIENT_ID
     }, function () { console.log(this.state.CLIENT_ID) }
     );
   }
