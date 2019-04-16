@@ -9,8 +9,10 @@ import Listen from "./pages/Listen";
 import UserSearch from "./pages/UserSearch";
 import API from "./utils/API"
 import Login from './pages/Login';
+import Settings from "./pages/Settings";
 import Error from "./pages/Error";
 import "./App.css";
+
 class App extends Component {
 
   constructor(props) {
@@ -328,6 +330,8 @@ class App extends Component {
                       />
                     }
                   />
+
+                  <Route exact path="/Settings" component={Settings} />
 
                   <Route component={Error} />
                 </Switch>
