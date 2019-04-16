@@ -74,7 +74,6 @@ class Navbar extends Component {
   render() {
 
     const { podcastSearch, handleInputChange, hidePodcasts, logout, user, showAudio, hideAudio } = this.props;
-    console.log(this.props.user);
 
     return (
 
