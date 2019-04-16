@@ -137,6 +137,10 @@ export default {
         return axios.post("/api/users?id_token=" + id_token);
     },
 
+    deleteUser: function(user) {
+        return axios.get("api/getUsers", user);
+    },
+
 
     // PODCAST, EPISODE SEARCH
     // =====================================
