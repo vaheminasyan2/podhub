@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faUser, faHome } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faUser, faHome, faCog } from '@fortawesome/free-solid-svg-icons'
 import Logo from "./purple_back.png";
 import NavbarAudio from "../NavbarAudio/navbarAudio";
 import Popup from "reactjs-popup";
+import OptionsMenu from "../OptionsMenu/optionsMenu";
 import "./navbar.css";
 
-library.add(faSearch, faUser, faHome);
+library.add(faSearch, faUser, faHome, faCog);
 
 // NAVBAR COMPONENT
 // Rendered by App.js on every page
@@ -19,15 +20,13 @@ class Navbar extends Component {
 
   state = {
     remove: false,
-    speed: 1.0
+    speed: 1.0,
+    showOptionsMenu: false
   };
 
-  // Prevent Enter keypress from refreshing window
-  suppressEnter = (event) => {
-    if (window.event.keyCode === 13) {
-      event.preventDefault();
-    }
-  }
+
+  // NAVBAR AUDIO PLAYER
+  // ====================================
 
   // Change speed of audio playback
   changeSpeed = (event) => {
@@ -45,9 +44,37 @@ class Navbar extends Component {
   }
 
 
+  // OPTIONS MENU
+  // ====================================
+
+  showOptionsMenu = () => {
+    this.setState({
+      showOptionsMenu: true
+    });
+  }
+
+  hideOptionsMenu = () => {
+    this.setState({
+      showOptionsMenu: false
+    });
+  }
+
+
+  // OTHER
+  // ====================================
+
+  // Prevent Enter keypress from refreshing window
+  suppressEnter = (event) => {
+    if (window.event.keyCode === 13) {
+      event.preventDefault();
+    }
+  }
+
+
   render() {
 
     const { podcastSearch, handleInputChange, hidePodcasts, logout, user, showAudio, hideAudio } = this.props;
+    console.log(this.props.user);
 
     return (
 
@@ -151,20 +178,20 @@ class Navbar extends Component {
                   className="navbarAudioPopup"
                   closeDocumentOnClick
                 >
-                    <p className="navbarPopupText" id="topPopupText">
-                        {this.props.podcastName}
-                    </p>
-                    
-                    <p className="navbarPopupText">
-                        {this.props.episodeName}
-                    </p>
+                  <p className="navbarPopupText" id="topPopupText">
+                    {this.props.podcastName}
+                  </p>
 
-                    <button className="btn btn-dark btn-sm hideAudioBtn" onClick={hideAudio}>
-                      Hide Audio Player
+                  <p className="navbarPopupText">
+                    {this.props.episodeName}
+                  </p>
+
+                  <button className="btn btn-dark btn-sm hideAudioBtn" onClick={hideAudio}>
+                    Hide Audio Player
                     </button>
                 </Popup>
               </div>
-              ) : (
+            ) : (
                 <></>
               )
             }
@@ -194,12 +221,29 @@ class Navbar extends Component {
               {/* Logout Button */}
 
               <li>
-                <button
-                  onClick={logout}
-                  className="logoutButton btn btn-dark"
+                {/* <FontAwesomeIcon 
+                  className="faCog fa-2x" 
+                  icon="cog" 
+                  onClick={this.showOptionsMenu}
+                /> */}
+
+                <span
+                  onClick={this.showOptionsMenu}
                 >
-                  Logout
-                </button>
+                  <img 
+                    className="navbarUserImg"
+                    src={this.props.user.profileImage} />
+                </span>
+
+                {this.state.showOptionsMenu ? (
+                  <OptionsMenu
+                    user={this.props.user}
+                    hideOptionsMenu={this.hideOptionsMenu}
+                    logout={logout}
+                  />
+                ) : (
+                    <></>
+                  )}
               </li>
 
             </ul>
