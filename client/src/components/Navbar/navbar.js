@@ -6,6 +6,7 @@ import { faSearch, faUser, faHome } from '@fortawesome/free-solid-svg-icons'
 import Logo from "./purple_back.png";
 import NavbarAudio from "../NavbarAudio/navbarAudio";
 import Popup from "reactjs-popup";
+import OptionsMenu from "../OptionsMenu/optionsMenu";
 import "./navbar.css";
 
 library.add(faSearch, faUser, faHome);
@@ -19,15 +20,13 @@ class Navbar extends Component {
 
   state = {
     remove: false,
-    speed: 1.0
+    speed: 1.0,
+    showOptionsMenu: false
   };
 
-  // Prevent Enter keypress from refreshing window
-  suppressEnter = (event) => {
-    if (window.event.keyCode === 13) {
-      event.preventDefault();
-    }
-  }
+
+  // NAVBAR AUDIO PLAYER
+  // ====================================
 
   // Change speed of audio playback
   changeSpeed = (event) => {
@@ -42,6 +41,33 @@ class Navbar extends Component {
 
   isPlaying = (opposite) => {
     this.props.isPlayingApp(opposite);
+  }
+
+
+  // OPTIONS MENU
+  // ====================================
+
+  showOptionsMenu = () => {
+    this.setState({
+      showOptionsMenu: true
+    });
+  }
+
+  hideOptionsMenu = () => {
+    this.setState({
+      showOptionsMenu: false
+    });
+  }
+
+
+  // OTHER
+  // ====================================
+
+  // Prevent Enter keypress from refreshing window
+  suppressEnter = (event) => {
+    if (window.event.keyCode === 13) {
+      event.preventDefault();
+    }
   }
 
 
@@ -151,20 +177,20 @@ class Navbar extends Component {
                   className="navbarAudioPopup"
                   closeDocumentOnClick
                 >
-                    <p className="navbarPopupText" id="topPopupText">
-                        {this.props.podcastName}
-                    </p>
-                    
-                    <p className="navbarPopupText">
-                        {this.props.episodeName}
-                    </p>
+                  <p className="navbarPopupText" id="topPopupText">
+                    {this.props.podcastName}
+                  </p>
 
-                    <button className="btn btn-dark btn-sm hideAudioBtn" onClick={hideAudio}>
-                      Hide Audio Player
+                  <p className="navbarPopupText">
+                    {this.props.episodeName}
+                  </p>
+
+                  <button className="btn btn-dark btn-sm hideAudioBtn" onClick={hideAudio}>
+                    Hide Audio Player
                     </button>
                 </Popup>
               </div>
-              ) : (
+            ) : (
                 <></>
               )
             }
@@ -191,15 +217,26 @@ class Navbar extends Component {
                 </form>
               </li>
 
-              {/* Logout Button */}
+              {/* Settings/Logout Dropdown Menu */}
 
               <li>
-                <button
-                  onClick={logout}
-                  className="logoutButton btn btn-dark"
+                <span
+                  onClick={this.showOptionsMenu}
                 >
-                  Logout
-                </button>
+                  <img 
+                    className="navbarUserImg"
+                    src={this.props.user.profileImage} />
+                </span>
+
+                {this.state.showOptionsMenu ? (
+                  <OptionsMenu
+                    user={this.props.user}
+                    hideOptionsMenu={this.hideOptionsMenu}
+                    logout={logout}
+                  />
+                ) : (
+                    <></>
+                  )}
               </li>
 
             </ul>
