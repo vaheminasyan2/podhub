@@ -147,7 +147,6 @@ export default {
 
     // Gets list of podcasts according to user query
     getPodcasts: function (userQuery) {
-        console.log(API_KEY);
         var URL = "https://listennotes.p.rapidapi.com/api/v1/search?sort_by_date=0&type=podcast&only_in=title&language=English&q=" + userQuery;
 
         return axios.get(URL, { 'headers': { 'X-RapidAPI-Key': API_KEY } })
