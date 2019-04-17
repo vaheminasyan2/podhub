@@ -178,12 +178,13 @@
 }
 
 #playFromNavButton {
-  color: white;
-  border-radius: 8px;
-  float: right;
-  margin-right: 20px;
   background-color: rgb(37, 37, 37);
   border: none;
+  border-radius: 8px;
+  color: white;
+  float: right;
+  font-size: 12px;
+  margin-right: 20px;
   padding: 4px 6px 4px 6px;
 }
 
