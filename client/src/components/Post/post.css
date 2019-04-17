@@ -44,12 +44,12 @@
   margin-bottom: 7px !important;
 }
 
-.fa-comment .dark {
+.comment-dark {
   color:white;
 }
 
-.fa-comment .light {
-  color: lightgray;
+.comment-light {
+  color: lightgray !important;
 }
 
 /* .fa-heart {

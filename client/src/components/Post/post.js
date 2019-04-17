@@ -367,7 +367,7 @@ class Post extends Component {
                                 className={`comments post-${this.props.theme}`}
                                 onClick={() => this.handleShowCommentsModal(this.state.postId)}
                             >
-                                <FontAwesomeIcon className={`fa-comment ${this.props.theme}`} icon="comment" /> &nbsp;&nbsp;
+                                <FontAwesomeIcon className={`comment-${this.props.theme}`} icon="comment" /> &nbsp;&nbsp;
                                 {this.state.numComments}
                             </span>
                         </div>
