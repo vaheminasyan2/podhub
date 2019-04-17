@@ -196,6 +196,7 @@ class Listen extends Component {
                                 setRawCurrentTime={this.setRawCurrentTime}
                                 flipPlayPauseState={this.flipPlayPauseState}
                                 play={this.state.play}
+                                theme={this.props.theme}
                             />
                         </div>
                     </div>
