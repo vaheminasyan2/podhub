@@ -95,6 +95,10 @@ class NavbarAudio extends Component {
             this.setPlaybackRate();
         }
 
+        if (this.props.theme !== prevProps.theme) {
+            this.setImages();
+        }
+
     }
 
     flipPlayPauseState = () => {
