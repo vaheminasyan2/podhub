@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 
-var API_KEY = "a063bce4f1msh0a4f44209d57a2fp1225adjsn3f80cc1cf1bb";
+var API_KEY = process.env.REACT_APP_PODCAST_API_KEY;
 
 export default {
 
