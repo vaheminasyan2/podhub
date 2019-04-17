@@ -36,8 +36,16 @@ class ProfileHeader extends Component {
         this.getNumFollowers();
         this.getNumFollowing();
         this.isUserFollowed();
+
+        let buttonTheme = "dark";
+
+        if (this.props.theme === "dark") {
+            buttonTheme = "light";
+        }
+
         this.setState({
-            user: this.props.user
+            user: this.props.user, 
+            buttonTheme: buttonTheme
         });
     }
 
@@ -294,14 +302,14 @@ class ProfileHeader extends Component {
                         {this.props.user.id !== JSON.parse(localStorage.getItem("user")).id ? (
                             this.state.userIsFollowed ? (
                                 <button
-                                    className={`btn btn-outline-${this.props.theme} followBtn`}
+                                    className={`btn btn-outline-${this.state.buttonTheme} followBtn`}
                                     onClick={(event) => { event.preventDefault(); this.unfollowUser(this.state.user.id) }}
                                 >
                                     Unfollow
                                 </button>
                             ) : (
                                     <button
-                                        className={`btn btn-outline-${this.props.theme} followBtn`}
+                                        className={`btn btn-outline-${this.state.buttonTheme} followBtn`}
                                         onClick={(event) => {
                                             event.preventDefault();
                                             this.followUser(this.state.user.id)
@@ -313,7 +321,7 @@ class ProfileHeader extends Component {
                         ) : (
                                 !this.state.editProfile ? (
                                     <button
-                                        className={`btn btn-outline-${this.props.theme} editProfileBtn`}
+                                        className={`btn btn-outline-${this.state.buttonTheme} editProfileBtn`}
                                         onClick={this.editProfile}
                                     >
                                         Edit Profile
