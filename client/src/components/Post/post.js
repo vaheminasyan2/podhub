@@ -220,7 +220,7 @@ class Post extends Component {
     render() {
         return (
             <div className={`container rounded-0 border-top-0 border-left-0 border-right-0 card text-secondary bg-${this.props.theme}`} id="top" >
-                <div className="row" id="post-top-row">
+                <div className="row" id={`post-top-row-${this.props.theme}`}>
 
                     {/* USER PROFILE IMAGE / LINK TO PROFILE PAGE */}
 
@@ -267,7 +267,7 @@ class Post extends Component {
 
                 {/* PODCAST LOGO / LINK TO EPISODE LIST PAGE */}
 
-                <div className="row" id="second-row-post">
+                <div className="row" id={`second-row-post-${this.props.theme}`}>
 
                     <div className="col-md-2 col-xs-2 p-0">
                         <div id="img-post">
@@ -367,7 +367,7 @@ class Post extends Component {
                                 className={`comments post-${this.props.theme}`}
                                 onClick={() => this.handleShowCommentsModal(this.state.postId)}
                             >
-                                <FontAwesomeIcon icon="comment" /> &nbsp;&nbsp;
+                                <FontAwesomeIcon className={`fa-comment ${this.props.theme}`} icon="comment" /> &nbsp;&nbsp;
                                 {this.state.numComments}
                             </span>
                         </div>

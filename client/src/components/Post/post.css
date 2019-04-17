@@ -44,8 +44,12 @@
   margin-bottom: 7px !important;
 }
 
-.fa-comment {
+.fa-comment .dark {
   color:white;
+}
+
+.fa-comment .light {
+  color: lightgray;
 }
 
 /* .fa-heart {
@@ -131,17 +135,29 @@
   color: rgb(214, 214, 214);
 }
 
-#post-top-row {
+#post-top-row-light,
+#post-top-row-dark {
   margin-bottom: 10px;
 }
 
-#post-top-row:after {
+#post-top-row-dark:after,
+#second-row-post-dark:after {
   content: ""; /* This is necessary for the pseudo element to work. */ 
   display: block; /* This will put the pseudo element on its own line. */
   margin: 0 auto; /* This will center the border. */
   width: 95%; /* Change this to whatever width you want. */
-  padding-top: 8px; /* This creates some space between the element and the border. */
-  border-bottom: 1px solid rgb(46, 45, 45); /* This creates the border. Replace black with whatever color you want. */
+  padding-top: 5px; /* This creates some space between the element and the border. */
+  border-bottom: 1px solid rgb(46, 45, 45);
+}
+
+#post-top-row-light:after,
+#second-row-post-light:after {
+  content: ""; /* This is necessary for the pseudo element to work. */ 
+  display: block; /* This will put the pseudo element on its own line. */
+  margin: 0 auto; /* This will center the border. */
+  width: 95%; /* Change this to whatever width you want. */
+  padding-top: 5px; /* This creates some space between the element and the border. */
+  border-bottom: 1px solid rgb(114, 114, 114);
 }
 
 #profileImage {
@@ -150,17 +166,9 @@
   border-radius: 35px;
 }
 
-#second-row-post {
+#second-row-post-light,
+#second-row-post-dark {
   max-height: 230px !important;
-}
-
-#second-row-post:after {
-  content: ""; /* This is necessary for the pseudo element to work. */ 
-  display: block; /* This will put the pseudo element on its own line. */
-  margin: 0 auto; /* This will center the border. */
-  width: 95%; /* Change this to whatever width you want. */
-  padding-top: 0px; /* This creates some space between the element and the border. */
-  border-bottom: 1px solid rgb(46, 45, 45); 
 }
 
 #top {
