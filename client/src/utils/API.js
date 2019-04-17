@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 
-var API_KEY = process.env.REACT_APP_PODCAST_API_KEY;
+var API_KEY = "a063bce4f1msh0a4f44209d57a2fp1225adjsn3f80cc1cf1bb";
 
 export default {
 
@@ -147,6 +147,7 @@ export default {
 
     // Gets list of podcasts according to user query
     getPodcasts: function (userQuery) {
+        console.log(API_KEY);
         var URL = "https://listennotes.p.rapidapi.com/api/v1/search?sort_by_date=0&type=podcast&only_in=title&language=English&q=" + userQuery;
 
         return axios.get(URL, { 'headers': { 'X-RapidAPI-Key': API_KEY } })

@@ -35,13 +35,16 @@ class Settings extends Component {
     }
 
     render() {
+
+        console.log(this.props);
+
         return (
             <Container>
                 <div
-                    className="bg-dark settings-bg"
+                    className={`bg-${this.props.theme} settings-bg-${this.props.theme}`}
                 >
 
-                    <h4>{this.props.user}</h4>
+                    <h4>{this.props.location.state.user.name}</h4>
                     <br/>
 
                     <h4 className="border-bottom">Profile</h4>
@@ -51,6 +54,24 @@ class Settings extends Component {
                     </div>
                     
                     <p>Change Photo</p>
+
+                    <div>
+                        <p>Change Theme </p>
+                        <button
+                            className="btn btn-dark theme dark"
+                            name="dark"
+                            onClick={this.props.darkTheme}
+                        >
+                        Dark 
+                        </button>
+                        <button
+                            className="btn btn-light theme light"
+                            name="light"
+                            onClick={this.props.lightTheme}
+                        >
+                        Light
+                        </button>
+                    </div>
 
                     <h4 className="border-bottom">Account</h4>
                     <p

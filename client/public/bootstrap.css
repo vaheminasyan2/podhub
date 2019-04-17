@@ -4510,6 +4510,7 @@ input[type="button"].btn-block {
 }
 
 .navbar-dark .navbar-nav .nav-link {
+  background: rgb(51, 57, 63) !important;
   color: rgb(255, 255, 255);
 }
 
@@ -6517,8 +6518,12 @@ button.bg-primary:focus {
   background-color: #0062cc !important;
 }
 
-.bg-secondary {
+.bg-secondary .dark {
   background-color: #6c757d !important;
+}
+
+.bg-secondary .light {
+  background-color: white !important;
 }
 
 a.bg-secondary:hover, a.bg-secondary:focus,

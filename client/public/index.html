@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="colorTheme"> 
 
 <head>
   <meta charset="utf-8" />
@@ -23,14 +23,13 @@
 
   <link rel="stylesheet" href="./bootstrap.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
 
   <script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
-  <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
     crossorigin="anonymous"></script>
@@ -40,9 +39,9 @@
   <title>PodHub</title>
 </head>
 
-<body class="bg-secondary">
+<body class="bg-secondary colorTheme">
   <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
+  <div class="colorTheme" id="root"></div>
   <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -53,6 +52,24 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+  <script>
+
+    function setTheme() {
+      let dark = document.getElementsByClassName("dark");
+      let light = document.getElementsByClassName("light");
+
+      if (dark[0].hasClass("appClass")) {
+        $(".colorTheme").addClass("dark");
+      }
+      else if (light[0].hasClass("appClass")) {
+        $(".colorTheme").addClass("light");
+      }
+    }
+
+    setTheme();
+
+  </script>
 </body>
 
 </html>

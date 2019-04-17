@@ -25,6 +25,21 @@ button > div {
     margin-bottom: 20px; 
 }
 
+.navbar-nav .light {
+    background: rgb(250, 250, 251) !important;
+    color: black;
+}
+
+.navbar-theme-dark {
+    background: rgb(51, 57, 63);
+    color: white;
+}
+
+.navbar-theme-light {
+    background: rgb(250, 250, 251);
+    color: black !important;
+}
+
 .navbarAudioPopup {
     background: white;
     color: black !important;
@@ -77,4 +92,9 @@ button > div {
     height: 50px;
     margin: 0px 15px 0px 0px;
     width: 50px;
+}
+
+.light {
+    background: #dbdbdb !important;
+    color: black !important;
 }

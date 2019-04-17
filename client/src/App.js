@@ -30,7 +30,8 @@ class App extends Component {
       podcastName: null,
       episodeName: null,
       isMounted: false,
-      isPlaying: false
+      isPlaying: false,
+      theme: "dark"
     };
   }
 
@@ -205,12 +206,24 @@ class App extends Component {
   //   console.log(this.state.isPlaying)
   // }
 
+  darkTheme = () => {
+    this.setState({
+      theme: "dark",
+    });
+  }
+
+  lightTheme = () => {
+    this.setState({
+      theme: "light",
+    });
+  }
+
 
   render() {
     return (
 
       <Router>
-        <div className="wrapper">
+        <div className={`wrapper appClass ${this.state.theme}`}>
 
           {/* Redirect to Login page if user logged out */}
 
@@ -256,7 +269,9 @@ class App extends Component {
                   isPlayingApp={this.isPlayingApp}
                   isItPlaying={this.state.isPlaying}
                   isMounted={this.state.isMounted}
+                  theme={this.state.theme}
                 />
+
                 <PodcastSearch
                   show={this.state.showPodcasts}
                   hide={this.hidePodcasts}
@@ -274,6 +289,7 @@ class App extends Component {
                             <Home
                               user={this.state.user}
                               toApp={this.toApp}
+                              theme={this.state.theme}
                             />
                           </div>
                           <div className="col-md-2 col-xs-0"></div>
@@ -291,6 +307,7 @@ class App extends Component {
                             <Home
                               user={this.state.user}
                               toApp={this.toApp}
+                              theme={this.state.theme}
                             />
                           </div>
                           <div className="col-md-2 col-xs-0"></div>
@@ -303,6 +320,7 @@ class App extends Component {
                     render={(props) =>
                       <Profile {...props}
                         toApp={this.toApp}
+                        theme={this.state.theme}
                       />
                     }
                   />
@@ -318,6 +336,7 @@ class App extends Component {
                         isMounted={this.state.isMounted}
                         changeToPlay={this.changeToPlay}
                         itIsPlaying={this.state.isPlaying}
+                        theme={this.state.theme}
                       />
                     }
 
@@ -327,11 +346,20 @@ class App extends Component {
                     render={() =>
                       <UserSearch
                         user={this.state.user}
+                        theme={this.state.theme}
                       />
                     }
                   />
 
-                  <Route exact path="/Settings" component={Settings} />
+                  <Route exact path="/Settings"
+                    render={(props) =>
+                      <Settings {...props}
+                        darkTheme={this.darkTheme}
+                        lightTheme={this.lightTheme}
+                        theme={this.state.theme}
+                      />
+                    }
+                  />
 
                   <Route component={Error} />
                 </Switch>

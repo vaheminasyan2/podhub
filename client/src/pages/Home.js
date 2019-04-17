@@ -74,7 +74,7 @@ class Home extends Component {
 
     render() {
         return (
-            <div className="container bg-dark rounded" id="post-container">
+            <div className={`container bg-${this.props.theme} rounded`} id="post-container">
                 <Row>
                     {this.state.posts.length > 0
                         ? (
@@ -99,6 +99,7 @@ class Home extends Component {
                                         postId={post.id}
                                         updateParentState={this.getPosts}
                                         toHomeAndProfile={this.toHomeAndProfile}
+                                        theme={this.props.theme}
                                   />
                                 ))}
                             </Container>

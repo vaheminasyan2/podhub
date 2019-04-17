@@ -1,5 +1,16 @@
-.settings-bg {
+.settings-bg-dark {
     border-radius: 15px;
     color: white;
     padding: 15px;
+}
+
+.settings-bg-light {
+    border-radius: 15px;
+    color: black;
+    padding: 15px;
+}
+
+.theme {
+    cursor: pointer;
+    margin-left: 10px;
 }
