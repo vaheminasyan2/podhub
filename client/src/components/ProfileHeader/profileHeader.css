@@ -17,6 +17,16 @@
   color: white;
 }
 
+.image-light {
+  border-radius: 20px !important;
+  border: 3px solid #d4d0d0 !important;
+}
+
+.image-dark {
+  border-radius: 20px !important;
+  border: 3px solid white !important;
+}
+
 /* Modal  */
 
 .followersModal {

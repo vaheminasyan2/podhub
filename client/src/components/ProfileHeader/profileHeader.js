@@ -271,7 +271,7 @@ class ProfileHeader extends Component {
                             src={this.props.user.profileImage}
                             alt="User"
                             id="userMainProfileImage"
-                            className="rounded border-white"
+                            className={`rounded image-${this.props.theme}`}
                         />
                     </div>
 
