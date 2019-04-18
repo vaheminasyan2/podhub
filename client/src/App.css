@@ -58,7 +58,7 @@ body {
 .userComment {
   max-width: 500px;
   padding: 0px 20px;
-  padding-right: 35px;
+  padding-right: 32px;
   word-wrap: break-word;
 }
 
