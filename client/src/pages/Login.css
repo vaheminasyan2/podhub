@@ -6,7 +6,8 @@
 
 .googleButton{
     border-radius:21px !important;
-    background-color:lightgray  !important;
+    background-color:rgb(233, 233, 233)  !important;
+    color: black !important;
 }
 
 button > div {
