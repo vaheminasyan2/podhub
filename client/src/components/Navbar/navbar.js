@@ -70,6 +70,9 @@ class Navbar extends Component {
     }
   }
 
+  scrollToTop = () => {
+    window.scrollTo(0, 0);
+}
 
   render() {
 
@@ -83,7 +86,7 @@ class Navbar extends Component {
           {/* Podhub Logo */}
 
           <div className="navbar-header">
-            <Link className="navbarText navbar-brand" to="/home">
+            <Link className="navbarText navbar-brand" to="/home" onClick={this.scrollToTop}>
               <img src={Logo} alt="logo" id="size" />
             </Link>
           </div>
@@ -108,7 +111,8 @@ class Navbar extends Component {
                     window.location.pathname === "/home"
                       ? `nav-link active ${this.props.theme}`
                       : `nav-link ${this.props.theme}`
-                  }
+                  } 
+                  onClick={this.scrollToTop}
                 >
                   <FontAwesomeIcon icon="home" />
                   &nbsp; Home
@@ -130,6 +134,7 @@ class Navbar extends Component {
                       ? `nav-link active ${this.props.theme}`
                       : `nav-link ${this.props.theme}`
                   }
+                  onClick={this.scrollToTop}
                 >
                   <FontAwesomeIcon icon="user" />
                   &nbsp; Profile
