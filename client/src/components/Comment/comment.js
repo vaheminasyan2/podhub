@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faComment, faHeart } from '@fortawesome/free-solid-svg-icons'
 import moment from "moment";
 import API from "../../utils/API";
+import "./comment.css";
 
 library.add(faComment);
 library.add(faHeart);
@@ -89,7 +90,7 @@ class Comment extends Component {
         return (
             <span>
                 <div
-                    className="commentBox rounded border border-top-0 border-left-0 border-right-0 bg-dark text-secondary"
+                    className="commentBox rounded border-top-0 border-left-0 border-right-0 bg-dark text-secondary"
                     key={this.props.comment.id}
                 >
                     {/* PREVIOUS COMMENTS */}
