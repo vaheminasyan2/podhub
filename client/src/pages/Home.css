@@ -27,3 +27,7 @@
   .favorite {
     height: auto !important;
   }
+
+  .bg-light {
+    color: black !important;
+  }

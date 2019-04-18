@@ -73,3 +73,7 @@ body {
 .episodeDescription {
   word-wrap: break-word; 
  }
+
+.wrapper {
+  min-height: 100vh;
+}

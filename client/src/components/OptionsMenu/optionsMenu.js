@@ -68,6 +68,7 @@ class OptionsMenu extends Component {
                                 user: this.state.user
                             }
                         }}
+                        
                     />
                 ) : (
                     <></>

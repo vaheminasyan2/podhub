@@ -55,7 +55,11 @@ a:hover {
 }
 
 .favoriteLink {
-  color: white
+  color: white !important;
+}
+
+.light {
+  color: black !important;
 }
 
 #favoriteIcon{

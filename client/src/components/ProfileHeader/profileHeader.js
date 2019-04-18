@@ -36,8 +36,16 @@ class ProfileHeader extends Component {
         this.getNumFollowers();
         this.getNumFollowing();
         this.isUserFollowed();
+
+        let buttonTheme = "dark";
+
+        if (this.props.theme === "dark") {
+            buttonTheme = "light";
+        }
+
         this.setState({
-            user: this.props.user
+            user: this.props.user, 
+            buttonTheme: buttonTheme
         });
     }
 
@@ -254,15 +262,16 @@ class ProfileHeader extends Component {
 
 
     render() {
+
         return (
             <span>
-                <div className="row userProfile rounded bg-dark text-white">
+                <div className={`row userProfile rounded bg-${this.props.theme}`}>
                     <div className="col-3">
                         <img
                             src={this.props.user.profileImage}
                             alt="User"
                             id="userMainProfileImage"
-                            className="rounded border-white"
+                            className={`rounded image-${this.props.theme}`}
                         />
                     </div>
 
@@ -272,7 +281,7 @@ class ProfileHeader extends Component {
 
                         <Row>
                             {!this.state.editProfile ? (
-                                <h2 className="paddingTop userName">{this.state.userName || this.props.user.name}</h2>
+                                <h2 className={`paddingTop userName profile-${this.props.theme}`}>{this.state.userName || this.props.user.name}</h2>
                             ) : (
                                 <form>
                                     <textarea
@@ -293,14 +302,14 @@ class ProfileHeader extends Component {
                         {this.props.user.id !== JSON.parse(localStorage.getItem("user")).id ? (
                             this.state.userIsFollowed ? (
                                 <button
-                                    className="btn btn-outline-light followBtn"
+                                    className={`btn btn-outline-${this.state.buttonTheme} followBtn`}
                                     onClick={(event) => { event.preventDefault(); this.unfollowUser(this.state.user.id) }}
                                 >
                                     Unfollow
                                 </button>
                             ) : (
                                     <button
-                                        className="btn btn-outline-light followBtn"
+                                        className={`btn btn-outline-${this.state.buttonTheme} followBtn`}
                                         onClick={(event) => {
                                             event.preventDefault();
                                             this.followUser(this.state.user.id)
@@ -312,7 +321,7 @@ class ProfileHeader extends Component {
                         ) : (
                                 !this.state.editProfile ? (
                                     <button
-                                        className="btn btn-outline-light editProfileBtn"
+                                        className={`btn btn-outline-${this.state.buttonTheme} editProfileBtn`}
                                         onClick={this.editProfile}
                                     >
                                         Edit Profile
@@ -332,13 +341,13 @@ class ProfileHeader extends Component {
 
                                     <div id="editButtons">
                                         <button
-                                            className="btn btn-light btn-sm cancelBtn"
+                                            className={`btn btn-${this.props.theme} btn-sm cancelBtn`}
                                             onClick={this.cancelEditProfile}
                                         >
                                             Cancel
                                         </button>
                                         <button
-                                            className="btn btn-light btn-sm saveBtn"
+                                            className={`btn btn-${this.props.theme} btn-sm saveBtn`}
                                             onClick={this.saveProfile}
                                         >
                                             Save
@@ -393,20 +402,20 @@ class ProfileHeader extends Component {
 
                 {/* STATS BUTTONS */}
 
-                <div className="row userStats rounded bg-dark">
+                <div className={`row userStats rounded bg-${this.props.theme}`}>
 
                     <div className="rounded" id="statsBtns">
 
                         {/* POSTS */}
 
-                        <span className="btn btn-dark postsBtn" onClick={this.scrollTo}>
+                        <span className={`btn btn-${this.props.theme} postsBtn`} onClick={this.scrollTo}>
                             Posts:&nbsp; {this.props.numPosts}
                         </span>
 
                         {/* FOLLOWERS */}
 
                         <button
-                            className="btn btn-dark"
+                            className={`btn btn-${this.props.theme}`}
                             onClick={this.getFollowers}
                         >
                             Followers:&nbsp;{this.state.numFollowers}
@@ -415,7 +424,7 @@ class ProfileHeader extends Component {
                         {/* FOLLOWING */}
 
                         <button
-                            className="btn btn-dark"
+                            className={`btn btn-${this.props.theme}`}
                             onClick={this.getUsersFollowed}
                         >
                             Following:&nbsp;{this.state.numFollowing}

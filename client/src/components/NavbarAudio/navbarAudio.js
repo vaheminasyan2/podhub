@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import "./navbarAudio.css";
-import skipForwardImage from "../../images/skip-forward-white.png";
-import skipBackwardImage from "../../images/skip-back-white.png";
-import playImg from "../../images/play-white.png";
-import pauseImg from "../../images/pause-white.png";
+import skipForwardImageLight from "../../images/skip-forward-white.png";
+import skipBackwardImageLight from "../../images/skip-back-white.png";
+import playImgLight from "../../images/play-white.png";
+import pauseImgLight from "../../images/pause-white.png";
+import skipForwardImageDark from "../../images/skip-forward.png";
+import skipBackwardImageDark from "../../images/skip-backward.png";
+import playImgDark from "../../images/play.png";
+import pauseImgDark from "../../images/pause.png";
 
 // AUDIO PLAYER COMPONENT
 
@@ -24,6 +28,27 @@ class NavbarAudio extends Component {
         this.setState({ loaded: true });
     }
 
+    setImages = () => {
+        if (this.props.theme === "dark") {
+            this.setState({
+                playImg: playImgLight,
+                skipForwardImg: skipForwardImageLight,
+                skipBackwardImg: skipBackwardImageLight,
+                pauseImg: pauseImgLight
+            });
+        }
+        else {
+            if (this.props.theme === "light") {
+                this.setState({
+                    playImg: playImgDark,
+                    skipForwardImg: skipForwardImageDark,
+                    skipBackwardImg: skipBackwardImageDark,
+                    pauseImg: pauseImgDark
+                });
+            }
+        }
+    }
+
     setHeadPosition = (position) => {
         this.setState({ headPosition: position });
     }
@@ -40,6 +65,7 @@ class NavbarAudio extends Component {
 
     componentDidMount() {
         this.props.itIsMounted(true);
+        this.setImages();
         const audioElement = this.audioElement.current;
         audioElement.addEventListener('loadedmetadata', () => {
             if (this.props.aCurrentTime) {
@@ -67,6 +93,10 @@ class NavbarAudio extends Component {
         if (this.props.playbackRate !== prevProps.playbackRate) {
             // We've got a new playback rate.
             this.setPlaybackRate();
+        }
+
+        if (this.props.theme !== prevProps.theme) {
+            this.setImages();
         }
 
     }
@@ -114,14 +144,14 @@ class NavbarAudio extends Component {
 
                 <div id="nav-row-1">
                     <div className="NAV-SKIP-BACKWARD-15">
-                        <img src={skipBackwardImage} alt="skip backward"
+                        <img src={this.state.skipBackwardImg} alt="skip backward"
                             id="nav-skip-backward-15"
                             onClick={this.skipBackward15}
                         />
                     </div>
 
                     <div className="NAV-PLAY-BUTTON">
-                        <img src={this.props.isItPlaying ? pauseImg : playImg} alt="play button"
+                        <img src={this.props.isItPlaying ? this.state.pauseImg : this.state.playImg} alt="play button"
                             id="nav-pButton"
                             onClick={this.playAudio}
                         />
@@ -129,7 +159,7 @@ class NavbarAudio extends Component {
 
 
                     <div className="NAV-SKIP-FORWARD-15">
-                        <img src={skipForwardImage} alt="skip forward"
+                        <img src={this.state.skipForwardImg} alt="skip forward"
                             id="nav-skip-forward-15"
                             onClick={this.skipForward15}
                         />
@@ -149,9 +179,6 @@ class NavbarAudio extends Component {
                         list="steplist"
                     />
                 </div>
-
-
-
 
                 <audio
                     id="music"

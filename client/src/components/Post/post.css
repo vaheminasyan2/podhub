@@ -1,3 +1,18 @@
+.bg-light {
+  background: rgb(250, 250, 251) !important;
+  color: black !important;
+}
+
+.post-light {
+  background: rgb(250, 250, 251) !important;
+  color: black !important;
+}
+
+.post-dark {
+  background: rgb(51, 57, 63) !important;
+  color: white;
+}
+
 .btn {
   margin-right: 2%;
   right: 0;
@@ -29,8 +44,12 @@
   margin-bottom: 7px !important;
 }
 
-.fa-comment {
+.comment-dark {
   color:white;
+}
+
+.comment-light {
+  color: lightgray !important;
 }
 
 /* .fa-heart {
@@ -80,12 +99,12 @@
   max-width: 20px;
 }
 
-#episode-description-home {
+.episode-description-home {
   font-size: 13px;
   margin-top: 0px;
 }
 
-#episode-name-home {
+.episode-name-home {
   font-size: 15px;
 }
 
@@ -99,51 +118,58 @@
 }
 
 #podcastIcon {
-  width: 80px;
   margin: 0px 10px 0px 5px;
-  border: solid 3.4px rgb(212, 208, 208) !important;
+  width: 80px;
+  /* border: solid 3.4px rgb(212, 208, 208) !important; */
 }
 
-#podcast-name-home {
+.podcast-name-home {
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 5px !important;
 }
 
-#podcast-name-home, #episode-name-home, #episode-description-home {
+.podcast-name-home, 
+.episode-name-home, 
+.episode-description-home {
   color: rgb(214, 214, 214);
 }
 
-#post-top-row {
+#post-top-row-light,
+#post-top-row-dark {
   margin-bottom: 10px;
 }
 
-#post-top-row:after {
+#post-top-row-dark:after,
+#second-row-post-dark:after {
   content: ""; /* This is necessary for the pseudo element to work. */ 
   display: block; /* This will put the pseudo element on its own line. */
   margin: 0 auto; /* This will center the border. */
   width: 95%; /* Change this to whatever width you want. */
-  padding-top: 8px; /* This creates some space between the element and the border. */
-  border-bottom: 1px solid rgb(46, 45, 45); /* This creates the border. Replace black with whatever color you want. */
+  padding-top: 5px; /* This creates some space between the element and the border. */
+  border-bottom: 1px solid rgb(46, 45, 45);
+}
+
+#post-top-row-light:after,
+#second-row-post-light:after {
+  content: ""; /* This is necessary for the pseudo element to work. */ 
+  display: block; /* This will put the pseudo element on its own line. */
+  margin: 0 auto; /* This will center the border. */
+  width: 95%; /* Change this to whatever width you want. */
+  padding-top: 5px; /* This creates some space between the element and the border. */
+  border-bottom: 1px solid lightgray;
 }
 
 #profileImage {
-  width: 35px;
-  margin: 0px;
+  border: 1px solid rgb(134, 134, 134);
   border-radius: 35px;
+  margin: 0px;
+  width: 35px;
 }
 
-#second-row-post {
+#second-row-post-light,
+#second-row-post-dark {
   max-height: 230px !important;
-}
-
-#second-row-post:after {
-  content: ""; /* This is necessary for the pseudo element to work. */ 
-  display: block; /* This will put the pseudo element on its own line. */
-  margin: 0 auto; /* This will center the border. */
-  width: 95%; /* Change this to whatever width you want. */
-  padding-top: 0px; /* This creates some space between the element and the border. */
-  border-bottom: 1px solid rgb(46, 45, 45); 
 }
 
 #top {
@@ -153,12 +179,13 @@
 }
 
 #playFromNavButton {
-  color: white;
-  border-radius: 8px;
-  float: right;
-  margin-right: 20px;
   background-color: rgb(37, 37, 37);
   border: none;
+  border-radius: 8px;
+  color: white;
+  float: right;
+  font-size: 12px;
+  margin-right: 20px;
   padding: 4px 6px 4px 6px;
 }
 

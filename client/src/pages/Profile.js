@@ -156,12 +156,13 @@ class Profile extends Component {
               <ProfileHeader 
                 user={this.props.location.state.user}
                 numPosts={this.state.posts.length}
+                theme={this.props.theme}
               />
 
               {/* FAVORITES SECTION */}
 
               <h4 id="favoritesTitle">Favorites</h4>
-              <div className="row favorites rounded bg-dark">
+              <div className={`row favorites rounded bg-${this.props.theme}`}>
 
                 {this.state.favorites.length ? (
 
@@ -213,7 +214,7 @@ class Profile extends Component {
                                 audioLink: favorite.audioLink
                               }
                             }}
-                            className="favoriteLink"
+                            className={`favoriteLink ${this.props.theme}`}
                           >
                             <h4>{favorite.podcastName}</h4>
                             <p className="favoriteDescription">{favorite.episodeName}</p>
@@ -250,7 +251,7 @@ class Profile extends Component {
               {/* POSTS SECTION */}
 
               <h4 id="postsTitle">Posts</h4>
-              <div className="row posts rounded bg-dark">
+              <div className={`row posts rounded bg-${this.props.theme}`}>
                 {this.state.posts.length ? (
                   <Container>
                     {this.state.posts.map(post => (
@@ -273,6 +274,7 @@ class Profile extends Component {
                         postId={post.id}
                         updateParentState={this.getPostsOnlyByUser}
                         toHomeAndProfile={this.toHomeAndProfile}
+                        theme={this.props.theme}
                       />
                     ))}
                   </Container>

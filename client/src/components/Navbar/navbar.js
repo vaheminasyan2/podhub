@@ -73,11 +73,11 @@ class Navbar extends Component {
 
   render() {
 
-    const { podcastSearch, handleInputChange, hidePodcasts, logout, user, showAudio, hideAudio } = this.props;
+    const { podcastSearch, handleInputChange, hidePodcasts, logout, user, showAudio, hideAudio, theme } = this.props;
 
     return (
 
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+      <nav className={`navbar navbar-expand-lg navbar-${theme} bg-${theme} sticky-top`}>
         <div className="container fluid">
 
           {/* Podhub Logo */}
@@ -106,8 +106,8 @@ class Navbar extends Component {
                   to="/home"
                   className={
                     window.location.pathname === "/home"
-                      ? "nav-link active"
-                      : "nav-link"
+                      ? `nav-link active ${this.props.theme}`
+                      : `nav-link ${this.props.theme}`
                   }
                 >
                   <FontAwesomeIcon icon="home" />
@@ -126,9 +126,9 @@ class Navbar extends Component {
                     }
                   }}
                   className={
-                    window.location.pathname === "/profile"
-                      ? "nav-link active"
-                      : "nav-link"
+                    window.location.pathname === "/home"
+                      ? `nav-link active ${this.props.theme}`
+                      : `nav-link ${this.props.theme}`
                   }
                 >
                   <FontAwesomeIcon icon="user" />
@@ -143,10 +143,14 @@ class Navbar extends Component {
                   to={{
                     pathname: "/userSearch",
                   }}
-                  className="nav-link"
+                  className={
+                    window.location.pathname === "/home"
+                      ? `nav-link active ${this.props.theme}`
+                      : `nav-link ${this.props.theme}`
+                  }
                 >
                   <FontAwesomeIcon icon="search" />
-                  <span>&nbsp; Find Users</span>
+                  <span className={`navbar-theme-{this.props.theme}`}>&nbsp; Find Users</span>
                 </Link>
               </li>
             </ul>

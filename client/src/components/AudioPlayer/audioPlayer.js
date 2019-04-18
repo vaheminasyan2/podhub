@@ -205,8 +205,7 @@ class AudioPlayer extends Component {
         const {audioLink, initialSpeed, changeSpeed } = this.props;
 
         return (
-            <div id="audio-player-container">
-
+            <div id={`audio-player-container-${this.props.theme}`}>
 
                 <div className="first-row">
                     <div className="CURRENT-TIME"
