@@ -12,7 +12,7 @@
 
 button > div {
     border-radius:21px !important;
-    background-color:lightgray !important;
+    background-color:rgb(233, 233, 233) !important;
     position:relative;
 }
 
@@ -26,6 +26,7 @@ button > div {
 }
 
 .loginText {
+    color: black;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
