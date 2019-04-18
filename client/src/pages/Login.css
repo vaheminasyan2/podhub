@@ -6,12 +6,12 @@
 
 .googleButton{
     border-radius:21px !important;
-   background-color:black !important;
+    background-color:lightgray  !important;
 }
 
 button > div {
     border-radius:21px !important;
-    background-color:black !important;
+    background-color:lightgray !important;
     position:relative;
 }
 

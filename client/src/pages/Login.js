@@ -8,7 +8,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 
-var CLIENT_ID = process.env.REACT_APP_G_CLIENT_ID;
+var CLIENT_ID = "940323765774-bpnsf77f8vksurn7gbv082gatubu97kl.apps.googleusercontent.com";
 
 class Login extends Component {
 
