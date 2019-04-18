@@ -69,10 +69,10 @@
       let dark = document.getElementsByClassName("dark");
       let light = document.getElementsByClassName("light");
 
-      if (dark[0].hasClass("appClass")) {
+      if (dark[0] != null && dark[0].hasClass("appClass")) {
         $(".colorTheme").addClass("dark");
       }
-      else if (light[0].hasClass("appClass")) {
+      else if (light[0] != null && light[0].hasClass("appClass")) {
         $(".colorTheme").addClass("light");
       }
     }
