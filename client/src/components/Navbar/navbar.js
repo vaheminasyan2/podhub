@@ -90,6 +90,50 @@ class Navbar extends Component {
               <img src={Logo} alt="logo" id="size" />
             </Link>
           </div>
+          <div className="fulllength">
+          {showAudio ? (
+              <div className="mobilePosition">
+                <Popup
+                  trigger={
+                    <span>
+                      <NavbarAudio
+                        audioLink={this.props.audioLink}
+                        playbackRate={this.state.speed}
+                        changeSpeed={this.changeSpeed}
+                        initialSpeed={this.state.speed}
+                        remove={this.state.remove}
+                        aCurrentTime={this.props.rawCurrentTime}
+                        itIsMounted={this.itIsMountedNav}
+                        isPlaying={this.isPlaying}
+                        isItPlaying={this.props.isItPlaying}
+                        isMounted={this.props.isMounted}
+                        theme={this.props.theme}
+                      />
+                    </span>
+                  }
+                  on="hover"
+                  position="bottom center"
+                  className="navbarAudioPopup"
+                  closeDocumentOnClick
+                >
+                  <p className="navbarPopupText" id="topPopupText">
+                    {this.props.podcastName}
+                  </p>
+
+                  <p className="navbarPopupText">
+                    {this.props.episodeName}
+                  </p>
+
+                  <button className="btn btn-dark btn-sm hideAudioBtn" onClick={hideAudio}>
+                    Hide Audio Player
+                    </button>
+                </Popup>
+              </div>
+            ) : (
+                <></>
+              )
+            }
+            </div>
 
           {/* Hamburger Menu */}
 
@@ -162,48 +206,7 @@ class Navbar extends Component {
 
             {/* Show Audio Player in Nav Bar */}
 
-            {showAudio ? (
-              <div>
-                <Popup
-                  trigger={
-                    <span>
-                      <NavbarAudio
-                        audioLink={this.props.audioLink}
-                        playbackRate={this.state.speed}
-                        changeSpeed={this.changeSpeed}
-                        initialSpeed={this.state.speed}
-                        remove={this.state.remove}
-                        aCurrentTime={this.props.rawCurrentTime}
-                        itIsMounted={this.itIsMountedNav}
-                        isPlaying={this.isPlaying}
-                        isItPlaying={this.props.isItPlaying}
-                        isMounted={this.props.isMounted}
-                        theme={this.props.theme}
-                      />
-                    </span>
-                  }
-                  on="hover"
-                  position="bottom center"
-                  className="navbarAudioPopup"
-                  closeDocumentOnClick
-                >
-                  <p className="navbarPopupText" id="topPopupText">
-                    {this.props.podcastName}
-                  </p>
-
-                  <p className="navbarPopupText">
-                    {this.props.episodeName}
-                  </p>
-
-                  <button className="btn btn-dark btn-sm hideAudioBtn" onClick={hideAudio}>
-                    Hide Audio Player
-                    </button>
-                </Popup>
-              </div>
-            ) : (
-                <></>
-              )
-            }
+            
 
             {/* Podcast Search form */}
 
@@ -230,14 +233,11 @@ class Navbar extends Component {
               {/* Settings/Logout Dropdown Menu */}
 
               <li>
-                <span
+              
+                <div
                   onClick={this.showOptionsMenu}
+                  className="holder"
                 >
-                  <img 
-                    className="navbarUserImg"
-                    src={this.props.user.profileImage} />
-                </span>
-
                 {this.state.showOptionsMenu ? (
                   <OptionsMenu
                     user={this.props.user}
@@ -247,6 +247,12 @@ class Navbar extends Component {
                 ) : (
                     <></>
                   )}
+                  <img 
+                    className="navbarUserImg"
+                    src={this.props.user.profileImage} />
+                </div>
+
+          
               </li>
 
             </ul>

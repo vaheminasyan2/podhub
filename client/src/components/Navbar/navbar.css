@@ -51,7 +51,8 @@ button > div {
     white-space: wrap;
     width: 350px;
     border-radius: 10px;
-    margin: 8px 0px 0px 40px;
+    margin-left: -33.7em
+    
 }
 
 .navbarPopupText {
@@ -65,6 +66,8 @@ button > div {
     height: 40px;
     margin-left: 10px;
     margin-top: 0px;
+    position: absolute;
+    right:0;
 }
 
 #topPopupText:after {
@@ -93,3 +96,66 @@ button > div {
     margin: 0px 15px 0px 0px;
     width: 50px;
 }
+.holder{
+    width:120px;
+    position:relative;
+}
+
+.fulllength{
+    position: absolute;
+    width: 1110px;
+    z-index: -1;
+}
+.mobilePosition{
+    position: relative;
+    left: 25.5em;
+    
+}
+
+.navbar-toggler{
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+    .navbar-nav {
+        flex-direction: row;
+        justify-content: space-between;
+        
+    }
+    .navbar-nav .nav-link{
+        padding:0;
+    }
+    /* .navbarUserImg{
+        display:none;
+    } */
+
+    .my-2{
+        margin-bottom:0;
+    }
+
+    .holder{
+        margin-top: 7px;
+    }
+
+    .mobilePosition{
+        position: fixed;
+        left: 25%;
+        top: 0.7em;
+    }
+
+    .navbarAudioPopup{
+        display:none;
+    }
+  }
+
+  @media only screen and (max-width: 400px) {
+    .mobilePosition{
+        left: 22%;
+    }
+  }
+
+  @media only screen and (max-width: 350px) {
+    .mobilePosition{
+        left: 18%;
+    }
+  }
