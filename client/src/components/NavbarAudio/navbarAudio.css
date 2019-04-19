@@ -34,8 +34,8 @@
 
 #nav-audio-player-container {
     min-width: 300px;
-    margin: 0px 0px 0px 90px;
-    /* background-color: rgb(43, 41, 41); */
+    max-width: 300px;
+    margin-right: 0 !important;
 }
 
 #nav-row-1 {
@@ -69,4 +69,13 @@
       background: #e7e5e5 !important;     
     }
   
+  }
+
+  @media only screen and (max-width: 600px) {
+    #nav-audio-player-container {
+        min-width: 200px;
+        max-width: 200px;
+        float: left;
+    }
+    
   }
