@@ -92,7 +92,6 @@ class Comment extends Component {
                     className="commentBox rounded border border-top-0 border-left-0 border-right-0 bg-dark text-secondary"
                     key={this.props.comment.id}
                 >
-
                     {/* PREVIOUS COMMENTS */}
 
                     <div
@@ -118,17 +117,15 @@ class Comment extends Component {
                                 id="userImageCommentsModal"
                                 className="rounded border-white mt-2 ml-2 mb-2"
                             />
-                            <span className="ml-3 mr-3 pl-2 pr-2">
+                            <span className="ml-3 mr-3 pl-2 pr-2 text-white">
                                 {this.props.comment.userName} &nbsp;&nbsp;|&nbsp;&nbsp;
                                     {moment(this.props.comment.createdAt).format("LLL")}
                             </span>
                         </Link>
                     </div>
 
-                    <div
-                        className="row comment-second-row"
-                    >
-                        <p className="userComment pl-2 ml-3">{this.props.comment.comment}</p>
+                    <div className="row comment-second-row">
+                        <p className="userComment ml-3">{this.props.comment.comment}</p>
                     </div>
 
                     {/* COMMENT LIKE BUTTON */}

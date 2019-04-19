@@ -53,8 +53,9 @@ a:hover {
   color: white !important;
 }
 
-.light {
-  color: black !important;
+.favoriteDescription {
+  font-size: 12px;
+  padding-right: 35px;
 }
 
 #favoriteIcon{
@@ -91,7 +92,6 @@ a:hover {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-  
 }
 
 .pad {
@@ -143,7 +143,6 @@ h4 {
   margin: 15px auto 20px auto;
 }
 
-
 .delbtn {
   position: absolute;
   top: 0px;
@@ -163,7 +162,6 @@ h4 {
 
 .card-img-top  {
   border: 1px solid white !important;
-  
 }
 
 

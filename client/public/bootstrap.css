@@ -6521,13 +6521,23 @@ button.bg-primary:focus {
   background-color: #0062cc !important;
 }
 
-.bg-secondary .dark {
+.bg-secondary {
   background-color: #6c757d !important;
 }
 
-.bg-secondary .light {
-  background-color: white !important;
+.dark {
+  background-color: #6c757d !important;
+  color: white !important;
 }
+
+.light {
+  background-color: #dbdbdb !important;
+  color: black !important;
+}
+
+/* .bg-secondary .light {
+  background-color: white !important;
+} */
 
 a.bg-secondary:hover, a.bg-secondary:focus,
 button.bg-secondary:hover,

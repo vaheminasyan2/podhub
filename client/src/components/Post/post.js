@@ -396,7 +396,7 @@ class Post extends Component {
                 >
                     {this.state.likes.map(like => (
                         <div
-                            className={`row rounded favorite bg-${this.props.theme} text-secondary`}
+                            className={`row rounded bg-${this.props.theme} text-secondary`}
                             key={like.id}
                         >
                             <Link 
