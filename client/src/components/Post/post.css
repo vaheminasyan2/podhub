@@ -22,6 +22,14 @@
   margin-top: 10px;
 }
 
+.comment-dark {
+  color:white;
+}
+
+.comment-light {
+  color: lightgray !important;
+}
+
 .commentDiv {
   margin-left: 5px;
 }
@@ -44,24 +52,16 @@
   margin-bottom: 7px !important;
 }
 
-.comment-dark {
-  color:white;
-}
-
-.comment-light {
-  color: lightgray !important;
-}
-
-/* .fa-heart {
-  color:red;
-} */
-
 .fa-heart-liked {
   color: red;
 }
 
 .fa-heart-unliked {
   color: lightgray;
+}
+
+.like {
+  margin-bottom: 3px;
 }
 
 .likes, .comments {
