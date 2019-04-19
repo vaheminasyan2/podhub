@@ -109,13 +109,12 @@ class Listen extends Component {
         toast(text, {
             className: 'toast-container',
             bodyClassName: "toast-text",
-          });
+        });
     }
 
     addToFavorites = event => {
         event.preventDefault();
         this.handleCloseModal();
-
 
         let userId = JSON.parse(localStorage.getItem("user")).id;
 

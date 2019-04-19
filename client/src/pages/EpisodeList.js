@@ -40,7 +40,7 @@ class EpisodeList extends Component {
                 podcastLogo: this.props.location.state.podcastLogo,
                 loadMore: this.props.location.state.loadMore,
                 episodes: []
-            }, () => {this.getEpisodes() });
+            }, () => { this.getEpisodes() });
         }
     }
 
@@ -139,7 +139,7 @@ class EpisodeList extends Component {
         return (
             <Container>
                 <h1 className="text-center text-black">{this.state.podcastName}</h1>
-                
+
                 <img
                     src={this.state.podcastLogo}
                     alt="Podcast Logo"
@@ -148,7 +148,7 @@ class EpisodeList extends Component {
 
                 <br />
                 <Row>
-                    
+
                     {this.state.episodes.length ? (
                         <div className="container rounded p-0 text-secondary">
                             <List>
@@ -171,8 +171,8 @@ class EpisodeList extends Component {
                                 {this.state.loadMore ? (
                                     <button className="btn btn-dark" onClick={this.getEpisodes}>Load More</button>
                                 ) : (
-                                    <></>
-                                )}
+                                        <></>
+                                    )}
                                 <button className="btn btn-light" onClick={this.scrollToTop}>Back to Top</button>
                             </div>
                         </div>

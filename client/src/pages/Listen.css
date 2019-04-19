@@ -104,7 +104,6 @@
 
 }
 
-
 #span {
     height: 1px;
     color: rgb(180, 175, 175);
@@ -127,19 +126,17 @@
     background-color:rgb(153, 151, 151);  
 }
 
-.Toastify {
-    background: #9E26E5;
-}
-
 .toast-container {
     text-align:center;
     opacity: 0.6;
     background: #9E26E5 !important;
     top:75px;
-    width: 150px;
+    width: 200px;
+    float: right;
   }
 
 .toast-text {
    color: white;  
+   font-size: 18px;
 }
 
