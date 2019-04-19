@@ -6,6 +6,10 @@ import Modal from "react-responsive-modal";
 import AudioPlayer from "../components/AudioPlayer/audioPlayer";
 import API from "../utils/API";
 import "./Listen.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Slide, Zoom, Flip, Bounce } from 'react-toastify';
+
 
 // LISTEN TO PODCAST PAGE
 // This page allows a user to listen to a podcast.
@@ -81,6 +85,7 @@ class Listen extends Component {
             .then(function (response) {
                 //console.log(response);
             });
+        this.showNotification("Shared");
     }
 
     // Collects text input from modal for User Message
@@ -98,6 +103,14 @@ class Listen extends Component {
     //     API.addEpisodeToFavorites(this.state.episodeId);
     //     alert("Favorited!");
     // }
+
+
+    showNotification = (text) => {
+        toast(text, {
+            className: 'toast-container',
+            bodyClassName: "toast-text",
+        });
+    }
 
     addToFavorites = event => {
         event.preventDefault();
@@ -117,9 +130,8 @@ class Listen extends Component {
             userId
         )
             .then(function (response) {
-                //console.log(response);
-                //alert("Favorited!");
             });
+        this.showNotification("Favorited");
     }
 
     // Adjusts playback speed of AudioPlayer
@@ -155,14 +167,21 @@ class Listen extends Component {
         this.setState({ play: !this.state.play });
     };
 
+
     render() {
         return (
             <Container>
+                <ToastContainer
+                    autoClose={2000}
+                    closeButton={false}
+                    transition={Zoom}
+                    hideProgressBar={true}
+                />
                 <Row>
                     <div className="col-md-3 col-xs-0"></div>
                     <div className="col-md-6 col-xs-12 text-center" id="first-row-listen">
                         <div id="pod-name">
-                            {this.state.podcastName}<br/>
+                            {this.state.podcastName}<br />
                             <Link
                                 to={{
                                     pathname: "/episodeList",
