@@ -174,42 +174,39 @@ class Profile extends Component {
                       // FAVORITES: PODCAST LOGO, LINK TO EPISODE LIST PAGE
 
                       <div className="py-5 px-3 pad card bg-transparent" id="card-contain">
-                      
+
                         {/* FAVORITES: DELETE BUTTON */}
-                        {JSON.parse(localStorage.getItem("user")).id === favorite.userId
-                          ?
-                          <div>
-                            <button
-                              className="btn btn-sm mb-1 float-right deleteButtonX"
-                              onClick={() => this.handleFavoriteDelete(favorite.id)}
-                            >
-                              <img src={Delete} alt="delete" className="size delbtn" />
-                            </button>
-                          </div>
-                          : null
-                        }
+                          {JSON.parse(localStorage.getItem("user")).id === favorite.userId ?
+                            (<div>
 
-                        <Link
-                          to={{
-                            pathname: "/episodeList",
-                            state: {
-                              podcastId: favorite.podcastId,
-                              podcastName: favorite.podcastName,
-                              podcastLogo: favorite.podcastLogo,
-                              loadMore: true
-                            }
-                          }}
-                        >
-                          <span>
-                            <img
-                              id="podcastIcon"
-                              src={favorite.podcastLogo}
-                              alt="Podcast Logo"
-                              className="border-white favoriteIcon card-img-top"
-                            />
-                          </span>
-                        </Link>
+                              <button
+                                className="btn btn-sm mb-1 float-right deleteButtonX"
+                                onClick={() => this.handleFavoriteDelete(favorite.id)}
+                              >
+                                <img src={Delete} alt="delete" className="size delbtn" />
+                              </button>
+                            </div>)
+                            : (null)
+                          }
 
+                          <Link
+                            to={{
+                              pathname: "/episodeList",
+                              state: {
+                                podcastId: favorite.podcastId,
+                                podcastName: favorite.podcastName,
+                                podcastLogo: favorite.podcastLogo,
+                                loadMore: true
+                              }
+                            }}
+                          >
+                              <img
+                                id="podcastIcon"
+                                src={favorite.podcastLogo}
+                                alt="Podcast Logo"
+                                className="border-white favoriteIcon card-img-top"
+                              />
+                          </Link>
 
                         <div className="card-body">
                           {/* FAVORITES: BODY, LINK TO LISTEN PAGE */}

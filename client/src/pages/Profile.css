@@ -44,10 +44,6 @@ a:hover {
   color: rgb(143, 143, 143);
 }
 
-.favoriteIcon {
-  margin-left: -5px !important;
-  margin-top: -38px !important;
-}
 
 .favoriteLink {
   color: white !important;
@@ -58,9 +54,6 @@ a:hover {
   padding-right: 35px;
 }
 
-#favoriteIcon{
-  width: 100px;
-}
 
 #favoritesTitle, 
 #postsTitle {
@@ -103,17 +96,25 @@ h4 {
 }
 
 .favoriteIcon {
-  width: 40% !important;
-  height: auto !important ;
-  border: 1px solid white !important;
+  border: 1px solid white;
+  flex: 0 1 auto;
+  position: absolute;             /* new */
+  left: 49%;
+  top: 8px;
+  transform: translateX(-50%);
+  border: solid 2px white !important;
+}
+
+.delbtn, .deleteButtonX {
   margin: 0px !important;
-  margin-top: -10px !important;
+  padding: 4px 2px 0px 0px !important; 
+  float: right !important;
 }
 
 #card-contain {
   text-align: center;
   border: 1px solid #ffffff;
-  height: auto;
+  max-height: 230px !important;
   margin: 13px;
   padding: 20px 3px 3px 3px !important;
   border-radius: 10px;
@@ -124,13 +125,17 @@ h4 {
 #card-contain h4 {
   font-size: 12px;
   font-weight: bold;
-  margin-top: 10px;
+  margin-top: 76px;
 }
 
 .favoriteDescription {
+  height: 70px;
   font-size: 12px;
   padding-right: 8px;
   padding-left: 8px;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
 }
 
 .card-body hr {
@@ -145,12 +150,6 @@ h4 {
   margin: 15px auto 15px auto;
 }
 
-.delbtn, .deleteButtonX {
-  float: right;
-  margin: 0px !important;
-  padding: 4px 2px 0px 0px !important;
-}
-
 #entire-favorites-column {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -161,7 +160,5 @@ h4 {
   padding: 0px 5px 5px 5px;
 }
 
-.card-img-top  {
-  border: 1px solid white !important;
-}
+
 
