@@ -162,7 +162,7 @@ class Profile extends Component {
               {/* FAVORITES SECTION */}
 
               <h4 id="favoritesTitle">Favorites</h4>
-              <div className={`favorites rounded bg-${this.props.theme}`}>
+              <div className={`row favorites rounded bg-${this.props.theme}`}>
 
                 {this.state.favorites.length ? (
 
