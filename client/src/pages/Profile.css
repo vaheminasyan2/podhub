@@ -69,6 +69,10 @@ a:hover {
   padding-left: 0px;
 }
 
+.light {
+  color: black !important; 
+}
+
 .size {
   width: 20px;
   margin:0;
