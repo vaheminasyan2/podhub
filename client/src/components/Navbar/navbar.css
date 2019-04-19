@@ -104,11 +104,12 @@ button > div {
 .fulllength{
     position: absolute;
     width: 1110px;
-    z-index: -1;
+    z-index: 0;
 }
 .mobilePosition{
     position: relative;
     left: 25.5em;
+    
     
 }
 
@@ -150,12 +151,12 @@ button > div {
 
   @media only screen and (max-width: 400px) {
     .mobilePosition{
-        left: 22%;
+        left: 17%;
     }
   }
 
   @media only screen and (max-width: 350px) {
     .mobilePosition{
-        left: 18%;
+        left: 12%;
     }
   }
