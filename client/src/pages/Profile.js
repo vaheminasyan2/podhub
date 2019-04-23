@@ -181,20 +181,20 @@ class Profile extends Component {
                 className={`row favorites rounded bg-${this.props.theme}`}
               >
 
-                {/* SCROLL LEFT ARROW */}
-
-                <FontAwesomeIcon
-                  className="left-arrow fa-3x"
-                  icon="chevron-left"
-                  onClick={this.scrollLeft}
-                />
-
                 {this.state.favorites.length ? (
 
                   <div 
                     ref="scroller"
                     id="entire-favorites-column"
                   >
+
+                    {/* SCROLL LEFT ARROW */}
+
+                    <FontAwesomeIcon
+                      className="left-arrow fa-3x"
+                      icon="chevron-left"
+                      onClick={this.scrollLeft}
+                    />  
 
                     {this.state.favorites.map(favorite => (
 
@@ -264,6 +264,14 @@ class Profile extends Component {
 
                     ))}
 
+                    {/* SCROLL RIGHT ARROW */}
+
+                    <FontAwesomeIcon
+                      className="right-arrow fa-3x"
+                      icon="chevron-right"
+                      onClick={this.scrollRight}
+                    />
+
                   </div>
                   
                 ) : (
@@ -271,15 +279,6 @@ class Profile extends Component {
                     <h5 className="text-center">&nbsp;{this.state.message}</h5>
                   </div>
                 )}
-
-                {/* SCROLL RIGHT ARROW */}
-
-                <FontAwesomeIcon
-                  className="right-arrow fa-3x"
-                  icon="chevron-right"
-                  onClick={this.scrollRight}
-                />
-
               </div>
 
               {/* POSTS SECTION */}
