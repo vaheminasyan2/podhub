@@ -101,10 +101,8 @@ a:hover {
 }
  
 h4 {
-  max-height: 50px;
   overflow: hidden;
-  padding-top: 10px;
-  white-space: normal;
+  padding-top: 15px;
 }
 
 .favoriteIcon {
@@ -134,7 +132,7 @@ h4 {
   padding-top: 0px !important;
   text-align: center;
   transition: 0.3s;
-  width: 200px;
+  width: 180px;
 }
 #card-contain h4 {
   font-size: 12px;
@@ -192,8 +190,3 @@ h4 {
 .right-arrow {
   right: 25px;
 }
-
-
-
-
-
