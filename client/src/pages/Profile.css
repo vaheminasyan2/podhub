@@ -10,8 +10,15 @@
 /* Favorite Container */
 
 .favorites {
-  max-height: 300px;
-  overflow-y: scroll;
+  max-height: 270px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  padding: 10px 50px;
+}
+
+.posts {
+  padding: 5px;
+  padding-top: 10px;
 }
 
 .favorites, 
@@ -19,8 +26,6 @@
   border: 1px solid black;
   color: white;
   margin-bottom: 20px;
-  padding: 5px;
-  padding-top: 10px;
 }
 
 ::-webkit-scrollbar {
@@ -116,15 +121,17 @@ h4 {
 }
 
 #card-contain {
-  text-align: center;
   border: 1px solid #ffffff;
-  max-height: 230px !important;
-  margin: 13px;
-  padding: 20px 3px 3px 3px !important;
   border-radius: 10px;
   box-shadow: 6px 0px 21px -2px rgba(0,0,0,0.47);
-  transition: 0.3s;
+  display: inline-block;
+  margin: 13px;
+  max-height: 230px !important;
+  padding: 20px 3px 3px 3px !important;
   padding-top: 0px !important;
+  text-align: center;
+  transition: 0.3s;
+  width: 200px;
 }
 #card-contain h4 {
   font-size: 12px;
@@ -155,14 +162,35 @@ h4 {
 }
 
 #entire-favorites-column {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-column-gap: 10px;
+  height: 270px;
+  overflow-x: scroll;
+  white-space: nowrap;
 }
 
 .card-body {
   padding: 0px 5px 5px 5px;
+  padding-top: 15px;
 }
+
+.left-arrow,
+.right-arrow {
+  cursor: pointer;
+  height: 270px;
+  margin-left: -42px;
+  margin-top: -15px;
+  position: absolute;
+  z-index: 99;
+}
+
+.left-arrow {
+  float: left;
+}
+
+.right-arrow {
+  right: 25px;
+}
+
+
 
 
 

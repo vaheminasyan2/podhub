@@ -9,6 +9,12 @@ import moment from "moment";
 import ProfileHeader from "../components/ProfileHeader/profileHeader";
 import "./Profile.css";
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faChevronLeft, faChevronRight);
+
 // USER PROFILE PAGE
 
 // Contains info on user's # of posts, followers, and followings
@@ -143,6 +149,14 @@ class Profile extends Component {
     this.props.toApp(value, link, podName, epName);
   }
 
+  scrollLeft = () => {
+    this.refs.scroller.scrollLeft -= 100;
+  }
+
+  scrollRight = () => {
+    this.refs.scroller.scrollLeft += 100;
+  }
+
   render() {
     return (
       <div className="container">
@@ -162,12 +176,25 @@ class Profile extends Component {
               {/* FAVORITES SECTION */}
 
               <h4 id="favoritesTitle">Favorites</h4>
-              <div className={`row favorites rounded bg-${this.props.theme}`}>
+
+              <div
+                className={`row favorites rounded bg-${this.props.theme}`}
+              >
+
+                {/* SCROLL LEFT ARROW */}
+
+                <FontAwesomeIcon
+                  className="left-arrow fa-3x"
+                  icon="chevron-left"
+                  onClick={this.scrollLeft}
+                />
 
                 {this.state.favorites.length ? (
 
-
-                  <div id="entire-favorites-column">
+                  <div 
+                    ref="scroller"
+                    id="entire-favorites-column"
+                  >
 
                     {this.state.favorites.map(favorite => (
 
@@ -176,37 +203,37 @@ class Profile extends Component {
                       <div className="py-5 px-3 pad card bg-transparent" id="card-contain">
 
                         {/* FAVORITES: DELETE BUTTON */}
-                          {JSON.parse(localStorage.getItem("user")).id === favorite.userId ?
-                            (<div>
+                        {JSON.parse(localStorage.getItem("user")).id === favorite.userId ?
+                          (<div>
 
-                              <button
-                                className="btn btn-sm mb-1 float-right deleteButtonX"
-                                onClick={() => this.handleFavoriteDelete(favorite.id)}
-                              >
-                                <img src={Delete} alt="delete" className="size delbtn" />
-                              </button>
-                            </div>)
-                            : (null)
-                          }
+                            <button
+                              className="btn btn-sm mb-1 float-right deleteButtonX"
+                              onClick={() => this.handleFavoriteDelete(favorite.id)}
+                            >
+                              <img src={Delete} alt="delete" className="size delbtn" />
+                            </button>
+                          </div>)
+                          : (null)
+                        }
 
-                          <Link
-                            to={{
-                              pathname: "/episodeList",
-                              state: {
-                                podcastId: favorite.podcastId,
-                                podcastName: favorite.podcastName,
-                                podcastLogo: favorite.podcastLogo,
-                                loadMore: true
-                              }
-                            }}
-                          >
-                              <img
-                                id="podcastIcon"
-                                src={favorite.podcastLogo}
-                                alt="Podcast Logo"
-                                className="border-white favoriteIcon card-img-top"
-                              />
-                          </Link>
+                        <Link
+                          to={{
+                            pathname: "/episodeList",
+                            state: {
+                              podcastId: favorite.podcastId,
+                              podcastName: favorite.podcastName,
+                              podcastLogo: favorite.podcastLogo,
+                              loadMore: true
+                            }
+                          }}
+                        >
+                          <img
+                            id="podcastIcon"
+                            src={favorite.podcastLogo}
+                            alt="Podcast Logo"
+                            className="border-white favoriteIcon card-img-top"
+                          />
+                        </Link>
 
                         <div className="card-body">
                           {/* FAVORITES: BODY, LINK TO LISTEN PAGE */}
@@ -236,14 +263,23 @@ class Profile extends Component {
                       </div>
 
                     ))}
+
                   </div>
-
-
+                  
                 ) : (
-                    <div className="col">
-                      <h5 className="text-center">&nbsp;{this.state.message}</h5>
-                    </div>
-                  )}
+                  <div className="col">
+                    <h5 className="text-center">&nbsp;{this.state.message}</h5>
+                  </div>
+                )}
+
+                {/* SCROLL RIGHT ARROW */}
+
+                <FontAwesomeIcon
+                  className="right-arrow fa-3x"
+                  icon="chevron-right"
+                  onClick={this.scrollRight}
+                />
+
               </div>
 
               {/* POSTS SECTION */}
