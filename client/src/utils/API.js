@@ -2,7 +2,6 @@ import axios from "axios";
 import dotenv from 'dotenv';
 dotenv.config();
 
-
 var API_KEY = process.env.REACT_APP_PODCAST_API_KEY;
 
 export default {
@@ -147,9 +146,9 @@ export default {
 
     // Gets list of podcasts according to user query
     getPodcasts: function (userQuery) {
-        var URL = "https://listennotes.p.rapidapi.com/api/v1/search?sort_by_date=0&type=podcast&only_in=title&language=English&q=" + userQuery;
+        var URL = "https://listen-api.listennotes.com/api/v2/search?sort_by_date=0&type=podcast&only_in=title&language=English&q=" + userQuery;
 
-        return axios.get(URL, { 'headers': { 'X-RapidAPI-Key': API_KEY } })
+        return axios.get(URL, { 'headers': { 'X-ListenAPI-Key': API_KEY } })
             .then((response) => {
                 return response;
             })
@@ -174,9 +173,9 @@ export default {
 
         function request(podcastId, pagination, episodes) {
 
-            let URL = "https://listennotes.p.rapidapi.com/api/v1/podcasts/" + podcastId + "?sort=recent_first&next_episode_pub_date=" + pagination;
+            let URL = "https://listen-api.listennotes.com/api/v2/podcasts/" + podcastId + "?sort=recent_first&next_episode_pub_date=" + pagination;
 
-            return axios.get(URL, { 'headers': { 'X-RapidAPI-Key': "a063bce4f1msh0a4f44209d57a2fp1225adjsn3f80cc1cf1bb" } })
+            return axios.get(URL, { 'headers': { 'X-ListenAPI-Key': API_KEY } })
                 .then((response => {
                     numEpisodes = response.data.episodes.length;
 
