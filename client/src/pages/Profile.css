@@ -176,7 +176,7 @@ h4 {
 .right-arrow {
   cursor: pointer;
   height: 270px;
-  margin-left: -42px;
+  margin-left: -40px;
   margin-top: -15px;
   position: absolute;
   z-index: 99;
