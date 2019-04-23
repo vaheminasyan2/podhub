@@ -101,7 +101,10 @@ a:hover {
 }
  
 h4 {
-  padding-top:1%;
+  max-height: 50px;
+  overflow: hidden;
+  padding-top: 10px;
+  white-space: normal;
 }
 
 .favoriteIcon {
