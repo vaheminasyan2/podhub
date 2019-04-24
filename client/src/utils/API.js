@@ -224,7 +224,7 @@ export default {
     },
 
     handleFavoriteDelete: function (id) {
-        console.log("api", id)
+        //console.log("api", id)
         return axios.delete("/api/favorites/delete/" + id);
     },
 
