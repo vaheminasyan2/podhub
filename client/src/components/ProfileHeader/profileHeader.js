@@ -28,7 +28,8 @@ class ProfileHeader extends Component {
             followers: [],
             following: [],
             showFollowersModal: false,
-            showFollowingModal: false
+            showFollowingModal: false,
+            numFavs: 0
         }
     }
 
@@ -45,7 +46,8 @@ class ProfileHeader extends Component {
 
         this.setState({
             user: this.props.user, 
-            buttonTheme: buttonTheme
+            buttonTheme: buttonTheme,
+            numFavs: this.props.numFavs
         });
     }
 
@@ -257,7 +259,14 @@ class ProfileHeader extends Component {
 
     // Scrolls to post section when Posts is clicked from profile header
     scrollTo = () => {
-        window.scrollTo(0, 500);
+
+        let to = 350;
+
+        if (this.props.numFavs > 0) {
+            to = 580;
+        }
+
+        window.scrollTo(0, to);
     }
 
 
