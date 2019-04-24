@@ -31,10 +31,11 @@ class PodcastSearch extends Component {
           .then(res => {
 
             let allPodcasts = this.state.podcasts.concat(res.data.results);
-            console.log(allPodcasts);
+            
             this.setState({
               podcasts: allPodcasts
             });
+            
           })
           .catch((error) => {
             console.log("Error getting podcasts", error);
