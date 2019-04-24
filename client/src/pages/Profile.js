@@ -154,18 +154,17 @@ class Profile extends Component {
   scrollTo = (direction) => {
     let element = document.getElementById("entire-favorites-column");
 
-    let to = this.state.scrollLeft - 618;
     let duration = 1000;
     let that = this;
 
-    if (direction === "right") {
-      to = this.state.scrollLeft + 618;
-    }
-
     var start = element.scrollLeft,
-      change = to - start,
+      change = -618,
       currentTime = 0,
       increment = 20;
+
+    if (direction === "right") {
+      change = 618;
+    }
 
     var animateScroll = function () {
       currentTime += increment;
@@ -176,9 +175,13 @@ class Profile extends Component {
       }
     }
 
-    this.setState({
-      scrollLeft: this.state.scrollLeft + to
-    });
+    let maxScroll = this.state.favorites.length * 193;
+    console.log(this.state.scrollLeft);
+    if (this.state.scrollLeft >= 0 && this.state.scrollLeft <= maxScroll) {
+      this.setState({
+        scrollLeft: this.state.scrollLeft + change
+      });
+    }
     
     animateScroll();
   }
