@@ -79,8 +79,6 @@ class Navbar extends Component {
   resetState = () => {
     this.setState({
       goToPodcastPage: false
-    }, () => {
-      console.log("Navbar State", this.state);
     });
   }
 
