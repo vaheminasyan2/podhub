@@ -29,7 +29,7 @@ class Listen extends Component {
         showModal: false,
         speed: 1.0,
         userMessage: "",
-        play: false,
+        play: false
     };
 
     componentDidMount = () => {
