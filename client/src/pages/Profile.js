@@ -30,6 +30,7 @@ class Profile extends Component {
     redirect: false,
     postMessage: "",
     favMessage: "",
+    scrollLeft: 0
   };
 
   // Load user profile information
@@ -153,12 +154,12 @@ class Profile extends Component {
   scrollTo = (direction) => {
     let element = document.getElementById("entire-favorites-column");
 
-    let to = -618;
+    let to = this.state.scrollLeft - 618;
     let duration = 1000;
     let that = this;
 
     if (direction === "right") {
-      to = 618;
+      to = this.state.scrollLeft + 618;
     }
 
     var start = element.scrollLeft,
@@ -174,6 +175,10 @@ class Profile extends Component {
         setTimeout(animateScroll, increment);
       }
     }
+
+    this.setState({
+      scrollLeft: this.state.scrollLeft + to
+    });
     
     animateScroll();
   }
