@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faUser, faHome } from '@fortawesome/free-solid-svg-icons'
@@ -21,8 +21,13 @@ class Navbar extends Component {
   state = {
     remove: false,
     speed: 1.0,
-    showOptionsMenu: false
+    showOptionsMenu: false,
+    goToPodcastPage: false
   };
+
+  componentDidMount = () => {
+    console.log("Navbar props", this.props);
+  }
 
 
   // NAVBAR AUDIO PLAYER
@@ -63,10 +68,15 @@ class Navbar extends Component {
   // OTHER
   // ====================================
 
-  // Prevent Enter keypress from refreshing window
-  suppressEnter = (event) => {
+  // This will redirect user to Podcast Search page 
+  // if user clicks Enter with input in search box
+  handleEnter = (event) => {
     if (window.event.keyCode === 13) {
       event.preventDefault();
+
+      this.setState({
+        goToPodcastPage: true
+      });
     }
   }
 
@@ -222,13 +232,25 @@ class Navbar extends Component {
                     name="podcastSearch"
                     autoComplete="off"
                     onBlur={hidePodcasts}
-                    onKeyPress={this.suppressEnter}
+                    onKeyPress={this.handleEnter}
                     onChange={handleInputChange}
                     onFocus={handleInputChange}
                     required
                   />
                 </form>
               </li>
+
+              {/* REDIRECT TO PODCAST SEARCH PAGE */}
+
+              {this.state.goToPodcastPage ? (
+                <Redirect 
+                  to={{
+                    pathname: "/podcastSearch"
+                  }}
+                />
+              ) : (
+                <></>
+              )}
 
               {/* Settings/Logout Dropdown Menu */}
 
