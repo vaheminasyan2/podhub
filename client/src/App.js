@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar/navbar";
 import PodcastSearch from "./components/PodcastSearch/podcastSearch";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
+import PodcastSearchPage from "./pages/PodcastSearch";
 import EpisodeList from "./pages/EpisodeList";
 import Listen from "./pages/Listen";
 import UserSearch from "./pages/UserSearch";
@@ -110,7 +111,7 @@ class App extends Component {
 
   // Search for podcasts by calling API
   getPodcasts = () => {
-    API.getPodcasts(this.state.podcastSearch)
+    API.getPodcasts(this.state.podcastSearch, 0)
       .then(res => {
         this.setState({
           podcasts: res.data.results
@@ -325,7 +326,14 @@ class App extends Component {
                     }
                   />
 
-
+                  <Route exact path="/podcastSearch" render={(props) =>
+                      <PodcastSearchPage {...props}
+                        userQuery={this.state.podcastSearch}
+                        podcasts={this.state.podcasts}
+                        theme={this.state.theme}
+                      />
+                    }
+                  />
 
                   <Route exact path="/episodeList" component={EpisodeList} />
                   <Route exact path="/listen"

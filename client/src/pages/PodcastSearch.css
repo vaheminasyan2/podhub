@@ -1,0 +1,15 @@
+.loadMoreBtn {
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.podcastResult {
+    background: rgb(0, 0, 0);
+    cursor: pointer;
+    display: block;
+    margin-bottom: 5px;
+    height: 80px;
+    overflow: hidden;
+    padding: 5px;
+}
