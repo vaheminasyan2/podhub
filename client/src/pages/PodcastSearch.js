@@ -19,7 +19,18 @@ class PodcastSearch extends Component {
     componentDidMount = () => {
         this.setState({
             podcastSearch: this.props.userQuery,
-        }, () => this.getPodcasts());
+        }, () => {
+            this.props.location.resetState();
+            this.getPodcasts();
+        });
+    }
+
+    componentWillUnmount = () => {
+        this.setState({
+            podcastSearch: "",
+            podcasts: [],
+            message: "" 
+        });
     }
 
     getPodcasts = () => {
@@ -31,11 +42,10 @@ class PodcastSearch extends Component {
           .then(res => {
 
             let allPodcasts = this.state.podcasts.concat(res.data.results);
-            
+
             this.setState({
               podcasts: allPodcasts
             });
-            
           })
           .catch((error) => {
             console.log("Error getting podcasts", error);
