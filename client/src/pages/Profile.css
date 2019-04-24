@@ -11,15 +11,17 @@
 
 .favorites {
   min-height: 50px;
-  max-height: 270px;
+  max-height: 278px;
   overflow-y: hidden;
-  padding: 5px 50px;
-  padding-top: 10px;
+  padding: 10px 50px;
 }
 
 .posts {
-  padding: 5px;
-  padding-top: 10px;
+  padding: 10px 5px;
+}
+
+h5 {
+  margin-bottom: 0px !important;
 }
 
 .favorites, 
