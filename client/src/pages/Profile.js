@@ -135,6 +135,64 @@ class Profile extends Component {
     });
   };
 
+  // Handles SCROLLING left and right through Favorites section
+  scrollTo = (direction) => {
+    let element = document.getElementById("entire-favorites-column");
+
+    let duration = 500;
+    let that = this;
+
+    var start = element.scrollLeft,
+      change = (618 - ((start % 618)) - 618), // default to scrolling left
+      currentTime = 0,
+      increment = 20;
+
+    // For scrolling left
+    if (change === 0) {
+      change = -618;
+    }
+
+    // For scrolling right
+    if (direction === "right") {
+      change = 618 - (start % 618);
+    }
+
+    var animateScroll = function () {
+      currentTime += increment;
+
+      var val = that.easeInAndOut(currentTime, start, change, duration);
+
+      element.scrollLeft = val;
+
+      if (currentTime < duration) {
+        setTimeout(animateScroll, increment);
+      }
+    }
+
+    let maxScroll = this.state.favorites.length * 193;
+
+    if (this.state.scrollLeft >= 0 && this.state.scrollLeft <= maxScroll) {
+      this.setState({
+        scrollLeft: that.state.scrollLeft + change
+      });
+    }
+
+    animateScroll();
+  }
+
+  // Handles animation timing for scrolling through Favorites
+  easeInAndOut = (time, value, change, duration) => {
+    time /= duration / 2;
+
+    if (time < 1) {
+      return change / 2 * time * time + value;
+    }
+
+    time--;
+
+    return -change / 2 * (time * (time - 2) - 1) + value;
+  };
+
 
   // OTHER
   // ===============================================
@@ -151,50 +209,8 @@ class Profile extends Component {
     this.props.toApp(value, link, podName, epName);
   }
 
-  scrollTo = (direction) => {
-    let element = document.getElementById("entire-favorites-column");
-
-    let duration = 1000;
-    let that = this;
-
-    var start = element.scrollLeft,
-      change = -618,
-      currentTime = 0,
-      increment = 20;
-
-    if (direction === "right") {
-      change = 618;
-    }
-
-    var animateScroll = function () {
-      currentTime += increment;
-      var val = that.easeInAndOut(currentTime, start, change, duration);
-      element.scrollLeft = val;
-      if (currentTime < duration) {
-        setTimeout(animateScroll, increment);
-      }
-    }
-
-    let maxScroll = this.state.favorites.length * 193;
-
-    if (this.state.scrollLeft >= 0 && this.state.scrollLeft <= maxScroll) {
-      this.setState({
-        scrollLeft: this.state.scrollLeft + change
-      });
-    }
-    
-    animateScroll();
-  }
-
-  easeInAndOut = (time, value, change, duration) => {
-  time /= duration / 2;
-  if (time < 1) return change / 2 * time * time + value;
-  time--;
-  return -change / 2 * (time * (time - 2) - 1) + value;
-};
 
 render() {
-
   return (
     <div className="container">
       <Row>
