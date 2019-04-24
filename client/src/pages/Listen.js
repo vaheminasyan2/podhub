@@ -10,6 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Slide, Zoom, Flip, Bounce } from 'react-toastify';
 
+
 // LISTEN TO PODCAST PAGE
 // This page allows a user to listen to a podcast.
 // It renders a ListenView component which contains all relevant info on the podcast as well as the audio player.
@@ -29,7 +30,6 @@ class Listen extends Component {
         speed: 1.0,
         userMessage: "",
         play: false,
-        isNotFavorited: false
     };
 
     componentDidMount = () => {

@@ -42,8 +42,6 @@ class App extends Component {
   }
 
 
-
-
   // Hide audio player in navbar
   hideAudio = () => {
     this.setState({
