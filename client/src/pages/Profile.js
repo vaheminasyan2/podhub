@@ -254,8 +254,8 @@ class Profile extends Component {
                             }}
                             className={`favoriteLink ${this.props.theme}`}
                           >
-                            <h4>{favorite.podcastName}</h4>
-                            <hr />
+                            <h4 className="favoriteTitle">{favorite.podcastName}</h4>
+                            
                             <p className="favoriteDescription">{favorite.episodeName}</p>
                           </Link>
                         </div>

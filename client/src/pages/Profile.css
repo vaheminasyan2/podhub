@@ -102,16 +102,21 @@ a:hover {
  
 h4 {
   overflow: hidden;
-  padding-top: 15px;
+  padding: 10px 5px;
+}
+
+.favoriteTitle {
+  border-bottom: 1px solid rgb(117, 117, 117);
+  white-space: normal;
 }
 
 .favoriteIcon {
   border: 1px solid white;
   flex: 0 1 auto;
-  position: absolute;             /* new */
-  left: 49%;
+  position: absolute;
+  left: 50%;
   top: 8px;
-  transform: translateX(-50%);
+  transform: translateX(-45px);
   border: solid 2px white !important;
 }
 
@@ -126,6 +131,7 @@ h4 {
   border-radius: 10px;
   box-shadow: 6px 0px 21px -2px rgba(0,0,0,0.47);
   display: inline-block;
+  height: 230px;
   margin: 13px;
   max-height: 230px !important;
   padding: 20px 3px 3px 3px !important;
@@ -146,8 +152,10 @@ h4 {
   padding-right: 8px;
   padding-left: 8px;
   overflow-y: hidden;
-  text-overflow: ellipsis;
-  -o-text-overflow: ellipsis;
+  /* text-overflow: ellipsis; */
+  /* -o-text-overflow: ellipsis; */
+  white-space: normal;
+  word-wrap: break-word;
 }
 
 .card-body hr {
@@ -171,6 +179,8 @@ h4 {
 .card-body {
   padding: 0px 5px 5px 5px;
   padding-top: 15px;
+  position: absolute;
+  top: 0;
 }
 
 .left-arrow,
