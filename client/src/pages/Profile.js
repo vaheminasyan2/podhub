@@ -176,7 +176,7 @@ class Profile extends Component {
     }
 
     let maxScroll = this.state.favorites.length * 193;
-    console.log(this.state.scrollLeft);
+
     if (this.state.scrollLeft >= 0 && this.state.scrollLeft <= maxScroll) {
       this.setState({
         scrollLeft: this.state.scrollLeft + change
@@ -194,6 +194,7 @@ class Profile extends Component {
 };
 
 render() {
+
   return (
     <div className="container">
       <Row>
@@ -206,6 +207,7 @@ render() {
             <ProfileHeader
               user={this.props.location.state.user}
               numPosts={this.state.posts.length}
+              numFavs={this.state.favorites.length}
               theme={this.props.theme}
             />
 
@@ -239,7 +241,7 @@ render() {
 
                     // FAVORITES: PODCAST LOGO, LINK TO EPISODE LIST PAGE
 
-                    <div className="py-5 px-3 pad card bg-transparent" id="card-contain">
+                    <div className="py-5 px-3 pad card bg-transparent" id="card-contain" key={favorite.podcastId}>
 
                       {/* FAVORITES: DELETE BUTTON */}
                       {JSON.parse(localStorage.getItem("user")).id === favorite.userId ?
