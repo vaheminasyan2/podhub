@@ -75,12 +75,14 @@ class PodcastSearch extends Component {
                     <h4>{this.state.message}</h4>
                 )}
 
-                <button 
-                    className="btn btn-dark" 
-                    onClick={this.getPodcasts}
-                >
-                    Load More
-                </button>
+                <div className="loadMoreBtn">
+                    <button 
+                        className="btn btn-dark" 
+                        onClick={this.getPodcasts}
+                    >
+                        Load More
+                    </button>
+                </div>
             </Container>
         );
     }

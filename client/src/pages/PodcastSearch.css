@@ -1,3 +1,9 @@
+.loadMoreBtn {
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+
 .podcastResult {
     background: rgb(0, 0, 0);
     cursor: pointer;
