@@ -19,6 +19,7 @@ class PodcastSearch extends Component {
     componentDidMount = () => {
         this.setState({
             podcastSearch: this.props.userQuery,
+            podcasts: this.props.podcasts,
         }, () => {
             this.props.location.resetState();
             this.getPodcasts();
