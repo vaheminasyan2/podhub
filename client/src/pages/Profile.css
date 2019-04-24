@@ -101,8 +101,10 @@ a:hover {
 }
  
 h4 {
+  height: 40px;
   overflow: hidden;
   padding: 10px 5px;
+  text-overflow: ellipsis;
 }
 
 .favoriteTitle {
