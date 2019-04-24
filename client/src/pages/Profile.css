@@ -10,10 +10,11 @@
 /* Favorite Container */
 
 .favorites {
+  min-height: 50px;
   max-height: 270px;
-  overflow-x: scroll;
   overflow-y: hidden;
   padding: 5px 50px;
+  padding-top: 10px;
 }
 
 .posts {
@@ -53,12 +54,6 @@ a:hover {
 .favoriteLink {
   color: white !important;
 }
-
-.favoriteDescription {
-  font-size: 12px;
-  padding-right: 35px;
-}
-
 
 #favoritesTitle, 
 #postsTitle {
@@ -149,7 +144,7 @@ h4 {
 }
 
 .favoriteDescription {
-  height: 76px;
+  height: 50px;
   font-size: 12px;
   padding-right: 8px;
   padding-left: 8px;
@@ -174,7 +169,6 @@ h4 {
 
 #entire-favorites-column {
   height: 270px;
-  overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
 }
