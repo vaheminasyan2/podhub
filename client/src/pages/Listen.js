@@ -129,9 +129,14 @@ class Listen extends Component {
             this.state.audioLink,
             userId
         )
-            .then(function (response) {
+            .then(response => {
+                if (response.data[1] === true) {
+                    this.showNotification("Favorited");
+                }
+                else {
+                    this.showNotification("Already favorited");
+                }
             });
-        this.showNotification("Favorited");
     }
 
     // Adjusts playback speed of AudioPlayer

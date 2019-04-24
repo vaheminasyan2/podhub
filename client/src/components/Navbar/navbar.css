@@ -65,7 +65,7 @@ button > div {
 }
 
 .navbarUserImg {
-    border: 1px solid black;
+    border: 1px solid rgb(134, 134, 134);
     border-radius: 20px;
     height: 40px;
     margin-left: 10px;
