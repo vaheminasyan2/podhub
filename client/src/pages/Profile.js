@@ -28,7 +28,8 @@ class Profile extends Component {
     favorites: [],
     currentPostId: "",
     redirect: false,
-    message: ""
+    postMessage: "",
+    favMessage: "",
   };
 
   // Load user profile information
@@ -71,7 +72,7 @@ class Profile extends Component {
         if (res.data.length === 0) {
           this.setState({
             favorites: [],
-            message:
+            favMessage:
               "No favorites found."
           });
         } else {
@@ -83,7 +84,7 @@ class Profile extends Component {
       .catch(() => {
         this.setState({
           favorites: [],
-          message:
+          favMessage:
             "No favorites found."
         });
       });
@@ -96,7 +97,7 @@ class Profile extends Component {
         if (res.data.length === 0) {
           this.setState({
             posts: [],
-            message: "No posts found."
+            postMessage: "No posts found."
           });
         } else {
           this.setState({
@@ -107,7 +108,7 @@ class Profile extends Component {
       .catch(() => {
         this.setState({
           posts: [],
-          message: "No posts found."
+          postMessage: "No posts found."
         });
       });
   };
@@ -276,7 +277,7 @@ class Profile extends Component {
                   
                 ) : (
                   <div className="col">
-                    <h5 className="text-center">&nbsp;{this.state.message}</h5>
+                    <h5 className="text-center">&nbsp;{this.state.favMessage}</h5>
                   </div>
                 )}
               </div>
@@ -315,7 +316,7 @@ class Profile extends Component {
                 ) : (
                     <div className="col">
                       <h5 className="text-center">
-                        &nbsp;{this.state.message}
+                        &nbsp;{this.state.postMessage}
                       </h5>
                     </div>
                   )}
