@@ -25,10 +25,6 @@ class Navbar extends Component {
     goToPodcastPage: false
   };
 
-  componentDidMount = () => {
-    console.log("Navbar props", this.props);
-  }
-
 
   // NAVBAR AUDIO PLAYER
   // ====================================
