@@ -13,7 +13,7 @@ class FavoriteController {
     console.log(req.body)
     db.favorite
       .findOrCreate({
-        where: {episodeId: req.body.episodeId},
+        where: {episodeId: req.body.episodeId} && {userId: req.body.userId},
         defaults: {
           podcastId: req.body.podcastId,
           podcastName: req.body.podcastName,
