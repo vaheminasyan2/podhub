@@ -10,10 +10,12 @@ class FavoriteController {
    * @param {*} res
    */
   create(req, res) {
-    console.log(req.body)
     db.favorite
       .findOrCreate({
-        where: {episodeId: req.body.episodeId} && {userId: req.body.userId},
+        where: {
+          episodeId: req.body.episodeId,
+          userId: req.body.userId
+        },
         defaults: {
           podcastId: req.body.podcastId,
           podcastName: req.body.podcastName,
@@ -27,12 +29,12 @@ class FavoriteController {
         }
       })
       .then(function(favorite, created) {
-        res.json(favorite)
+          res.json(favorite);
       })
       .catch(function(error) {
         console.error(error);
         res.status(400);
-      })
+      });
   }
 
   /**
