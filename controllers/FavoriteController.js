@@ -29,7 +29,6 @@ class FavoriteController {
         }
       })
       .then(function(favorite, created) {
-          console.log("Favorite", favorite);
           res.json(favorite);
       })
       .catch(function(error) {
