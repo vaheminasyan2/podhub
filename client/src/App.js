@@ -32,7 +32,8 @@ class App extends Component {
       episodeName: null,
       isMounted: false,
       isPlaying: false,
-      theme: "dark"
+      theme: "dark",
+      socket: null
     };
   }
 
@@ -141,11 +142,21 @@ class App extends Component {
   isLoggedIn = () => this.state.user != null;
 
   // Log the user into the site
-  handleUser = (userData) => {
+  handleUser = (userData, socket) => {
+
+    socket.on("share", this.onPostShared);
+
     this.setState({
       user: userData,
-      logout: false
+      logout: false,
+      socket
     });
+  }
+
+  // Receives notification about newly shared post
+  onPostShared = (postId) => {
+    console.log("New Post!", postId);
+    alert("New Post! " + postId);
   }
 
   // Logout current user
@@ -219,6 +230,11 @@ class App extends Component {
     });
   }
 
+  userLoggedIn = (socket, userId) => {
+    this.setState({
+      socket
+    });
+  }
 
   render() {
     return (

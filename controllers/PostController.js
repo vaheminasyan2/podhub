@@ -15,7 +15,7 @@ class PostController {
     console.log("posts", req.body);
     db.post.create(req.body).then(function(post) {
       res.json(post);
-      server.notification.notifyShare(req.body.postedBy);
+      server.notification.notifyShare(req.body.postedBy, req.body.podcastId);
     });
   }
 

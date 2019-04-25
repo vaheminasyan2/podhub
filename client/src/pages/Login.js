@@ -16,21 +16,23 @@ class Login extends Component {
 
     state = {
         id_token: "",
-        redirect: false,
+        redirect: false
     };
 
     getOrCreateUser = () => {
         API.getOrCreateUser(this.state.id_token)
             .then(res => {
-                this.props.handleUser(res.data);
-                localStorage.setItem("user", JSON.stringify(res.data));
-
                 console.warn("User ID", res.data.id);
 
+                //////////////////    Notification   ///////////////////
                 const socket = io(`${window.location}?userId=${res.data.id}`); // We need to initialize a connection to server.
                 socket.on("connect", (s) => {
                     console.log("Login Connected!");
                 });
+
+                this.props.handleUser(res.data, socket);
+
+                localStorage.setItem("user", JSON.stringify(res.data));
             })
     };
 
