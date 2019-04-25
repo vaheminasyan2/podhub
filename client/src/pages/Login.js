@@ -4,7 +4,9 @@ import API from "../utils/API";
 import GoogleLogin from 'react-google-login';
 import "./Login.css";
 import Logo from "../components/Navbar/purple_back.png";
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
+import io from "socket.io-client";
+
 dotenv.config();
 
 
@@ -22,6 +24,13 @@ class Login extends Component {
             .then(res => {
                 this.props.handleUser(res.data);
                 localStorage.setItem("user", JSON.stringify(res.data));
+
+                console.warn("User ID", res.data.id);
+
+                const socket = io(`${window.location}?userId=${res.data.id}`); // We need to initialize a connection to server.
+                socket.on("connect", (s) => {
+                    console.log("Login Connected!");
+                });
             })
     };
 
@@ -32,6 +41,8 @@ class Login extends Component {
             });
 
             this.getOrCreateUser();
+
+            console.log("Login Constructed!");
         }
 
         return (
