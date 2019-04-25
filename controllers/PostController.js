@@ -1,3 +1,4 @@
+const server = require(`../server.js`);
 const db = require(`../models/index.js`);
 const Op = db.Sequelize.Op;
 
@@ -12,7 +13,10 @@ class PostController {
    */
   create(req, res) {
     console.log("posts", req.body);
-    db.post.create(req.body).then(post => res.json(post));
+    db.post.create(req.body).then(function(post) {
+      res.json(post);
+      server.notification.notifyShare(req.body.postedBy, req.body.podcastId);
+    });
   }
 
   // /**
