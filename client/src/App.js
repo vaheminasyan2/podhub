@@ -33,7 +33,8 @@ class App extends Component {
       isMounted: false,
       isPlaying: false,
       theme: "dark",
-      socket: null
+      socket: null,
+      APICalls: 0,
     };
   }
 
@@ -133,18 +134,18 @@ class App extends Component {
     let boundaryDiv = document.getElementById("boundary");
     let totalScroll = boundaryDiv.scrollTop;
 
+    // Save current list of podcasts from state
     let podcasts = this.state.podcasts;
 
     if (totalScroll >= boundaryDiv.scrollHeight - boundaryDiv.clientHeight) {
-      
+
       API.getPodcasts(this.state.podcastSearch, this.state.podcasts.length)
       .then(res => {
         this.setState({
-          podcasts: []
-        });
-
-        this.setState({
-          podcasts: podcasts.concat(res.data.results)
+          podcasts: podcasts.concat(res.data.results),
+          APICalls: this.state.APICalls + 1
+        }, () => {
+          console.log("API Calls: ", this.state.APICalls)
         });
 
         boundaryDiv.scrollTop = totalScroll;
