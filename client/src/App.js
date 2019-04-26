@@ -4,7 +4,6 @@ import Navbar from "./components/Navbar/navbar";
 import PodcastSearch from "./components/PodcastSearch/podcastSearch";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
-import PodcastSearchPage from "./pages/PodcastSearch";
 import EpisodeList from "./pages/EpisodeList";
 import Listen from "./pages/Listen";
 import UserSearch from "./pages/UserSearch";
@@ -371,15 +370,6 @@ class App extends Component {
                     render={(props) =>
                       <Profile {...props}
                         toApp={this.toApp}
-                        theme={this.state.theme}
-                      />
-                    }
-                  />
-
-                  <Route exact path="/podcastSearch" render={(props) =>
-                      <PodcastSearchPage {...props}
-                        userQuery={this.state.podcastSearch}
-                        podcasts={this.state.podcasts}
                         theme={this.state.theme}
                       />
                     }
