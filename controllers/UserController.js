@@ -199,7 +199,8 @@ class UserController {
    */
   update(req, res) {
     db.user
-      .update(req.body, { where: req.params })
+      .update(req.body, { where: { id: req.params.id }   
+      })
       .then(user => res.json(user));
   }
 

@@ -140,7 +140,9 @@ export default {
         return axios.get("api/getUsers", user); // temporary. will be more like axios.delete("api/deleteUser", user);
     },
 
-
+    updateUser: function(userId, body){
+        return axios.put("/api/users/update/" + userId, body)
+    },
     // PODCAST, EPISODE SEARCH
     // =====================================
 
