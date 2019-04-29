@@ -31,3 +31,28 @@
   .bg-light {
     color: black !important;
   }
+
+
+
+  /* width */
+::-webkit-scrollbar {
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
+  width: 6px !important;
+  height: 0px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(0, 0, 0); 
+  border-radius: 0px !important;
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #270d1e;
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
+}
