@@ -33,7 +33,8 @@ class App extends Component {
       isMounted: false,
       isPlaying: false,
       theme: "dark",
-      socket: null
+      socket: null,
+      APICalls: 0,
     };
   }
 
@@ -126,6 +127,38 @@ class App extends Component {
         })
       });
   };
+
+  // This monitors the scroll position in Podcast Search results
+  // Loads more podcast results as user scrolls
+  checkScroll = () => {
+    let boundaryDiv = document.getElementById("boundary");
+    let totalScroll = boundaryDiv.scrollTop;
+
+    // Save current list of podcasts from state
+    let podcasts = this.state.podcasts;
+
+    if (totalScroll >= boundaryDiv.scrollHeight - boundaryDiv.clientHeight) {
+
+      API.getPodcasts(this.state.podcastSearch, this.state.podcasts.length)
+      .then(res => {
+        this.setState({
+          podcasts: podcasts.concat(res.data.results),
+          APICalls: this.state.APICalls + 1
+        }, () => {
+          console.log("API Calls: ", this.state.APICalls)
+        });
+
+        boundaryDiv.scrollTop = totalScroll;
+      })
+      .catch((error) => {
+        console.log("Error getting podcasts", error);
+        this.setState({
+          podcasts: [],
+          message: "We couldn't find a match."
+        })
+      });
+    }
+  }
 
   // Hides podcast search results
   hidePodcasts = () => {
@@ -293,6 +326,7 @@ class App extends Component {
                   show={this.state.showPodcasts}
                   hide={this.hidePodcasts}
                   podcasts={this.state.podcasts}
+                  checkScroll={this.checkScroll}
                 />
 
                 <Switch>

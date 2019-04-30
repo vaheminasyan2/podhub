@@ -70,7 +70,7 @@ router.get("/followings/:id", (req, res) => controller.findFollowings(req, res))
  * @param {*} req
  * @param {*} res
  */
-router.get("/update/:id", (req, res) => controller.update(req, res));
+router.put("/update/:id", (req, res) => controller.update(req, res));
 
 /**
  * Route to remove the existing user

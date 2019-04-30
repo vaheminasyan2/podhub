@@ -4,7 +4,7 @@
     color: black;
     font-size: 14px;
     height: auto;
-    max-height: 100%;
+    max-height: 600px;
     overflow-y: scroll;
     padding: 5px;
     position: fixed;

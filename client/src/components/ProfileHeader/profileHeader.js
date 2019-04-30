@@ -12,15 +12,17 @@ class ProfileHeader extends Component {
     constructor(props) {
         super(props);
 
+        console.log("ProfileHeader Constructing", props.user);
+
         this.state = {
-            user: null,
-            userName: null,
+            user: props.user,
+            userName: props.user.name,
             newUsername: null,
-            userLocation: "",
-            userBio: "",
+            userLocation: props.user.location,
+            userBio: props.user.aboutMe,
             editProfile: false,
-            newLocation: "",
-            newBio: "",
+            newLocation: null,
+            newBio: null,
             userIsFollowed: null,
             numPosts: 0,
             numFollowers: 0,
@@ -130,10 +132,16 @@ class ProfileHeader extends Component {
     }
 
     saveProfile = () => {
+        API.updateUser(this.props.user.id, 
+            {
+                name: this.state.newUsername || this.state.userName,
+                aboutMe: this.state.newBio || this.state.userBio,
+                location: this.state.newLocation || this.state.userLocation
+            })
         this.setState({
-            userName: this.state.newUsername,
-            userBio: this.state.newBio,
-            userLocation: this.state.newLocation,
+            userName: this.state.newUsername || this.state.userName,
+            userBio: this.state.newBio || this.state.userBio,
+            userLocation: this.state.newLocation || this.state.userLocation,
             editProfile: false
         });
     }
@@ -298,9 +306,9 @@ class ProfileHeader extends Component {
                                         id="usernameTextarea"
                                         maxLength="75"
                                         onChange={this.setNewUsername}
-                                        value={this.state.newUsername || this.props.user.name}
+                                        value={this.state.newUsername || this.state.userName}
                                     >
-                                        {this.state.userName || this.props.user.name}
+                                        {this.state.userName || this.state.userName}
                                     </textarea>
                                 </form>
                             )}
