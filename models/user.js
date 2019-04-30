@@ -19,6 +19,9 @@ module.exports = function(sequelize, DataTypes) {
     },
     aboutMe: {
       type: DataTypes.STRING
+    },
+    location: {
+      type: DataTypes.STRING
     }
   });
 
