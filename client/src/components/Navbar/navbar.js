@@ -165,7 +165,7 @@ class Navbar extends Component {
                   to="/home"
                   className={
                     window.location.pathname === "/home"
-                      ? `nav-link active ${this.props.theme}`
+                      ? `nav-link ${this.props.theme} active`
                       : `nav-link ${this.props.theme}`
                   } 
                   onClick={this.scrollToTop}
@@ -187,7 +187,7 @@ class Navbar extends Component {
                   }}
                   className={
                     window.location.pathname === "/profile"
-                      ? `nav-link active ${this.props.theme}`
+                      ? `nav-link ${this.props.theme} active`
                       : `nav-link ${this.props.theme}`
                   }
                   onClick={this.scrollToTop}
@@ -206,7 +206,7 @@ class Navbar extends Component {
                   }}
                   className={
                     window.location.pathname === "/userSearch"
-                      ? `nav-link active ${this.props.theme}`
+                      ? `nav-link ${this.props.theme} active`
                       : `nav-link ${this.props.theme}`
                   }
                 >
@@ -222,7 +222,7 @@ class Navbar extends Component {
                   }}
                   className={
                     window.location.pathname === "/notifications"
-                      ? `nav-link active ${this.props.theme}`
+                      ? `nav-link ${this.props.theme} active`
                       : `nav-link ${this.props.theme}`
                   }
                 >
