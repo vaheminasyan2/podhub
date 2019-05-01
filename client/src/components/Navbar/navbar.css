@@ -5,6 +5,10 @@ button > div {
     position: relative;
 }
 
+.active {
+    color: rgb(196, 196, 196) !important;
+}
+
 .findUsers {
     margin-left: 5px;
     margin-top: 5px;
