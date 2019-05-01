@@ -54,7 +54,7 @@ a:hover {
 
 
 .favoriteLink {
-  color: white !important;
+  color: white;
 }
 
 #favoritesTitle, 
@@ -65,7 +65,7 @@ a:hover {
 }
 
 .light {
-  color: black !important; 
+  color: black; 
 }
 
 .size {
