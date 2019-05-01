@@ -186,7 +186,7 @@ class Navbar extends Component {
                     }
                   }}
                   className={
-                    window.location.pathname === "/home"
+                    window.location.pathname === "/profile"
                       ? `nav-link active ${this.props.theme}`
                       : `nav-link ${this.props.theme}`
                   }
@@ -205,7 +205,7 @@ class Navbar extends Component {
                     pathname: "/userSearch",
                   }}
                   className={
-                    window.location.pathname === "/home"
+                    window.location.pathname === "/userSearch"
                       ? `nav-link active ${this.props.theme}`
                       : `nav-link ${this.props.theme}`
                   }
