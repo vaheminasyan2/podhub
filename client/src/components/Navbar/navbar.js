@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faUser, faHome } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faUser, faHome, faBell } from '@fortawesome/free-solid-svg-icons'
 import Logo from "./purple_back.png";
 import NavbarAudio from "../NavbarAudio/navbarAudio";
 import Popup from "reactjs-popup";
 import OptionsMenu from "../OptionsMenu/optionsMenu";
 import "./navbar.css";
 
-library.add(faSearch, faUser, faHome);
+library.add(faSearch, faUser, faHome, faBell);
 
 // NAVBAR COMPONENT
 // Rendered by App.js on every page
@@ -212,6 +212,22 @@ class Navbar extends Component {
                 >
                   <FontAwesomeIcon icon="search" />
                   <span className={`navbar-theme-{this.props.theme}`}>&nbsp; Find Users</span>
+                </Link>
+              </li>
+
+              <li className="nav-item notifications">
+                <Link
+                  to={{
+                    pathname: "/notifications",
+                  }}
+                  className={
+                    window.location.pathname === "/notifications"
+                      ? `nav-link active ${this.props.theme}`
+                      : `nav-link ${this.props.theme}`
+                  }
+                >
+                  <FontAwesomeIcon icon="bell" />
+                  <span className={`navbar-theme-{this.props.theme}`}>&nbsp; Notifications </span>
                 </Link>
               </li>
             </ul>
