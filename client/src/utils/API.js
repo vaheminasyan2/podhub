@@ -117,6 +117,10 @@ export default {
         return axios.get("/api/users/" + userId + "/followings/posts");
     },
 
+    // Update post details
+    updatePost: function(postId, body){
+        return axios.put("/api/posts/update/" + postId, body)
+    },
 
     // USERS
     // =====================================
@@ -143,6 +147,7 @@ export default {
     updateUser: function(userId, body){
         return axios.put("/api/users/update/" + userId, body)
     },
+
     // PODCAST, EPISODE SEARCH
     // =====================================
 
