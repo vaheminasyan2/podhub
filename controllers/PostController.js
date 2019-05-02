@@ -146,7 +146,8 @@ class PostController {
    */
   update(req, res) {
     db.post
-      .update(req.body, { where: req.params })
+      .update(req.body, { where: { id: req.params.id }   
+      })
       .then(post => res.json(post));
   }
 

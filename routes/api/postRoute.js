@@ -51,7 +51,7 @@ router.delete("/unlike/:postId/:userId", (req, res) => controller.removeLikes(re
  * @param {*} req
  * @param {*} res
  */
-router.get("/update/:id", (req, res) => controller.update(req, res));
+router.put("/update/:id", (req, res) => controller.update(req, res));
 
 /**
  * Route to remove the existing post <----- User Profile Page ----->
