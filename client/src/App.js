@@ -12,6 +12,7 @@ import API from "./utils/API"
 import Login from './pages/Login';
 import Settings from "./pages/Settings";
 import Error from "./pages/Error";
+import Notifications from "./pages/Notifications";
 import "./App.css";
 
 class App extends Component {
@@ -140,23 +141,23 @@ class App extends Component {
     if (totalScroll >= boundaryDiv.scrollHeight - boundaryDiv.clientHeight) {
 
       API.getPodcasts(this.state.podcastSearch, this.state.podcasts.length)
-      .then(res => {
-        this.setState({
-          podcasts: podcasts.concat(res.data.results),
-          APICalls: this.state.APICalls + 1
-        }, () => {
-          console.log("API Calls: ", this.state.APICalls)
-        });
+        .then(res => {
+          this.setState({
+            podcasts: podcasts.concat(res.data.results),
+            APICalls: this.state.APICalls + 1
+          }, () => {
+            console.log("API Calls: ", this.state.APICalls)
+          });
 
-        boundaryDiv.scrollTop = totalScroll;
-      })
-      .catch((error) => {
-        console.log("Error getting podcasts", error);
-        this.setState({
-          podcasts: [],
-          message: "We couldn't find a match."
+          boundaryDiv.scrollTop = totalScroll;
         })
-      });
+        .catch((error) => {
+          console.log("Error getting podcasts", error);
+          this.setState({
+            podcasts: [],
+            message: "We couldn't find a match."
+          })
+        });
     }
   }
 
@@ -377,12 +378,12 @@ class App extends Component {
                   />
 
                   <Route exact path="/podcastSearch" render={(props) =>
-                      <PodcastSearchPage {...props}
-                        userQuery={this.state.podcastSearch}
-                        podcasts={this.state.podcasts}
-                        theme={this.state.theme}
-                      />
-                    }
+                    <PodcastSearchPage {...props}
+                      userQuery={this.state.podcastSearch}
+                      podcasts={this.state.podcasts}
+                      theme={this.state.theme}
+                    />
+                  }
                   />
 
                   <Route exact path="/episodeList" component={EpisodeList} />
@@ -414,6 +415,15 @@ class App extends Component {
                       <Settings {...props}
                         darkTheme={this.darkTheme}
                         lightTheme={this.lightTheme}
+                        theme={this.state.theme}
+                      />
+                    }
+                  />
+
+                  <Route exact path="/notifications"
+                    render={() =>
+                      <Notifications
+                        user={this.state.user}
                         theme={this.state.theme}
                       />
                     }
