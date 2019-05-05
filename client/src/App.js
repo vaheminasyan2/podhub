@@ -13,6 +13,7 @@ import Login from './pages/Login';
 import Settings from "./pages/Settings";
 import Error from "./pages/Error";
 import Notifications from "./pages/Notifications";
+import Contact from "./pages/Contact";
 import "./App.css";
 
 class App extends Component {
@@ -404,6 +405,15 @@ class App extends Component {
                   <Route exact path="/userSearch"
                     render={() =>
                       <UserSearch
+                        user={this.state.user}
+                        theme={this.state.theme}
+                      />
+                    }
+                  />
+
+                  <Route exact path="/contact"
+                    render={(props) => 
+                      <Contact {...props}
                         user={this.state.user}
                         theme={this.state.theme}
                       />
