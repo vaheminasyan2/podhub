@@ -38,28 +38,36 @@ class Settings extends Component {
                     className={`bg-${this.props.theme} settings-bg-${this.props.theme}`}
                 >
 
+                    {/* USER NAME */}
                     <h4>{this.props.location.state.user.name}</h4>
                     <br/>
 
-                    <h4 className="border-bottom">Profile</h4>
-                    <br/>
-                    <div>
-                        Change Name {this.props.location.state.user.name}
-                    </div>
+                    {/* NAME */}
+                    {/* <div>
+                        <label>Change Name </label>
+                        {this.props.location.state.user.name}
+                    </div> */}
                     
-                    <p>Change Photo</p>
-
+                    {/* PHOTO */}
+                    {/* <div>
+                        <label>Change Photo</label>
+                        <form>
+                            <input type="file"/>
+                        </form>
+                    </div> */}
+                    
+                    {/* THEME */}
                     <div>
-                        <p>Change Theme </p>
+                        <label>Theme </label>
                         <button
-                            className="btn btn-dark theme dark"
+                            className="btn btn-dark btn-sm theme dark"
                             name="dark"
                             onClick={this.props.darkTheme}
                         >
                         Dark 
                         </button>
                         <button
-                            className="btn btn-light theme light"
+                            className="btn btn-light btn-sm theme light"
                             name="light"
                             onClick={this.props.lightTheme}
                         >
@@ -67,12 +75,12 @@ class Settings extends Component {
                         </button>
                     </div>
 
-                    <h4 className="border-bottom">Account</h4>
-                    <p
+                    {/* DELETE ACCOUNT */}
+                    {/* <p
                         onClick={this.deleteAccount}
                     >
                     Delete Account
-                    </p>
+                    </p> */}
 
                 </div>
             </Container>
