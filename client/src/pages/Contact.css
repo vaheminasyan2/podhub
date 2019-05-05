@@ -1,0 +1,85 @@
+.contact-bg-dark {
+    border-radius: 15px;
+    color: white;
+    padding: 15px;
+}
+
+.contact-bg-light {
+    border-radius: 15px;
+    color: black;
+    padding: 15px;
+}
+
+.contactList {
+    margin: 40px auto;
+    padding: 10px;
+}
+
+.contacts-bg-light .teamMember a {
+    color: black !important;
+    font-size: 14px;
+}
+
+.contacts-bg-dark .teamMember a {
+    color: white !important;
+    font-size: 14px;
+}
+
+.contactRow {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.contactRow:last-child {
+    margin-top: -30px;
+}
+
+#contactTitle {
+    margin-bottom: 20px;
+    text-align: center !important;
+}
+
+.teamMember {
+    border-radius: 12px;
+    cursor: pointer;
+    display: inline-block;
+    height: 250px;
+    margin: 10px;
+    padding: 5px;
+    text-align: center;
+    width: 185px;
+}
+
+.teamMember h4 {
+    font-size: 18px;
+    height: auto;
+    margin-bottom: 0px;
+    padding: 0;
+}
+
+.teamMember img {
+    border: 1px solid black;
+    border-radius: 12px;
+    height: 150px;
+    margin: 10px auto;
+    width: 150px;
+}
+
+.teamMember a:hover {
+    color: rgb(61, 61, 61);
+}
+
+@media screen and (max-width: 960px) {
+
+    #contactTitle {
+        margin-bottom: 50px;
+    }
+
+    .teamMember {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: -35px;
+    }
+}
