@@ -12,7 +12,8 @@ class OptionsMenu extends Component {
 
         this.state = {
             user: null,
-            openSettings: false
+            openSettings: false,
+            openContact: false,
         }
     }
 
@@ -33,6 +34,12 @@ class OptionsMenu extends Component {
         });
     }
 
+    openContact = () => {
+        this.setState({
+            openContact: true
+        });
+    }
+
     logout = () => {
         this.props.logout();
     }
@@ -45,34 +52,54 @@ class OptionsMenu extends Component {
 
                 <ul className="optionsList">
 
+                    {/* CONTACT US */}
+                    <li
+                        onClick={this.openContact}
+                    >
+                        Contact
+                    </li>
+
                     {/* PROFILE SETTINGS */}
-                    <li 
+                    <li
                         onClick={this.openSettings}
                     >
-                    Settings
+                        Settings
                     </li>
 
                     {/* LOG OUT */}
                     <li
                         onClick={this.logout}
                     >
-                    Log Out
+                        Log Out
                     </li>
                 </ul>
 
                 {this.state.openSettings ? (
-                    <Redirect 
+                    <Redirect
                         to={{
                             pathname: "/settings",
                             state: {
                                 user: this.state.user
                             }
                         }}
-                        
+
                     />
                 ) : (
-                    <></>
-                )}
+                        <></>
+                    )}
+
+                {this.state.openContact ? (
+                    <Redirect
+                        to={{
+                            pathname: "/contact",
+                            state: {
+                                user: this.state.user
+                            }
+                        }}
+                    />
+                ) : (
+                        <></>
+                    )}
 
             </div>
         );
