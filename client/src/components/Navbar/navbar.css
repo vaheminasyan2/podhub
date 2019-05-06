@@ -75,7 +75,6 @@ button > div {
     margin-left: 10px;
     margin-top: 0px;
     position: absolute;
-    right:0;
 }
 
 #topPopupText:after {
@@ -96,7 +95,7 @@ button > div {
 #podcastInput {
     border-radius: 21px;
     text-align: left;
-    width: 170px;
+    width: 250px;
 }
 
 #size {
@@ -114,15 +113,21 @@ button > div {
     width: 100%;
     z-index: 0;
 }
+
 .mobilePosition{
-    position: relative;
-    left: 25.5em;
-    
-    
+    left: 50%;
+    position: fixed;
+    top: 0.7em;
+    transform: translate(-150px);
 }
 
 .navbar-toggler{
     cursor: pointer;
+}
+
+#navContentContainer {
+    margin: 0px;
+    max-width: 100%;
 }
 
 @media only screen and (max-width: 600px) {
@@ -147,9 +152,10 @@ button > div {
     }
 
     .mobilePosition{
+        left: 50%;
         position: fixed;
-        left: 25%;
         top: 0.7em;
+        transform: translate(-150px);
     }
 
     .navbarAudioPopup{
@@ -157,7 +163,7 @@ button > div {
     }
   }
 
-  @media only screen and (max-width: 400px) {
+  /* @media only screen and (max-width: 400px) {
     .mobilePosition{
         left: 17%;
     }
@@ -167,4 +173,4 @@ button > div {
     .mobilePosition{
         left: 12%;
     }
-  }
+  } */
