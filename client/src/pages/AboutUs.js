@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Container from "../components/Container/container";
 import API from "../utils/API";
-import "./Contact.css";
+import "./AboutUs.css";
 
-class Contact extends Component {
+class AboutUs extends Component {
 
     constructor(props) {
         super(props);
@@ -16,6 +16,8 @@ class Contact extends Component {
     componentDidMount = () => {
         this.setState({
             user: this.props.location.state.user
+        }, () => {
+            this.props.location.hideOptionsMenu();
         });
     }
 
@@ -26,8 +28,27 @@ class Contact extends Component {
                 <div
                     className={` contacts-bg-${this.props.theme} contactList`}
                 >
-                    <h3 className="" id="contactTitle">Contact Us</h3>
+                    <div className="aboutRow">
+                        <h3 className="border-bottom" id="aboutTitle">About Us</h3>
+                        <p>
+                            In April 2019, a team of six intrepid web developers launched Podhub as their final project for the University of Washington Coding Boot Camp.
+                            The goal of the project was to provide an online platform on which users can easily share, discover, and discuss podcasts with 
+                            friends and followers. 
+                        </p>
+
+                        <p>
+                            The project was a substantial undertaking and was accomplished only through teamwork, determination, and unabashed use of the Stack Overflow forums. 
+                            Post-graduation, the Podhub team decided to continue developing Podhub to its fullest extent.
+                        </p>
+
+                        <p>
+                            Today, the site is operable and yet still a work in progress with features such as direct messaging, notifications, and functionality improvements 
+                            currently in the works. 
+                        </p>
+                    </div>
+
                     <div className="contactRow">
+                        <h3 className="border-bottom" id="aboutTitle">Our Team</h3>
                         <div className="teamMember">
                             <a href="https://www.linkedin.com/in/carson-wack/" target="_blank">
                                 <img src="https://avatars2.githubusercontent.com/u/42584679?s=400&v=4"/>
@@ -90,4 +111,4 @@ class Contact extends Component {
     }
 }
 
-export default Contact;
+export default AboutUs;

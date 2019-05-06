@@ -1,3 +1,15 @@
+.aboutRow {
+    font-size: 14px;
+    margin: 10px auto;
+    max-width: 800px;
+    text-align: justify;
+}
+
+#aboutTitle {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
 .contact-bg-dark {
     border-radius: 15px;
     color: white;
@@ -26,18 +38,13 @@
 }
 
 .contactRow {
-    margin-left: auto;
-    margin-right: auto;
+    margin: 10px auto;
+    max-width: 800px;
     text-align: center;
 }
 
 .contactRow:last-child {
     margin-top: -30px;
-}
-
-#contactTitle {
-    margin-bottom: 20px;
-    text-align: center !important;
 }
 
 .teamMember {

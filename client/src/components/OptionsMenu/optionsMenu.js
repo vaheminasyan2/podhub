@@ -13,7 +13,7 @@ class OptionsMenu extends Component {
         this.state = {
             user: null,
             openSettings: false,
-            openContact: false,
+            openAboutUs: false,
         }
     }
 
@@ -34,9 +34,9 @@ class OptionsMenu extends Component {
         });
     }
 
-    openContact = () => {
+    openAboutUs = () => {
         this.setState({
-            openContact: true
+            openAboutUs: true
         });
     }
 
@@ -52,11 +52,11 @@ class OptionsMenu extends Component {
 
                 <ul className="optionsList">
 
-                    {/* CONTACT US */}
+                    {/* ABOUT US */}
                     <li
-                        onClick={this.openContact}
+                        onClick={this.openAboutUs}
                     >
-                        Contact
+                        About
                     </li>
 
                     {/* PROFILE SETTINGS */}
@@ -80,7 +80,8 @@ class OptionsMenu extends Component {
                             pathname: "/settings",
                             state: {
                                 user: this.state.user
-                            }
+                            },
+                            hideOptionsMenu: this.props.hideOptionsMenu
                         }}
 
                     />
@@ -88,13 +89,14 @@ class OptionsMenu extends Component {
                         <></>
                     )}
 
-                {this.state.openContact ? (
+                {this.state.openAboutUs ? (
                     <Redirect
                         to={{
-                            pathname: "/contact",
+                            pathname: "/aboutUs",
                             state: {
                                 user: this.state.user
-                            }
+                            },
+                            hideOptionsMenu: this.props.hideOptionsMenu
                         }}
                     />
                 ) : (
