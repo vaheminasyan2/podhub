@@ -27,7 +27,7 @@ class AboutUs extends Component {
                     className={` contacts-bg-${this.props.theme} contactList`}
                 >
                     <div className="aboutRow">
-                        <h3 className="" id="aboutTitle">About Us</h3>
+                        <h3 className="border-bottom" id="aboutTitle">About Us</h3>
                         <p>
                             In April 2019, a team of six intrepid web developers launched Podhub as their final project for the University of Washington Coding Boot Camp.
                             The goal of the project was to provide an online platform on which users can easily share, discover, and discuss podcasts with 
@@ -46,7 +46,7 @@ class AboutUs extends Component {
                     </div>
 
                     <div className="contactRow">
-                        <h3 className="" id="aboutTitle">Our Team</h3>
+                        <h3 className="border-bottom" id="aboutTitle">Our Team</h3>
                         <div className="teamMember">
                             <a href="https://www.linkedin.com/in/carson-wack/" target="_blank">
                                 <img src="https://avatars2.githubusercontent.com/u/42584679?s=400&v=4"/>
