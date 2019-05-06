@@ -7,6 +7,7 @@
 
 #aboutTitle {
     margin-bottom: 20px;
+    text-align: left;
 }
 
 .contact-bg-dark {
@@ -39,6 +40,7 @@
 .contactRow {
     margin: 10px auto;
     max-width: 800px;
+    text-align: center;
 }
 
 .contactRow:last-child {
