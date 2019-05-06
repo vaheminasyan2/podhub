@@ -46,6 +46,7 @@ class AboutUs extends Component {
                     </div>
 
                     <div className="contactRow">
+                        <h3 className="" id="aboutTitle">Our Team</h3>
                         <div className="teamMember">
                             <a href="https://www.linkedin.com/in/carson-wack/" target="_blank">
                                 <img src="https://avatars2.githubusercontent.com/u/42584679?s=400&v=4"/>
