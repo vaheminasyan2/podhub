@@ -16,6 +16,8 @@ class AboutUs extends Component {
     componentDidMount = () => {
         this.setState({
             user: this.props.location.state.user
+        }, () => {
+            this.props.location.hideOptionsMenu();
         });
     }
 
