@@ -35,12 +35,12 @@ class AboutUs extends Component {
                         </p>
 
                         <p>
-                            The project was a substantial undertaking and was accomplished only through teamwork, determination, and Stack Overflow. Post-graduation, 
-                            the Podhub team decided to continue developing Podhub to its fullest extent.
+                            The project was a substantial undertaking and was accomplished only through teamwork, determination, and unabashed use of the Stack Overflow forums. 
+                            Post-graduation, the Podhub team decided to continue developing Podhub to its fullest extent.
                         </p>
 
                         <p>
-                            Today, the site is still a work in progress with features such as direct messaging, notifications, and functionality improvements 
+                            Today, the site is operable and yet still a work in progress with features such as direct messaging, notifications, and functionality improvements 
                             currently in the works. 
                         </p>
                     </div>
