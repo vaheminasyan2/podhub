@@ -33,6 +33,16 @@ class AboutUs extends Component {
                             The goal of the project was to provide an online platform on which users can easily share, discover, and discuss podcasts with 
                             friends and followers. 
                         </p>
+
+                        <p>
+                            The project was a substantial undertaking and was accomplished only through teamwork, determination, and Stack Overflow. Post-graduation, 
+                            the Podhub team decided to continue developing Podhub to its fullest extent.
+                        </p>
+
+                        <p>
+                            Today, the site is still a work in progress with features such as direct messaging, notifications, and functionality improvements 
+                            currently in the works. 
+                        </p>
                     </div>
 
                     <div className="contactRow">
