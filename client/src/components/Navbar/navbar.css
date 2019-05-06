@@ -54,7 +54,8 @@ button > div {
     color: black !important;
     font-size: 12px;
     font-weight: bold;
-    margin-left: -43em;
+    left: 50%;
+    /* margin-left: -43em; */
     opacity: 1;
     overflow: hidden;
     text-overflow: ellipsis;
