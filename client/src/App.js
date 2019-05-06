@@ -13,7 +13,7 @@ import Login from './pages/Login';
 import Settings from "./pages/Settings";
 import Error from "./pages/Error";
 import Notifications from "./pages/Notifications";
-import Contact from "./pages/Contact";
+import AboutUs from "./pages/AboutUs";
 import "./App.css";
 
 class App extends Component {
@@ -411,9 +411,9 @@ class App extends Component {
                     }
                   />
 
-                  <Route exact path="/contact"
+                  <Route exact path="/aboutUs"
                     render={(props) => 
-                      <Contact {...props}
+                      <AboutUs {...props}
                         user={this.state.user}
                         theme={this.state.theme}
                       />
