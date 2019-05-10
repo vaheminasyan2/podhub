@@ -14,7 +14,7 @@ class Notification extends Component {
         newLikes: [],
         newComments: [],
         newFollowers: [],
-        message: "",
+        message: "There are no notifications",
         user: null
     };
 

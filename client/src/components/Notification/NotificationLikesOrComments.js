@@ -5,7 +5,7 @@ import API from "../../utils/API";
 import "./notification.css";
 
 
-class Notification extends Component {
+class NotificationLikesOrComments extends Component {
     constructor(props) {
 
         super(props);
@@ -38,4 +38,4 @@ class Notification extends Component {
     }
 }
 
-export default Notification;
+export default NotificationLikesOrComments;
