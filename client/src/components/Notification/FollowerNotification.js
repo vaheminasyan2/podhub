@@ -44,7 +44,7 @@ class FollowerNotification extends Component {
 
                         <div className="notificationText">
                             <p className={`notif`}>
-                                {this.props.userName}&nbsp;
+                                <strong>{this.props.userName}</strong>&nbsp;
                                     started following you.
                 </p>
                         </div>
