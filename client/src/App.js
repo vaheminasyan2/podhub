@@ -412,7 +412,7 @@ class App extends Component {
                   />
 
                   <Route exact path="/aboutUs"
-                    render={(props) => 
+                    render={(props) =>
                       <AboutUs {...props}
                         user={this.state.user}
                         theme={this.state.theme}
@@ -432,10 +432,17 @@ class App extends Component {
 
                   <Route exact path="/notifications"
                     render={() =>
-                      <Notifications
-                        user={this.state.user}
-                        theme={this.state.theme}
-                      />
+                      <div className="container">
+                        <div className="row">
+                          <div className="col-md-2 col-xs-0"></div>
+                          <div className="col-md-8 col-xs-12">
+                            <Notifications
+                              user={this.state.user}
+                              theme={this.state.theme}
+                            />
+                          </div>
+                        </div>
+                      </div>
                     }
                   />
 

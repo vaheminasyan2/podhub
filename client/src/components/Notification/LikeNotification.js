@@ -6,36 +6,30 @@ import "./notification.css";
 
 
 class LikeNotification extends Component {
-    constructor(props) {
-
-        super(props);
-
-        this.state = {
-            podcastId: "",
-            podcastName: "",
-            episodeId: "",
-            episodeName: "",
-            userMessage: ""
-        }
-    }
-
-    componentDidMount = () => {
-        this.setState ({
-            podcastId: this.props.podcastId,
-            podcastName: this.props.podcastName,
-            episodeName: this.props.episodeName,
-            userMessage: this.props.userMessage
-        })
-    }
 
     render() {
         return (
             <div className="row" id={`notification-${this.props.theme}`}>
-                <div className="col-md-xs p-2"> 
-                New Like&nbsp;:&nbsp;
-                {this.props.podcastName}&nbsp;--&nbsp;
-                {this.props.episodeName}&nbsp;:&nbsp;
-                {this.props.userMessage}
+
+                <div className="col-md-1 col-xs-1">
+                    <Link
+                        to={{
+                            pathname: "/profile",
+                            state: {
+                                user: {
+                                    id: this.props.userId,
+                                    name: this.props.userName,
+                                    profileImage: this.props.userImage
+                                }
+                            }
+                        }}
+                    >
+                        <img id="profileImage" src={this.props.userImage} alt="User" />
+                    </Link>
+                </div>
+
+                <div className="col-md-10 col-xs-10 p-2 notification">
+                    {this.props.userName}&nbsp; liked your post.
                 </div>
 
             </div>

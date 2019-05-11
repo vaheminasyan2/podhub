@@ -4,7 +4,7 @@ import Row from "../components/Row/row";
 import API from "../utils/API";
 import LikeNotification from "../components/Notification/LikeNotification";
 import CommentNotification from "../components/Notification/CommentNotification";
-import NotificationFollowers from "../components/Notification/NotificationFollowers";
+import FollowerNotification from "../components/Notification/FollowerNotification";
 import "./Notifications.css"
 
 // NOTIFICATION PAGE
@@ -14,29 +14,26 @@ class Notification extends Component {
     state = {
         newLikes: [
             {
-                podcastId:1,
-                podcastName:"Joe Rogan",
-                episodeId:1,
-                episodeName:"This is placeholder for episode name",
-                userMessage:"user messege"
-            },
+                userId:1,
+                userName: "Vahe Minasyan",
+                userImage:"https://via.placeholder.com/150C/O",
+                postId:21
+            }
         ],
         newComments: [
             {
-                podcastId:2,
-                podcastName:"Craig Roschele",
-                episodeId:2,
-                episodeName:"This is placeholder for episode name",
-                userMessage:"user messege"
-            },
-
+                userId:2,
+                userName: "John Smith",
+                userImage:"https://via.placeholder.com/150C",
+                postId:22
+            }
         ],
         newFollowers: [
             {
-                userId:1,
-                userName:"Vahe Minasyan",
+                userId:3,
+                userName:"Ricardo Joe",
                 userImage:"https://via.placeholder.com/150C/O"
-            },
+            }
         ],
         message: "There are no notifications",
         user: null
@@ -76,31 +73,30 @@ class Notification extends Component {
                                     {this.state.newLikes.map(newLike => (
                                         <LikeNotification
                                             key={newLike.id}
-                                            podcastId={newLike.podcastId}
-                                            podcastName={newLike.podcastName}
-                                            episodeId={newLike.episodeId}
+                                            userId={newLike.userId}
+                                            userName={newLike.userName}
+                                            userImage={newLike.userImage}
                                             episodeName={newLike.episodeName}
-                                            userMessage={newLike.userMessage}
+                                            postId={newLike.postId}
                                             theme={this.props.theme}
                                         />
                                     ))}
                                     {this.state.newComments.map(newComment => (
                                         <CommentNotification
                                             key={newComment.id}
-                                            podcastId={newComment.podcastId}
-                                            podcastName={newComment.podcastName}
-                                            episodeId={newComment.episodeId}
-                                            episodeName={newComment.episodeName}
-                                            userMessage={newComment.userMessage}
+                                            userId={newComment.userId}
+                                            userName={newComment.userName}
+                                            userImage={newComment.userImage}
+                                            postId={newComment.postId}
                                             theme={this.props.theme}
                                         />
                                     ))}
                                     {this.state.newFollowers.map(newFollower => (
-                                        <NotificationFollowers
+                                        <FollowerNotification
                                             key={newFollower.id}
                                             userId={newFollower.userId}
-                                            userImage={newFollower.userImage}
                                             userName={newFollower.userName}
+                                            userImage={newFollower.userImage}
                                             theme={this.props.theme}
                                         />
                                     ))}
@@ -110,8 +106,7 @@ class Notification extends Component {
                             :
                             (
                                 <h4 className="text-center">{this.state.message}</h4>
-                            )
-                    }
+                            )}
                 </Row>
             </div>
         )

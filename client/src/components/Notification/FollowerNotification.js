@@ -4,8 +4,7 @@ import moment from "moment";
 import API from "../../utils/API";
 import "./notification.css";
 
-
-class CommentNotification extends Component {
+class FollowerNotification extends Component {
 
     render() {
         return (
@@ -29,7 +28,7 @@ class CommentNotification extends Component {
                 </div>
 
                 <div className="col-md-10 col-xs-10 p-2 notification">
-                    {this.props.userName}&nbsp; commented on your post.
+                    {this.props.userName}&nbsp; started following you.
                 </div>
 
             </div>
@@ -37,4 +36,4 @@ class CommentNotification extends Component {
     }
 }
 
-export default CommentNotification;
+export default FollowerNotification;
