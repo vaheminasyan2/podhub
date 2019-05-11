@@ -14,6 +14,7 @@ import Settings from "./pages/Settings";
 import Error from "./pages/Error";
 import Notifications from "./pages/Notifications";
 import AboutUs from "./pages/AboutUs";
+import moment from "moment";
 import "./App.css";
 
 class App extends Component {
@@ -199,6 +200,7 @@ class App extends Component {
 
     localStorage.clear();
     sessionStorage.clear();
+    //console.log(moment().format())
 
     this.setState({
       user: null,
