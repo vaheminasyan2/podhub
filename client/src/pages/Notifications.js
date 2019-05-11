@@ -13,30 +13,30 @@ class Notification extends Component {
 
     state = {
         newLikes: [
-            {
-                userId:1,
-                userName: "Vahe Minasyan",
-                userImage:"https://via.placeholder.com/150C/O",
-                postId:21,
-                date:"2019-04-16 05:30:39"
-            }
+            // {
+            //     userId:1,
+            //     userName: "Vahe Minasyan",
+            //     userImage:"https://via.placeholder.com/150C/O",
+            //     postId:21,
+            //     date:"2019-04-16 05:30:39"
+            // }
         ],
         newComments: [
-            {
-                userId:2,
-                userName: "John Smith",
-                userImage:"https://via.placeholder.com/150C",
-                postId:22,
-                date: "2019-04-18 04:05:01"
-            }
+            // {
+            //     userId:2,
+            //     userName: "John Smith",
+            //     userImage:"https://via.placeholder.com/150C",
+            //     postId:22,
+            //     date: "2019-04-18 04:05:01"
+            // }
         ],
         newFollowers: [
-            {
-                userId:3,
-                userName:"Ricardo Joe",
-                userImage:"https://via.placeholder.com/150C/O",
-                date: "2019-05-10 22:24:35"
-            }
+            // {
+            //     userId:3,
+            //     userName:"Ricardo Joe",
+            //     userImage:"https://via.placeholder.com/150C/O",
+            //     date: "2019-05-10 22:24:35"
+            // }
         ],
         message: "There are no notifications",
         user: null
