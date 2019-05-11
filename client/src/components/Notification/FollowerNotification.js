@@ -31,12 +31,10 @@ class FollowerNotification extends Component {
 
                     <Link
                         to={{
-                            pathname: "/profile",
+                            pathname: "/userSearch",
                             state: {
                                 user: {
-                                    id: this.props.userId,
-                                    name: this.props.userName,
-                                    profileImage: this.props.userImage
+                                    id: this.props.loginUser.id
                                 }
                             }
                         }}

@@ -44,6 +44,7 @@ class Notification extends Component {
         //this.checkNewLikes();
         //this.checkNewComments();
         //this.checkNewFollowers();
+
     };
 
     checkNewLikes = () => {
@@ -79,6 +80,7 @@ class Notification extends Component {
                                             episodeName={newLike.episodeName}
                                             postId={newLike.postId}
                                             theme={this.props.theme}
+                                            loginUser={this.props.user}
                                         />
                                     ))}
                                     {this.state.newComments.map(newComment => (
@@ -89,6 +91,7 @@ class Notification extends Component {
                                             userImage={newComment.userImage}
                                             postId={newComment.postId}
                                             theme={this.props.theme}
+                                            loginUser={this.props.user}
                                         />
                                     ))}
                                     {this.state.newFollowers.map(newFollower => (
@@ -98,6 +101,7 @@ class Notification extends Component {
                                             userName={newFollower.userName}
                                             userImage={newFollower.userImage}
                                             theme={this.props.theme}
+                                            loginUser={this.props.user}
                                         />
                                     ))}
 

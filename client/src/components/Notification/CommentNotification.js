@@ -35,9 +35,9 @@ class CommentNotification extends Component {
                             pathname: "/profile",
                             state: {
                                 user: {
-                                    id: this.props.userId,
-                                    name: this.props.userName,
-                                    profileImage: this.props.userImage
+                                    id: this.props.loginUser.id,
+                                    name: this.props.loginUser.name,
+                                    profileImage: this.props.loginUser.profileImage
                                 }
                             }
                         }}
