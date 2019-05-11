@@ -46,7 +46,7 @@ class CommentNotification extends Component {
                         <div className="notificationText">
                             <p className={`notif`}>
                                 <strong>{this.props.userName}</strong>&nbsp;
-                                    commented your post -- {moment(this.props.date).startOf('hour').fromNow()}
+                                    commented on your post -- {moment(this.props.date).startOf('hour').fromNow()}
                 </p>
                         </div>
 
