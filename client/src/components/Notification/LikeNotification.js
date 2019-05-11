@@ -28,8 +28,30 @@ class LikeNotification extends Component {
                     </Link>
                 </div>
 
-                <div className="col-md-10 col-xs-10 p-2 notification">
-                    {this.props.userName}&nbsp; liked your post.
+                <div className="col-md-10 col-xs-10 pl-1 notification">
+
+                    <Link
+                        to={{
+                            pathname: "/profile",
+                            state: {
+                                user: {
+                                    id: this.props.userId,
+                                    name: this.props.userName,
+                                    profileImage: this.props.userImage
+                                }
+                            }
+                        }}
+                    >
+
+                        <div className="notificationText">
+                            <p className={`notif`}>
+                                {this.props.userName}&nbsp;
+                                    liked your post.
+                </p>
+                        </div>
+
+                    </Link>
+                    
                 </div>
 
             </div>

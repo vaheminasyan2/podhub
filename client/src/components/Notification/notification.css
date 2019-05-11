@@ -1,3 +1,9 @@
 .notification:hover {
     opacity: 0.8; 
 }
+
+.notif {
+    color: white;
+    font-size: 16px;
+    margin: 5px 0px 15px 5px
+}
