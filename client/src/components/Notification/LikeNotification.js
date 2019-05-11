@@ -5,6 +5,7 @@ import API from "../../utils/API";
 import "./notification.css";
 
 
+
 class LikeNotification extends Component {
   
 
@@ -47,7 +48,7 @@ class LikeNotification extends Component {
                         <div className="notificationText">
                             <p className={`notif`}>
                                 <strong>{this.props.userName}</strong>&nbsp;
-                                    liked your post.
+                                    liked your post -- {moment(this.props.date).startOf('hour').fromNow()}
                 </p>
                         </div>
 

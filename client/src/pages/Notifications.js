@@ -17,7 +17,8 @@ class Notification extends Component {
                 userId:1,
                 userName: "Vahe Minasyan",
                 userImage:"https://via.placeholder.com/150C/O",
-                postId:21
+                postId:21,
+                date:"2019-04-16 05:30:39"
             }
         ],
         newComments: [
@@ -25,14 +26,16 @@ class Notification extends Component {
                 userId:2,
                 userName: "John Smith",
                 userImage:"https://via.placeholder.com/150C",
-                postId:22
+                postId:22,
+                date: "2019-04-18 04:05:01"
             }
         ],
         newFollowers: [
             {
                 userId:3,
                 userName:"Ricardo Joe",
-                userImage:"https://via.placeholder.com/150C/O"
+                userImage:"https://via.placeholder.com/150C/O",
+                date: "2019-05-10 22:24:35"
             }
         ],
         message: "There are no notifications",
@@ -79,6 +82,7 @@ class Notification extends Component {
                                             userImage={newLike.userImage}
                                             episodeName={newLike.episodeName}
                                             postId={newLike.postId}
+                                            date={newLike.date}
                                             theme={this.props.theme}
                                             loginUser={this.props.user}
                                         />
@@ -90,6 +94,7 @@ class Notification extends Component {
                                             userName={newComment.userName}
                                             userImage={newComment.userImage}
                                             postId={newComment.postId}
+                                            date={newComment.date}
                                             theme={this.props.theme}
                                             loginUser={this.props.user}
                                         />
@@ -100,6 +105,7 @@ class Notification extends Component {
                                             userId={newFollower.userId}
                                             userName={newFollower.userName}
                                             userImage={newFollower.userImage}
+                                            date={newFollower.date}
                                             theme={this.props.theme}
                                             loginUser={this.props.user}
                                         />
