@@ -5,15 +5,15 @@ import API from "../../utils/API";
 import "./notification.css";
 
 
-class NotificationLikesOrComments extends Component {
+class CommentNotification extends Component {
     constructor(props) {
 
         super(props);
 
         this.state = {
-            userId: "",
             podcastId: "",
             podcastName: "",
+            episodeId: "",
             episodeName: "",
             userMessage: ""
         }
@@ -21,7 +21,6 @@ class NotificationLikesOrComments extends Component {
 
     componentDidMount = () => {
         this.setState ({
-            userId: this.props.userId,
             podcastId: this.props.podcastId,
             podcastName: this.props.podcastName,
             episodeName: this.props.episodeName,
@@ -31,11 +30,17 @@ class NotificationLikesOrComments extends Component {
 
     render() {
         return (
-            <div>
+            <div className="row" id={`notification-${this.props.theme}`}>
+                <div className="col-md-xs p-2"> 
+                New Comment&nbsp;:&nbsp;
+                {this.props.podcastName}&nbsp;--&nbsp;
+                {this.props.episodeName}&nbsp;:&nbsp;
+                {this.props.userMessage}
+                </div>
 
             </div>
         )
     }
 }
 
-export default NotificationLikesOrComments;
+export default CommentNotification;
