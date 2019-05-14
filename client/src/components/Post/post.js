@@ -20,8 +20,6 @@ class Post extends Component {
 
         super(props);
 
-        this.myRef = React.createRef();
-        
         this.state = {
             userId: "",
             userName: "",
@@ -163,7 +161,7 @@ class Post extends Component {
                 this.closeCommentsModal();
                 this.setState({
                     numComments: this.state.numComments + 1,
-                    currentComment:"",
+                    currentComment: "",
                 });
             });
     }
@@ -175,12 +173,11 @@ class Post extends Component {
             this.closeCommentsModal();
             this.setState({
                 numComments: this.state.numComments - 1
-                
+
             });
 
-            if (this.state.numComments > 0) 
-            {this.handleShowCommentsModal();}
-            
+            if (this.state.numComments > 0) { this.handleShowCommentsModal(); }
+
         });
     };
 
@@ -401,7 +398,7 @@ class Post extends Component {
                             className={`row rounded bg-${this.props.theme} text-secondary like`}
                             key={like.id}
                         >
-                            <Link 
+                            <Link
                                 className="col-3 mt-0"
                                 to={{
                                     pathname: "/profile",
@@ -413,7 +410,7 @@ class Post extends Component {
                                         }
                                     }
                                 }}
-                                >
+                            >
                                 <img
                                     src={like.image}
                                     alt="User Icon"
@@ -422,8 +419,8 @@ class Post extends Component {
                                 />
                             </Link>
 
-                            <div className="col-9">	
-                                <p>{like.name}</p>	
+                            <div className="col-9">
+                                <p>{like.name}</p>
                             </div>
                         </div>
                     ))}
@@ -449,7 +446,7 @@ class Post extends Component {
 
                     <form>
                         <div className={`form-group mt-4 bg-${this.props.theme} text-secondary`}>
-                            <textarea 
+                            <textarea
                                 type="text"
                                 className="form-control"
                                 rows="3"
@@ -459,7 +456,7 @@ class Post extends Component {
                                 placeholder="Enter your comment"
                                 ref={this.state.currentComment}
                                 onChange={this.handleInputChange}
-                                //value={this.state.currentComment}
+                            //value={this.state.currentComment}
                             />
                         </div>
                         <button

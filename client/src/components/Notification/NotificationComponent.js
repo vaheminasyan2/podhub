@@ -8,7 +8,7 @@ class NotificationComponent extends Component {
     render() {
         return (
             <div className="row" id={`notification-${this.props.theme}`}>
-                
+
                 <div className="col-md-1 col-xs-1">
                     <Link
                         to={{
@@ -19,7 +19,7 @@ class NotificationComponent extends Component {
                                     name: this.props.userName,
                                     profileImage: this.props.userImage
                                 }
-                            }, 
+                            },
                         }}
                     >
                         <img id="profileImage" src={this.props.userImage} alt="User" />
@@ -73,9 +73,9 @@ class NotificationComponent extends Component {
                                             ?
                                             (
                                                 <div className="notificationText">
-                                                    <p 
-                                                    className={`notif`} 
-                                                    id={this.props.postId}
+                                                    <p
+                                                        className={`notif`}
+                                                        id={this.props.postId}
                                                     >
                                                         <strong>{this.props.userName}</strong>&nbsp;
                                             liked your post -- {moment(this.props.date).startOf('hour').fromNow()}

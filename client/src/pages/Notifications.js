@@ -70,7 +70,7 @@ class Notification extends Component {
             <div className={`container bg-${this.props.theme} rounded`} id="post-container">
                 <Row>
                     {
-                        this.state.notifications.length > 0 
+                        this.state.notifications.length > 0
                             ?
                             (
                                 <Container>
@@ -84,7 +84,7 @@ class Notification extends Component {
                                             date={notification.date}
                                             type={notification.type}
                                             theme={this.props.theme}
-                                            loginUser={this.props.user}                                            
+                                            loginUser={this.props.user}
                                         />
                                     ))}
 

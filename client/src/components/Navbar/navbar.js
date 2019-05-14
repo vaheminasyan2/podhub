@@ -103,7 +103,7 @@ class Navbar extends Component {
             </Link>
           </div>
           <div className="fulllength">
-          {showAudio ? (
+            {showAudio ? (
               <div className="mobilePosition">
                 <Popup
                   trigger={
@@ -145,7 +145,7 @@ class Navbar extends Component {
                 <></>
               )
             }
-            </div>
+          </div>
 
           {/* Hamburger Menu */}
 
@@ -167,7 +167,7 @@ class Navbar extends Component {
                     window.location.pathname === "/home"
                       ? `nav-link ${this.props.theme} active`
                       : `nav-link ${this.props.theme}`
-                  } 
+                  }
                   onClick={this.scrollToTop}
                 >
                   <FontAwesomeIcon icon="home" />
@@ -234,7 +234,7 @@ class Navbar extends Component {
 
             {/* Show Audio Player in Nav Bar */}
 
-            
+
 
             {/* Podcast Search form */}
 
@@ -261,39 +261,39 @@ class Navbar extends Component {
               {/* REDIRECT TO PODCAST SEARCH PAGE */}
 
               {this.state.goToPodcastPage ? (
-                <Redirect 
+                <Redirect
                   to={{
                     pathname: "/podcastSearch",
                     resetState: this.resetState
                   }}
                 />
               ) : (
-                <></>
-              )}
+                  <></>
+                )}
 
               {/* Settings/Logout Dropdown Menu */}
 
               <li>
-              
+
                 <div
                   onClick={this.showOptionsMenu}
                   className="holder"
                 >
-                {this.state.showOptionsMenu ? (
-                  <OptionsMenu
-                    user={this.props.user}
-                    hideOptionsMenu={this.hideOptionsMenu}
-                    logout={logout}
-                  />
-                ) : (
-                    <></>
-                  )}
-                  <img 
+                  {this.state.showOptionsMenu ? (
+                    <OptionsMenu
+                      user={this.props.user}
+                      hideOptionsMenu={this.hideOptionsMenu}
+                      logout={logout}
+                    />
+                  ) : (
+                      <></>
+                    )}
+                  <img
                     className="navbarUserImg"
                     src={this.props.user.profileImage} />
                 </div>
 
-          
+
               </li>
 
             </ul>

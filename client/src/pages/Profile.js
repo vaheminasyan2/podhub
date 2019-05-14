@@ -39,7 +39,7 @@ class Profile extends Component {
     };
   }
 
- // Load user profile information
+  // Load user profile information
   componentDidMount() {
     this.getFavorites();
     this.getPostsOnlyByUser();
@@ -230,7 +230,7 @@ class Profile extends Component {
         this.setScrollToPostFalse();
       }, 1000)
     }
-}
+  }
 
   setScrollToPostFalse = () => {
     this.setState({
