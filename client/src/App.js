@@ -188,6 +188,10 @@ class App extends Component {
   handleUser = (userData, socket) => {
 
     socket.on("share", this.onPostShared);
+    socket.on("comment", this.onCommented);
+    socket.on("follow", this.onFollow);
+    socket.on("post_like", this.onPostLiked);
+    socket.on("comment_like", this.onCommentLiked);
 
     this.setState({
       user: userData,
@@ -202,16 +206,34 @@ class App extends Component {
     alert("New Post! " + postId);
   }
 
+  onCommented = (name, comment, title) => {
+    alert(name + " commented: " + comment + " on your post: " + title);
+  }
+
+  onCommentLiked = (name, comment) => {
+    alert(name + " likes your comment: " + comment);
+  }
+
+  onPostLiked = (name, title) => {
+    alert(name + " likes your post: " + title);
+  }
+
+  onFollow = (name) => {
+    alert(name + " is following you!");
+  }
+
   // Logout current user
   logout = () => {
 
     localStorage.clear();
     sessionStorage.clear();
     //console.log(moment().format())
+    this.state.socket.disconnect();
 
     this.setState({
       user: null,
-      logout: true
+      logout: true,
+      socket: null
     });
   }
 
