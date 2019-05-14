@@ -24,7 +24,7 @@ class Notification extends Component {
                 userId:2,
                 userName: "John Smith",
                 userImage:"https://via.placeholder.com/150C",
-                postId:22,
+                postId:35,
                 date: "2019-04-18 04:05:01",
                 type: "comment"
             },

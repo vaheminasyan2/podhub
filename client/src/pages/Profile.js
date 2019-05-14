@@ -22,21 +22,24 @@ library.add(faChevronLeft, faChevronRight);
 // Displays user's posts
 
 class Profile extends Component {
-  state = {
-    user: [],
-    posts: [],
-    favorites: [],
-    currentPostId: "",
-    redirect: false,
-    postMessage: "",
-    favMessage: "",
-    scrollLeft: 0,
-    scrollToPost: true,
-    scrollToPostId: 35,
-  };
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      user: [],
+      posts: [],
+      favorites: [],
+      currentPostId: "",
+      redirect: false,
+      postMessage: "",
+      favMessage: "",
+      scrollLeft: 0,
+      scrollToPost: false,
+      scrollToPostId: "",
+    };
+  }
 
-  // Load user profile information
+ // Load user profile information
   componentDidMount() {
     this.getFavorites();
     this.getPostsOnlyByUser();
@@ -45,6 +48,9 @@ class Profile extends Component {
       scrollToPost: this.props.location.state.scrollToPost,
       scrollToPostId: this.props.location.state.scrollToPostId
     });
+    if (this.props.location.state.scrollToPost !== undefined && this.props.location.state.scrollToPostId !== undefined) {
+      this.scrollToElement();
+    }
   }
 
   // Update profile information if subject user changes
@@ -57,7 +63,6 @@ class Profile extends Component {
       });
     }
   }
-
 
   // POPULATE POST & FAVORITE INFORMATION
   // ===============================================
@@ -216,20 +221,23 @@ class Profile extends Component {
 
   // Handle SCROLLING to specific post
   scrollToElement = () => {
-    var id = this.state.scrollToPostId;
-    console.log(id)
-    var element = document.getElementById(id);
-    console.log(element);
-    element.scrollIntoView(true);
-    window.scrollBy(0, -100)
-  }
-
-  scrollToPost = () => {
-    if (this.state.scrollToPost === true) {
-      this.scrollToElement();
+    {
+      setTimeout(() => {
+        var id = this.state.scrollToPostId;
+        var element = document.getElementById(id);
+        element.scrollIntoView(true);
+        window.scrollBy(0, -100)
+        this.setScrollToPostFalse();
+      }, 1000)
     }
-  }
+}
 
+  setScrollToPostFalse = () => {
+    this.setState({
+      scrollToPost: false,
+      scrollToPostId: ""
+    })
+  }
 
   render() {
 
@@ -365,7 +373,7 @@ class Profile extends Component {
 
               {/* POSTS SECTION */}
 
-              <h4 id="postsTitle" onClick={(event) => { event.preventDefault(); this.scrollToPost(); }}>Posts</h4>
+              <h4 id="postsTitle">Posts</h4>
               <div className={`row posts rounded bg-${this.props.theme}`}>
                 {this.state.posts.length ? (
                   <Container>
@@ -392,10 +400,9 @@ class Profile extends Component {
                         theme={this.props.theme}
                       />
 
-
                     ))}
 
-                  </Container>
+                  </Container >
 
                 ) : (
                     <div className="col">
@@ -405,8 +412,12 @@ class Profile extends Component {
                     </div>
                   )}
 
+
+
               </div>
+
             </Container>
+
           </div>
 
           <div className="col-md-2 col-xs-0"></div>
