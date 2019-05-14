@@ -14,6 +14,7 @@ import Settings from "./pages/Settings";
 import Error from "./pages/Error";
 import Notifications from "./pages/Notifications";
 import AboutUs from "./pages/AboutUs";
+import moment from "moment";
 import "./App.css";
 
 class App extends Component {
@@ -199,6 +200,7 @@ class App extends Component {
 
     localStorage.clear();
     sessionStorage.clear();
+    //console.log(moment().format())
 
     this.setState({
       user: null,
@@ -412,7 +414,7 @@ class App extends Component {
                   />
 
                   <Route exact path="/aboutUs"
-                    render={(props) => 
+                    render={(props) =>
                       <AboutUs {...props}
                         user={this.state.user}
                         theme={this.state.theme}
@@ -432,10 +434,17 @@ class App extends Component {
 
                   <Route exact path="/notifications"
                     render={() =>
-                      <Notifications
-                        user={this.state.user}
-                        theme={this.state.theme}
-                      />
+                      <div className="container">
+                        <div className="row">
+                          <div className="col-md-2 col-xs-0"></div>
+                          <div className="col-md-8 col-xs-12">
+                            <Notifications
+                              user={this.state.user}
+                              theme={this.state.theme}
+                            />
+                          </div>
+                        </div>
+                      </div>
                     }
                   />
 
