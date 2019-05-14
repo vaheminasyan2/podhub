@@ -1,3 +1,4 @@
+const server = require(`../server.js`);
 const db = require(`../models/index.js`);
 const Op = db.Sequelize.Op;
 
@@ -11,7 +12,15 @@ class CommentController {
    * @param {*} res
    */
   createComment(req, res) {
-    db.comment.create(req.body).then(comment => res.json(comment));
+    db.comment.create(req.body).then(function(comment) {
+      db.user.findByPk(req.body.commentedBy).then(function(user) {
+        db.post.findByPk(req.body.postId).then(function(post){
+          if(post.postedBy != req.body.commentedBy)
+            server.notification.notifyComment(post.postedBy ,user.name, req.body.comment, post.episodeName);
+          res.json(comment);
+        })
+      });
+    });
   }
 
   /**
@@ -20,7 +29,16 @@ class CommentController {
    * @param {*} res
    */
   createCommentLikes(req, res) {
-    db.commentLike.findOrCreate({ where: req.body }).then(dbCommentLike => res.json(dbCommentLike));
+    db.commentLike.findOrCreate({ where: req.body }).then(function(dbCommentLike){
+      db.comment.findByPk(req.body.commentId).then(function(comment){
+        db.user.findByPk(req.body.userId).then(function(likedBy){
+          if(comment.commentedBy != req.body.userId)
+            server.notification.notifyCommentLike(comment.commentedBy, likedBy.name, comment.comment);
+          res.json(dbCommentLike);
+        })
+
+      })
+    });
   }
 
 

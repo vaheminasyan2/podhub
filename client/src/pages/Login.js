@@ -25,11 +25,7 @@ class Login extends Component {
                 console.warn("User ID", res.data.id);
 
                 //////////////////    Notification   ///////////////////
-                const socket = io(`${window.location}?userId=${res.data.id}`); // We need to initialize a connection to server.
-                socket.on("connect", (s) => {
-                    console.log("Login Connected!");
-                });
-
+                const socket = io(`${window.location}?userId=${res.data.id}`); // We need to initialize a connection to server.   
                 this.props.handleUser(res.data, socket);
 
                 localStorage.setItem("user", JSON.stringify(res.data));

@@ -1,3 +1,4 @@
+const server = require(`../server.js`);
 const db = require(`../models/index.js`);
 const axios = require('axios');
 const Op = db.Sequelize.Op;
@@ -32,7 +33,12 @@ class UserController {
    * @param {*} res
    */
   postFollowUser(req, res){
-    db.follow.create(req.body).then(follow => res.json(follow));
+    db.follow.create(req.body).then(function(follow){
+      db.user.findByPk(req.body.followedBy).then(function(by){
+        server.notification.notifyfavorite(req.body.isFollowing, by.name);
+        res.json(follow);
+      })
+    });
   }
 
   /**
