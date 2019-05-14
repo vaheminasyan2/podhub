@@ -19,6 +19,8 @@ import "./App.css";
 
 class App extends Component {
 
+  _isMounted = false;
+
   constructor(props) {
     super(props)
 
@@ -41,9 +43,14 @@ class App extends Component {
     };
   }
 
+  componentWillUnmount = () => {
+    this._isMounted = false;
+  }
+
   // Load user from local storage
   // Check Session Storage for Audio Settings every 500ms to display audio player in navbar
   componentDidMount = () => {
+    this._isMounted = true;
     this.loadUserFromLocalStorage();
   }
 
