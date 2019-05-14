@@ -20,6 +20,8 @@ class Post extends Component {
 
         super(props);
 
+        this.myRef = React.createRef();
+        
         this.state = {
             userId: "",
             userName: "",
@@ -219,7 +221,7 @@ class Post extends Component {
 
     render() {
         return (
-            <div className={`container rounded-0 border-top-0 border-left-0 border-right-0 card text-secondary bg-${this.props.theme}`} id="top" >
+            <div className={`container rounded-0 border-top-0 border-left-0 border-right-0 card text-secondary top bg-${this.props.theme}`} id={this.props.postId} >
                 <div className="row" id={`post-top-row-${this.props.theme}`}>
 
                     {/* USER PROFILE IMAGE / LINK TO PROFILE PAGE */}

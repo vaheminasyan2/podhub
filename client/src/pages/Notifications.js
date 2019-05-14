@@ -15,7 +15,7 @@ class Notification extends Component {
                 userId:1,
                 userName: "Vahe Minasyan",
                 userImage:"https://via.placeholder.com/150C/O",
-                postId:21,
+                postId:26,
                 date:"2019-04-16 05:30:39",
                 type:"like"
             },
@@ -35,7 +35,7 @@ class Notification extends Component {
                 userImage:"https://via.placeholder.com/150C/O",
                 date: "2019-05-10 22:24:35",
                 type: "follower"
-            }
+            },
         ],
 
         message: "There are no notifications",
@@ -62,7 +62,6 @@ class Notification extends Component {
 
     }
 
-
     render() {
         return (
             <div className={`container bg-${this.props.theme} rounded`} id="post-container">
@@ -82,8 +81,7 @@ class Notification extends Component {
                                             date={notification.date}
                                             type={notification.type}
                                             theme={this.props.theme}
-                                            loginUser={this.props.user}
-                                            
+                                            loginUser={this.props.user}                                            
                                         />
                                     ))}
 
