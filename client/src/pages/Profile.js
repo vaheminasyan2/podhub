@@ -22,24 +22,35 @@ library.add(faChevronLeft, faChevronRight);
 // Displays user's posts
 
 class Profile extends Component {
-  state = {
-    user: [],
-    posts: [],
-    favorites: [],
-    currentPostId: "",
-    redirect: false,
-    postMessage: "",
-    favMessage: "",
-    scrollLeft: 0
-  };
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      user: [],
+      posts: [],
+      favorites: [],
+      currentPostId: "",
+      redirect: false,
+      postMessage: "",
+      favMessage: "",
+      scrollLeft: 0,
+      scrollToPost: false,
+      scrollToPostId: "",
+    };
+  }
 
   // Load user profile information
   componentDidMount() {
     this.getFavorites();
     this.getPostsOnlyByUser();
     this.setState({
-      user: this.props.location.state.user
+      user: this.props.location.state.user,
+      scrollToPost: this.props.location.state.scrollToPost,
+      scrollToPostId: this.props.location.state.scrollToPostId
     });
+    if (this.props.location.state.scrollToPost !== undefined && this.props.location.state.scrollToPostId !== undefined) {
+      this.scrollToElement();
+    }
   }
 
   // Update profile information if subject user changes
@@ -52,7 +63,6 @@ class Profile extends Component {
       });
     }
   }
-
 
   // POPULATE POST & FAVORITE INFORMATION
   // ===============================================
@@ -209,189 +219,215 @@ class Profile extends Component {
     this.props.toApp(value, link, podName, epName);
   }
 
+  // Handle SCROLLING to specific post
+  scrollToElement = () => {
+    {
+      setTimeout(() => {
+        var id = this.state.scrollToPostId;
+        var element = document.getElementById(id);
+        element.scrollIntoView(true);
+        window.scrollBy(0, -100)
+        this.setScrollToPostFalse();
+      }, 1000)
+    }
+  }
 
-render() {
-  return (
-    <div className="container">
-      <Row>
-        <div className="col-md-2 col-xs-0"></div>
-        <div className="col-md-8 col-xs-12">
-          <Container>
+  setScrollToPostFalse = () => {
+    this.setState({
+      scrollToPost: false,
+      scrollToPostId: ""
+    })
+  }
 
-            {/* PROFILE HEADER */}
+  render() {
 
-            <ProfileHeader
-              user={this.props.location.state.user}
-              numPosts={this.state.posts.length}
-              numFavs={this.state.favorites.length}
-              theme={this.props.theme}
-            />
+    return (
+      <div className="container">
+        <Row>
+          <div className="col-md-2 col-xs-0"></div>
+          <div className="col-md-8 col-xs-12">
+            <Container>
 
-            {/* FAVORITES SECTION */}
+              {/* PROFILE HEADER */}
 
-            <h4 id="favoritesTitle">Favorites</h4>
+              <ProfileHeader
+                user={this.props.location.state.user}
+                numPosts={this.state.posts.length}
+                numFavs={this.state.favorites.length}
+                theme={this.props.theme}
+              />
 
-            <div
-              className={`row favorites rounded bg-${this.props.theme}`}
-            >
+              {/* FAVORITES SECTION */}
 
-              {this.state.favorites.length ? (
+              <h4 id="favoritesTitle">Favorites</h4>
 
-                <div
-                  ref="scroller"
-                  id="entire-favorites-column"
-                >
+              <div
+                className={`row favorites rounded bg-${this.props.theme}`}
+              >
 
-                  {/* SCROLL LEFT ARROW */}
+                {this.state.favorites.length ? (
 
-                  <FontAwesomeIcon
-                    className="left-arrow fa-3x"
-                    icon="chevron-left"
-                    onClick={ (event) => {
-                      event.preventDefault();
-                      this.scrollTo("left");
-                    }}
-                  />
+                  <div
+                    ref="scroller"
+                    id="entire-favorites-column"
+                  >
 
-                  {this.state.favorites.map(favorite => (
+                    {/* SCROLL LEFT ARROW */}
 
-                    // FAVORITES: PODCAST LOGO, LINK TO EPISODE LIST PAGE
+                    <FontAwesomeIcon
+                      className="left-arrow fa-3x"
+                      icon="chevron-left"
+                      onClick={(event) => {
+                        event.preventDefault();
+                        this.scrollTo("left");
+                      }}
+                    />
 
-                    <div className="py-5 px-3 pad card bg-transparent" id="card-contain" key={favorite.podcastId}>
+                    {this.state.favorites.map(favorite => (
 
-                      {/* FAVORITES: DELETE BUTTON */}
-                      {JSON.parse(localStorage.getItem("user")).id === favorite.userId ?
-                        (<div>
+                      // FAVORITES: PODCAST LOGO, LINK TO EPISODE LIST PAGE
 
-                          <button
-                            className="btn btn-sm mb-1 float-right deleteButtonX"
-                            onClick={() => this.handleFavoriteDelete(favorite.id)}
-                          >
-                            <img src={Delete} alt="delete" className="size delbtn" />
-                          </button>
-                        </div>)
-                        : (null)
-                      }
+                      <div className="py-5 px-3 pad card bg-transparent" id="card-contain" key={favorite.podcastId}>
 
-                      <Link
-                        to={{
-                          pathname: "/episodeList",
-                          state: {
-                            podcastId: favorite.podcastId,
-                            podcastName: favorite.podcastName,
-                            podcastLogo: favorite.podcastLogo,
-                            loadMore: true
-                          }
-                        }}
-                      >
-                        <img
-                          id="podcastIcon"
-                          src={favorite.podcastLogo}
-                          alt="Podcast Logo"
-                          className="border-white favoriteIcon card-img-top"
-                        />
-                      </Link>
+                        {/* FAVORITES: DELETE BUTTON */}
+                        {JSON.parse(localStorage.getItem("user")).id === favorite.userId ?
+                          (<div>
 
-                      <div className="card-body">
-                        {/* FAVORITES: BODY, LINK TO LISTEN PAGE */}
+                            <button
+                              className="btn btn-sm mb-1 float-right deleteButtonX"
+                              onClick={() => this.handleFavoriteDelete(favorite.id)}
+                            >
+                              <img src={Delete} alt="delete" className="size delbtn" />
+                            </button>
+                          </div>)
+                          : (null)
+                        }
 
                         <Link
                           to={{
-                            pathname: "/listen",
+                            pathname: "/episodeList",
                             state: {
                               podcastId: favorite.podcastId,
                               podcastName: favorite.podcastName,
                               podcastLogo: favorite.podcastLogo,
-                              episodeId: favorite.episodeId,
-                              episodeName: favorite.episodeName,
-                              date: moment(favorite.date).format("LLL"),
-                              description: favorite.description,
-                              audioLink: favorite.audioLink
+                              loadMore: true
                             }
                           }}
-                          className={`favoriteLink ${this.props.theme}`}
                         >
-                          <h4 className="favoriteTitle">{favorite.podcastName}</h4>
-
-                          <p className="favoriteDescription">{favorite.episodeName}</p>
+                          <img
+                            id="podcastIcon"
+                            src={favorite.podcastLogo}
+                            alt="Podcast Logo"
+                            className="border-white favoriteIcon card-img-top"
+                          />
                         </Link>
+
+                        <div className="card-body">
+                          {/* FAVORITES: BODY, LINK TO LISTEN PAGE */}
+
+                          <Link
+                            to={{
+                              pathname: "/listen",
+                              state: {
+                                podcastId: favorite.podcastId,
+                                podcastName: favorite.podcastName,
+                                podcastLogo: favorite.podcastLogo,
+                                episodeId: favorite.episodeId,
+                                episodeName: favorite.episodeName,
+                                date: moment(favorite.date).format("LLL"),
+                                description: favorite.description,
+                                audioLink: favorite.audioLink
+                              }
+                            }}
+                            className={`favoriteLink ${this.props.theme}`}
+                          >
+                            <h4 className="favoriteTitle">{favorite.podcastName}</h4>
+
+                            <p className="favoriteDescription">{favorite.episodeName}</p>
+                          </Link>
+                        </div>
+
                       </div>
 
-                    </div>
+                    ))}
 
-                  ))}
+                    {/* SCROLL RIGHT ARROW */}
 
-                  {/* SCROLL RIGHT ARROW */}
-
-                  <FontAwesomeIcon
-                    className="right-arrow fa-3x"
-                    icon="chevron-right"
-                    onClick={ (event) => {
-                      event.preventDefault();
-                      this.scrollTo("right");
-                    }}
-                  />
-
-                </div>
-
-              ) : (
-                  <div className="col">
-                    <h5 className="text-center">&nbsp;{this.state.favMessage}</h5>
-                  </div>
-                )}
-            </div>
-
-            {/* POSTS SECTION */}
-
-            <h4 id="postsTitle">Posts</h4>
-            <div className={`row posts rounded bg-${this.props.theme}`}>
-              {this.state.posts.length ? (
-                <Container>
-                  {this.state.posts.map(post => (
-                    <Post
-                      key={post.id}
-                      userId={post.postedBy}
-                      userName={this.state.user.name}
-                      userImage={this.state.user.profileImage}
-                      date={moment(post.createdAt).format("LLL")}
-                      podcastId={post.podcastId}
-                      podcastName={post.podcastName}
-                      podcastLogo={post.podcastLogo}
-                      episodeId={post.episodeId}
-                      episodeName={post.episodeName}
-                      description={post.description}
-                      audioLink={post.audioLink}
-                      userMessage={post.userMessage}
-                      numLikes={post.numberOfLikes}
-                      numComments={post.numberOfComments}
-                      postId={post.id}
-                      updateParentState={this.getPostsOnlyByUser}
-                      toHomeAndProfile={this.toHomeAndProfile}
-                      theme={this.props.theme}
+                    <FontAwesomeIcon
+                      className="right-arrow fa-3x"
+                      icon="chevron-right"
+                      onClick={(event) => {
+                        event.preventDefault();
+                        this.scrollTo("right");
+                      }}
                     />
-                  ))}
-                </Container>
 
-              ) : (
-                  <div className="col">
-                    <h5 className="text-center">
-                      &nbsp;{this.state.postMessage}
-                    </h5>
                   </div>
-                )}
 
-            </div>
-          </Container>
-        </div>
+                ) : (
+                    <div className="col">
+                      <h5 className="text-center">&nbsp;{this.state.favMessage}</h5>
+                    </div>
+                  )}
+              </div>
 
-        <div className="col-md-2 col-xs-0"></div>
+              {/* POSTS SECTION */}
 
-      </Row>
+              <h4 id="postsTitle">Posts</h4>
+              <div className={`row posts rounded bg-${this.props.theme}`}>
+                {this.state.posts.length ? (
+                  <Container>
+                    {this.state.posts.map(post => (
+                      <Post
+                        key={post.id}
+                        userId={post.postedBy}
+                        userName={this.state.user.name}
+                        userImage={this.state.user.profileImage}
+                        date={moment(post.createdAt).format("LLL")}
+                        podcastId={post.podcastId}
+                        podcastName={post.podcastName}
+                        podcastLogo={post.podcastLogo}
+                        episodeId={post.episodeId}
+                        episodeName={post.episodeName}
+                        description={post.description}
+                        audioLink={post.audioLink}
+                        userMessage={post.userMessage}
+                        numLikes={post.numberOfLikes}
+                        numComments={post.numberOfComments}
+                        postId={post.id}
+                        updateParentState={this.getPostsOnlyByUser}
+                        toHomeAndProfile={this.toHomeAndProfile}
+                        theme={this.props.theme}
+                      />
 
-    </div>
+                    ))}
 
-  );
-}
+                  </Container >
+
+                ) : (
+                    <div className="col">
+                      <h5 className="text-center">
+                        &nbsp;{this.state.postMessage}
+                      </h5>
+                    </div>
+                  )}
+
+
+
+              </div>
+
+            </Container>
+
+          </div>
+
+          <div className="col-md-2 col-xs-0"></div>
+
+        </Row>
+
+      </div>
+
+    );
+  }
 }
 
 export default Profile;

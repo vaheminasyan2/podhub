@@ -56,7 +56,7 @@ class Home extends Component {
             });
     };
 
-    
+
     // OTHER
     // ===============================================
 
@@ -100,7 +100,7 @@ class Home extends Component {
                                         updateParentState={this.getPosts}
                                         toHomeAndProfile={this.toHomeAndProfile}
                                         theme={this.props.theme}
-                                  />
+                                    />
                                 ))}
                             </Container>
                         )

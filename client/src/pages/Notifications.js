@@ -11,31 +11,34 @@ class Notification extends Component {
 
     state = {
         notifications: [
-            {
-                userId:1,
-                userName: "Vahe Minasyan",
-                userImage:"https://via.placeholder.com/150C/O",
-                postId:21,
-                date:"2019-04-16 05:30:39",
-                type:"like"
-            },
+            // {
+            //     id: 111,
+            //     userId:1,
+            //     userName: "Vahe Minasyan",
+            //     userImage:"https://via.placeholder.com/150C/O",
+            //     postId:26,
+            //     date:"2019-04-16 05:30:39",
+            //     type:"like"
+            // },
 
-            {
-                userId:2,
-                userName: "John Smith",
-                userImage:"https://via.placeholder.com/150C",
-                postId:22,
-                date: "2019-04-18 04:05:01",
-                type: "comment"
-            },
+            // {
+            //     id: 222,
+            //     userId:2,
+            //     userName: "John Smith",
+            //     userImage:"https://via.placeholder.com/150C",
+            //     postId:35,
+            //     date: "2019-04-18 04:05:01",
+            //     type: "comment"
+            // },
 
-            {
-                userId:3,
-                userName:"Ricardo Joe",
-                userImage:"https://via.placeholder.com/150C/O",
-                date: "2019-05-10 22:24:35",
-                type: "follower"
-            }
+            // {
+            //     id: 2333,
+            //     userId:3,
+            //     userName:"Ricardo Joe",
+            //     userImage:"https://via.placeholder.com/150C/O",
+            //     date: "2019-05-10 22:24:35",
+            //     type: "follower"
+            // },
         ],
 
         message: "There are no notifications",
@@ -62,13 +65,12 @@ class Notification extends Component {
 
     }
 
-
     render() {
         return (
             <div className={`container bg-${this.props.theme} rounded`} id="post-container">
                 <Row>
                     {
-                        this.state.notifications.length > 0 
+                        this.state.notifications.length > 0
                             ?
                             (
                                 <Container>
@@ -83,7 +85,6 @@ class Notification extends Component {
                                             type={notification.type}
                                             theme={this.props.theme}
                                             loginUser={this.props.user}
-                                            
                                         />
                                     ))}
 

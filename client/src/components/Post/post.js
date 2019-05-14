@@ -161,7 +161,7 @@ class Post extends Component {
                 this.closeCommentsModal();
                 this.setState({
                     numComments: this.state.numComments + 1,
-                    currentComment:"",
+                    currentComment: "",
                 });
             });
     }
@@ -173,12 +173,11 @@ class Post extends Component {
             this.closeCommentsModal();
             this.setState({
                 numComments: this.state.numComments - 1
-                
+
             });
 
-            if (this.state.numComments > 0) 
-            {this.handleShowCommentsModal();}
-            
+            if (this.state.numComments > 0) { this.handleShowCommentsModal(); }
+
         });
     };
 
@@ -219,7 +218,7 @@ class Post extends Component {
 
     render() {
         return (
-            <div className={`container rounded-0 border-top-0 border-left-0 border-right-0 card text-secondary bg-${this.props.theme}`} id="top" >
+            <div className={`container rounded-0 border-top-0 border-left-0 border-right-0 card text-secondary top bg-${this.props.theme}`} id={this.props.postId} >
                 <div className="row" id={`post-top-row-${this.props.theme}`}>
 
                     {/* USER PROFILE IMAGE / LINK TO PROFILE PAGE */}
@@ -399,7 +398,7 @@ class Post extends Component {
                             className={`row rounded bg-${this.props.theme} text-secondary like`}
                             key={like.id}
                         >
-                            <Link 
+                            <Link
                                 className="col-3 mt-0"
                                 to={{
                                     pathname: "/profile",
@@ -411,7 +410,7 @@ class Post extends Component {
                                         }
                                     }
                                 }}
-                                >
+                            >
                                 <img
                                     src={like.image}
                                     alt="User Icon"
@@ -420,8 +419,8 @@ class Post extends Component {
                                 />
                             </Link>
 
-                            <div className="col-9">	
-                                <p>{like.name}</p>	
+                            <div className="col-9">
+                                <p>{like.name}</p>
                             </div>
                         </div>
                     ))}
@@ -447,7 +446,7 @@ class Post extends Component {
 
                     <form>
                         <div className={`form-group mt-4 bg-${this.props.theme} text-secondary`}>
-                            <textarea 
+                            <textarea
                                 type="text"
                                 className="form-control"
                                 rows="3"
@@ -457,7 +456,7 @@ class Post extends Component {
                                 placeholder="Enter your comment"
                                 ref={this.state.currentComment}
                                 onChange={this.handleInputChange}
-                                //value={this.state.currentComment}
+                            //value={this.state.currentComment}
                             />
                         </div>
                         <button
