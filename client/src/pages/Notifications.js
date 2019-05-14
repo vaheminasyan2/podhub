@@ -11,31 +11,31 @@ class Notification extends Component {
 
     state = {
         notifications: [
-            {
-                userId:1,
-                userName: "Vahe Minasyan",
-                userImage:"https://via.placeholder.com/150C/O",
-                postId:26,
-                date:"2019-04-16 05:30:39",
-                type:"like"
-            },
+            // {
+            //     userId:1,
+            //     userName: "Vahe Minasyan",
+            //     userImage:"https://via.placeholder.com/150C/O",
+            //     postId:26,
+            //     date:"2019-04-16 05:30:39",
+            //     type:"like"
+            // },
 
-            {
-                userId:2,
-                userName: "John Smith",
-                userImage:"https://via.placeholder.com/150C",
-                postId:35,
-                date: "2019-04-18 04:05:01",
-                type: "comment"
-            },
+            // {
+            //     userId:2,
+            //     userName: "John Smith",
+            //     userImage:"https://via.placeholder.com/150C",
+            //     postId:35,
+            //     date: "2019-04-18 04:05:01",
+            //     type: "comment"
+            // },
 
-            {
-                userId:3,
-                userName:"Ricardo Joe",
-                userImage:"https://via.placeholder.com/150C/O",
-                date: "2019-05-10 22:24:35",
-                type: "follower"
-            },
+            // {
+            //     userId:3,
+            //     userName:"Ricardo Joe",
+            //     userImage:"https://via.placeholder.com/150C/O",
+            //     date: "2019-05-10 22:24:35",
+            //     type: "follower"
+            // },
         ],
 
         message: "There are no notifications",
