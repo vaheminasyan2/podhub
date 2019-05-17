@@ -53,8 +53,24 @@ class App extends Component {
   componentDidMount = () => {
     this._isMounted = true;
     this.loadUserFromLocalStorage();
+    //this.getLatestNotification(this.user.id);
   }
 
+  getLatestNotification = userId => {
+    API.getLatestNotification(userId)
+      .then (res => {
+        if (res.data.createdAt > this.user.logoutTime) {
+          this.setState ({
+            notificationAlert: true
+          });
+        }
+        else {
+            this.setState({
+              notificationAlert: false
+            });
+          }
+      })
+  };
 
   // Hide audio player in navbar
   hideAudio = () => {

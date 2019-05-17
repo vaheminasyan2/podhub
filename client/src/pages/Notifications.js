@@ -41,27 +41,21 @@ class Notification extends Component {
             },
         ],
 
-        message: "There are no notifications",
-        user: null
+        message: "There are no notifications"
     };
 
     componentDidMount() {
         //console.log(this.props.user.id)
-        //this.checkNewLikes();
-        //this.checkNewComments();
-        //this.checkNewFollowers();
+        //this.getNotifications(this.props.user.id)
     };
 
-    checkNewLikes = () => {
-
-    }
-
-    checkNewComments = () => {
-
-    }
-
-    checkNewFollowers = () => {
-
+    getNotifications = userId => {
+        API.getNotifications(userId)
+            .then (res => {
+                this.setState ({
+                    notifications: res.data
+                })
+            })
     }
 
     render() {
