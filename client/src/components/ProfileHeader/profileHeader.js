@@ -12,7 +12,7 @@ class ProfileHeader extends Component {
     constructor(props) {
         super(props);
 
-        console.log("ProfileHeader Constructing", props.user);
+        //console.log("ProfileHeader Constructing", props.user);
 
         this.state = {
             user: props.user,
