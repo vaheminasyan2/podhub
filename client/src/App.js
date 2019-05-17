@@ -40,6 +40,7 @@ class App extends Component {
       theme: "dark",
       socket: null,
       APICalls: 0,
+      notificationAlert: false
     };
   }
 
@@ -353,6 +354,7 @@ class App extends Component {
                   isItPlaying={this.state.isPlaying}
                   isMounted={this.state.isMounted}
                   theme={this.state.theme}
+                  notificationAlert={this.state.notificationAlert}
                 />
 
                 <PodcastSearch

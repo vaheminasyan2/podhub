@@ -23,7 +23,7 @@ class Navbar extends Component {
     speed: 1.0,
     showOptionsMenu: false,
     goToPodcastPage: false,
-    notificationAlert: false,
+    notificationAlert: this.props.notificationAlert,
   };
 
 
@@ -95,7 +95,7 @@ class Navbar extends Component {
 
   render() {
 
-    const { podcastSearch, handleInputChange, hidePodcasts, logout, user, showAudio, hideAudio, theme } = this.props;
+    const { podcastSearch, handleInputChange, hidePodcasts, logout, user, showAudio, hideAudio, theme, notificationAlert } = this.props;
 
     return (
 
