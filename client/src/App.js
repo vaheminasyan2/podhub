@@ -40,7 +40,7 @@ class App extends Component {
       theme: "dark",
       socket: null,
       APICalls: 0,
-      notificationAlert: false
+      notificationAlert: true
     };
   }
 
@@ -60,7 +60,7 @@ class App extends Component {
   getLatestNotification = userId => {
     API.getLatestNotification(userId)
       .then(res => {
-        if (res.data.createdAt > this.user.logoutTime) {
+        if (moment(res.data.createdAt).format() > moment(this.user.logoutTime).format()) {
           this.setState({
             notificationAlert: true
           });
