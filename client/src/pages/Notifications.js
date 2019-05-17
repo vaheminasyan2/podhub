@@ -11,34 +11,34 @@ class Notification extends Component {
 
     state = {
         notifications: [
-            {
-                id: 111,
-                userId:1,
-                userName: "Vahe Minasyan",
-                userImage:"https://via.placeholder.com/150C/O",
-                postId:26,
-                date:"2019-04-16 05:30:39",
-                type:"like"
-            },
+            // {
+            //     id: 111,
+            //     userId:1,
+            //     userName: "Vahe Minasyan",
+            //     userImage:"https://via.placeholder.com/150C/O",
+            //     postId:26,
+            //     date:"2019-04-16 05:30:39",
+            //     type:"like"
+            // },
 
-            {
-                id: 222,
-                userId:2,
-                userName: "John Smith",
-                userImage:"https://via.placeholder.com/150C",
-                postId:35,
-                date: "2019-04-18 04:05:01",
-                type: "comment"
-            },
+            // {
+            //     id: 222,
+            //     userId:2,
+            //     userName: "John Smith",
+            //     userImage:"https://via.placeholder.com/150C",
+            //     postId:35,
+            //     date: "2019-04-18 04:05:01",
+            //     type: "comment"
+            // },
 
-            {
-                id: 2333,
-                userId:3,
-                userName:"Ricardo Joe",
-                userImage:"https://via.placeholder.com/150C/O",
-                date: "2019-05-10 22:24:35",
-                type: "follower"
-            },
+            // {
+            //     id: 2333,
+            //     userId:3,
+            //     userName:"Ricardo Joe",
+            //     userImage:"https://via.placeholder.com/150C/O",
+            //     date: "2019-05-10 22:24:35",
+            //     type: "follower"
+            // },
         ],
 
         message: "There are no notifications"
@@ -49,10 +49,11 @@ class Notification extends Component {
         //this.getNotifications(this.props.user.id)
     };
 
+    // Get all notification history for given user
     getNotifications = userId => {
         API.getNotifications(userId)
-            .then (res => {
-                this.setState ({
+            .then(res => {
+                this.setState({
                     notifications: res.data
                 })
             })

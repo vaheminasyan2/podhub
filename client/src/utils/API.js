@@ -118,7 +118,7 @@ export default {
     },
 
     // Update post details
-    updatePost: function(postId, body){
+    updatePost: function (postId, body) {
         return axios.put("/api/posts/update/" + postId, body)
     },
 
@@ -140,11 +140,11 @@ export default {
         return axios.post("/api/users?id_token=" + id_token);
     },
 
-    deleteUser: function(user) {
+    deleteUser: function (user) {
         return axios.get("api/getUsers", user); // temporary. will be more like axios.delete("api/deleteUser", user);
     },
 
-    updateUser: function(userId, body){
+    updateUser: function (userId, body) {
         return axios.put("/api/users/update/" + userId, body)
     },
 

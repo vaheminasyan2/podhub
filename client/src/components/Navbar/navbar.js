@@ -236,12 +236,12 @@ class Navbar extends Component {
                 >
                   <FontAwesomeIcon icon="bell" />
                   <span className={`navbar-theme-{this.props.theme}`}>&nbsp; Notifications </span>
-                  {this.state.notificationAlert 
-                  ? <FontAwesomeIcon icon="circle" size="xs" className="mb-1"/>
-                  : null
-                }
+                  {this.state.notificationAlert
+                    ? <FontAwesomeIcon icon="circle" size="xs" className="mb-1" />
+                    : null
+                  }
                 </Link>
-              
+
               </li>
             </ul>
 

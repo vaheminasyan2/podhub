@@ -56,19 +56,20 @@ class App extends Component {
     //this.getLatestNotification(this.user.id);
   }
 
+  // Get date & time of the latest notification record in the user's notification history to know if we should alert user about new notifications or not  
   getLatestNotification = userId => {
     API.getLatestNotification(userId)
-      .then (res => {
+      .then(res => {
         if (res.data.createdAt > this.user.logoutTime) {
-          this.setState ({
+          this.setState({
             notificationAlert: true
           });
         }
         else {
-            this.setState({
-              notificationAlert: false
-            });
-          }
+          this.setState({
+            notificationAlert: false
+          });
+        }
       })
   };
 

@@ -47,7 +47,7 @@ class ProfileHeader extends Component {
         }
 
         this.setState({
-            user: this.props.user, 
+            user: this.props.user,
             buttonTheme: buttonTheme,
             numFavs: this.props.numFavs
         });
@@ -132,7 +132,7 @@ class ProfileHeader extends Component {
     }
 
     saveProfile = () => {
-        API.updateUser(this.props.user.id, 
+        API.updateUser(this.props.user.id,
             {
                 name: this.state.newUsername || this.state.userName,
                 aboutMe: this.state.newBio || this.state.userBio,
@@ -300,18 +300,18 @@ class ProfileHeader extends Component {
                             {!this.state.editProfile ? (
                                 <h2 className={`paddingTop userName profile-${this.props.theme}`}>{this.state.userName || this.props.user.name}</h2>
                             ) : (
-                                <form>
-                                    <textarea
-                                        className="rounded"
-                                        id="usernameTextarea"
-                                        maxLength="75"
-                                        onChange={this.setNewUsername}
-                                        value={this.state.newUsername || this.state.userName}
-                                    >
-                                        {this.state.userName || this.state.userName}
-                                    </textarea>
-                                </form>
-                            )}
+                                    <form>
+                                        <textarea
+                                            className="rounded"
+                                            id="usernameTextarea"
+                                            maxLength="75"
+                                            onChange={this.setNewUsername}
+                                            value={this.state.newUsername || this.state.userName}
+                                        >
+                                            {this.state.userName || this.state.userName}
+                                        </textarea>
+                                    </form>
+                                )}
                         </Row>
 
                         {/* Follow / Edit Profile Button */}
