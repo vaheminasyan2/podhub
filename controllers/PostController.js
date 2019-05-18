@@ -39,9 +39,18 @@ class PostController {
     db.postLike.findOrCreate({where: req.body}).then(function(dbPostLike){
       db.post.findByPk(req.body.postId).then(function(post){
         db.user.findByPk(req.body.userId).then(function(likedBy){
-          if(post.postedBy != req.body.userId)
-            server.notification.notifyPostLike(post.postedBy, likedBy.name, post.episodeName);
-          res.json(dbPostLike);
+          db.notification.create(
+            {
+              action: "pl",
+              name: likedBy.name,
+              postId: req.body.postId,
+              userId: post.postedBy
+            }
+          ).then(function(notification){
+            if(post.postedBy != req.body.userId)
+              server.notification.notifyPostLike(post.postedBy, likedBy.name, post.episodeName);
+            res.json(dbPostLike);
+          })
         })
       });
     });

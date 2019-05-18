@@ -56,6 +56,10 @@ module.exports = function(sequelize, DataTypes) {
     post.hasMany(models.postLike, {
       onDelete: "cascade"
     });
+
+    post.hasMany(models.notification, {
+      onDelete: "cascade"
+    });
   };
 
   return post;

@@ -39,6 +39,10 @@ module.exports = function(sequelize, DataTypes) {
     user.hasMany(models.favorite, {
       onDelete: "cascade"
     });
+
+    user.hasMany(models.notification, {
+      onDelete: "cascade"
+    })
   };
 
   return user;
