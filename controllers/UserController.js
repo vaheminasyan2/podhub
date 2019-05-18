@@ -35,8 +35,16 @@ class UserController {
   postFollowUser(req, res){
     db.follow.create(req.body).then(function(follow){
       db.user.findByPk(req.body.followedBy).then(function(by){
-        server.notification.notifyfavorite(req.body.isFollowing, by.name);
-        res.json(follow);
+        db.notification.create(
+          {
+            action: "f",
+            name: by.name,
+            userId: req.body.isFollowing
+          }
+        ).then(function(notification){
+          server.notification.notifyfavorite(req.body.isFollowing, by.name);
+          res.json(follow);
+        })
       })
     });
   }
