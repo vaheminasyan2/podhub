@@ -40,6 +40,7 @@ class App extends Component {
       theme: "dark",
       socket: null,
       APICalls: 0,
+      notificationAlert: true
     };
   }
 
@@ -52,8 +53,25 @@ class App extends Component {
   componentDidMount = () => {
     this._isMounted = true;
     this.loadUserFromLocalStorage();
+    //this.getLatestNotification(this.user.id);
   }
 
+  // Get date & time of the latest notification record in the user's notification history to know if we should alert user about new notifications or not  
+  getLatestNotification = userId => {
+    API.getLatestNotification(userId)
+      .then(res => {
+        if (moment(res.data.createdAt).format() > moment(this.user.logoutTime).format()) {
+          this.setState({
+            notificationAlert: true
+          });
+        }
+        else {
+          this.setState({
+            notificationAlert: false
+          });
+        }
+      })
+  };
 
   // Hide audio player in navbar
   hideAudio = () => {
@@ -353,6 +371,7 @@ class App extends Component {
                   isItPlaying={this.state.isPlaying}
                   isMounted={this.state.isMounted}
                   theme={this.state.theme}
+                  notificationAlert={this.state.notificationAlert}
                 />
 
                 <PodcastSearch

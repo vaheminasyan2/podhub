@@ -118,7 +118,7 @@ export default {
     },
 
     // Update post details
-    updatePost: function(postId, body){
+    updatePost: function (postId, body) {
         return axios.put("/api/posts/update/" + postId, body)
     },
 
@@ -140,11 +140,11 @@ export default {
         return axios.post("/api/users?id_token=" + id_token);
     },
 
-    deleteUser: function(user) {
+    deleteUser: function (user) {
         return axios.get("api/getUsers", user); // temporary. will be more like axios.delete("api/deleteUser", user);
     },
 
-    updateUser: function(userId, body){
+    updateUser: function (userId, body) {
         return axios.put("/api/users/update/" + userId, body)
     },
 
@@ -290,4 +290,19 @@ export default {
     isFollowingUsers: function (userId) {
         return axios.get("api/users/isFollowingUsers/" + userId);
     },
+
+
+    // NOTIFICATION HISTORY
+    // ==================================
+
+    // Gets the date & time of the latest notification in this user notification history
+    getLatestNotification: function (userId) {
+        return axios.get("api/users/latestNotification/" + userId)
+    },
+
+    // Gets a list of 20 recent notifications from this user notification history 
+    getNotifications: function (userId) {
+        return axios.get("api/users/notifications" + userId)
+    }
+
 };
