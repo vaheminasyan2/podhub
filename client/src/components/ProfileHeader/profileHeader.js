@@ -19,7 +19,7 @@ class ProfileHeader extends Component {
             userName: props.user.name,
             newUsername: null,
             userLocation: props.user.location,
-            userBio: props.user.aboutMe,
+            userBio: "",
             editProfile: false,
             newLocation: null,
             newBio: null,
@@ -50,7 +50,19 @@ class ProfileHeader extends Component {
             user: this.props.user,
             buttonTheme: buttonTheme,
             numFavs: this.props.numFavs
-        });
+        }, () => {this.getAboutMe()}); 
+    }
+
+    getAboutMe = () => {
+        API.getAboutMe(this.state.user.googleId)
+            .then(res => {
+                this.setState({
+                    userBio: res.data.aboutMe
+                });
+            })
+            .catch((err) => {
+                console.log("Error getting About Me", err);
+            });
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -67,7 +79,7 @@ class ProfileHeader extends Component {
             this.getNumFollowers();
             this.getNumFollowing();
         }
-    }
+    }  
 
 
     // SET UP HEADER
@@ -371,18 +383,6 @@ class ProfileHeader extends Component {
                                         </button>
                                     </div>
 
-                                    {/* EDIT LOCATION */}
-                                    <textarea
-                                        className="rounded"
-                                        id="userLocationTextarea"
-                                        maxLength="100"
-                                        onChange={this.setNewLocation}
-                                        placeholder="Seattle, WA"
-                                        value={this.state.newLocation}
-                                    >
-                                        {this.state.userLocation}
-                                    </textarea>
-
                                     {/* EDIT BIO */}
                                     <textarea
                                         className="rounded"
@@ -390,7 +390,7 @@ class ProfileHeader extends Component {
                                         maxLength="160"
                                         onChange={this.setNewBio}
                                         placeholder="I like listening to podcasts."
-                                        value={this.state.newBio}
+                                        value={this.state.newBio || ""}
                                     >
                                         {this.state.userBio}
                                     </textarea>
