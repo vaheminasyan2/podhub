@@ -185,8 +185,7 @@ class UserController {
           name: response.data.name,
           email: response.data.email,
           googleId: response.data.sub,
-          profileImage: response.data.picture,
-          aboutMe: response.data.aboutMe
+          profileImage: response.data.picture
         };
 
         db.user.findOrCreate({
@@ -195,8 +194,7 @@ class UserController {
             name: newUser.name,
             email: newUser.email,
             googleId: newUser.googleId,
-            profileImage: newUser.profileImage,
-            aboutMe: newUser.aboutMe
+            profileImage: newUser.profileImage
           }
         })
         .spread(function(user, created) {
