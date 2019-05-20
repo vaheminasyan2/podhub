@@ -23,6 +23,15 @@ router.post("/", (req, res) => {
 });
 
 /**
+ * Route to get user About Me section
+ * @param {*} req
+ * @param {*} res
+ */
+router.get("/getAboutMe/:googleId", (req, res) => {
+    controller.getAboutMe(req, res);
+});
+
+/**
  * Route to get isFollowing by userId from database <----- user Profile Page ----->
  * @param {*} req
  * @param {*} res
