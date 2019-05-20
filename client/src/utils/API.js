@@ -125,14 +125,9 @@ export default {
     // USERS
     // =====================================
 
-    // Get all users
-    getUsers: function (user) {
-        return axios.get("api/getUsers", user);
-    },
-
     // Gets About Me section for user
-    getAboutMe: function (userId) {
-        return axios.get("/api/getAboutMe", userId);
+    getAboutMe: function (googleId) {
+        return axios.get("/api/users/getAboutMe/" + googleId);
     },
 
     // Gets existing user; creates user if doesn't exist
@@ -140,9 +135,9 @@ export default {
         return axios.post("/api/users?id_token=" + id_token);
     },
 
-    deleteUser: function (user) {
-        return axios.get("api/getUsers", user); // temporary. will be more like axios.delete("api/deleteUser", user);
-    },
+    // deleteUser: function (user) {
+    //     return axios.get("api/getUsers", user); // temporary. will be more like axios.delete("api/deleteUser", user);
+    // },
 
     updateUser: function (userId, body) {
         return axios.put("/api/users/update/" + userId, body)
