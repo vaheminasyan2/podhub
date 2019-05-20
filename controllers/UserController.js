@@ -180,11 +180,13 @@ class UserController {
     axios
       .get("https://oauth2.googleapis.com/tokeninfo?id_token=" + req.query.id_token)
       .then(function(response) {
+
         newUser = {
           name: response.data.name,
           email: response.data.email,
           googleId: response.data.sub,
-          profileImage: response.data.picture
+          profileImage: response.data.picture,
+          aboutMe: response.data.aboutMe
         };
 
         db.user.findOrCreate({
@@ -193,7 +195,8 @@ class UserController {
             name: newUser.name,
             email: newUser.email,
             googleId: newUser.googleId,
-            profileImage: newUser.profileImage
+            profileImage: newUser.profileImage,
+            aboutMe: newUser.aboutMe
           }
         })
         .spread(function(user, created) {
@@ -204,6 +207,17 @@ class UserController {
         console.error(error);
         res.status(400);
       })
+  }
+
+  getAboutMe(req, res) {
+    db.user.findAll({ 
+      where: { 
+        googleId: req.params.googleId 
+      }
+    })
+    .spread(function(aboutMe, created) {
+      res.json(aboutMe);
+    });
   }
 
   /**
