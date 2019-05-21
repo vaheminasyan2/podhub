@@ -58,7 +58,7 @@ class App extends Component {
 
   // Get date & time of the latest notification record in the user's notification history to know if we should alert user about new notifications or not  
   isNewNotification = () => {
-    API.isNewNotification(this.state.user.id)
+    API.isNewNotification(this.state.user.id, moment().format())
       .then(res => {
         if (res.data) {
           this.setState({

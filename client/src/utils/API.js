@@ -291,8 +291,8 @@ export default {
     // ==================================
 
     // Gets the date & time of the latest notification in this user notification history
-    isNewNotification: function (userId) {
-        return axios.get("api/users/isnNewNotification/" + userId)
+    isNewNotification: function (userId, time) {
+        return axios.get("api/users/" + userId + time + "/notifications")
     },
 
     // Gets a list of 20 recent notifications from this user notification history 
