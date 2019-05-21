@@ -8,7 +8,7 @@ import PodcastSearchPage from "./pages/PodcastSearch";
 import EpisodeList from "./pages/EpisodeList";
 import Listen from "./pages/Listen";
 import UserSearch from "./pages/UserSearch";
-import API from "./utils/API"
+import API from "./utils/API";
 import Login from './pages/Login';
 import Settings from "./pages/Settings";
 import Error from "./pages/Error";
@@ -53,14 +53,14 @@ class App extends Component {
   componentDidMount = () => {
     this._isMounted = true;
     this.loadUserFromLocalStorage();
-    //this.getLatestNotification(this.user.id);
+    //this.isNewNotification(this.user.id);
   }
 
   // Get date & time of the latest notification record in the user's notification history to know if we should alert user about new notifications or not  
-  getLatestNotification = userId => {
-    API.getLatestNotification(userId)
+  isNewNotification = () => {
+    API.isNewNotification(this.state.user.id)
       .then(res => {
-        if (moment(res.data.createdAt).format() > moment(this.user.logoutTime).format()) {
+        if (res.data) {
           this.setState({
             notificationAlert: true
           });

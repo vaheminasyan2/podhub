@@ -291,13 +291,18 @@ export default {
     // ==================================
 
     // Gets the date & time of the latest notification in this user notification history
-    getLatestNotification: function (userId) {
-        return axios.get("api/users/latestNotification/" + userId)
+    isNewNotification: function (userId) {
+        return axios.get("api/users/isnNewNotification/" + userId)
     },
 
     // Gets a list of 20 recent notifications from this user notification history 
     getNotifications: function (userId) {
         return axios.get("api/users/" + userId + "/notifications" )
+    },
+
+    // Save a record of the date and time when user has checked his notifications last time 
+    lastCheckedNotification: function(userId, time) {
+        return axios.put("api/users/" + userId + time + "/notifications")
     }
 
 };
