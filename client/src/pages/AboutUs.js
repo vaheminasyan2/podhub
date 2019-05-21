@@ -79,12 +79,12 @@ class AboutUs extends Component {
 
                     <div className="contactRow">
                         <div className="teamMember">
-                            <a href="https://www.linkedin.com" target="_blank">
-                                <img src="https://avatars1.githubusercontent.com/u/37827950?s=400&v=4" />
+                            <a href="https://www.linkedin.com/in/mary-arzumanyan" target="_blank">
+                                <img src="https://avatars1.githubusercontent.com/u/37827950?s=400&u=c8ef9a92dacba648a2768eb89928b0d264d51920&v=4"/>
                             </a>
                             <h4>Meri Arzumanyan</h4>
                             <a href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=" target="_blank">Email&nbsp;</a>
-                            <a href="https://www.linkedin.com" target="_blank">&nbsp;LinkedIn</a>
+                            <a href="https://www.linkedin.com/in/mary-arzumanyan" target="_blank">&nbsp;LinkedIn</a>
                         </div>
 
                         <div className="teamMember">

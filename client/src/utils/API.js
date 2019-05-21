@@ -297,7 +297,7 @@ export default {
 
     // Gets a list of 20 recent notifications from this user notification history 
     getNotifications: function (userId) {
-        return axios.get("api/users/notifications" + userId)
+        return axios.get("api/users/" + userId + "/notifications" )
     }
 
 };

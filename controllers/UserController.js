@@ -328,6 +328,19 @@ class UserController {
     return 0;
   }
  */ 
+
+ getNotifications(req, res)
+ {
+   db.notification.findAll({
+    offset: 0, limit: 20,
+     where: {
+      userId: req.params.id
+     }
+   }).then(function(nots){
+     res.json(nots)
+   })
+
+ }
 }
 
 module.exports = UserController;

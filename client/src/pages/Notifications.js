@@ -46,7 +46,7 @@ class Notification extends Component {
 
     componentDidMount() {
         //console.log(this.props.user.id)
-        //this.getNotifications(this.props.user.id)
+        this.getNotifications(this.props.user.id)
     };
 
     // Get all notification history for given user
