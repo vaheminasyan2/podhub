@@ -45,7 +45,7 @@ class NotificationComponent extends Component {
                                     <div className="notificationText">
                                         <p className={`notif`}>
                                             <strong>{this.props.userName}</strong>&nbsp;
-                                    started following you -- {moment(this.props.date).startOf('hour').fromNow()}
+                                    started following you -- {moment(this.props.date).startOf().fromNow()}
                                         </p>
                                     </div>
 
