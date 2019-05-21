@@ -205,7 +205,7 @@ class App extends Component {
   // Log the user into the site
   handleUser = (userData, socket) => {
 
-    socket.on("share", this.onPostShared);
+  //  socket.on("share", this.onPostShared);
     socket.on("comment", this.onCommented);
     socket.on("follow", this.onFollow);
     socket.on("post_like", this.onPostLiked);

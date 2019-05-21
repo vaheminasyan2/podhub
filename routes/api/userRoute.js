@@ -118,4 +118,12 @@ router.post("/follow", (req, res) => {
  */
 router.post("/unfollow", (req, res) => controller.unFollow(req, res));
 
+/**
+ * Get Notifications <<--------------Notification page------------->>
+ * @param {*} req
+ * @param {*} res
+ */
+router.get("/:id/notifications", (req, res) => controller.getNotifications(req, res));
+
+
 module.exports = router;
