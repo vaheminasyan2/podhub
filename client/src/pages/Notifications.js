@@ -10,43 +10,13 @@ import NotificationComponent from "../components/Notification/NotificationCompon
 class Notification extends Component {
 
     state = {
-        notifications: [
-            // {
-            //     id: 111,
-            //     userId:1,
-            //     userName: "Vahe Minasyan",
-            //     userImage:"https://via.placeholder.com/150C/O",
-            //     postId:26,
-            //     date:"2019-04-16 05:30:39",
-            //     type:"like"
-            // },
-
-            // {
-            //     id: 222,
-            //     userId:2,
-            //     userName: "John Smith",
-            //     userImage:"https://via.placeholder.com/150C",
-            //     postId:35,
-            //     date: "2019-04-18 04:05:01",
-            //     type: "comment"
-            // },
-
-            // {
-            //     id: 2333,
-            //     userId:3,
-            //     userName:"Ricardo Joe",
-            //     userImage:"https://via.placeholder.com/150C/O",
-            //     date: "2019-05-10 22:24:35",
-            //     type: "follower"
-            // },
-        ],
-
+        notifications: [],
         message: "There are no notifications"
     };
 
     componentDidMount() {
         //console.log(this.props.user.id)
-        this.getNotifications(this.props.user.id)
+        this.getNotifications(this.props.user.id);
     };
 
     // Get all notification history for given user
@@ -55,7 +25,8 @@ class Notification extends Component {
             .then(res => {
                 this.setState({
                     notifications: res.data
-                })
+                });
+                console.log(this.state.notifications)
             })
     }
 
@@ -72,11 +43,11 @@ class Notification extends Component {
                                         <NotificationComponent
                                             key={notification.id}
                                             userId={notification.userId}
-                                            userName={notification.userName}
+                                            userName={notification.name}
                                             userImage={notification.userImage}
                                             postId={notification.postId}
-                                            date={notification.date}
-                                            type={notification.type}
+                                            date={notification.updatedAt}
+                                            type={notification.action}
                                             theme={this.props.theme}
                                             loginUser={this.props.user}
                                         />
