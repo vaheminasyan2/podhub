@@ -39,6 +39,8 @@ class UserController {
           {
             action: "f",
             name: by.name,
+            actorImage: by.profileImage,
+            actorId: by.id,
             userId: req.body.isFollowing
           }
         ).then(function(notification){

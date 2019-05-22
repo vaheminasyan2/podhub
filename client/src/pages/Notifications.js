@@ -42,9 +42,9 @@ class Notification extends Component {
                                     {this.state.notifications.map(notification => (
                                         <NotificationComponent
                                             key={notification.id}
-                                            userId={notification.userId}
+                                            userId={notification.actorId}
                                             userName={notification.name}
-                                            userImage={notification.userImage}
+                                            userImage={notification.actorImage}
                                             postId={notification.postId}
                                             date={notification.updatedAt}
                                             type={notification.action}
