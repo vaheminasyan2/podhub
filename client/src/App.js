@@ -219,25 +219,37 @@ class App extends Component {
   }
 
   // Receives notification about newly shared post
-  onPostShared = (postId) => {
-    console.log("New Post!", postId);
-    alert("New Post! " + postId);
-  }
+  // onPostShared = (postId) => {
+  //   console.log("New Post!", postId);
+  //   alert("New Post! " + postId);
+  // }
 
   onCommented = (name, comment, title) => {
-    alert(name + " commented: " + comment + " on your post: " + title);
+    //alert(name + " commented: " + comment + " on your post: " + title);
+    this.setState({
+      notificationAlert: true
+    });
   }
 
   onCommentLiked = (name, comment) => {
-    alert(name + " likes your comment: " + comment);
+    //alert(name + " likes your comment: " + comment);
+    this.setState({
+      notificationAlert: true
+    });
   }
 
   onPostLiked = (name, title) => {
-    alert(name + " likes your post: " + title);
+    //alert(name + " likes your post: " + title);
+    this.setState({
+      notificationAlert: true
+    });
   }
 
   onFollow = (name) => {
-    alert(name + " is following you!");
+    //alert(name + " is following you!");
+    this.setState({
+      notificationAlert: true
+    });
   }
 
   // Logout current user
@@ -245,7 +257,6 @@ class App extends Component {
 
     localStorage.clear();
     sessionStorage.clear();
-    //console.log(moment().format())
     this.state.socket.disconnect();
 
     this.setState({
