@@ -214,7 +214,7 @@ class App extends Component {
     this.setState({
       user: userData,
       logout: false,
-      socket
+      socket: socket
     });
   }
 
@@ -225,28 +225,28 @@ class App extends Component {
   // }
 
   onCommented = (name, comment, title) => {
-    alert(name + " commented: " + comment + " on your post: " + title);
+    // alert(name + " commented: " + comment + " on your post: " + title);
     this.setState({
       notificationAlert: true
     })
   }
 
   onCommentLiked = (name, comment) => {
-    alert(name + " likes your comment: " + comment);
+    // alert(name + " likes your comment: " + comment);
     this.setState({
       notificationAlert: true
     })
   }
 
   onPostLiked = (name, title) => {
-    alert(name + " likes your post: " + title);
+    // alert(name + " likes your post: " + title);
     this.setState({
       notificationAlert: true
     })
   }
 
   onFollow = (name) => {
-    alert(name + " is following you!");
+    // alert(name + " is following you!");
     this.setState({
       notificationAlert: true
     })
@@ -260,7 +260,7 @@ class App extends Component {
     sessionStorage.clear();
     //console.log(moment().format())
     //this.state.socket.disconnect();
-    
+
 
     this.setState({
       user: null,
@@ -329,11 +329,11 @@ class App extends Component {
     });
   }
 
-  userLoggedIn = (socket, userId) => {
-    this.setState({
-      socket
-    });
-  }
+  // userLoggedIn = (socket, userId) => {
+  //   this.setState({
+  //     socket
+  //   });
+  //}
 
   render() {
     console.log(this.state.socket)

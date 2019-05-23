@@ -25,14 +25,16 @@ class Navbar extends Component {
     speed: 1.0,
     showOptionsMenu: false,
     goToPodcastPage: false,
-    notificationAlert: this.props.notificationAlert,
+    isAlert: true
   };
 
-  componentDidMount = () => {
-    this.setState({
-      notificationAlert: this.props.notificationAlert
-    })
+  componentWillReceiveProps(nextProps) {
+    // You don't have to do this check first, but it can help prevent an unneeded render
+    if (nextProps.notificationAlert !== this.state.isAlert) {
+      this.setState({ isAlert: this.props.notificationAlert });
+    }
   }
+
   // NAVBAR AUDIO PLAYER
   // ====================================
 
@@ -95,13 +97,14 @@ class Navbar extends Component {
 
   // hide notification alert and save a record of the date and time when user has checked his notifications last time 
   lastCheckedNotification = () => {
+    this.setState({
+      isAlert: false
+    });
 
-    API.lastCheckedNotification(this.props.user.id, moment().format())
-      .then(res => {
-        this.setState({
-          notificationAlert: false
-        });
-      })
+
+    // API.lastCheckedNotification(this.props.user.id, moment().format())
+    //   .then(res => {
+    //   })
   }
 
 
@@ -252,7 +255,7 @@ class Navbar extends Component {
                 >
                   <FontAwesomeIcon icon="bell" />
                   <span className={`navbar-theme-{this.props.theme}`}>&nbsp; Notifications </span>
-                  {this.state.notificationAlert
+                  {notificationAlert && this.state.isAlert
                     ? <FontAwesomeIcon icon="circle" size="xs" className="mb-1" />
                     : null
                   }
