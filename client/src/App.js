@@ -239,10 +239,13 @@ class App extends Component {
   }
 
   onPostLiked = (name, title) => {
-    //alert(name + " likes your post: " + title);
+    alert(name + " likes your post: " + title);
+    console.log("liked")
+    console.log(this.state.notificationAlert)
     this.setState({
       notificationAlert: true
     });
+
   }
 
   onFollow = (name) => {
@@ -332,9 +335,10 @@ class App extends Component {
   }
 
   render() {
+
     return (
 
-      <Router>
+      < Router >
         <div className={`wrapper appClass ${this.state.theme}`}>
 
           {/* Redirect to Login page if user logged out */}
@@ -514,7 +518,7 @@ class App extends Component {
           }
 
         </div>
-      </Router>
+      </Router >
     )
   }
 }
