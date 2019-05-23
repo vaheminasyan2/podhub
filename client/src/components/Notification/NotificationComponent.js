@@ -57,12 +57,10 @@ class NotificationComponent extends Component {
                                 (
                                     <Link
                                         to={{
-                                            pathname: "/profile",
+                                            pathname: "/home",
                                             state: {
                                                 user: {
-                                                    id: this.props.loginUser.id,
-                                                    name: this.props.loginUser.name,
-                                                    profileImage: this.props.loginUser.profileImage
+                                                    id: this.props.loginUser.id
                                                 },
                                                 scrollToPostId: this.props.postId,
                                                 scrollToPost: true
@@ -83,12 +81,10 @@ class NotificationComponent extends Component {
                                     (
                                         <Link
                                             to={{
-                                                pathname: "/profile",
+                                                pathname: "/home",
                                                 state: {
                                                     user: {
-                                                        id: this.props.loginUser.id,
-                                                        name: this.props.loginUser.name,
-                                                        profileImage: this.props.loginUser.profileImage
+                                                        id: this.props.loginUser.id
                                                     },
                                                     scrollToPostId: this.props.postId,
                                                     scrollToPost: true
@@ -103,28 +99,28 @@ class NotificationComponent extends Component {
                                             </div>
                                         </Link>
                                     )
-                                    : null
-                        // (
-                        //     <Link
-                        //         to={{
-                        //             pathname: "/home",
-                        //             state: {
-                        //                 user: {
-                        //                     id: this.props.loginUser.id
-                        //                 },
-                        //                 scrollToPostId: this.props.postId,
-                        //                 scrollToPost: true
-                        //             }
-                        //         }}
-                        //     >
-                        //         <div className="notificationText">
-                        //             <p className={`notif`} id={this.props.postId}>
-                        //                 <strong>{this.props.userName}</strong>&nbsp;
-                        //         liked your comment on the post -- {moment(this.props.date).format()}
-                        //             </p>
-                        //         </div>
-                        //     </Link>
-                        // )
+                                    :
+                                    (
+                                        <Link
+                                            to={{
+                                                pathname: "/home",
+                                                state: {
+                                                    user: {
+                                                        id: this.props.loginUser.id
+                                                    },
+                                                    scrollToPostId: this.props.postId,
+                                                    scrollToPost: true
+                                                }
+                                            }}
+                                        >
+                                            <div className="notificationText">
+                                                <p className={`notif`} id={this.props.postId}>
+                                                    <strong>{this.props.userName}</strong>&nbsp;
+                                liked your comment -- {moment(this.props.date).startOf().fromNow()}
+                                                </p>
+                                            </div>
+                                        </Link>
+                                    )
                     }
 
                 </div>

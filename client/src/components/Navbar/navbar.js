@@ -113,7 +113,9 @@ class Navbar extends Component {
           {/* Podhub Logo */}
 
           <div className="navbar-header">
-            <Link className="navbarText navbar-brand" to="/home" onClick={this.scrollToTop}>
+            <Link className="navbarText navbar-brand" to={{
+              pathname: "/home",
+            }} onClick={this.scrollToTop}>
               <img src={Logo} alt="logo" id="size" />
             </Link>
           </div>
@@ -177,7 +179,9 @@ class Navbar extends Component {
 
               <li className="nav-item">
                 <Link
-                  to="/home"
+                  to={{
+                    pathname: "/home",
+                  }}
                   className={
                     window.location.pathname === "/home"
                       ? `nav-link ${this.props.theme} active`
