@@ -239,10 +239,13 @@ class App extends Component {
   }
 
   onPostLiked = (name, title) => {
-    //alert(name + " likes your post: " + title);
+    alert(name + " likes your post: " + title);
+    console.log("liked")
+    console.log(this.state.notificationAlert)
     this.setState({
       notificationAlert: true
     });
+    
   }
 
   onFollow = (name) => {
@@ -332,189 +335,190 @@ class App extends Component {
   }
 
   render() {
+
     return (
+     
+      < Router >
+      <div className={`wrapper appClass ${this.state.theme}`}>
 
-      <Router>
-        <div className={`wrapper appClass ${this.state.theme}`}>
+        {/* Redirect to Login page if user logged out */}
 
-          {/* Redirect to Login page if user logged out */}
+        {this.state.logout && window.location.pathname !== "/" ? (
+          <Redirect
+            to={{
+              pathname: "/"
+            }}
+          />
+        ) : (
+            <></>
+          )
+        }
 
-          {this.state.logout && window.location.pathname !== "/" ? (
-            <Redirect
-              to={{
-                pathname: "/"
-              }}
-            />
-          ) : (
-              <></>
-            )
-          }
+        {/* Render Home page and navbar if user logged in */}
 
-          {/* Render Home page and navbar if user logged in */}
+        {!this.isLoggedIn() ? (
 
-          {!this.isLoggedIn() ? (
+          <Route
+            render={() =>
+              <Login
+                handleUser={this.handleUser}
+              />
+            }
+          />
 
-            <Route
-              render={() =>
-                <Login
-                  handleUser={this.handleUser}
-                />
-              }
-            />
+        ) : (
 
-          ) : (
+            <>
+              <Navbar
+                podcastSearch={this.podcastSearch}
+                handleInputChange={this.handleInputChange}
+                hidePodcasts={this.hidePodcasts}
+                logout={this.logout}
+                user={this.state.user}
+                showAudio={this.state.showAudioInNavbar}
+                hideAudio={this.hideAudio}
+                audioLink={this.state.audioLink}
+                podcastName={this.state.podcastName}
+                episodeName={this.state.episodeName}
+                rawCurrentTime={this.state.rawCurrentTime}
+                itIsMountedApp={this.itIsMountedApp}
+                isPlayingApp={this.isPlayingApp}
+                isItPlaying={this.state.isPlaying}
+                isMounted={this.state.isMounted}
+                theme={this.state.theme}
+                notificationAlert={this.state.notificationAlert}
+              />
 
-              <>
-                <Navbar
-                  podcastSearch={this.podcastSearch}
-                  handleInputChange={this.handleInputChange}
-                  hidePodcasts={this.hidePodcasts}
-                  logout={this.logout}
-                  user={this.state.user}
-                  showAudio={this.state.showAudioInNavbar}
-                  hideAudio={this.hideAudio}
-                  audioLink={this.state.audioLink}
-                  podcastName={this.state.podcastName}
-                  episodeName={this.state.episodeName}
-                  rawCurrentTime={this.state.rawCurrentTime}
-                  itIsMountedApp={this.itIsMountedApp}
-                  isPlayingApp={this.isPlayingApp}
-                  isItPlaying={this.state.isPlaying}
-                  isMounted={this.state.isMounted}
-                  theme={this.state.theme}
-                  notificationAlert={this.state.notificationAlert}
-                />
+              <PodcastSearch
+                show={this.state.showPodcasts}
+                hide={this.hidePodcasts}
+                podcasts={this.state.podcasts}
+                checkScroll={this.checkScroll}
+              />
 
-                <PodcastSearch
-                  show={this.state.showPodcasts}
-                  hide={this.hidePodcasts}
-                  podcasts={this.state.podcasts}
-                  checkScroll={this.checkScroll}
-                />
+              <Switch>
 
-                <Switch>
-
-                  <Route exact path="/"
-                    render={(props) =>
-                      <div className="container">
-                        <div className="row">
-                          <div className="col-md-2 col-xs-0"></div>
-                          <div className="col-md-8 col-xs-12">
-                            <Home {...props}
-                              user={this.state.user}
-                              toApp={this.toApp}
-                              theme={this.state.theme}
-                            />
-                          </div>
-                          <div className="col-md-2 col-xs-0"></div>
+                <Route exact path="/"
+                  render={(props) =>
+                    <div className="container">
+                      <div className="row">
+                        <div className="col-md-2 col-xs-0"></div>
+                        <div className="col-md-8 col-xs-12">
+                          <Home {...props}
+                            user={this.state.user}
+                            toApp={this.toApp}
+                            theme={this.state.theme}
+                          />
                         </div>
+                        <div className="col-md-2 col-xs-0"></div>
                       </div>
-                    }
-                  />
+                    </div>
+                  }
+                />
 
-                  <Route exact path="/home"
-                    render={(props) =>
-                      <div className="container">
-                        <div className="row">
-                          <div className="col-md-2 col-xs-0"></div>
-                          <div className="col-md-8 col-xs-12">
-                            <Home {...props}
-                              user={this.state.user}
-                              toApp={this.toApp}
-                              theme={this.state.theme}
-                            />
-                          </div>
-                          <div className="col-md-2 col-xs-0"></div>
+                <Route exact path="/home"
+                  render={(props) =>
+                    <div className="container">
+                      <div className="row">
+                        <div className="col-md-2 col-xs-0"></div>
+                        <div className="col-md-8 col-xs-12">
+                          <Home {...props}
+                            user={this.state.user}
+                            toApp={this.toApp}
+                            theme={this.state.theme}
+                          />
                         </div>
+                        <div className="col-md-2 col-xs-0"></div>
                       </div>
-                    }
-                  />
+                    </div>
+                  }
+                />
 
-                  <Route exact path="/profile"
-                    render={(props) =>
-                      <Profile {...props}
-                        toApp={this.toApp}
-                        theme={this.state.theme}
-                      />
-                    }
-                  />
-
-                  <Route exact path="/podcastSearch" render={(props) =>
-                    <PodcastSearchPage {...props}
-                      userQuery={this.state.podcastSearch}
-                      podcasts={this.state.podcasts}
+                <Route exact path="/profile"
+                  render={(props) =>
+                    <Profile {...props}
+                      toApp={this.toApp}
                       theme={this.state.theme}
                     />
                   }
+                />
+
+                <Route exact path="/podcastSearch" render={(props) =>
+                  <PodcastSearchPage {...props}
+                    userQuery={this.state.podcastSearch}
+                    podcasts={this.state.podcasts}
+                    theme={this.state.theme}
                   />
+                }
+                />
 
-                  <Route exact path="/episodeList" component={EpisodeList} />
-                  <Route exact path="/listen"
-                    render={(props) =>
-                      <Listen {...props}
-                        toApp={this.toApp}
-                        rawCurrentTime={this.rawCurrentTime}
-                        isMounted={this.state.isMounted}
-                        changeToPlay={this.changeToPlay}
-                        itIsPlaying={this.state.isPlaying}
-                        theme={this.state.theme}
-                      />
-                    }
+                <Route exact path="/episodeList" component={EpisodeList} />
+                <Route exact path="/listen"
+                  render={(props) =>
+                    <Listen {...props}
+                      toApp={this.toApp}
+                      rawCurrentTime={this.rawCurrentTime}
+                      isMounted={this.state.isMounted}
+                      changeToPlay={this.changeToPlay}
+                      itIsPlaying={this.state.isPlaying}
+                      theme={this.state.theme}
+                    />
+                  }
 
-                  />
+                />
 
-                  <Route exact path="/userSearch"
-                    render={() =>
-                      <UserSearch
-                        user={this.state.user}
-                        theme={this.state.theme}
-                      />
-                    }
-                  />
+                <Route exact path="/userSearch"
+                  render={() =>
+                    <UserSearch
+                      user={this.state.user}
+                      theme={this.state.theme}
+                    />
+                  }
+                />
 
-                  <Route exact path="/aboutUs"
-                    render={(props) =>
-                      <AboutUs {...props}
-                        user={this.state.user}
-                        theme={this.state.theme}
-                      />
-                    }
-                  />
+                <Route exact path="/aboutUs"
+                  render={(props) =>
+                    <AboutUs {...props}
+                      user={this.state.user}
+                      theme={this.state.theme}
+                    />
+                  }
+                />
 
-                  <Route exact path="/Settings"
-                    render={(props) =>
-                      <Settings {...props}
-                        darkTheme={this.darkTheme}
-                        lightTheme={this.lightTheme}
-                        theme={this.state.theme}
-                      />
-                    }
-                  />
+                <Route exact path="/Settings"
+                  render={(props) =>
+                    <Settings {...props}
+                      darkTheme={this.darkTheme}
+                      lightTheme={this.lightTheme}
+                      theme={this.state.theme}
+                    />
+                  }
+                />
 
-                  <Route exact path="/notifications"
-                    render={() =>
-                      <div className="container">
-                        <div className="row">
-                          <div className="col-md-2 col-xs-0"></div>
-                          <div className="col-md-8 col-xs-12">
-                            <Notifications
-                              user={this.state.user}
-                              theme={this.state.theme}
-                            />
-                          </div>
+                <Route exact path="/notifications"
+                  render={() =>
+                    <div className="container">
+                      <div className="row">
+                        <div className="col-md-2 col-xs-0"></div>
+                        <div className="col-md-8 col-xs-12">
+                          <Notifications
+                            user={this.state.user}
+                            theme={this.state.theme}
+                          />
                         </div>
                       </div>
-                    }
-                  />
+                    </div>
+                  }
+                />
 
-                  <Route component={Error} />
-                </Switch>
-              </>
-            )
-          }
+                <Route component={Error} />
+              </Switch>
+            </>
+          )
+        }
 
-        </div>
-      </Router>
+      </div>
+      </Router >
     )
   }
 }
