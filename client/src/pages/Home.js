@@ -27,7 +27,6 @@ class Home extends Component {
 
     componentDidMount() {
         this.getPosts();
-        console.log(this.props.location)
         if (this.props.location.state !== undefined) {
             this.setState({
                 user: this.props.location.state.user,
