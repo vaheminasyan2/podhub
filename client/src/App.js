@@ -40,7 +40,7 @@ class App extends Component {
       theme: "dark",
       socket: null,
       APICalls: 0,
-      notificationAlert: true
+      notificationAlert: false
     };
   }
 
@@ -58,7 +58,7 @@ class App extends Component {
 
   // Get date & time of the latest notification record in the user's notification history to know if we should alert user about new notifications or not  
   isNewNotification = () => {
-    API.isNewNotification(this.state.user.id, moment().format())
+    API.isNewNotification(this.state.user.id)
       .then(res => {
         if (res.data) {
           this.setState({
@@ -214,39 +214,53 @@ class App extends Component {
     this.setState({
       user: userData,
       logout: false,
-      socket
+      socket: socket
     });
   }
 
   // Receives notification about newly shared post
-  onPostShared = (postId) => {
-    console.log("New Post!", postId);
-    alert("New Post! " + postId);
-  }
+  // onPostShared = (postId) => {
+  //   console.log("New Post!", postId);
+  //   alert("New Post! " + postId);
+  // }
 
   onCommented = (name, comment, title) => {
-    alert(name + " commented: " + comment + " on your post: " + title);
+    // alert(name + " commented: " + comment + " on your post: " + title);
+    this.setState({
+      notificationAlert: true
+    })
   }
 
   onCommentLiked = (name, comment) => {
-    alert(name + " likes your comment: " + comment);
+    // alert(name + " likes your comment: " + comment);
+    this.setState({
+      notificationAlert: true
+    })
   }
 
   onPostLiked = (name, title) => {
-    alert(name + " likes your post: " + title);
+    // alert(name + " likes your post: " + title);
+    this.setState({
+      notificationAlert: true
+    })
   }
 
   onFollow = (name) => {
-    alert(name + " is following you!");
+    // alert(name + " is following you!");
+    this.setState({
+      notificationAlert: true
+    })
   }
 
   // Logout current user
   logout = () => {
 
+
     localStorage.clear();
     sessionStorage.clear();
     //console.log(moment().format())
-    this.state.socket.disconnect();
+    //this.state.socket.disconnect();
+
 
     this.setState({
       user: null,
@@ -262,7 +276,8 @@ class App extends Component {
     }
     if (localStorage.getItem("user")) {
       this.setState({
-        user: JSON.parse(localStorage.getItem("user"))
+        user: JSON.parse(localStorage.getItem("user")),
+        socket: JSON.parse(localStorage.getItem("socket"))
       });
     }
   }
@@ -314,13 +329,16 @@ class App extends Component {
     });
   }
 
-  userLoggedIn = (socket, userId) => {
-    this.setState({
-      socket
-    });
-  }
+  // userLoggedIn = (socket, userId) => {
+  //   this.setState({
+  //     socket
+  //   });
+  //}
 
   render() {
+    console.log(this.state.socket)
+    console.log(this.state.user)
+    console.log(this.state.notificationAlert)
     return (
 
       <Router>
