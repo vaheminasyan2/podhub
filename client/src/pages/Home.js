@@ -14,14 +14,30 @@ let moment = require("moment");
 
 class Home extends Component {
 
-    state = {
-        posts: [],
-        message: "",
-        user: null
-    };
+    constructor(props) {
+        super(props)
+        this.state = {
+            posts: [],
+            message: "",
+            user: null,
+            scrollToPost: false,
+            scrollToPostId: "",
+        }
+    }
 
     componentDidMount() {
         this.getPosts();
+        console.log(this.props.location)
+        if (this.props.location.state !== undefined) {
+            this.setState({
+                user: this.props.location.state.user,
+                scrollToPost: this.props.location.state.scrollToPost,
+                scrollToPostId: this.props.location.state.scrollToPostId
+            });
+            if (this.props.location.state.scrollToPost !== undefined && this.props.location.state.scrollToPostId !== undefined) {
+                this.scrollToElement();
+            }
+        }
     }
 
 
@@ -70,6 +86,26 @@ class Home extends Component {
     // Takes (True, Audio Link) and passes them to App.js
     toHomeAndProfile = (value, link, podName, epName) => {
         this.props.toApp(value, link, podName, epName);
+    }
+
+    // Handle SCROLLING to specific post
+    scrollToElement = () => {
+        {
+            setTimeout(() => {
+                var id = this.state.scrollToPostId;
+                var element = document.getElementById(id);
+                element.scrollIntoView(true);
+                window.scrollBy(0, -100)
+                this.setScrollToPostFalse();
+            }, 1000)
+        }
+    }
+
+    setScrollToPostFalse = () => {
+        this.setState({
+            scrollToPost: false,
+            scrollToPostId: ""
+        })
     }
 
     render() {

@@ -384,12 +384,12 @@ class App extends Component {
                 <Switch>
 
                   <Route exact path="/"
-                    render={() =>
+                    render={(props) =>
                       <div className="container">
                         <div className="row">
                           <div className="col-md-2 col-xs-0"></div>
                           <div className="col-md-8 col-xs-12">
-                            <Home
+                            <Home {...props}
                               user={this.state.user}
                               toApp={this.toApp}
                               theme={this.state.theme}
@@ -402,12 +402,12 @@ class App extends Component {
                   />
 
                   <Route exact path="/home"
-                    render={() =>
+                    render={(props) =>
                       <div className="container">
                         <div className="row">
                           <div className="col-md-2 col-xs-0"></div>
                           <div className="col-md-8 col-xs-12">
-                            <Home
+                            <Home {...props}
                               user={this.state.user}
                               toApp={this.toApp}
                               theme={this.state.theme}
