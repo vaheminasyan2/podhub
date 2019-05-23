@@ -40,7 +40,7 @@ class App extends Component {
       theme: "dark",
       socket: null,
       APICalls: 0,
-      notificationAlert: true
+      notificationAlert: false
     };
   }
 
@@ -219,34 +219,48 @@ class App extends Component {
   }
 
   // Receives notification about newly shared post
-  onPostShared = (postId) => {
-    console.log("New Post!", postId);
-    alert("New Post! " + postId);
-  }
+  // onPostShared = (postId) => {
+  //   console.log("New Post!", postId);
+  //   alert("New Post! " + postId);
+  // }
 
   onCommented = (name, comment, title) => {
     alert(name + " commented: " + comment + " on your post: " + title);
+    this.setState({
+      notificationAlert: true
+    })
   }
 
   onCommentLiked = (name, comment) => {
     alert(name + " likes your comment: " + comment);
+    this.setState({
+      notificationAlert: true
+    })
   }
 
   onPostLiked = (name, title) => {
     alert(name + " likes your post: " + title);
+    this.setState({
+      notificationAlert: true
+    })
   }
 
   onFollow = (name) => {
     alert(name + " is following you!");
+    this.setState({
+      notificationAlert: true
+    })
   }
 
   // Logout current user
   logout = () => {
 
+
     localStorage.clear();
     sessionStorage.clear();
     //console.log(moment().format())
-    this.state.socket.disconnect();
+    //this.state.socket.disconnect();
+    
 
     this.setState({
       user: null,
@@ -262,7 +276,8 @@ class App extends Component {
     }
     if (localStorage.getItem("user")) {
       this.setState({
-        user: JSON.parse(localStorage.getItem("user"))
+        user: JSON.parse(localStorage.getItem("user")),
+        socket: JSON.parse(localStorage.getItem("socket"))
       });
     }
   }
@@ -321,6 +336,9 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state.socket)
+    console.log(this.state.user)
+    console.log(this.state.notificationAlert)
     return (
 
       <Router>

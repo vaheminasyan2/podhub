@@ -28,7 +28,11 @@ class Navbar extends Component {
     notificationAlert: this.props.notificationAlert,
   };
 
-
+  componentDidMount = () => {
+    this.setState({
+      notificationAlert: this.props.notificationAlert
+    })
+  }
   // NAVBAR AUDIO PLAYER
   // ====================================
 

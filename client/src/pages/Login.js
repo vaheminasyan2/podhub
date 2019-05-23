@@ -12,6 +12,19 @@ dotenv.config();
 
 var CLIENT_ID = process.env.REACT_APP_G_CLIENT_ID;
 
+const getCircularReplacer = () => {
+    const seen = new WeakSet();
+    return (key, value) => {
+      if (typeof value === "object" && value !== null) {
+        if (seen.has(value)) {
+          return;
+        }
+        seen.add(value);
+      }
+      return value;
+    };
+  };
+
 class Login extends Component {
 
     state = {
@@ -19,18 +32,22 @@ class Login extends Component {
         redirect: false
     };
 
+
     getOrCreateUser = () => {
         API.getOrCreateUser(this.state.id_token)
             .then(res => {
-                console.warn("User ID", res.data.id);
+               // console.warn("User ID", res.data.id);
 
                 //////////////////    Notification   ///////////////////
                 const socket = io(`${window.location}?userId=${res.data.id}`); // We need to initialize a connection to server.   
                 this.props.handleUser(res.data, socket);
 
                 localStorage.setItem("user", JSON.stringify(res.data));
+                localStorage.setItem("socket", JSON.stringify(socket, getCircularReplacer()));
             })
     };
+
+
 
     render() {
         const responseGoogle = (response) => {
@@ -40,7 +57,7 @@ class Login extends Component {
 
             this.getOrCreateUser();
 
-            console.log("Login Constructed!");
+            //console.log("Login Constructed!");
         }
 
         return (
