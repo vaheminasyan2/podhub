@@ -26,7 +26,7 @@ class Notification extends Component {
                 this.setState({
                     notifications: res.data
                 });
-                console.log(this.state.notifications)
+                //console.log(this.state.notifications)
             })
     }
 
