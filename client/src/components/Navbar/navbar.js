@@ -102,9 +102,8 @@ class Navbar extends Component {
     });
 
 
-    // API.lastCheckedNotification(this.props.user.id, moment().format())
-    //   .then(res => {
-    //   })
+    API.lastCheckedNotification(this.props.user.id, moment().format())
+       .then(res => {})
   }
 
 
