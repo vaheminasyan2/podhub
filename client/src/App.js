@@ -40,7 +40,7 @@ class App extends Component {
       theme: "dark",
       socket: null,
       APICalls: 0,
-      notificationAlert: true
+      notificationAlert: false
     };
   }
 
