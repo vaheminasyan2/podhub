@@ -14,6 +14,12 @@ import Settings from "./pages/Settings";
 import Error from "./pages/Error";
 import Notifications from "./pages/Notifications";
 import AboutUs from "./pages/AboutUs";
+
+import "./pages/Listen.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Slide, Zoom, Flip, Bounce } from 'react-toastify';
+
 import moment from "moment";
 import "./App.css";
 
@@ -225,28 +231,40 @@ class App extends Component {
   // }
 
   onCommented = (name, comment, title) => {
-    // alert(name + " commented: " + comment + " on your post: " + title);
+    toast(name + " commented: " + comment + " on your post: " + title, {
+      className: 'toast-container-notif',
+      bodyClassName: "toast-text",
+    });
     this.setState({
       notificationAlert: true
     })
   }
 
   onCommentLiked = (name, comment) => {
-    // alert(name + " likes your comment: " + comment);
+    toast(name + " likes your comment: " + comment, {
+      className: 'toast-container-notif',
+      bodyClassName: "toast-text",
+    });
     this.setState({
       notificationAlert: true
     })
   }
 
   onPostLiked = (name, title) => {
-    // alert(name + " likes your post: " + title);
+    toast(name + " likes your post: " + title, {
+      className: 'toast-container-notif',
+      bodyClassName: "toast-text",
+    });
     this.setState({
       notificationAlert: true
     })
   }
 
   onFollow = (name) => {
-    // alert(name + " is following you!");
+    toast(name + " is following you!", {
+      className: 'toast-container-notif',
+      bodyClassName: "toast-text",
+    });
     this.setState({
       notificationAlert: true
     })
@@ -372,6 +390,13 @@ class App extends Component {
           ) : (
 
               <>
+                <ToastContainer
+                    autoClose={5000}
+                    closeButton={false}
+                    transition={Zoom}
+                    hideProgressBar={true}
+                />
+
                 <Navbar
                   podcastSearch={this.podcastSearch}
                   handleInputChange={this.handleInputChange}
