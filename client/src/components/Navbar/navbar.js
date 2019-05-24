@@ -304,7 +304,7 @@ class Navbar extends Component {
 
               {/* Settings/Logout Dropdown Menu */}
 
-              <li>
+              <li id="navbarUsrImgLi">
 
                 <div
                   onClick={this.showOptionsMenu}
