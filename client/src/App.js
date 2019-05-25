@@ -67,13 +67,22 @@ class App extends Component {
   }
 
   setNotificationAlertOff = () => {
-    //event.preventDefault();
     this.setState({
       notificationAlert:false
-    })
+    });
 
-    API.lastCheckedNotification(this.state.user.id, moment().format())
+    localStorage.setItem("notificationAlert", false)
+
+    API.lastCheckedNotification(this.state.user.id, {notificationsSeen: moment().format()})
       .then(res => { })
+  }
+
+  setNotificationAlertOn = () => {
+    this.setState({
+      notificationAlert: true
+    });
+
+    localStorage.setItem("notificationAlert", true)
   }
 
   // Get date & time of the latest notification record in the user's notification history to know if we should alert user about new notifications or not  
@@ -81,14 +90,13 @@ class App extends Component {
     API.isNewNotification(this.state.user.id)
       .then(res => {
         if (res.data) {
-          this.setState({
-            notificationAlert: true
-          });
+          this.setNotificationAlertOn();
         }
         else {
           this.setState({
             notificationAlert: false
           });
+          localStorage.setItem("notificationAlert", false)
         }
       })
   };
@@ -259,9 +267,7 @@ class App extends Component {
       className: 'toast-container-notif',
       bodyClassName: "toast-text",
     });
-    this.setState({
-      notificationAlert: true
-    })
+    this.setNotificationAlertOn();
   }
 
   onCommentLiked = (name, comment) => {
@@ -269,9 +275,7 @@ class App extends Component {
       className: 'toast-container-notif',
       bodyClassName: "toast-text",
     });
-    this.setState({
-      notificationAlert: true
-    })
+    this.setNotificationAlertOn();
   }
 
   onPostLiked = (name, title) => {
@@ -279,9 +283,7 @@ class App extends Component {
       className: 'toast-container-notif',
       bodyClassName: "toast-text",
     });
-    this.setState({
-      notificationAlert: true
-    })
+    this.setNotificationAlertOn();
   }
 
   onFollow = (name) => {
@@ -289,9 +291,7 @@ class App extends Component {
       className: 'toast-container-notif',
       bodyClassName: "toast-text",
     });
-    this.setState({
-      notificationAlert: true
-    })
+    this.setNotificationAlertOn();
   }
 
   // Logout current user
@@ -319,7 +319,8 @@ class App extends Component {
 
     if (localStorage.getItem("user")) {
       this.setState({
-        user: JSON.parse(localStorage.getItem("user"))
+        user: JSON.parse(localStorage.getItem("user")),
+        notificationAlert: localStorage.getItem("notificationAlert")
       });
       this.initializeSocket(JSON.parse(localStorage.getItem("user")).id)
     }
