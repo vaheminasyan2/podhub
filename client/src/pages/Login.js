@@ -5,25 +5,11 @@ import GoogleLogin from 'react-google-login';
 import "./Login.css";
 import Logo from "../components/Navbar/purple_back.png";
 import dotenv from "dotenv";
-import io from "socket.io-client";
+//import io from "socket.io-client";
 
 dotenv.config();
 
-
 var CLIENT_ID = process.env.REACT_APP_G_CLIENT_ID;
-
-const getCircularReplacer = () => {
-    const seen = new WeakSet();
-    return (key, value) => {
-        if (typeof value === "object" && value !== null) {
-            if (seen.has(value)) {
-                return;
-            }
-            seen.add(value);
-        }
-        return value;
-    };
-};
 
 class Login extends Component {
 
@@ -39,11 +25,9 @@ class Login extends Component {
                 // console.warn("User ID", res.data.id);
 
                 //////////////////    Notification   ///////////////////
-                const socket = io(`${window.location}?userId=${res.data.id}`); // We need to initialize a connection to server.   
-                this.props.handleUser(res.data, socket);
-
+                //const socket = io(`${window.location}?userId=${res.data.id}`); // We need to initialize a connection to server.   
+                this.props.handleUser(res.data);
                 localStorage.setItem("user", JSON.stringify(res.data));
-                localStorage.setItem("socket", JSON.stringify(socket, getCircularReplacer()));
             })
     };
 
