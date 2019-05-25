@@ -301,7 +301,7 @@ export default {
     },
 
     // Save a record of the date and time when user has checked his notifications last time 
-    lastCheckedNotification: function (userId, time) {
-        return axios.put("api/users/" + userId + time + "/lastCheckedNotification")
+    lastCheckedNotification: function (userId, body) {
+        return axios.put("api/users/" + userId + "/lastCheckedNotification", body)
     }
 };
