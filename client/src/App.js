@@ -66,6 +66,15 @@ class App extends Component {
     //this.isNewNotification(this.user.id);
   }
 
+  setNotificationAlertOff = () => {
+    //event.preventDefault();
+    this.setState({
+      notificationAlert:false
+    })
+
+    API.lastCheckedNotification(this.state.user.id, moment().format())
+      .then(res => { })
+  }
 
   // Get date & time of the latest notification record in the user's notification history to know if we should alert user about new notifications or not  
   isNewNotification = () => {
@@ -432,6 +441,7 @@ class App extends Component {
                   isMounted={this.state.isMounted}
                   theme={this.state.theme}
                   notificationAlert={this.state.notificationAlert}
+                  setNotificationAlertOff={this.setNotificationAlertOff}
                 />
 
                 <PodcastSearch
