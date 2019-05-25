@@ -231,7 +231,7 @@ class App extends Component {
 
   // Initialize Socket 
   initializeSocket = (id) => {
-    const socket = io(`http://` + window.location.href.split("/")[2] + `?userId=${id}`);
+    const socket = io(window.location.protocol +`//`+ window.location.host + `?userId=${id}`);
 
     //  socket.on("share", this.onPostShared);
     socket.on("comment", this.onCommented);
@@ -381,6 +381,7 @@ class App extends Component {
     //console.log(this.state.socket)
     //console.log(this.state.user)
     //console.log(this.state.notificationAlert)
+     
 
     return (
 
