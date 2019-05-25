@@ -47,7 +47,7 @@ class CommentController {
         db.user.findByPk(req.body.userId).then(function(likedBy){
           res.json(dbCommentLike);
 
-          if(comment.commentedBy != req.body.userId){
+          if(comment.commentedBy != req.body.userId && dbCommentLike[1] === true){
             server.notification.notifyCommentLike(comment.commentedBy, likedBy.name, comment.comment);
             db.notification.create(
               {

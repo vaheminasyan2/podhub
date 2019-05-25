@@ -334,7 +334,7 @@ class UserController {
  getNotifications(req, res)
  {
    db.notification.findAll({
-    offset: 0, limit: 20,
+    offset: 0, limit: 30,
      where: {
       userId: req.params.id
      }
@@ -344,5 +344,6 @@ class UserController {
 
  }
 }
+
 
 module.exports = UserController;

@@ -101,8 +101,8 @@ class Navbar extends Component {
       isAlert: false
     });
 
-
-    API.lastCheckedNotification(this.props.user.id, moment().format())
+    API.lastCheckedNotification(this.props.user.id, 
+      {notificationsSeen: moment().format()} )
       .then(res => { })
   }
 

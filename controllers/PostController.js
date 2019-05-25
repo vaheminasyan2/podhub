@@ -41,7 +41,7 @@ class PostController {
         db.user.findByPk(req.body.userId).then(function(likedBy){
           res.json(dbPostLike);
           
-          if(post.postedBy != req.body.userId) {
+          if(post.postedBy != req.body.userId && dbPostLike[1] === true) {
             server.notification.notifyPostLike(post.postedBy, likedBy.name, post.episodeName);
             db.notification.create(
               {
