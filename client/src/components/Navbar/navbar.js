@@ -8,8 +8,8 @@ import NavbarAudio from "../NavbarAudio/navbarAudio";
 import Popup from "reactjs-popup";
 import OptionsMenu from "../OptionsMenu/optionsMenu";
 import "./navbar.css";
-import moment from "moment";
-import API from "../../utils/API";
+//import moment from "moment";
+//import API from "../../utils/API";
 
 library.add(faSearch, faUser, faHome, faBell, faCircle);
 
@@ -25,15 +25,8 @@ class Navbar extends Component {
     speed: 1.0,
     showOptionsMenu: false,
     goToPodcastPage: false,
-    isAlert: true
   };
 
-  componentWillReceiveProps(nextProps) {
-    // You don't have to do this check first, but it can help prevent an unneeded render
-    if (nextProps.notificationAlert !== this.state.isAlert) {
-      this.setState({ isAlert: this.props.notificationAlert });
-    }
-  }
 
   // NAVBAR AUDIO PLAYER
   // ====================================
@@ -95,21 +88,9 @@ class Navbar extends Component {
     window.scrollTo(0, 0);
   }
 
-  // hide notification alert and save a record of the date and time when user has checked his notifications last time 
-  lastCheckedNotification = () => {
-    this.setState({
-      isAlert: false
-    });
-
-    API.lastCheckedNotification(this.props.user.id, 
-      {notificationsSeen: moment().format()} )
-      .then(res => { })
-  }
-
-
   render() {
 
-    const { podcastSearch, handleInputChange, hidePodcasts, logout, user, showAudio, hideAudio, theme, notificationAlert } = this.props;
+    const { podcastSearch, handleInputChange, hidePodcasts, logout, user, showAudio, hideAudio, theme, notificationAlert, setNotificationAlertOff } = this.props;
 
     return (
 
@@ -250,11 +231,11 @@ class Navbar extends Component {
                       ? `nav-link ${this.props.theme} active`
                       : `nav-link ${this.props.theme}`
                   }
-                  onClick={this.lastCheckedNotification}
+                  onClick={setNotificationAlertOff}
                 >
                   <FontAwesomeIcon icon="bell" />
                   <span className={`navbar-theme-{this.props.theme}`}>&nbsp; Notifications </span>
-                  {notificationAlert && this.state.isAlert
+                  {notificationAlert
                     ? <FontAwesomeIcon icon="circle" size="xs" className="mb-1" />
                     : null
                   }
