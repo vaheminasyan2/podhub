@@ -62,18 +62,17 @@ class App extends Component {
   componentDidMount = () => {
     this._isMounted = true;
     this.loadUserFromLocalStorage();
-    //this.initializeSocket(this.state.user.id)
     //this.isNewNotification(this.user.id);
   }
 
   setNotificationAlertOff = () => {
     this.setState({
-      notificationAlert:false
+      notificationAlert: false
     });
 
     localStorage.setItem("notificationAlert", false)
 
-    API.lastCheckedNotification(this.state.user.id, {notificationsSeen: moment().format()})
+    API.lastCheckedNotification(this.state.user.id, { notificationsSeen: moment().format() })
       .then(res => { })
   }
 
@@ -232,7 +231,7 @@ class App extends Component {
 
   // Initialize Socket 
   initializeSocket = (id) => {
-    const socket = io(`http://`+ window.location.href.split("/")[2]+`?userId=${id}`);
+    const socket = io(`http://` + window.location.href.split("/")[2] + `?userId=${id}`);
 
     //  socket.on("share", this.onPostShared);
     socket.on("comment", this.onCommented);
@@ -299,7 +298,6 @@ class App extends Component {
 
     localStorage.clear();
     sessionStorage.clear();
-    //console.log(moment().format())
     //this.state.socket.disconnect();
 
     this.setState({
@@ -380,10 +378,10 @@ class App extends Component {
   //}
 
   render() {
-    console.log(this.state.socket)
-    console.log(this.state.user)
-    console.log(this.state.notificationAlert)
-   
+    //console.log(this.state.socket)
+    //console.log(this.state.user)
+    //console.log(this.state.notificationAlert)
+
     return (
 
       <Router>
