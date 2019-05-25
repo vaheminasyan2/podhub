@@ -23,6 +23,9 @@ import { Slide, Zoom, Flip, Bounce } from 'react-toastify';
 import moment from "moment";
 import "./App.css";
 
+import io from "socket.io-client";
+
+
 class App extends Component {
 
   _isMounted = false;
@@ -62,19 +65,37 @@ class App extends Component {
     //this.isNewNotification(this.user.id);
   }
 
+  setNotificationAlertOff = () => {
+    this.setState({
+      notificationAlert: false
+    });
+
+    localStorage.setItem("notificationAlert", false)
+
+    API.lastCheckedNotification(this.state.user.id, { notificationsSeen: moment().format() })
+      .then(res => { })
+  }
+
+  setNotificationAlertOn = () => {
+    this.setState({
+      notificationAlert: true
+    });
+
+    localStorage.setItem("notificationAlert", true)
+  }
+
   // Get date & time of the latest notification record in the user's notification history to know if we should alert user about new notifications or not  
   isNewNotification = () => {
     API.isNewNotification(this.state.user.id)
       .then(res => {
         if (res.data) {
-          this.setState({
-            notificationAlert: true
-          });
+          this.setNotificationAlertOn();
         }
         else {
           this.setState({
             notificationAlert: false
           });
+          localStorage.setItem("notificationAlert", false)
         }
       })
   };
@@ -208,8 +229,9 @@ class App extends Component {
   // Check if user is logged in
   isLoggedIn = () => this.state.user != null;
 
-  // Log the user into the site
-  handleUser = (userData, socket) => {
+  // Initialize Socket 
+  initializeSocket = (id) => {
+    const socket = io(`http://` + window.location.href.split("/")[2] + `?userId=${id}`);
 
     //  socket.on("share", this.onPostShared);
     socket.on("comment", this.onCommented);
@@ -218,9 +240,18 @@ class App extends Component {
     socket.on("comment_like", this.onCommentLiked);
 
     this.setState({
-      user: userData,
-      logout: false,
       socket: socket
+    })
+  }
+
+
+  // Log the user into the site
+  handleUser = (userData) => {
+    this.initializeSocket(userData.id)
+
+    this.setState({
+      user: userData,
+      logout: false
     });
   }
 
@@ -235,9 +266,7 @@ class App extends Component {
       className: 'toast-container-notif',
       bodyClassName: "toast-text",
     });
-    this.setState({
-      notificationAlert: true
-    })
+    this.setNotificationAlertOn();
   }
 
   onCommentLiked = (name, comment) => {
@@ -245,9 +274,7 @@ class App extends Component {
       className: 'toast-container-notif',
       bodyClassName: "toast-text",
     });
-    this.setState({
-      notificationAlert: true
-    })
+    this.setNotificationAlertOn();
   }
 
   onPostLiked = (name, title) => {
@@ -255,9 +282,7 @@ class App extends Component {
       className: 'toast-container-notif',
       bodyClassName: "toast-text",
     });
-    this.setState({
-      notificationAlert: true
-    })
+    this.setNotificationAlertOn();
   }
 
   onFollow = (name) => {
@@ -265,20 +290,15 @@ class App extends Component {
       className: 'toast-container-notif',
       bodyClassName: "toast-text",
     });
-    this.setState({
-      notificationAlert: true
-    })
+    this.setNotificationAlertOn();
   }
 
   // Logout current user
   logout = () => {
 
-
     localStorage.clear();
     sessionStorage.clear();
-    //console.log(moment().format())
     //this.state.socket.disconnect();
-
 
     this.setState({
       user: null,
@@ -289,14 +309,18 @@ class App extends Component {
 
   // Load user from local storage if available
   loadUserFromLocalStorage() {
+
     if (this.state.user) {
+      this.initializeSocket(this.state.user.id)
       return;
     }
+
     if (localStorage.getItem("user")) {
       this.setState({
         user: JSON.parse(localStorage.getItem("user")),
-        socket: JSON.parse(localStorage.getItem("socket"))
+        notificationAlert: localStorage.getItem("notificationAlert")
       });
+      this.initializeSocket(JSON.parse(localStorage.getItem("user")).id)
     }
   }
 
@@ -354,9 +378,10 @@ class App extends Component {
   //}
 
   render() {
-    console.log(this.state.socket)
-    console.log(this.state.user)
-    console.log(this.state.notificationAlert)
+    //console.log(this.state.socket)
+    //console.log(this.state.user)
+    //console.log(this.state.notificationAlert)
+
     return (
 
       <Router>
@@ -391,10 +416,10 @@ class App extends Component {
 
               <>
                 <ToastContainer
-                    autoClose={5000}
-                    closeButton={false}
-                    transition={Zoom}
-                    hideProgressBar={true}
+                  autoClose={5000}
+                  closeButton={false}
+                  transition={Zoom}
+                  hideProgressBar={true}
                 />
 
                 <Navbar
@@ -415,6 +440,7 @@ class App extends Component {
                   isMounted={this.state.isMounted}
                   theme={this.state.theme}
                   notificationAlert={this.state.notificationAlert}
+                  setNotificationAlertOff={this.setNotificationAlertOff}
                 />
 
                 <PodcastSearch
