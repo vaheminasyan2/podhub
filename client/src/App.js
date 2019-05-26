@@ -64,7 +64,6 @@ class App extends Component {
   componentDidMount = () => {
     this._isMounted = true;
     this.loadUserFromLocalStorage();
-    //this.isNewNotification(this.user.id);
   }
 
   setNotificationAlertOff = () => {
@@ -251,12 +250,12 @@ class App extends Component {
 
   // Log the user into the site
   handleUser = (userData) => {
-    this.initializeSocket(userData.id)
+    this.initializeSocket(userData.id);
 
     this.setState({
       user: userData,
       logout: false
-    });
+    }, () => this.isNewNotification());
   }
 
   //Receives notification about newly shared post

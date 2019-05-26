@@ -134,4 +134,12 @@ router.get("/:id/notifications", (req, res) => controller.getNotifications(req, 
 router.put("/:id/lastCheckedNotification", (req, res) => controller.update(req, res));
 
 
+/**
+ * Get if new notifications are available for user <<--------------Login------------->>
+ * @param {*} req
+ * @param {*} res
+ */
+router.get("/:id/isNewnotification", (req, res) => controller.isNewNotification(req, res));
+
+
 module.exports = router;

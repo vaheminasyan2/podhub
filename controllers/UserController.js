@@ -337,12 +337,29 @@ class UserController {
     offset: 0, limit: 30,
      where: {
       userId: req.params.id
-     }
+     },
+     order: [
+      ['createdAt', 'DESC']
+    ]
    }).then(function(nots){
      res.json(nots)
    })
 
  }
+
+  isNewNotification(req, res)
+  {
+    db.user.findByPk(req.params.id).then(function(user){
+      db.notification.findAndCountAll({
+        where: {
+          createdAt: {
+            [Op.gte]: user.notificationsSeen}
+        }
+      }).then(function(latest){
+        res.json(latest.count);
+      })
+    })
+  }
 }
 
 
