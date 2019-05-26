@@ -50,7 +50,8 @@ class App extends Component {
       socket: null,
       APICalls: 0,
       notificationAlert: "",
-      newPost: null
+      newPost: null,
+      newNotification: null,
     };
   }
 
@@ -78,11 +79,13 @@ class App extends Component {
   }
 
   setNotificationAlertOn = () => {
-    this.setState({
-      notificationAlert: "on"
-    });
+    if (window.location.pathname !== "/notifications") {
+      this.setState({
+        notificationAlert: "on"
+      });
 
-    localStorage.setItem("notificationAlert", "on")
+      localStorage.setItem("notificationAlert", "on")
+    }
   }
 
   // Get date & time of the latest notification record in the user's notification history to know if we should alert user about new notifications or not  
@@ -232,7 +235,7 @@ class App extends Component {
 
   // Initialize Socket 
   initializeSocket = (id) => {
-   const socket = io(window.location.protocol +`//`+ window.location.host + `?userId=${id}`);
+    const socket = io(window.location.protocol + `//` + window.location.host + `?userId=${id}`);
 
     socket.on("share", this.onPostShared);
     socket.on("comment", this.onCommented);
@@ -270,6 +273,9 @@ class App extends Component {
       bodyClassName: "toast-text",
     });
     this.setNotificationAlertOn();
+    this.setState({
+      newNotification: true
+    })
   }
 
   onCommentLiked = (name, comment) => {
@@ -278,6 +284,9 @@ class App extends Component {
       bodyClassName: "toast-text",
     });
     this.setNotificationAlertOn();
+    this.setState({
+      newNotification: true
+    })
   }
 
   onPostLiked = (name, title) => {
@@ -286,6 +295,9 @@ class App extends Component {
       bodyClassName: "toast-text",
     });
     this.setNotificationAlertOn();
+    this.setState({
+      newNotification: true
+    })
   }
 
   onFollow = (name) => {
@@ -294,6 +306,9 @@ class App extends Component {
       bodyClassName: "toast-text",
     });
     this.setNotificationAlertOn();
+    this.setState({
+      newNotification: true
+    })
   }
 
   // Logout current user
@@ -562,7 +577,7 @@ class App extends Component {
                             <Notifications
                               user={this.state.user}
                               theme={this.state.theme}
-                              notificationAlert={this.state.notificationAlert}
+                              newNotification={this.state.newNotification}
                             />
                           </div>
                         </div>
