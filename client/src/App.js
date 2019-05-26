@@ -558,6 +558,7 @@ class App extends Component {
                             <Notifications
                               user={this.state.user}
                               theme={this.state.theme}
+                              notificationAlert={this.state.notificationAlert}
                             />
                           </div>
                         </div>

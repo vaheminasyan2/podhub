@@ -19,6 +19,13 @@ class Notification extends Component {
         this.getNotifications(this.props.user.id);
     };
 
+    componentWillReceiveProps(nextProps) {
+        // You don't have to do this check first, but it can help prevent an unneeded render
+        if (nextProps.notificationAlert === "on") {
+            this.getNotifications(this.props.user.id);
+        }
+      }
+
     // Get all notification history for given user
     getNotifications = userId => {
         API.getNotifications(userId)
