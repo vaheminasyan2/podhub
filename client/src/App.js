@@ -49,7 +49,8 @@ class App extends Component {
       theme: "dark",
       socket: null,
       APICalls: 0,
-      notificationAlert: ""
+      notificationAlert: "",
+      newPost: null
     };
   }
 
@@ -233,7 +234,7 @@ class App extends Component {
   initializeSocket = (id) => {
    const socket = io(window.location.protocol +`//`+ window.location.host + `?userId=${id}`);
 
-    //  socket.on("share", this.onPostShared);
+    socket.on("share", this.onPostShared);
     socket.on("comment", this.onCommented);
     socket.on("follow", this.onFollow);
     socket.on("post_like", this.onPostLiked);
@@ -255,11 +256,13 @@ class App extends Component {
     });
   }
 
-  // Receives notification about newly shared post
-  // onPostShared = (postId) => {
-  //   console.log("New Post!", postId);
-  //   alert("New Post! " + postId);
-  // }
+  //Receives notification about newly shared post
+  onPostShared = (postId) => {
+    //console.log("New Post!", postId);
+    this.setState({
+      newPost: true
+    })
+  }
 
   onCommented = (name, comment, title) => {
     toast(name + " commented: " + comment + " on your post: " + title, {
@@ -480,6 +483,7 @@ class App extends Component {
                               user={this.state.user}
                               toApp={this.toApp}
                               theme={this.state.theme}
+                              newPost={this.state.newPost}
                             />
                           </div>
                           <div className="col-md-2 col-xs-0"></div>
