@@ -49,7 +49,7 @@ class App extends Component {
       theme: "dark",
       socket: null,
       APICalls: 0,
-      notificationAlert: false
+      notificationAlert: ""
     };
   }
 
@@ -67,10 +67,10 @@ class App extends Component {
 
   setNotificationAlertOff = () => {
     this.setState({
-      notificationAlert: false
+      notificationAlert: "off"
     });
 
-    localStorage.setItem("notificationAlert", false)
+    localStorage.setItem("notificationAlert", "off")
 
     API.lastCheckedNotification(this.state.user.id, { notificationsSeen: moment().format() })
       .then(res => { })
@@ -78,10 +78,10 @@ class App extends Component {
 
   setNotificationAlertOn = () => {
     this.setState({
-      notificationAlert: true
+      notificationAlert: "on"
     });
 
-    localStorage.setItem("notificationAlert", true)
+    localStorage.setItem("notificationAlert", "on")
   }
 
   // Get date & time of the latest notification record in the user's notification history to know if we should alert user about new notifications or not  
@@ -93,9 +93,9 @@ class App extends Component {
         }
         else {
           this.setState({
-            notificationAlert: false
+            notificationAlert: "off"
           });
-          localStorage.setItem("notificationAlert", false)
+          localStorage.setItem("notificationAlert", "off")
         }
       })
   };
