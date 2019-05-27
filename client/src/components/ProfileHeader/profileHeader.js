@@ -125,14 +125,8 @@ class ProfileHeader extends Component {
     }
 
     setNewBio = (event) => {
-
-        let newBio = event.target.value;
-
-        if (event.target.value === "") {
-            newBio = "";
-        }
         this.setState({
-            newBio: newBio,
+            newBio: event.target.value,
         });
     }
 
