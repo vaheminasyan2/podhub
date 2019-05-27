@@ -11,7 +11,6 @@ class AWSController {
    * @param {*} res
    */
   awsUploadImage(req, res) {
-
     // configure the keys for accessing AWS
     AWS.config.update({
       accessKeyId: process.env.AWS_ACCESS_KEY,
@@ -67,17 +66,37 @@ class AWSController {
    * @param {*} res
    */
   awsGetImageUrl(req, res) {
-    var params = {
-      Bucket: "podhub-images", 
-      Key: `podhubBucket/${req.params.userId}.png`, 
-     };
-  
-    s3.getSignedUrl('getObject', params, function (err, url) {
-      if (err) throw err
-      console.log('Your generated pre-signed URL is', url);
-        // res.json({url:url})
+    console.log("test url");
+    // configure the keys for accessing AWS
+    AWS.config.update({
+      accessKeyId: process.env.AWS_ACCESS_KEY,
+      secretAccessKey: process.env.AWS_SECRET_KEY,
+      region: process.env.AWS_REGION
     });
-  
+
+    // configure AWS to work with promises
+    AWS.config.setPromisesDependency(bluebird);
+
+    // create S3 instance
+    const s3 = new AWS.S3();
+
+    var params = {
+      Bucket: process.env.AWS_BUCKET,
+      Key: `podhubBucket/IMG${req.params.userId}.png`
+      // Key: `podhubBucket/1.png`
+    };
+    s3.getObject(params, function(err, data) {
+      if(data){
+        console.log(data)
+        // let type = data.ContentType
+        
+        let url = `https://podhub-user-images.s3.amazonaws.com/podhubBucket/IMG${req.params.userId}.png`
+        res.json({ url: url });
+      }
+      else{
+        res.json({ url: data });
+      }
+    });
   }
 }
 module.exports = AWSController;
