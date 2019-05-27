@@ -40,6 +40,7 @@ class Profile extends Component {
 
   // Load user profile information
   componentDidMount() {
+    this.getAwsImageUrl()
     this.getFavorites();
     this.getPostsOnlyByUser();
   }
@@ -47,6 +48,7 @@ class Profile extends Component {
   // Update profile information if subject user changes
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.location.state.user.id !== this.props.location.state.user.id) {
+      this.getAwsImageUrl()
       this.getFavorites();
       this.getPostsOnlyByUser();
       this.setState({
@@ -66,12 +68,21 @@ class Profile extends Component {
       });
     });
   };
-
+  getAwsImageUrl = () => {
+    API.getAwsImageUrl(this.props.location.state.user.id)
+      .then(res => {
+        console.log(res.data.url)
+        // console.log(this)
+        this.setState({
+          awsImageUrl: res.data.url,
+        });
+        console.log(this.state.awsImageUrl)
+      })
+  }
   // Get user's FAVORITES
   getFavorites = () => {
     API.getFavorites(this.props.location.state.user.id)
       .then(res => {
-        // console.log(res.data)
         if (res.data.length === 0) {
           this.setState({
             favorites: [],
@@ -83,13 +94,6 @@ class Profile extends Component {
             favorites: res.data
           });
         }
-        API.getAwsImageUrl(this.props.location.state.user.id)
-        .then(res => {
-          console.log(res)
-          this.setState({
-            awsImageUrl: res.url,
-          });
-        })
       })
       .catch(() => {
         this.setState({
@@ -219,6 +223,7 @@ class Profile extends Component {
   }
 
   render() {
+    
 
     return (
       <div className="container">
@@ -231,6 +236,7 @@ class Profile extends Component {
 
               <ProfileHeader
                 user={this.props.location.state.user}
+                awsImageUrl={this.state.awsImageUrl}
                 numPosts={this.state.posts.length}
                 numFavs={this.state.favorites.length}
                 theme={this.props.theme}
