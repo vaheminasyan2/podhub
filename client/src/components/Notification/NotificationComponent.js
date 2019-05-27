@@ -44,7 +44,7 @@ class NotificationComponent extends Component {
                                 >
 
                                     <div className="notificationText">
-                                        <p className={`notif`}>
+                                        <p className={`notif-${this.props.theme}`}>
                                             <strong>{this.props.userName}</strong>&nbsp;
                                     started following you -- {moment(this.props.date).startOf().fromNow()}
                                         </p>
