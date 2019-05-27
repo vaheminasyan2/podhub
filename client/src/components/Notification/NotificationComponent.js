@@ -6,6 +6,7 @@ import "./notification.css";
 class NotificationComponent extends Component {
 
     render() {
+
         return (
             <div className="row" id={`notification-${this.props.theme}`}>
 

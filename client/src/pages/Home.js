@@ -3,12 +3,13 @@ import Container from "../components/Container/container";
 import Row from "../components/Row/row";
 import Post from "../components/Post/post";
 import API from "../utils/API";
-import { faComment, faHeart } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faComment, faHeart, faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import "./Home.css";
 
-library.add(faComment);
-library.add(faHeart);
+library.add(faComment, faHeart, faArrowUp);
+
 
 let moment = require("moment");
 
@@ -22,11 +23,15 @@ class Home extends Component {
             user: null,
             scrollToPost: false,
             scrollToPostId: "",
+            uploadNewPost: false
         }
     }
 
     componentDidMount() {
         this.getPosts();
+        this.setState({
+            uploadNewPost: false
+        })
         if (this.props.location.state !== undefined) {
             this.setState({
                 user: this.props.location.state.user,
@@ -42,10 +47,20 @@ class Home extends Component {
     componentWillReceiveProps(nextProps) {
         // You don't have to do this check first, but it can help prevent an unneeded render
         if (nextProps.newPost === true) {
-            this.getPosts();
+            this.setState({
+                uploadNewPost: true
+            })
         }
     }
 
+    updatePage = () => {
+        this.setState({
+            uploadNewPost: false
+        })
+        this.getPosts();
+        this.scrollToTop();
+        this.props.setNewPostAlertOff();
+    }
 
     // POSTS
     // ===============================================
@@ -114,9 +129,23 @@ class Home extends Component {
         })
     }
 
+    scrollToTop = () => {
+        window.scrollTo(0, 0);
+    }
+
     render() {
+        console.log(this.state.uploadNewPost)
         return (
             <div className={`container bg-${this.props.theme} rounded`} id="post-container">
+                {this.state.uploadNewPost === true
+                    ?
+                    <div className="col sticky"
+                        onClick={() => (this.updatePage())}
+                    >
+                        New post <FontAwesomeIcon icon="arrow-up" /></div>
+
+                    : null
+                }
                 <Row>
                     {this.state.posts.length > 0
                         ? (

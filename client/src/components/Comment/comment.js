@@ -29,7 +29,7 @@ class Comment extends Component {
             comment: this.props.comment,
             numberOfLikes: this.props.comment.numberOfLikes,
             userListCommentLikes: []
-        }, () => {this.getUsersListCommentLikes(this.state.comment.id)});
+        }, () => { this.getUsersListCommentLikes(this.state.comment.id) });
     }
 
     // Likes or unlikes a comment
@@ -98,7 +98,7 @@ class Comment extends Component {
                     <div
                         className="row comment-top-row"
                     >
-                        <Link 
+                        <Link
                             to={{
                                 pathname: "/profile",
                                 state: {
@@ -158,18 +158,18 @@ class Comment extends Component {
                                     arrow={false}
                                 >
                                     {this.state.userListCommentLikes.map(user => (
-                                        <Link 
+                                        <Link
                                             to={{
                                                 pathname: "/profile",
                                                 state: {
                                                     user: {
-                                                            id: user.id,
-                                                            name: user.name,
-                                                            profileImage: user.image,
-                                                        }
+                                                        id: user.id,
+                                                        name: user.name,
+                                                        profileImage: user.image,
+                                                    }
                                                 }
                                             }}
-                                            className="row" 
+                                            className="row"
                                             key={user.id}
                                         >
                                             <div className="col-3 m-0">
@@ -201,7 +201,7 @@ class Comment extends Component {
                                         this.props.delete(this.state.comment.id);
                                     }}
                                 >
-                                Delete
+                                    Delete
                                 </button>
                             </div>
                             : null

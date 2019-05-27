@@ -25,6 +25,9 @@ import "./App.css";
 
 import io from "socket.io-client";
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
+library.add(faArrowUp);
 
 class App extends Component {
 
@@ -50,7 +53,7 @@ class App extends Component {
       socket: null,
       APICalls: 0,
       notificationAlert: "",
-      newPost: null,
+      newPost: false,
       newNotification: null,
     };
   }
@@ -63,7 +66,7 @@ class App extends Component {
   // Check Session Storage for Audio Settings every 500ms to display audio player in navbar
   componentDidMount = () => {
     this._isMounted = true;
-    this.loadUserFromLocalStorage();
+    this.loadUserFromlocalStorage();
   }
 
   setNotificationAlertOff = () => {
@@ -88,11 +91,17 @@ class App extends Component {
   }
 
   // Get date & time of the latest notification record in the user's notification history to know if we should alert user about new notifications or not  
-  isNewNotification = () => {
+  isNewNotification = (id) => {
     API.isNewNotification(this.state.user.id)
       .then(res => {
-        if (res.data) {
+        if (res.data > 0) {
           this.setNotificationAlertOn();
+          if (id === "toast") {
+            toast("You have " + res.data + " new notifications", {
+              className: 'toast-container-notif',
+              bodyClassName: "toast-text",
+            });
+          }
         }
         else {
           this.setState({
@@ -100,6 +109,7 @@ class App extends Component {
           });
           localStorage.setItem("notificationAlert", "off")
         }
+
       })
   };
 
@@ -255,14 +265,22 @@ class App extends Component {
     this.setState({
       user: userData,
       logout: false
-    }, () => this.isNewNotification());
+    }, () => this.isNewNotification("toast"));
   }
 
   //Receives notification about newly shared post
-  onPostShared = (postId) => {
+  onPostShared = (postId, userId) => {
     //console.log("New Post!", postId);
+    if (userId !== this.state.user.id) {
+      this.setState({
+        newPost: true
+      });
+    }
+  }
+
+  setNewPostAlertOff = () => {
     this.setState({
-      newPost: true
+      newPost: false
     })
   }
 
@@ -314,8 +332,8 @@ class App extends Component {
   logout = () => {
 
     localStorage.clear();
-    sessionStorage.clear();
-    //this.state.socket.disconnect();
+    localStorage.clear();
+    this.state.socket.disconnect();
 
     this.setState({
       user: null,
@@ -325,10 +343,11 @@ class App extends Component {
   }
 
   // Load user from local storage if available
-  loadUserFromLocalStorage() {
+  loadUserFromlocalStorage() {
 
     if (this.state.user) {
-      this.initializeSocket(this.state.user.id)
+      this.initializeSocket(this.state.user.id);
+      this.isNewNotification("no-toast")
       return;
     }
 
@@ -336,8 +355,9 @@ class App extends Component {
       this.setState({
         user: JSON.parse(localStorage.getItem("user")),
         notificationAlert: localStorage.getItem("notificationAlert")
-      });
-      this.initializeSocket(JSON.parse(localStorage.getItem("user")).id)
+      }, () => this.isNewNotification("no-toast")
+      );
+      this.initializeSocket(JSON.parse(localStorage.getItem("user")).id);
     }
   }
 
@@ -387,12 +407,6 @@ class App extends Component {
       theme: "light",
     });
   }
-
-  // userLoggedIn = (socket, userId) => {
-  //   this.setState({
-  //     socket
-  //   });
-  //}
 
   render() {
     //console.log(this.state.socket)
@@ -493,11 +507,13 @@ class App extends Component {
                         <div className="row">
                           <div className="col-md-2 col-xs-0"></div>
                           <div className="col-md-8 col-xs-12">
+
                             <Home {...props}
                               user={this.state.user}
                               toApp={this.toApp}
                               theme={this.state.theme}
                               newPost={this.state.newPost}
+                              setNewPostAlertOff={this.setNewPostAlertOff}
                             />
                           </div>
                           <div className="col-md-2 col-xs-0"></div>
