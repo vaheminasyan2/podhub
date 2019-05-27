@@ -30,7 +30,7 @@ class Home extends Component {
     componentDidMount() {
         this.getPosts();
         this.setState({
-            uploadNewPost:false
+            uploadNewPost: false
         })
         if (this.props.location.state !== undefined) {
             this.setState({
@@ -134,7 +134,7 @@ class Home extends Component {
     }
 
     render() {
-console.log(this.state.uploadNewPost)
+        console.log(this.state.uploadNewPost)
         return (
             <div className={`container bg-${this.props.theme} rounded`} id="post-container">
                 {this.state.uploadNewPost === true

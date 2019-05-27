@@ -68,7 +68,7 @@ class Listen extends Component {
     handleShareEpisode = event => {
         event.preventDefault();
         this.handleCloseModal();
-       
+
 
         let userId = JSON.parse(localStorage.getItem("user")).id;
 

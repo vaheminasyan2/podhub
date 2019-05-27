@@ -550,7 +550,6 @@ class App extends Component {
                         changeToPlay={this.changeToPlay}
                         itIsPlaying={this.state.isPlaying}
                         theme={this.state.theme}
-                        setNewPostAlertOff={this.setNewPostAlertOff}
                       />
                     }
 
