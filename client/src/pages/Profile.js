@@ -34,6 +34,7 @@ class Profile extends Component {
       postMessage: "",
       favMessage: "",
       scrollLeft: 0,
+      awsImageUrl:""
     };
   }
 
@@ -70,6 +71,7 @@ class Profile extends Component {
   getFavorites = () => {
     API.getFavorites(this.props.location.state.user.id)
       .then(res => {
+        // console.log(res.data)
         if (res.data.length === 0) {
           this.setState({
             favorites: [],
@@ -81,6 +83,13 @@ class Profile extends Component {
             favorites: res.data
           });
         }
+        API.getAwsImageUrl(this.props.location.state.user.id)
+        .then(res => {
+          console.log(res)
+          this.setState({
+            awsImageUrl: res.url,
+          });
+        })
       })
       .catch(() => {
         this.setState({
