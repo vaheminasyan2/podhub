@@ -6,12 +6,11 @@ const bluebird = require("bluebird");
 const multiparty = require("multiparty");
 class AWSController {
   /**
-   * create a new comment in database
+   * upload the image to AWS S3 Bucket
    * @param {*} req
    * @param {*} res
    */
   awsUploadImage(req, res) {
-    console.log("hello aws");
 
     // configure the keys for accessing AWS
     AWS.config.update({
@@ -60,6 +59,25 @@ class AWSController {
         return res.status(400).send(error);
       }
     });
+  }
+
+  /**
+   * Get the image url from AWS S3 Bucket
+   * @param {*} req
+   * @param {*} res
+   */
+  awsGetImageUrl(req, res) {
+    var params = {
+      Bucket: "podhub-images", 
+      Key: `podhubBucket/${req.params.userId}.png`, 
+     };
+  
+    s3.getSignedUrl('getObject', params, function (err, url) {
+      if (err) throw err
+      console.log('Your generated pre-signed URL is', url);
+        // res.json({url:url})
+    });
+  
   }
 }
 module.exports = AWSController;
