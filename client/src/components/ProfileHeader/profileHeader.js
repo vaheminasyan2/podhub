@@ -49,8 +49,6 @@ class ProfileHeader extends Component {
             buttonTheme: buttonTheme,
             numFavs: this.props.numFavs
         }, () => {this.getProfileHeader()}); 
-
-        console.log("Mount", this.state);
     }
 
     getProfileHeader = () => {
@@ -80,8 +78,6 @@ class ProfileHeader extends Component {
             this.getNumFollowers();
             this.getNumFollowing();
         }
-
-        console.log("Update", this.state);
     }  
 
 
