@@ -134,7 +134,7 @@ class Home extends Component {
     }
 
     render() {
-        console.log(this.state.uploadNewPost)
+        
         return (
             <div className={`container bg-${this.props.theme} rounded`} id="post-container">
                 {this.state.uploadNewPost === true

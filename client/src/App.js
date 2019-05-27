@@ -69,6 +69,7 @@ class App extends Component {
     this.loadUserFromlocalStorage();
   }
 
+  // Set notification alert to off 
   setNotificationAlertOff = () => {
     this.setState({
       notificationAlert: "off"
