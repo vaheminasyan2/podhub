@@ -236,7 +236,7 @@ class Navbar extends Component {
                   <FontAwesomeIcon icon="bell" />
                   <span className={`navbar-theme-{this.props.theme}`}>&nbsp; Notifications </span>
                   {notificationAlert === "on" && window.location.pathname !== "/notifications"
-                    ? <FontAwesomeIcon icon="circle" size="xs" className="mb-1" />
+                    ? <FontAwesomeIcon icon="circle" size="xs" className="mb-1" color="purple" />
                     : null
                   }
                 </Link>
