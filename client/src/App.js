@@ -91,15 +91,17 @@ class App extends Component {
   isNewNotification = () => {
     API.isNewNotification(this.state.user.id)
       .then(res => {
-        if (res.data) {
-          this.setNotificationAlertOn();
-        }
-        else {
-          this.setState({
-            notificationAlert: "off"
-          });
-          localStorage.setItem("notificationAlert", "off")
-        }
+        console.log(res.data)
+        // if (res.data) {
+        //   this.setNotificationAlertOn();
+        // }
+        // else {
+        //   this.setState({
+        //     notificationAlert: "off"
+        //   });
+        //   localStorage.setItem("notificationAlert", "off")
+        // }
+
       })
   };
 

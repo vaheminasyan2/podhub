@@ -210,7 +210,7 @@ class Profile extends Component {
   }
 
   render() {
-console.log(this.props.location.state.user)
+
     return (
       <div className="container">
         <Row>
