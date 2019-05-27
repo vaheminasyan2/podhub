@@ -98,10 +98,18 @@ class App extends Component {
         if (res.data > 0) {
           this.setNotificationAlertOn();
           if (id === "toast") {
-            toast("You have " + res.data + " new notifications", {
-              className: 'toast-container-notif',
-              bodyClassName: "toast-text",
-            });
+            if (res.data === 1) {
+              toast("You have " + res.data + " new notification", {
+                className: 'toast-container-notif',
+                bodyClassName: "toast-text",
+              });
+            }
+            else {
+              toast("You have " + res.data + " new notifications", {
+                className: 'toast-container-notif',
+                bodyClassName: "toast-text",
+              });
+            }
           }
         }
         else {
