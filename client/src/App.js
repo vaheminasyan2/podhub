@@ -49,7 +49,9 @@ class App extends Component {
       theme: "dark",
       socket: null,
       APICalls: 0,
-      notificationAlert: false
+      notificationAlert: "",
+      newPost: null,
+      newNotification: null,
     };
   }
 
@@ -67,21 +69,23 @@ class App extends Component {
 
   setNotificationAlertOff = () => {
     this.setState({
-      notificationAlert: false
+      notificationAlert: "off"
     });
 
-    localStorage.setItem("notificationAlert", false)
+    localStorage.setItem("notificationAlert", "off")
 
     API.lastCheckedNotification(this.state.user.id, { notificationsSeen: moment().format() })
       .then(res => { })
   }
 
   setNotificationAlertOn = () => {
-    this.setState({
-      notificationAlert: true
-    });
+    if (window.location.pathname !== "/notifications") {
+      this.setState({
+        notificationAlert: "on"
+      });
 
-    localStorage.setItem("notificationAlert", true)
+      localStorage.setItem("notificationAlert", "on")
+    }
   }
 
   // Get date & time of the latest notification record in the user's notification history to know if we should alert user about new notifications or not  
@@ -93,9 +97,9 @@ class App extends Component {
         }
         else {
           this.setState({
-            notificationAlert: false
+            notificationAlert: "off"
           });
-          localStorage.setItem("notificationAlert", false)
+          localStorage.setItem("notificationAlert", "off")
         }
       })
   };
@@ -231,9 +235,9 @@ class App extends Component {
 
   // Initialize Socket 
   initializeSocket = (id) => {
-   const socket = io(window.location.protocol +`//`+ window.location.host + `?userId=${id}`);
+    const socket = io(window.location.protocol + `//` + window.location.host + `?userId=${id}`);
 
-    //  socket.on("share", this.onPostShared);
+    socket.on("share", this.onPostShared);
     socket.on("comment", this.onCommented);
     socket.on("follow", this.onFollow);
     socket.on("post_like", this.onPostLiked);
@@ -255,11 +259,13 @@ class App extends Component {
     });
   }
 
-  // Receives notification about newly shared post
-  // onPostShared = (postId) => {
-  //   console.log("New Post!", postId);
-  //   alert("New Post! " + postId);
-  // }
+  //Receives notification about newly shared post
+  onPostShared = (postId) => {
+    //console.log("New Post!", postId);
+    this.setState({
+      newPost: true
+    })
+  }
 
   onCommented = (name, comment, title) => {
     toast(name + " commented: " + comment + " on your post: " + title, {
@@ -267,6 +273,9 @@ class App extends Component {
       bodyClassName: "toast-text",
     });
     this.setNotificationAlertOn();
+    this.setState({
+      newNotification: true
+    })
   }
 
   onCommentLiked = (name, comment) => {
@@ -275,6 +284,9 @@ class App extends Component {
       bodyClassName: "toast-text",
     });
     this.setNotificationAlertOn();
+    this.setState({
+      newNotification: true
+    })
   }
 
   onPostLiked = (name, title) => {
@@ -283,6 +295,9 @@ class App extends Component {
       bodyClassName: "toast-text",
     });
     this.setNotificationAlertOn();
+    this.setState({
+      newNotification: true
+    })
   }
 
   onFollow = (name) => {
@@ -291,6 +306,9 @@ class App extends Component {
       bodyClassName: "toast-text",
     });
     this.setNotificationAlertOn();
+    this.setState({
+      newNotification: true
+    })
   }
 
   // Logout current user
@@ -480,6 +498,7 @@ class App extends Component {
                               user={this.state.user}
                               toApp={this.toApp}
                               theme={this.state.theme}
+                              newPost={this.state.newPost}
                             />
                           </div>
                           <div className="col-md-2 col-xs-0"></div>
@@ -558,6 +577,7 @@ class App extends Component {
                             <Notifications
                               user={this.state.user}
                               theme={this.state.theme}
+                              newNotification={this.state.newNotification}
                             />
                           </div>
                         </div>
