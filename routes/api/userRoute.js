@@ -23,12 +23,12 @@ router.post("/", (req, res) => {
 });
 
 /**
- * Route to get user About Me section
+ * Route to get user Profile Header section
  * @param {*} req
  * @param {*} res
  */
-router.get("/getAboutMe/:googleId", (req, res) => {
-    controller.getAboutMe(req, res);
+router.get("/getProfileHeader/:googleId", (req, res) => {
+    controller.getProfileHeader(req, res);
 });
 
 /**
