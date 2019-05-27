@@ -41,6 +41,11 @@ class Profile extends Component {
   componentDidMount() {
     this.getFavorites();
     this.getPostsOnlyByUser();
+    this.setState({
+      user: this.props.location.state.user,
+    }, () => {
+      this.getProfileHeader();
+    })
   }
 
   // Update profile information if subject user changes
@@ -52,6 +57,19 @@ class Profile extends Component {
         user: this.props.location.state.user
       });
     }
+  }
+
+  getProfileHeader = () => {
+    API.getProfileHeader(this.state.user.googleId)
+        .then(res => {
+            this.setState({
+                userName: res.data.name,
+                userBio: res.data.aboutMe
+            });
+        })
+        .catch((err) => {
+            console.log("Error getting Profile Header", err);
+        });
   }
 
   // POPULATE POST & FAVORITE INFORMATION
