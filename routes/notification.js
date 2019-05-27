@@ -25,7 +25,7 @@ class Notification {
         const userIdAsString = userId.toString();
         console.log("Notify user: ", userIdAsString, this._clients.has(userIdAsString));
         this._clients.forEach((value) => {
-            value.emit("share", postId);
+            value.emit("share", postId, userId);
         });
 
     };

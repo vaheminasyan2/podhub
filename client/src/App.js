@@ -269,11 +269,13 @@ class App extends Component {
   }
 
   //Receives notification about newly shared post
-  onPostShared = (postId) => {
+  onPostShared = (postId, userId) => {
     //console.log("New Post!", postId);
-    this.setState({
-      newPost: true
-    })
+    if (userId !== this.state.user.id) {
+      this.setState({
+        newPost: true
+      });
+    }
   }
 
   setNewPostAlertOff = () => {
@@ -548,6 +550,7 @@ class App extends Component {
                         changeToPlay={this.changeToPlay}
                         itIsPlaying={this.state.isPlaying}
                         theme={this.state.theme}
+                        setNewPostAlertOff={this.setNewPostAlertOff}
                       />
                     }
 
