@@ -33,7 +33,7 @@ class ProfileHeader extends Component {
       showFollowingModal: false,
       numFavs: 0,
       file: null,
-      awsimageurl: ""
+      awsImageurl: ""
     };
   }
 
@@ -47,11 +47,11 @@ class ProfileHeader extends Component {
     if (this.props.theme === "dark") {
       buttonTheme = "light";
     }
-
     this.setState({
         user: this.props.user,
         buttonTheme: buttonTheme,
-        numFavs: this.props.numFavs
+        numFavs: this.props.numFavs,
+        awsImageurl: this.props.awsImageUrl
       }, () => {this.getAboutMe()});
   }
 
@@ -81,6 +81,13 @@ class ProfileHeader extends Component {
       this.getNumFollowers();
       this.getNumFollowing();
     }
+
+    if (prevProps.awsImageUrl != this.props.awsImageUrl) {
+      this.setState({
+        awsImageurl: this.props.awsImageUrl
+      });
+    }
+    
   }
 
 
@@ -311,12 +318,11 @@ class ProfileHeader extends Component {
     API.uploadImageAWS(this.props.user.id, formData, header)
       .then((response) => {
         console.log(response);
-        let url = response.data.Location;
         console.log(this);
         this.setState({
-          awsimageurl: response.data.Location
+          awsImageurl: response.data.Location
         });
-        console.log(this.state.awsimageurl);
+        console.log("image",this.state.awsImageurl);
       })
       .catch(err => {
         console.log(err);
@@ -329,7 +335,7 @@ class ProfileHeader extends Component {
         <div className={`row userProfile rounded bg-${this.props.theme}`}>
           <div className="col-3">
             <img
-              src={this.state.awsimageurl || this.props.user.profileImage}
+              src={this.state.awsImageurl || this.props.user.profileImage}
               alt="User"
               id="userMainProfileImage"
               className={`rounded image-${this.props.theme}`}
