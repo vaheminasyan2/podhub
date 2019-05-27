@@ -4,6 +4,7 @@ const userRoutes = require("./userRoute");
 const postRoutes = require("./postRoute");
 const favoriteRoutes = require("./favoriteRoute");
 const commentRoute = require("./commentRoute");
+const awsRoute = require("./awsRoute");
 
 // User routes
 router.use("/users", userRoutes);
@@ -16,6 +17,9 @@ router.use("/favorites", favoriteRoutes);
 
 // Favorite Routes
 router.use("/comments", commentRoute);
+
+// AWS Routes
+router.use("/aws", awsRoute);
 
 // For anything else, render the html page
 router.use(function(req, res) {
