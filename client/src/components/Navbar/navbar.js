@@ -167,7 +167,7 @@ class Navbar extends Component {
               <li className="nav-item">
                 <Link
                   to={{
-                    pathname: "/home",
+                    pathname: "/home"
                   }}
                   className={
                     window.location.pathname === "/home"

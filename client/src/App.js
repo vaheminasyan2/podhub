@@ -25,6 +25,9 @@ import "./App.css";
 
 import io from "socket.io-client";
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
+library.add(faArrowUp);
 
 class App extends Component {
 
@@ -50,7 +53,7 @@ class App extends Component {
       socket: null,
       APICalls: 0,
       notificationAlert: "",
-      newPost: null,
+      newPost: false,
       newNotification: null,
     };
   }
@@ -242,7 +245,6 @@ class App extends Component {
   // Initialize Socket 
   initializeSocket = (id) => {
     const socket = io(window.location.protocol + `//` + window.location.host + `?userId=${id}`);
-    console.log(socket)
 
     socket.on("share", this.onPostShared);
     socket.on("comment", this.onCommented);
@@ -271,6 +273,12 @@ class App extends Component {
     //console.log("New Post!", postId);
     this.setState({
       newPost: true
+    })
+  }
+
+  setNewPostAlertOff = () => {
+    this.setState({
+      newPost: false
     })
   }
 
@@ -398,12 +406,6 @@ class App extends Component {
     });
   }
 
-  // userLoggedIn = (socket, userId) => {
-  //   this.setState({
-  //     socket
-  //   });
-  //}
-
   render() {
     //console.log(this.state.socket)
     //console.log(this.state.user)
@@ -503,11 +505,13 @@ class App extends Component {
                         <div className="row">
                           <div className="col-md-2 col-xs-0"></div>
                           <div className="col-md-8 col-xs-12">
+
                             <Home {...props}
                               user={this.state.user}
                               toApp={this.toApp}
                               theme={this.state.theme}
                               newPost={this.state.newPost}
+                              setNewPostAlertOff={this.setNewPostAlertOff}
                             />
                           </div>
                           <div className="col-md-2 col-xs-0"></div>
