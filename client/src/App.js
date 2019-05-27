@@ -92,15 +92,19 @@ class App extends Component {
     API.isNewNotification(this.state.user.id)
       .then(res => {
         console.log(res.data)
-        // if (res.data) {
-        //   this.setNotificationAlertOn();
-        // }
-        // else {
-        //   this.setState({
-        //     notificationAlert: "off"
-        //   });
-        //   localStorage.setItem("notificationAlert", "off")
-        // }
+        if (res.data > 0) {
+          this.setNotificationAlertOn();
+          toast("You have " + res.data + " new notifications since your last login", {
+            className: 'toast-container-notif',
+            bodyClassName: "toast-text",
+          });
+        }
+        else {
+          this.setState({
+            notificationAlert: "off"
+          });
+          localStorage.setItem("notificationAlert", "off")
+        }
 
       })
   };
@@ -237,6 +241,7 @@ class App extends Component {
   // Initialize Socket 
   initializeSocket = (id) => {
     const socket = io(window.location.protocol + `//` + window.location.host + `?userId=${id}`);
+    console.log(socket)
 
     socket.on("share", this.onPostShared);
     socket.on("comment", this.onCommented);
@@ -317,7 +322,7 @@ class App extends Component {
 
     localStorage.clear();
     sessionStorage.clear();
-    //this.state.socket.disconnect();
+    this.state.socket.disconnect();
 
     this.setState({
       user: null,
