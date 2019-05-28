@@ -56,11 +56,11 @@ class ProfileHeader extends Component {
     getProfileHeader = () => { 
         API.getProfileHeader(this.state.user.id)
             .then(res => {
-                console.log(this.props, this.state);
                 this.setState({
                     userName: res.data.name,
                     userBio: res.data.aboutMe
                 });
+                console.log(this.props, this.state);
             })
             .catch((err) => {
                 console.log("Error getting Profile Header", err);
@@ -139,12 +139,6 @@ class ProfileHeader extends Component {
         });
     }
 
-    setNewLocation = (event) => {
-        this.setState({
-            newLocation: event.target.value
-        });
-    }
-
     setNewUsername = (event) => {
         this.setState({
             newUsername: event.target.value
@@ -172,10 +166,6 @@ class ProfileHeader extends Component {
                     aboutMe: this.state.newBio || this.state.userBio,
                 });
         });
-
-        
-
-        
     }
 
     cancelEditProfile = () => {
@@ -430,7 +420,7 @@ class ProfileHeader extends Component {
                                             {this.state.user.id === JSON.parse(localStorage.getItem("user")).id ? (
                                                 this.state.newBio || this.state.userBio || JSON.parse(localStorage.getItem("user")).aboutMe
                                             ) : (
-                                                this.props.user.userBio
+                                                this.state.userBio || this.props.user.userBio
                                             )}
                                         </div>
 
