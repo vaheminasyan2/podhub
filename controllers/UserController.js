@@ -209,14 +209,14 @@ class UserController {
       })
   }
 
-  getAboutMe(req, res) {
+  getProfileHeader(req, res) {
     db.user.findAll({ 
       where: { 
-        googleId: req.params.googleId 
+        id: req.params.googleId 
       }
     })
-    .spread(function(aboutMe, created) {
-      res.json(aboutMe);
+    .spread(function(profileHeader, created) {
+      res.json(profileHeader);
     });
   }
 
