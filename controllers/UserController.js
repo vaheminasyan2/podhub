@@ -212,7 +212,7 @@ class UserController {
   getProfileHeader(req, res) {
     db.user.findAll({ 
       where: { 
-        googleId: req.params.googleId 
+        id: req.params.googleId 
       }
     })
     .spread(function(profileHeader, created) {
