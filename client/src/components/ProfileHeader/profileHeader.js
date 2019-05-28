@@ -44,6 +44,8 @@ class ProfileHeader extends Component {
             buttonTheme = "light";
         }
 
+        console.log("User", this.props.user);
+
         this.setState({
             user: this.props.user,
             buttonTheme: buttonTheme,
@@ -58,6 +60,7 @@ class ProfileHeader extends Component {
                     userName: res.data.name,
                     userBio: res.data.aboutMe
                 });
+                console.log(this.props, this.state);
             })
             .catch((err) => {
                 console.log("Error getting Profile Header", err);
@@ -125,8 +128,14 @@ class ProfileHeader extends Component {
     }
 
     setNewBio = (event) => {
+
+        let newBio = event.target.value;
+
+        if (event.target.value === "") {
+            newBio = "";
+        }
         this.setState({
-            newBio: event.target.value,
+            newBio: newBio,
         });
     }
 
@@ -325,9 +334,8 @@ class ProfileHeader extends Component {
                                             id="usernameTextarea"
                                             maxLength="75"
                                             onChange={this.setNewUsername}
-                                            value={this.state.newUsername || this.state.userName}
+                                            defaultValue={this.state.newUsername || this.state.userName}
                                         >
-                                            {this.state.userName || this.state.userName}
                                         </textarea>
                                     </form>
                                 )}
