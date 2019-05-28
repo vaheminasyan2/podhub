@@ -44,8 +44,6 @@ class ProfileHeader extends Component {
             buttonTheme = "light";
         }
 
-        console.log(this.props);
-
         this.setState({
             user: this.props.user,
             buttonTheme: buttonTheme,
