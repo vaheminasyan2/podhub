@@ -23,12 +23,12 @@ router.post("/", (req, res) => {
 });
 
 /**
- * Route to get user About Me section
+ * Route to get user Profile Header section
  * @param {*} req
  * @param {*} res
  */
-router.get("/getAboutMe/:googleId", (req, res) => {
-    controller.getAboutMe(req, res);
+router.get("/getProfileHeader/:googleId", (req, res) => {
+    controller.getProfileHeader(req, res);
 });
 
 /**
@@ -132,6 +132,14 @@ router.get("/:id/notifications", (req, res) => controller.getNotifications(req, 
  * @param {*} res
  */
 router.put("/:id/lastCheckedNotification", (req, res) => controller.update(req, res));
+
+
+/**
+ * Get if new notifications are available for user <<--------------Login------------->>
+ * @param {*} req
+ * @param {*} res
+ */
+router.get("/:id/isNewnotification", (req, res) => controller.isNewNotification(req, res));
 
 
 module.exports = router;

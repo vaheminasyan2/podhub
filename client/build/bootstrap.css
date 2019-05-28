@@ -46,6 +46,9 @@ html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  min-height: 100vh;
+  height: 100%;
+  width: 100vw;
 }
 
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
@@ -6518,13 +6521,23 @@ button.bg-primary:focus {
   background-color: #0062cc !important;
 }
 
-.bg-secondary .dark {
+.bg-secondary {
   background-color: #6c757d !important;
 }
 
-.bg-secondary .light {
-  background-color: white !important;
+.dark {
+  background-color: #6c757d !important;
+  color: white !important;
 }
+
+.light {
+  background-color: #dbdbdb !important;
+  color: black !important;
+}
+
+/* .bg-secondary .light {
+  background-color: white !important;
+} */
 
 a.bg-secondary:hover, a.bg-secondary:focus,
 button.bg-secondary:hover,

@@ -25,6 +25,9 @@ import "./App.css";
 
 import io from "socket.io-client";
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
+library.add(faArrowUp);
 
 class App extends Component {
 
@@ -49,7 +52,9 @@ class App extends Component {
       theme: "dark",
       socket: null,
       APICalls: 0,
-      notificationAlert: false
+      notificationAlert: "",
+      newPost: false,
+      newNotification: null,
     };
   }
 
@@ -61,42 +66,59 @@ class App extends Component {
   // Check Session Storage for Audio Settings every 500ms to display audio player in navbar
   componentDidMount = () => {
     this._isMounted = true;
-    this.loadUserFromLocalStorage();
-    //this.isNewNotification(this.user.id);
+    this.loadUserFromlocalStorage();
   }
 
+  // Set notification alert to off 
   setNotificationAlertOff = () => {
     this.setState({
-      notificationAlert: false
+      notificationAlert: "off"
     });
 
-    localStorage.setItem("notificationAlert", false)
+    localStorage.setItem("notificationAlert", "off")
 
     API.lastCheckedNotification(this.state.user.id, { notificationsSeen: moment().format() })
       .then(res => { })
   }
 
   setNotificationAlertOn = () => {
-    this.setState({
-      notificationAlert: true
-    });
+    if (window.location.pathname !== "/notifications") {
+      this.setState({
+        notificationAlert: "on"
+      });
 
-    localStorage.setItem("notificationAlert", true)
+      localStorage.setItem("notificationAlert", "on")
+    }
   }
 
   // Get date & time of the latest notification record in the user's notification history to know if we should alert user about new notifications or not  
-  isNewNotification = () => {
+  isNewNotification = (id) => {
     API.isNewNotification(this.state.user.id)
       .then(res => {
-        if (res.data) {
+        if (res.data > 0) {
           this.setNotificationAlertOn();
+          if (id === "toast") {
+            if (res.data === 1) {
+              toast("You have " + res.data + " new notification", {
+                className: 'toast-container-notif',
+                bodyClassName: "toast-text",
+              });
+            }
+            else {
+              toast("You have " + res.data + " new notifications", {
+                className: 'toast-container-notif',
+                bodyClassName: "toast-text",
+              });
+            }
+          }
         }
         else {
           this.setState({
-            notificationAlert: false
+            notificationAlert: "off"
           });
-          localStorage.setItem("notificationAlert", false)
+          localStorage.setItem("notificationAlert", "off")
         }
+
       })
   };
 
@@ -231,9 +253,9 @@ class App extends Component {
 
   // Initialize Socket 
   initializeSocket = (id) => {
-   const socket = io(window.location.protocol +`//`+ window.location.host + `?userId=${id}`);
+    const socket = io(window.location.protocol + `//` + window.location.host + `?userId=${id}`);
 
-    //  socket.on("share", this.onPostShared);
+    socket.on("share", this.onPostShared);
     socket.on("comment", this.onCommented);
     socket.on("follow", this.onFollow);
     socket.on("post_like", this.onPostLiked);
@@ -247,19 +269,29 @@ class App extends Component {
 
   // Log the user into the site
   handleUser = (userData) => {
-    this.initializeSocket(userData.id)
+    this.initializeSocket(userData.id);
 
     this.setState({
       user: userData,
       logout: false
-    });
+    }, () => this.isNewNotification("toast"));
   }
 
-  // Receives notification about newly shared post
-  // onPostShared = (postId) => {
-  //   console.log("New Post!", postId);
-  //   alert("New Post! " + postId);
-  // }
+  //Receives notification about newly shared post
+  onPostShared = (postId, userId) => {
+    //console.log("New Post!", postId);
+    if (userId !== this.state.user.id) {
+      this.setState({
+        newPost: true
+      });
+    }
+  }
+
+  setNewPostAlertOff = () => {
+    this.setState({
+      newPost: false
+    })
+  }
 
   onCommented = (name, comment, title) => {
     toast(name + " commented: " + comment + " on your post: " + title, {
@@ -267,6 +299,9 @@ class App extends Component {
       bodyClassName: "toast-text",
     });
     this.setNotificationAlertOn();
+    this.setState({
+      newNotification: true
+    })
   }
 
   onCommentLiked = (name, comment) => {
@@ -275,6 +310,9 @@ class App extends Component {
       bodyClassName: "toast-text",
     });
     this.setNotificationAlertOn();
+    this.setState({
+      newNotification: true
+    })
   }
 
   onPostLiked = (name, title) => {
@@ -283,6 +321,9 @@ class App extends Component {
       bodyClassName: "toast-text",
     });
     this.setNotificationAlertOn();
+    this.setState({
+      newNotification: true
+    })
   }
 
   onFollow = (name) => {
@@ -291,14 +332,17 @@ class App extends Component {
       bodyClassName: "toast-text",
     });
     this.setNotificationAlertOn();
+    this.setState({
+      newNotification: true
+    })
   }
 
   // Logout current user
   logout = () => {
 
     localStorage.clear();
-    sessionStorage.clear();
-    //this.state.socket.disconnect();
+    localStorage.clear();
+    this.state.socket.disconnect();
 
     this.setState({
       user: null,
@@ -308,10 +352,11 @@ class App extends Component {
   }
 
   // Load user from local storage if available
-  loadUserFromLocalStorage() {
+  loadUserFromlocalStorage() {
 
     if (this.state.user) {
-      this.initializeSocket(this.state.user.id)
+      this.initializeSocket(this.state.user.id);
+      this.isNewNotification("no-toast")
       return;
     }
 
@@ -319,8 +364,9 @@ class App extends Component {
       this.setState({
         user: JSON.parse(localStorage.getItem("user")),
         notificationAlert: localStorage.getItem("notificationAlert")
-      });
-      this.initializeSocket(JSON.parse(localStorage.getItem("user")).id)
+      }, () => this.isNewNotification("no-toast")
+      );
+      this.initializeSocket(JSON.parse(localStorage.getItem("user")).id);
     }
   }
 
@@ -370,12 +416,6 @@ class App extends Component {
       theme: "light",
     });
   }
-
-  // userLoggedIn = (socket, userId) => {
-  //   this.setState({
-  //     socket
-  //   });
-  //}
 
   render() {
     //console.log(this.state.socket)
@@ -476,10 +516,13 @@ class App extends Component {
                         <div className="row">
                           <div className="col-md-2 col-xs-0"></div>
                           <div className="col-md-8 col-xs-12">
+
                             <Home {...props}
                               user={this.state.user}
                               toApp={this.toApp}
                               theme={this.state.theme}
+                              newPost={this.state.newPost}
+                              setNewPostAlertOff={this.setNewPostAlertOff}
                             />
                           </div>
                           <div className="col-md-2 col-xs-0"></div>
@@ -558,6 +601,7 @@ class App extends Component {
                             <Notifications
                               user={this.state.user}
                               theme={this.state.theme}
+                              newNotification={this.state.newNotification}
                             />
                           </div>
                         </div>

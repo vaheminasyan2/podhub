@@ -167,7 +167,7 @@ class Navbar extends Component {
               <li className="nav-item">
                 <Link
                   to={{
-                    pathname: "/home",
+                    pathname: "/home"
                   }}
                   className={
                     window.location.pathname === "/home"
@@ -235,8 +235,8 @@ class Navbar extends Component {
                 >
                   <FontAwesomeIcon icon="bell" />
                   <span className={`navbar-theme-{this.props.theme}`}>&nbsp; Notifications </span>
-                  {notificationAlert
-                    ? <FontAwesomeIcon icon="circle" size="xs" className="mb-1" />
+                  {notificationAlert === "on" && window.location.pathname !== "/notifications"
+                    ? <FontAwesomeIcon icon="circle" size="xs" className="mb-1" id="notification-alert" />
                     : null
                   }
                 </Link>

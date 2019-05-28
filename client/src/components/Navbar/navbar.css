@@ -164,6 +164,14 @@ button > div {
     }
   }
 
+  #notification-alert {
+    color: #9E26E5
+  }
+
+  .navbarUserImg:hover {
+    cursor: pointer;
+  }
+
   /* @media only screen and (max-width: 400px) {
     .mobilePosition{
         left: 17%;
