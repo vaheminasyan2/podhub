@@ -125,9 +125,9 @@ export default {
     // USERS
     // =====================================
 
-    // Gets About Me section for user
-    getAboutMe: function (googleId) {
-        return axios.get("/api/users/getAboutMe/" + googleId);
+    // Gets Profile Header for user
+    getProfileHeader: function (googleId) {
+        return axios.get("/api/users/getProfileHeader/" + googleId);
     },
 
     // Gets existing user; creates user if doesn't exist
