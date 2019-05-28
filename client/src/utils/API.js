@@ -29,6 +29,18 @@ export default {
         return axios.delete("/api/posts/unlike/" + postId + "/" + userId);
     },
 
+    // AWS S3 IMAGE UPLOAD
+    // ====================================
+
+    // upload the user image
+    uploadImageAWS: function(userId, formData, header) {
+        return axios.post("/api/aws/awsImageUpload/" + userId, formData, header);
+    },
+
+    // get the user image url
+    getAwsImageUrl: function(userId) {
+        return axios.get("/api/aws/awsGetImageUrl/" + userId);
+    },
 
     // COMMENTS
     // =====================================
