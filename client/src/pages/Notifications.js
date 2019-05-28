@@ -11,7 +11,7 @@ class Notification extends Component {
 
     state = {
         notifications: [],
-        message: "There are no notifications"
+        message: ""
     };
 
     componentDidMount() {
@@ -28,13 +28,29 @@ class Notification extends Component {
 
     // Get all notification history for given user
     getNotifications = userId => {
+        this.setState({
+            message: "Getting notifications..."
+        });
+
         API.getNotifications(userId)
             .then(res => {
+                var message = "";
+
+                if (res.data.length === 0) {
+                    message = "There are no notifications"
+                }
                 this.setState({
+                    message: message,
                     notifications: res.data
                 });
-                //console.log(this.state.notifications)
             })
+            .catch(error => {
+                console.log(error);
+                this.setState({
+                    message: "No notifications found.",
+                    posts: []
+                });
+            });
     }
 
     render() {
