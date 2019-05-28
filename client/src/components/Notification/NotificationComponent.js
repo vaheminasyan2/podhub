@@ -5,6 +5,14 @@ import "./notification.css";
 
 class NotificationComponent extends Component {
 
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount = () => {
+        console.log(this.props);
+    }
+
     render() {
 
         return (
@@ -46,7 +54,7 @@ class NotificationComponent extends Component {
                                 >
 
                                     <div className="notificationText">
-                                        <p className={`notif`}>
+                                        <p className={`notif-${this.props.theme}`}>
                                             <strong>{this.props.userName}</strong>&nbsp;
                                     started following you -- {moment(this.props.date).startOf().fromNow()}
                                         </p>
@@ -71,7 +79,7 @@ class NotificationComponent extends Component {
                                         }}
                                     >
                                         <div className="notificationText">
-                                            <p className={`notif`} id={this.props.postId}>
+                                            <p className={`notif-${this.props.theme}`} id={this.props.postId}>
                                                 <strong>{this.props.userName}</strong>&nbsp;
                                             commented on your post -- {moment(this.props.date).startOf().fromNow()}
                                             </p>
@@ -95,7 +103,7 @@ class NotificationComponent extends Component {
                                             }}
                                         >
                                             <div className="notificationText">
-                                                <p className={`notif`} id={this.props.postId}>
+                                                <p className={`notif-${this.props.theme}`} id={this.props.postId}>
                                                     <strong>{this.props.userName}</strong>&nbsp;
                                             liked your post -- {moment(this.props.date).startOf().fromNow()}
                                                 </p>
@@ -117,7 +125,7 @@ class NotificationComponent extends Component {
                                             }}
                                         >
                                             <div className="notificationText">
-                                                <p className={`notif`} id={this.props.postId}>
+                                                <p className={`notif-${this.props.theme}`} id={this.props.postId}>
                                                     <strong>{this.props.userName}</strong>&nbsp;
                                 liked your comment -- {moment(this.props.date).startOf().fromNow()}
                                                 </p>

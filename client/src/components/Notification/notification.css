@@ -2,8 +2,16 @@
     opacity: 0.8; 
 }
 
-.notif {
-    color: white;
+.notif-light, 
+.notif-dark {
     font-size: 16px;
-    margin: 5px 0px 15px 5px
+    margin: 5px 0px 15px 5px;
+}
+
+.notif-light {
+    color: black;
+}
+
+.notif-dark {
+    color: white;
 }

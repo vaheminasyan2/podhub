@@ -16,12 +16,10 @@ class ProfileHeader extends Component {
 
         this.state = {
             user: props.user,
-            userName: props.user.name,
+            userName: null,
             newUsername: null,
-            userLocation: props.user.location,
-            userBio: "",
+            userBio: null,
             editProfile: false,
-            newLocation: null,
             newBio: null,
             userIsFollowed: null,
             numPosts: 0,
@@ -50,18 +48,19 @@ class ProfileHeader extends Component {
             user: this.props.user,
             buttonTheme: buttonTheme,
             numFavs: this.props.numFavs
-        }, () => {this.getAboutMe()}); 
+        }, () => {this.getProfileHeader()}); 
     }
 
-    getAboutMe = () => {
-        API.getAboutMe(this.state.user.googleId)
+    getProfileHeader = () => { 
+        API.getProfileHeader(this.state.user.id)
             .then(res => {
                 this.setState({
+                    userName: res.data.name,
                     userBio: res.data.aboutMe
                 });
             })
             .catch((err) => {
-                console.log("Error getting About Me", err);
+                console.log("Error getting Profile Header", err);
             });
     }
 
@@ -127,13 +126,7 @@ class ProfileHeader extends Component {
 
     setNewBio = (event) => {
         this.setState({
-            newBio: event.target.value
-        });
-    }
-
-    setNewLocation = (event) => {
-        this.setState({
-            newLocation: event.target.value
+            newBio: event.target.value,
         });
     }
 
@@ -144,17 +137,25 @@ class ProfileHeader extends Component {
     }
 
     saveProfile = () => {
-        API.updateUser(this.props.user.id,
-            {
-                name: this.state.newUsername || this.state.userName,
-                aboutMe: this.state.newBio || this.state.userBio,
-                location: this.state.newLocation || this.state.userLocation
-            })
+
         this.setState({
             userName: this.state.newUsername || this.state.userName,
             userBio: this.state.newBio || this.state.userBio,
-            userLocation: this.state.newLocation || this.state.userLocation,
             editProfile: false
+        }, () => {
+            let localUser = JSON.parse(localStorage.getItem("user"));
+
+            if (this.state.user.googleId === localUser.googleId) {
+                localUser.name = this.state.newUsername || this.state.userName;
+                localUser.aboutMe = this.state.newBio || this.state.userBio;
+                localStorage.setItem("user", JSON.stringify(localUser));
+            }
+
+            API.updateUser(this.props.user.id,
+                {
+                    name: this.state.newUsername || this.state.userName,
+                    aboutMe: this.state.newBio || this.state.userBio,
+                });
         });
     }
 
@@ -310,7 +311,13 @@ class ProfileHeader extends Component {
 
                         <Row>
                             {!this.state.editProfile ? (
-                                <h2 className={`paddingTop userName profile-${this.props.theme}`}>{this.state.userName || this.props.user.name}</h2>
+                                <h2 className={`paddingTop userName profile-${this.props.theme}`}>
+                                    {JSON.parse(localStorage.getItem("user")).id === this.state.user.id ? (
+                                        this.state.newUsername || this.state.userName || JSON.parse(localStorage.getItem("user")).name
+                                    ) : (
+                                        this.props.user.name
+                                    )}
+                                </h2>
                             ) : (
                                     <form>
                                         <textarea
@@ -318,9 +325,8 @@ class ProfileHeader extends Component {
                                             id="usernameTextarea"
                                             maxLength="75"
                                             onChange={this.setNewUsername}
-                                            value={this.state.newUsername || this.state.userName}
+                                            defaultValue={this.state.newUsername || this.state.userName}
                                         >
-                                            {this.state.userName || this.state.userName}
                                         </textarea>
                                     </form>
                                 )}
@@ -390,9 +396,8 @@ class ProfileHeader extends Component {
                                         maxLength="160"
                                         onChange={this.setNewBio}
                                         placeholder="I like listening to podcasts."
-                                        value={this.state.newBio || ""}
+                                        defaultValue={this.state.newBio || this.state.userBio}
                                     >
-                                        {this.state.userBio}
                                     </textarea>
                                 </form>
 
@@ -400,14 +405,13 @@ class ProfileHeader extends Component {
 
                                     <span>
 
-                                        {/* LOCATION */}
-                                        <div id="userLocation">
-                                            {this.state.userLocation}
-                                        </div>
-
                                         {/* BIO */}
                                         <div id="userBio">
-                                            {this.state.userBio}
+                                            {this.state.user.id === JSON.parse(localStorage.getItem("user")).id ? (
+                                                this.state.newBio || this.state.userBio || JSON.parse(localStorage.getItem("user")).aboutMe
+                                            ) : (
+                                                this.state.userBio || this.props.user.userBio
+                                            )}
                                         </div>
 
                                     </span>
