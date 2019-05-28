@@ -58,7 +58,6 @@ class ProfileHeader extends Component {
                     userName: res.data.name,
                     userBio: res.data.aboutMe
                 });
-                console.log(this.props, this.state);
             })
             .catch((err) => {
                 console.log("Error getting Profile Header", err);
