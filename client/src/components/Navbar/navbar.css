@@ -206,6 +206,45 @@ button > div {
 
   }
 
+  @media only screen and (max-width: 593px) {
+    .show {
+        display: inline-block;
+    }
+
+    .show #first-set {
+        margin-top: 10px;
+        display: block;
+        margin-left: 0%;
+        text-align: center;
+    }
+
+    .show #first-set li {
+        font-size: 16px;
+        margin-left: 3%;
+        text-align: left;
+        display: block;
+        height: 35px;
+    }
+    .show #first-set a {
+        min-width: 120px;
+    }
+
+    .show #second-set {
+        display: inline;
+        margin-left: 13%;
+    }
+
+    .show #second-set #searchPods-responsive {
+        text-align: center;
+        margin-left: 34%;
+    }
+
+    .show #second-set #userLogo-responsive {
+        margin-right: 7%;
+    }
+
+  }
+
   #notification-alert {
     color: #9E26E5
   }
