@@ -44,6 +44,8 @@ class ProfileHeader extends Component {
             buttonTheme = "light";
         }
 
+        console.log(this.props);
+
         this.setState({
             user: this.props.user,
             buttonTheme: buttonTheme,
@@ -51,9 +53,10 @@ class ProfileHeader extends Component {
         }, () => {this.getProfileHeader()}); 
     }
 
-    getProfileHeader = () => {
-        API.getProfileHeader(this.state.user.googleId)
+    getProfileHeader = () => { 
+        API.getProfileHeader(this.state.user.id)
             .then(res => {
+                console.log(this.props, this.state);
                 this.setState({
                     userName: res.data.name,
                     userBio: res.data.aboutMe
@@ -125,8 +128,14 @@ class ProfileHeader extends Component {
     }
 
     setNewBio = (event) => {
+
+        let newBio = event.target.value;
+
+        if (event.target.value === "") {
+            newBio = "";
+        }
         this.setState({
-            newBio: event.target.value,
+            newBio: newBio,
         });
     }
 
@@ -322,7 +331,7 @@ class ProfileHeader extends Component {
                         <Row>
                             {!this.state.editProfile ? (
                                 <h2 className={`paddingTop userName profile-${this.props.theme}`}>
-                                    {JSON.parse(localStorage.getItem("user")).googleId === this.state.user.googleId ? (
+                                    {JSON.parse(localStorage.getItem("user")).id === this.state.user.id ? (
                                         this.state.newUsername || this.state.userName || JSON.parse(localStorage.getItem("user")).name
                                     ) : (
                                         this.props.user.name
@@ -418,7 +427,7 @@ class ProfileHeader extends Component {
 
                                         {/* BIO */}
                                         <div id="userBio">
-                                            {this.state.user.googleId === JSON.parse(localStorage.getItem("user")).googleId ? (
+                                            {this.state.user.id === JSON.parse(localStorage.getItem("user")).id ? (
                                                 this.state.newBio || this.state.userBio || JSON.parse(localStorage.getItem("user")).aboutMe
                                             ) : (
                                                 this.props.user.userBio
