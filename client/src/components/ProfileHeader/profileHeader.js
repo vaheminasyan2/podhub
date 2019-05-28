@@ -29,7 +29,8 @@ class ProfileHeader extends Component {
             following: [],
             showFollowersModal: false,
             showFollowingModal: false,
-            numFavs: 0
+            numFavs: 0,
+            awsImageurl: ""
         }
     }
 
@@ -47,7 +48,8 @@ class ProfileHeader extends Component {
         this.setState({
             user: this.props.user,
             buttonTheme: buttonTheme,
-            numFavs: this.props.numFavs
+            numFavs: this.props.numFavs,
+            awsImageurl: this.props.awsImageUrl
         }, () => {this.getProfileHeader()}); 
     }
 
@@ -77,6 +79,12 @@ class ProfileHeader extends Component {
         if (prevState.userIsFollowed !== this.state.userIsFollowed) {
             this.getNumFollowers();
             this.getNumFollowing();
+        }
+
+        if (prevProps.awsImageUrl != this.props.awsImageUrl) {
+            this.setState({
+                awsImageurl: this.props.awsImageUrl
+            });
         }
     }  
 
@@ -290,6 +298,37 @@ class ProfileHeader extends Component {
         window.scrollTo(0, to);
     }
 
+    // AWS S3 Image upload
+    handleFileUpload = event => {
+        this.setState({ file: event.target.files });
+    };
+
+    submitFile = event => {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append("file", this.state.file[0]);
+    let header = {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    };
+    // let that = this;
+    // console.log(that);
+    API.uploadImageAWS(this.props.user.id, formData, header)
+      .then((response) => {
+        console.log(response);
+        console.log(this);
+        this.setState({
+          awsImageurl: response.data.Location
+        });
+        console.log("image",this.state.awsImageurl);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
 
     render() {
 
@@ -298,7 +337,7 @@ class ProfileHeader extends Component {
                 <div className={`row userProfile rounded bg-${this.props.theme}`}>
                     <div className="col-3">
                         <img
-                            src={this.props.user.profileImage}
+                            src={this.state.awsImageurl || this.props.user.profileImage}
                             alt="User"
                             id="userMainProfileImage"
                             className={`rounded image-${this.props.theme}`}
@@ -311,6 +350,7 @@ class ProfileHeader extends Component {
 
                         <Row>
                             {!this.state.editProfile ? (
+                              <div>
                                 <h2 className={`paddingTop userName profile-${this.props.theme}`}>
                                     {JSON.parse(localStorage.getItem("user")).id === this.state.user.id ? (
                                         this.state.newUsername || this.state.userName || JSON.parse(localStorage.getItem("user")).name
@@ -318,6 +358,15 @@ class ProfileHeader extends Component {
                                         this.props.user.name
                                     )}
                                 </h2>
+                                <form onSubmit={this.submitFile}>
+                                <input
+                                  label="upload file"
+                                  type="file"
+                                  onChange={this.handleFileUpload}
+                                />
+                                <button type="submit">Confirm</button>
+                              </form>
+                              </div>
                             ) : (
                                     <form>
                                         <textarea
