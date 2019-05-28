@@ -160,7 +160,7 @@ class Navbar extends Component {
           {/* Navigation Menu */}
 
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <ul className="navbar-nav">
+            <ul className="navbar-nav" id="first-set">
 
               {/* Home */}
 
@@ -250,8 +250,8 @@ class Navbar extends Component {
 
             {/* Podcast Search form */}
 
-            <ul className="navbar-nav ml-auto">
-              <li>
+            <ul className="navbar-nav ml-auto" id="second-set">
+              <li id="searchPods-responsive">
                 <form className="form-inline my-2 my-lg-0 searchPodcastForm">
                   <input className="form-control mr-sm-2 searchPodcastInput"
                     type="search"
@@ -285,7 +285,7 @@ class Navbar extends Component {
 
               {/* Settings/Logout Dropdown Menu */}
 
-              <li>
+              <li id="userLogo-responsive">
 
                 <div
                   onClick={this.showOptionsMenu}

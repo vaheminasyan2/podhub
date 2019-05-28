@@ -164,6 +164,48 @@ button > div {
     }
   }
 
+  @media only screen and (max-width: 991px) {
+
+    .show {
+        display: inline-block;
+    }
+
+    .show #first-set {
+        display: inline;
+        margin-left: 13%;
+    }
+
+    .show #first-set li {
+        width: 20%;
+        position: relative;  
+        display: inline-block;
+    }
+
+    .show #second-set {
+        display: inline;
+        margin-left: 13%;
+    }
+
+    .show #second-set li {
+        width: 20%;
+        position: relative;  
+        display: inline-block;
+    }
+
+    .show #second-set #searchPods-responsive {
+        text-align: center;
+        margin-left: 38%;
+    }
+
+    .show #second-set #userLogo-responsive {
+        float: right;
+    }
+    .show #second-set .navbarUserImg {
+        right: 0px;
+    }
+
+  }
+
   #notification-alert {
     color: #9E26E5
   }
