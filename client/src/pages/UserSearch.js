@@ -164,27 +164,27 @@ class UserSearch extends Component {
                 {this.state.users.length ? (
                     <ul className="row userContainer">
                         {this.state.users.map(user => (
-                            <div className="container bg-dark tile m-2" key={user.id}>
+                            <div className={`container bg-${this.props.theme} tile m-2`} key={user.id}>
                                 <User
                                     userId={user.id}
                                     userName={user.name}
                                     userImage={user.profileImage}
+                                    theme={this.props.theme}
                                     handler={null}
                                 />
                                 {user.follow ? (
                                     <button
-                                        className="btn btn-outline-light buttonPosition"
+                                        className={`btn btn-outline-${this.props.theme === "light" ? ("dark"):("light")} buttonPosition`}
                                         onClick={(event) => {
                                             event.preventDefault();
                                             this.unFollowUser(user.id)
-                                        }
-                                        }
+                                        }}
                                     >
                                         Unfollow
                                     </button>
                                 ) : (
                                         <button
-                                            className="btn btn-outline-light buttonPosition"
+                                            className={`btn btn-outline-${this.props.theme === "light" ? ("dark"):("light")} buttonPosition`}
                                             onClick={(event) => {
                                                 event.preventDefault();
                                                 this.followUser(user.id)

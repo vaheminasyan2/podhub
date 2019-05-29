@@ -7,7 +7,7 @@ import "./user.css";
 // It displays information such as User Name, Profile Image, and number of Followers.
 // It includes a link to the user's profile page.
 
-function User ({ userId, userName, userImage, handler }) {
+function User ({ userId, userName, userImage, theme, handler }) {
     
     return (
 
@@ -25,7 +25,7 @@ function User ({ userId, userName, userImage, handler }) {
             onClick={handler}>
 
             <span><img className="userImage" src={userImage} alt="User"/></span>
-            <span><p className="userName searchName">{userName}</p></span>
+            <span><p className={`userName searchName color-${theme}`}>{userName}</p></span>
         </Link>
     );
 };
