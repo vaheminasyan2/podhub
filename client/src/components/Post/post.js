@@ -338,7 +338,7 @@ class Post extends Component {
                 {/* LIKES AND COMMENTS */}
 
                 <div className="row pb-1">
-                    <div className="col-md text-center col-sm-2">
+                    <div className="col-md text-center" id="responsive-likeComment">
 
                         {/* LIKES */}
 
