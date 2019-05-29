@@ -45,3 +45,9 @@
 .userContainer {
     margin: 20px auto;
 }
+
+@media only screen and (max-width: 575px) {	
+    .searchUserInput {	
+        width: 50% !important;	
+    }	
+} 
