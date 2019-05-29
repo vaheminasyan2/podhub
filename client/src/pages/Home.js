@@ -52,10 +52,6 @@ class Home extends Component {
                 uploadNewPost: true
             })
         }
-
-        if (nextProps.posts === true) {
-            console.log("new props")
-        }
     }
 
     updatePage = () => {
@@ -143,7 +139,7 @@ class Home extends Component {
     }
 
     render() {
-        console.log(this.props.newPost)
+
         return (
             <div className={`container bg-${this.props.theme} rounded`} id="post-container">
                 {this.state.uploadNewPost === true
