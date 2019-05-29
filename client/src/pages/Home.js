@@ -143,7 +143,7 @@ class Home extends Component {
                     <div className={`col rounded sticky-${this.props.theme}`}
                         onClick={() => (this.updatePage())}
                     >
-                        New posts <FontAwesomeIcon icon="arrow-up" /></div>
+                        New post <FontAwesomeIcon icon="arrow-up" /></div>
 
                     : null
                 }
