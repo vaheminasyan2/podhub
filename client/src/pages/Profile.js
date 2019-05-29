@@ -74,12 +74,12 @@ class Profile extends Component {
   getAwsImageUrl = () => {
     API.getAwsImageUrl(this.props.location.state.user.id)
       .then(res => {
-        console.log(res.data.url)
+        //console.log(res.data.url)
         // console.log(this)
         this.setState({
           awsImageUrl: res.data.url,
         });
-        console.log(this.state.awsImageUrl)
+        //console.log(this.state.awsImageUrl)
       })
   }
   // Get user's FAVORITES
