@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Container from "../components/Container/container";
 import Row from "../components/Row/row";
 import API from "../utils/API";
-import "./Notifications.css"
 import NotificationComponent from "../components/Notification/NotificationComponent";
 
 // NOTIFICATION PAGE
@@ -34,23 +33,25 @@ class Notification extends Component {
 
         API.getNotifications(this.props.user.id)
             .then(res => {
-                var message = "";
 
                 if (res.data.length === 0) {
-                    message = "There are no notifications";
+                    this.setState({
+                        message: "There are no notifications",
+                    });
                 }
-                this.setState({
-                    message: message,
-                    notifications: res.data
-                });
+                else {
+                    this.setState({
+                        notifications: res.data
+                    });
+                }
             })
             .catch(error => {
                 console.log(error);
                 this.setState({
-                    message: "No notifications found.",
-                    posts: []
+                    message: "There are no notifications",
+                    notifications: []
                 });
-            });
+            })
     }
 
     render() {

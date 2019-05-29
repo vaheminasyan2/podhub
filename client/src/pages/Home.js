@@ -140,10 +140,10 @@ class Home extends Component {
                 {this.state.uploadNewPost === true
                     ? 
          
-                    <div className="col mx-auto sticky"
+                    <div className={`col rounded sticky-${this.props.theme}`}
                         onClick={() => (this.updatePage())}
                     >
-                        New post <FontAwesomeIcon icon="arrow-up" /></div>
+                        New posts <FontAwesomeIcon icon="arrow-up" /></div>
 
                     : null
                 }
