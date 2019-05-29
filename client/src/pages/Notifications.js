@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Container from "../components/Container/container";
 import Row from "../components/Row/row";
 import API from "../utils/API";
-import "./Notifications.css"
 import NotificationComponent from "../components/Notification/NotificationComponent";
 
 // NOTIFICATION PAGE
@@ -11,29 +10,47 @@ class Notification extends Component {
 
     state = {
         notifications: [],
-        message: "There are no notifications"
+        message: ""
     };
 
     componentDidMount() {
         //console.log(this.props.user.id)
-        this.getNotifications(this.props.user.id);
+        this.getNotifications();
     };
 
     componentWillReceiveProps(nextProps) {
         // You don't have to do this check first, but it can help prevent an unneeded render
         if (nextProps.newNotification === true) {
-            this.getNotifications(this.props.user.id);
+            this.getNotifications();
         }
     }
 
     // Get all notification history for given user
-    getNotifications = userId => {
-        API.getNotifications(userId)
+    getNotifications = () => {
+        this.setState({
+            message: "Getting notifications..."
+        });
+
+        API.getNotifications(this.props.user.id)
             .then(res => {
+
+                if (res.data.length === 0) {
+                    this.setState({
+                        message: "There are no notifications",
+                    });
+                }
+                else {
+                    this.setState({
+                        notifications: res.data
+                    });
+                }
+            })
+            .catch(error => {
+                console.log(error);
                 this.setState({
-                    notifications: res.data
+                    message: "There are no notifications",
+                    notifications: []
                 });
-                //console.log(this.state.notifications)
             })
     }
 

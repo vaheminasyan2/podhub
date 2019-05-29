@@ -138,8 +138,9 @@ class Home extends Component {
         return (
             <div className={`container bg-${this.props.theme} rounded`} id="post-container">
                 {this.state.uploadNewPost === true
-                    ?
-                    <div className="col sticky"
+                    ? 
+         
+                    <div className={`col rounded sticky-${this.props.theme}`}
                         onClick={() => (this.updatePage())}
                     >
                         New post <FontAwesomeIcon icon="arrow-up" /></div>
