@@ -12,3 +12,11 @@
     display: inline;
     font-size: 12px;
 }
+
+.color-light {
+    color: black;
+}
+
+.color-dark {
+    color: white;
+}
