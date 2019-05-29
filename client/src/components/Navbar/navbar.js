@@ -249,7 +249,6 @@ class Navbar extends Component {
 
 
             {/* Podcast Search form */}
-
             <ul className="navbar-nav ml-auto" id="second-set">
               <li id="searchPods-responsive">
                 <form className="form-inline my-2 my-lg-0 searchPodcastForm">

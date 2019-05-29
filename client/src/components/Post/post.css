@@ -13,6 +13,15 @@
   color: white;
 }
 
+p.post-dark.ellipses {
+  color: rgb(212, 208, 208);
+  font-family: 'News Cycle', sans-serif;
+}
+
+.podcast-name-home {
+  font-family: 'News Cycle', sans-serif !important;
+}
+
 .btn {
   margin-right: 2%;
   right: 0;
@@ -132,7 +141,8 @@
 .podcast-name-home, 
 .episode-name-home, 
 .episode-description-home {
-  color: rgb(214, 214, 214);
+  color: rgb(212, 208, 208);
+  font-family: 'News Cycle', sans-serif !important;
 }
 
 #post-top-row-light,
@@ -191,6 +201,10 @@
 
 #playFromNavButton:focus {
   outline:0;
+}
+
+.postText {
+  color: rgb(105, 101, 101) !important;
 }
 
 @media only screen and (max-width: 768px) {

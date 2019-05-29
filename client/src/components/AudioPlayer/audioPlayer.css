@@ -154,4 +154,28 @@
 }
 
 
+@media only screen and (max-width: 535px) {
+  #audio-player-listen {
+    margin: 0px !important
+  }
+  #second-row-listen {
+    padding: 0px !important;
+  }
+}
+@media only screen and (max-width: 500px) {
+
+  #third-row-listen {
+    margin-top: 110px;
+  }
+  #audio-player-container-dark {
+    width: 375px;
+    position: absolute;
+    left: 0px;
+  }
+  #audio-player-container-dark .second-row #timeline {
+    width: 80%;
+  }
+}
+
+
 

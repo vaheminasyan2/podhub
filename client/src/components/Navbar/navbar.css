@@ -206,6 +206,18 @@ button > div {
 
   }
 
+#nav-audio-player-container {
+    margin-left: 55px;
+}
+
+#search-responsive {
+    float: right !important;
+}
+
+
+
+
+
   @media only screen and (max-width: 593px) {
     .show {
         display: inline-block;
@@ -229,19 +241,28 @@ button > div {
         min-width: 120px;
     }
 
-    .show #second-set {
-        display: inline;
-        margin-left: 13%;
-    }
-
-    .show #second-set #searchPods-responsive {
-        text-align: center;
-        margin-left: 34%;
-    }
 
     .show #second-set #userLogo-responsive {
         margin-right: 7%;
     }
+
+    .navbarUserImg {
+        /* margin-right: 10px; */
+    }
+
+  }
+
+  @media only screen and (max-width: 445px) {
+      #searchPods-responsive {
+          margin-left: 0px !important;
+      }
+      
+      .navbarUserImg {
+        width: 40px !important;
+        margin-left: 0px !important;
+        position: absolute;
+        left: 45px;
+      }
 
   }
 
@@ -252,15 +273,3 @@ button > div {
   .navbarUserImg:hover {
     cursor: pointer;
   }
-
-  /* @media only screen and (max-width: 400px) {
-    .mobilePosition{
-        left: 17%;
-    }
-  }
-
-  @media only screen and (max-width: 350px) {
-    .mobilePosition{
-        left: 12%;
-    }
-  } */
