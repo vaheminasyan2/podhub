@@ -16,28 +16,28 @@ class Notification extends Component {
 
     componentDidMount() {
         //console.log(this.props.user.id)
-        this.getNotifications(this.props.user.id);
+        this.getNotifications();
     };
 
     componentWillReceiveProps(nextProps) {
         // You don't have to do this check first, but it can help prevent an unneeded render
         if (nextProps.newNotification === true) {
-            this.getNotifications(this.props.user.id);
+            this.getNotifications();
         }
     }
 
     // Get all notification history for given user
-    getNotifications = userId => {
+    getNotifications = () => {
         this.setState({
             message: "Getting notifications..."
         });
 
-        API.getNotifications(userId)
+        API.getNotifications(this.props.user.id)
             .then(res => {
                 var message = "";
 
                 if (res.data.length === 0) {
-                    message = "There are no notifications"
+                    message = "There are no notifications";
                 }
                 this.setState({
                     message: message,
