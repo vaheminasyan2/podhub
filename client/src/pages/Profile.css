@@ -198,3 +198,12 @@ h4 {
 .right-arrow {
   right: 25px;
 }
+
+
+@media only screen and (max-width: 991px) {
+  .editProfileBtn {
+    position: absolute;
+    right: 90%;
+    top: 90%;
+  }
+}
