@@ -34,13 +34,13 @@ class Profile extends Component {
       postMessage: "",
       favMessage: "",
       scrollLeft: 0,
-      awsImageUrl:""
+      //awsImageUrl:""
     };
   }
 
   // Load user profile information
   componentDidMount() {
-    this.getAwsImageUrl()
+    //this.getAwsImageUrl()
     this.getFavorites();
     this.getPostsOnlyByUser();
     this.setState({
@@ -51,7 +51,7 @@ class Profile extends Component {
   // Update profile information if subject user changes
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.location.state.user.id !== this.props.location.state.user.id) {
-      this.getAwsImageUrl()
+      //this.getAwsImageUrl()
       this.getFavorites();
       this.getPostsOnlyByUser();
       this.setState({
@@ -71,17 +71,19 @@ class Profile extends Component {
       });
     });
   };
-  getAwsImageUrl = () => {
-    API.getAwsImageUrl(this.props.location.state.user.id)
-      .then(res => {
-        console.log(res.data.url)
-        // console.log(this)
-        this.setState({
-          awsImageUrl: res.data.url,
-        });
-        console.log(this.state.awsImageUrl)
-      })
-  }
+
+  // getAwsImageUrl = () => {
+  //   API.getAwsImageUrl(this.props.location.state.user.id)
+  //     .then(res => {
+  //       console.log(res.data.url)
+  //       // console.log(this)
+  //       this.setState({
+  //         awsImageUrl: res.data.url,
+  //       });
+  //       console.log(this.state.awsImageUrl)
+  //     })
+  // }
+  
   // Get user's FAVORITES
   getFavorites = () => {
     API.getFavorites(this.props.location.state.user.id)
@@ -239,7 +241,7 @@ class Profile extends Component {
 
               <ProfileHeader
                 user={this.props.location.state.user}
-                awsImageUrl={this.state.awsImageUrl}
+                awsImageUrl={this.props.location.state.awsImageUrl}
                 numPosts={this.state.posts.length}
                 numFavs={this.state.favorites.length}
                 theme={this.props.theme}
