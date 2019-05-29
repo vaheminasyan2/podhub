@@ -1,5 +1,9 @@
+.bg-light {
+    color: black;
+}
+
 .searchUserInput {
-    /* width: 25% !important; */
+    width: 25% !important;
     margin: 0 auto;
     border-radius: 50px;
     text-align: center;
@@ -32,9 +36,8 @@
     border-radius: 50px;
 }
 
-.searchName{
+.searchName {
     font-size: 12pt;
-    color: white;
     width: 200px;
     display: inline-block;
 }
@@ -42,10 +45,3 @@
 .userContainer {
     margin: 20px auto;
 }
-
-
-@media only screen and (max-width: 575px) {
-    .searchUserInput {
-        width: 50% !important;
-    }
-  }
