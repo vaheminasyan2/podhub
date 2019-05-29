@@ -502,6 +502,8 @@ class App extends Component {
                               user={this.state.user}
                               toApp={this.toApp}
                               theme={this.state.theme}
+                              newPost={this.state.newPost}	
+                              setNewPostAlertOff={this.setNewPostAlertOff}
                             />
                           </div>
                           <div className="col-md-2 col-xs-0"></div>
