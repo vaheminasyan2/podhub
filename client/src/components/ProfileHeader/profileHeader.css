@@ -1,7 +1,22 @@
 .followBtn,
 .editProfileBtn {
   float: right;
-  margin-top: -45px;
+  margin-top: -32px;
+}
+
+.editImgBtn {
+  background: lightgray;
+  border-radius: 20px;
+  color: rgb(70, 70, 70);
+  cursor: pointer;
+  font-size: 13px;
+  height: 100px;
+  margin-top: -100px;
+  opacity: 0.9;
+  padding-top: 35px;
+  position: absolute;
+  text-align: center;
+  width: 100px;
 }
 
 .postsBtn {
@@ -52,11 +67,17 @@
 }
 
 #userMainProfileImage{
+  height: 100px;
+  max-height: 100px;
   width: 100px;
 }
 
 .userImage {
   margin-top: 0px !important;
+}
+
+.userInfo {
+  margin-top: 20px;
 }
 
 .userStats {
