@@ -55,7 +55,6 @@ class App extends Component {
       notificationAlert: "",
       newPost: false,
       newNotification: null,
-      awsImageUrl: ""
     };
   }
 
@@ -357,33 +356,18 @@ class App extends Component {
 
     if (this.state.user) {
       this.initializeSocket(this.state.user.id);
-      this.isNewNotification("no-toast");
-      this.getAwsImageUrl();
+      this.isNewNotification("no-toast")
       return;
     }
 
     if (localStorage.getItem("user")) {
       this.setState({
         user: JSON.parse(localStorage.getItem("user")),
-        notificationAlert: localStorage.getItem("notificationAlert"),
-        awsImageUrl: localStorage.getItem("awsImageUrl")
+        notificationAlert: localStorage.getItem("notificationAlert")
       }, () => this.isNewNotification("no-toast")
       );
       this.initializeSocket(JSON.parse(localStorage.getItem("user")).id);
     }
-  }
-
-  getAwsImageUrl = () => {
-    API.getAwsImageUrl(this.state.user.id)
-      .then(res => {
-        //console.log(res.data.url)
-        // console.log(this)
-        this.setState({
-          awsImageUrl: res.data.url,
-        });
-        localStorage.setItem("awsImageUrl", res.data.url)
-        console.log(this.state.awsImageUrl)
-      })
   }
 
   // Updates showAudioInNavbar and audioLink using (True, Audio Link) from Home.js & Profile.js
@@ -497,7 +481,6 @@ class App extends Component {
                   theme={this.state.theme}
                   notificationAlert={this.state.notificationAlert}
                   setNotificationAlertOff={this.setNotificationAlertOff}
-                  awsImageUrl={this.state.awsImageUrl}
                 />
 
                 <PodcastSearch
@@ -519,8 +502,6 @@ class App extends Component {
                               user={this.state.user}
                               toApp={this.toApp}
                               theme={this.state.theme}
-                              newPost={this.state.newPost}
-                              setNewPostAlertOff={this.setNewPostAlertOff}
                             />
                           </div>
                           <div className="col-md-2 col-xs-0"></div>
@@ -542,7 +523,6 @@ class App extends Component {
                               theme={this.state.theme}
                               newPost={this.state.newPost}
                               setNewPostAlertOff={this.setNewPostAlertOff}
-                              awsImageUrl={this.state.awsImageUrl}
                             />
                           </div>
                           <div className="col-md-2 col-xs-0"></div>
@@ -556,7 +536,6 @@ class App extends Component {
                       <Profile {...props}
                         toApp={this.toApp}
                         theme={this.state.theme}
-                        awsImageUrl={this.state.awsImageUrl}
                       />
                     }
                   />
@@ -609,7 +588,6 @@ class App extends Component {
                         darkTheme={this.darkTheme}
                         lightTheme={this.lightTheme}
                         theme={this.state.theme}
-                        awsImageUrl={this.state.awsImageUrl}
                       />
                     }
                   />
