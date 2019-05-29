@@ -157,7 +157,7 @@ class Post extends Component {
     addComment = () => {
         API.addComment(this.state.currentComment, this.state.postId, JSON.parse(localStorage.getItem("user")).id)
             .then(res => {
-                this.props.updateParentState();
+                //this.props.updateParentState();
                 this.closeCommentsModal();
                 this.setState({
                     numComments: this.state.numComments + 1,
@@ -169,7 +169,7 @@ class Post extends Component {
     // Delete a comment from post
     deleteComment = (commentId) => {
         API.deleteComment(commentId).then(res => {
-            this.props.updateParentState();
+            //this.props.updateParentState();
             this.closeCommentsModal();
             this.setState({
                 numComments: this.state.numComments - 1
@@ -217,6 +217,7 @@ class Post extends Component {
 
 
     render() {
+
         return (
             <div className={`container rounded-0 border-top-0 border-left-0 border-right-0 card text-secondary top bg-${this.props.theme}`} id={this.props.postId} >
                 <div className="row" id={`post-top-row-${this.props.theme}`}>

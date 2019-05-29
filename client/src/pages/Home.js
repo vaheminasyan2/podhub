@@ -46,10 +46,15 @@ class Home extends Component {
 
     componentWillReceiveProps(nextProps) {
         // You don't have to do this check first, but it can help prevent an unneeded render
+
         if (nextProps.newPost === true) {
             this.setState({
                 uploadNewPost: true
             })
+        }
+
+        if (nextProps.posts === true) {
+            console.log("new props")
         }
     }
 
@@ -59,7 +64,7 @@ class Home extends Component {
         })
         this.getPosts();
         this.scrollToTop();
-        this.props.setNewPostAlertOff();
+        //this.props.setNewPostAlertOff();
     }
 
     // POSTS
@@ -67,12 +72,16 @@ class Home extends Component {
 
     // Get posts from user and those that user is following
     getPosts = () => {
+        this.props.setNewPostAlertOff();
         this.setState({
-            message: "Getting posts..."
+            message: "Getting posts...",
+            uploadNewPost: false
         });
+
 
         API.getFollowingsPosts(this.props.user.id)
             .then(res => {
+
                 var message = "";
 
                 if (res.data.length === 0) {
@@ -134,12 +143,12 @@ class Home extends Component {
     }
 
     render() {
-        
+        console.log(this.props.newPost)
         return (
             <div className={`container bg-${this.props.theme} rounded`} id="post-container">
                 {this.state.uploadNewPost === true
-                    ? 
-         
+                    ?
+
                     <div className={`col rounded sticky-${this.props.theme}`}
                         onClick={() => (this.updatePage())}
                     >
