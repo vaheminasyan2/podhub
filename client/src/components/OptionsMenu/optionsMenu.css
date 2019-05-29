@@ -11,10 +11,15 @@
     text-align: left;
     width: 100px;
     z-index: 99;
+    top: 4px;
 }
 
+
 .optionsList li {
+    display: block !important;
     cursor: pointer;
+    width: 90px !important;
+    height: 28px;
 }
 
 #deleteAccount {
