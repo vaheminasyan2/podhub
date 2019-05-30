@@ -25,6 +25,10 @@ module.exports = function(sequelize, DataTypes) {
     },
     notificationsSeen: {
       type: DataTypes.DATE
+    },
+    awsImageUrl: {
+      type: DataTypes.STRING,
+      len: [1]
     }
     
   });
