@@ -34,7 +34,7 @@ class Profile extends Component {
       postMessage: "",
       favMessage: "",
       scrollLeft: 0,
-      awsImageUrl:""
+      awsImageUrl: ""
     };
   }
 
@@ -226,7 +226,7 @@ class Profile extends Component {
   }
 
   render() {
-    
+
 
     return (
       <div className="container">

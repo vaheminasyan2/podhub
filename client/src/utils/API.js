@@ -33,12 +33,12 @@ export default {
     // ====================================
 
     // upload the user image
-    uploadImageAWS: function(userId, formData, header) {
+    uploadImageAWS: function (userId, formData, header) {
         return axios.post("/api/aws/awsImageUpload/" + userId, formData, header);
     },
 
     // get the user image url
-    getAwsImageUrl: function(userId) {
+    getAwsImageUrl: function (userId) {
         return axios.get("/api/aws/awsGetImageUrl/" + userId);
     },
 

@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart, faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import "./Home.css";
+import { func } from "prop-types";
 
 library.add(faComment, faHeart, faArrowUp);
 
@@ -138,55 +139,71 @@ class Home extends Component {
         window.scrollTo(0, 0);
     }
 
+
+    removePostFromState = (postId) => {
+
+        for (var i = 0; i < this.state.posts.length; i++) {
+            if (this.state.posts[i].id === postId) {
+                this.setState({
+                    posts: this.state.posts.filter((_, j) => j !== i)
+                });
+            }
+        }
+    }
+
+
     render() {
-
+        console.log(this.state.posts)
         return (
-            <div className={`container bg-${this.props.theme} rounded`} id="post-container">
-                {this.state.uploadNewPost === true
-                    ?
+            <div className={`container bg-${this.props.theme} rounded`} id="post-container" >
+                {
+                    this.state.uploadNewPost === true
+                        ?
 
-                    <div className={`col rounded sticky-${this.props.theme}`}
-                        onClick={() => (this.updatePage())}
-                    >
-                        New post <FontAwesomeIcon icon="arrow-up" /></div>
+                        <div className={`col rounded sticky-${this.props.theme}`}
+                            onClick={() => (this.updatePage())}
+                        >
+                            New post <FontAwesomeIcon icon="arrow-up" /></div>
 
-                    : null
+                        : null
                 }
-                <Row>
-                    {this.state.posts.length > 0
-                        ? (
-                            <Container>
-                                {this.state.posts.map(post => (
-                                    <Post
-                                        key={post.id}
-                                        userId={post.postedBy}
-                                        userName={post.userName}
-                                        userImage={post.userImage}
-                                        date={moment(post.createdAt).format("LLL")}
-                                        podcastId={post.podcastId}
-                                        podcastName={post.podcastName}
-                                        podcastLogo={post.podcastLogo}
-                                        episodeId={post.episodeId}
-                                        episodeName={post.episodeName}
-                                        description={post.description}
-                                        audioLink={post.audioLink}
-                                        userMessage={post.userMessage}
-                                        numLikes={post.numberOfLikes}
-                                        numComments={post.numberOfComments}
-                                        postId={post.id}
-                                        updateParentState={this.getPosts}
-                                        toHomeAndProfile={this.toHomeAndProfile}
-                                        theme={this.props.theme}
-                                    />
-                                ))}
-                            </Container>
-                        )
-                        :
-                        (
-                            <h4 className="text-center">{this.state.message}</h4>
-                        )}
-                </Row>
-            </div>
+                < Row >
+                    {
+                        this.state.posts.length > 0
+                            ? (
+                                <Container>
+                                    {this.state.posts.map(post => (
+                                        <Post
+                                            key={post.id}
+                                            userId={post.postedBy}
+                                            userName={post.userName}
+                                            userImage={post.userImage}
+                                            date={moment(post.createdAt).format("LLL")}
+                                            podcastId={post.podcastId}
+                                            podcastName={post.podcastName}
+                                            podcastLogo={post.podcastLogo}
+                                            episodeId={post.episodeId}
+                                            episodeName={post.episodeName}
+                                            description={post.description}
+                                            audioLink={post.audioLink}
+                                            userMessage={post.userMessage}
+                                            numLikes={post.numberOfLikes}
+                                            numComments={post.numberOfComments}
+                                            postId={post.id}
+                                            updateParentState={this.removePostFromState}
+                                            toHomeAndProfile={this.toHomeAndProfile}
+                                            theme={this.props.theme}
+                                        />
+                                    ))}
+                                </Container>
+                            )
+                            :
+                            (
+                                <h4 className="text-center">{this.state.message}</h4>
+                            )
+                    }
+                </Row >
+            </div >
         );
     }
 }
