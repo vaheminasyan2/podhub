@@ -69,9 +69,10 @@ class Post extends Component {
     // Deletes a post and updates parent state
     handlePostDelete = () => {
         let that = this;
+        let postId = this.state.postId
         API.handlePostDelete(this.state.postId)
             .then(function () {
-                that.props.updateParentState();
+                that.props.updateParentState(postId);
             });
     }
 
