@@ -1,5 +1,5 @@
 # PodHub
-Social media site for Podcast listeners. **Check it out** [**here**](https://podhub.herokuapp.com/).
+Social media site for Podcast listeners. **Check it out** [**here**](https://podhub.herokuapp.com/). Watch recording of app demo [here](https://drive.google.com/file/d/1C4BPPqquglRcOl0H2I-LSs4RFMROVpcK/view).
 
 ![image](/index-image.PNG)
 
