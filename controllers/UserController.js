@@ -206,7 +206,18 @@ class UserController {
       .catch(function(error) {
         console.error(error);
         res.status(400);
-      })
+      });
+  }
+
+  getUser(req, res) {
+    db.user.findAll({
+      where: {
+        id: req.params.id,
+      }
+    })
+    .then(function(user) {   
+      res.json(user);
+    });
   }
 
   getProfileHeader(req, res) {

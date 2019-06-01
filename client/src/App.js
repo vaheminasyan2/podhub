@@ -18,7 +18,7 @@ import AboutUs from "./pages/AboutUs";
 import "./pages/Listen.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Slide, Zoom, Flip, Bounce } from 'react-toastify';
+import { Zoom } from 'react-toastify';
 
 import moment from "moment";
 import "./App.css";
@@ -67,6 +67,19 @@ class App extends Component {
   componentDidMount = () => {
     this._isMounted = true;
     this.loadUserFromlocalStorage();
+  }
+
+  refreshUserData = () => {
+    console.log(this.state.user);
+    API.getUser(this.state.user.id)
+      .then((res) => {
+        console.log("App, user", res);
+        this.setState({
+          user: res.data
+        });
+
+        localStorage.setItem("user", JSON.stringify(this.state.user));
+      });
   }
 
   // Set notification alert to off 
@@ -538,6 +551,7 @@ class App extends Component {
                       <Profile {...props}
                         toApp={this.toApp}
                         theme={this.state.theme}
+                        refreshUserData={this.refreshUserData}
                       />
                     }
                   />

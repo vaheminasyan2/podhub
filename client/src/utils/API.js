@@ -33,7 +33,7 @@ export default {
     // ====================================
 
     // upload the user image
-    uploadImageAWS: function (userId, formData, header) {
+    awsImageUpload: function (userId, formData, header) {
         return axios.post("/api/aws/awsImageUpload/" + userId, formData, header);
     },
 
@@ -137,6 +137,11 @@ export default {
     // USERS
     // =====================================
 
+    // Gets individual user's data
+    getUser: function(userId) {
+        return axios.get("/api/users/getUser/" + userId);
+    },
+
     // Gets Profile Header for user
     getProfileHeader: function (googleId) {
         return axios.get("/api/users/getProfileHeader/" + googleId);
@@ -146,10 +151,6 @@ export default {
     getOrCreateUser: function (id_token) {
         return axios.post("/api/users?id_token=" + id_token);
     },
-
-    // deleteUser: function (user) {
-    //     return axios.get("api/getUsers", user); // temporary. will be more like axios.delete("api/deleteUser", user);
-    // },
 
     updateUser: function (userId, body) {
         return axios.put("/api/users/update/" + userId, body)

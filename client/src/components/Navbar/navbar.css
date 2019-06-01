@@ -76,6 +76,7 @@ button > div {
     margin-left: 10px;
     margin-top: 0px;
     position: absolute;
+    width: 40px;
 }
 
 #topPopupText:after {

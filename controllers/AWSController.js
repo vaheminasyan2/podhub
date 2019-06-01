@@ -10,7 +10,7 @@ class AWSController {
    * @param {*} req
    * @param {*} res
    */
-  awsUploadImage(req, res) {
+  awsImageUpload(req, res) {
     // configure the keys for accessing AWS
     AWS.config.update({
       accessKeyId: process.env.AWS_ACCESS_KEY,
@@ -37,22 +37,17 @@ class AWSController {
 
     const form = new multiparty.Form();
     const userId = req.params.userId;
-    console.log(userId);
+
     form.parse(req, async (error, fields, files) => {
       if (error) throw new Error(error);
       try {
         const path = files.file[0].path;
-        console.log(path);
-
         const buffer = fs.readFileSync(path);
-
         const type = fileType(buffer);
-        console.log(type);
-        // const timestamp = Date.now().toString();
         const image = `IMG${userId}`;
-        console.log(image);
         const fileName = `podhubBucket/${image}`;
         const data = await uploadFile(buffer, fileName, type);
+        
         return res.status(200).send(data);
       } catch (error) {
         return res.status(400).send(error);

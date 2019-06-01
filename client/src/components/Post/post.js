@@ -24,6 +24,7 @@ class Post extends Component {
             userId: "",
             userName: "",
             userImage: "",
+            awsImageUrl: "",
             date: "",
             podcastId: "",
             podcastName: "",
@@ -51,6 +52,7 @@ class Post extends Component {
             userId: this.props.userId,
             userName: this.props.userName,
             userImage: this.props.userImage,
+            awsImageUrl: this.props.awsImageUrl,
             date: this.props.date,
             postId: this.props.postId,
             podcastId: this.props.podcastId,
@@ -234,12 +236,13 @@ class Post extends Component {
                                     user: {
                                         id: this.state.userId,
                                         name: this.state.userName,
-                                        profileImage: this.state.userImage
+                                        profileImage: this.state.userImage,
+                                        awsImageUrl: this.state.awsImageUrl,
                                     }
                                 }
                             }}
                         >
-                            <img id="profileImage" src={this.state.userImage} alt="User" />
+                            <img id="profileImage" src={this.state.awsImageUrl || this.state.userImage} alt="User" />
                         </Link>
 
                     </div>

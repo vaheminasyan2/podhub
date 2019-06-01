@@ -175,6 +175,7 @@ p.post-dark.ellipses {
 #profileImage {
   border: 1px solid rgb(134, 134, 134);
   border-radius: 35px;
+  height: 35px;
   margin: 0px;
   width: 35px;
 }
