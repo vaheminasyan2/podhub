@@ -8,7 +8,7 @@ const controller = new AWSController();
  * @param {*} res
  */
 router.post("/awsImageUpload/:userId", (req, res) =>
-  controller.awsUploadImage(req, res)
+  controller.awsImageUpload(req, res)
 );
 
 /**

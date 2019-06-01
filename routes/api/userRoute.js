@@ -11,7 +11,6 @@ router.get("/:id", (req, res) => {
     controller.getUsersList(req, res);
 });
 
-
 /**
  * Route to create a new user in database or get userDetails by userId for exisiting user
  * @param {*} req
@@ -20,6 +19,15 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
     console.log("[Route] User : GET", req.query.id_token);
     controller.getOrCreate(req, res);
+});
+
+/**
+ * Route to get individual user
+ * @param {*} req
+ * @param {*} res
+ */
+router.get("/getUser/:userId", (req, res) => {
+    controller.getUser(req, res);
 });
 
 /**
