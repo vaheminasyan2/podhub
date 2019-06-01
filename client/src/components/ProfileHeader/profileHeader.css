@@ -4,6 +4,21 @@
   margin-top: -45px;
 }
 
+#editImgBtn {
+  background: lightgray;
+  border-radius: 20px;
+  color: rgb(22, 22, 22);
+  cursor: pointer;
+  font-size: 13px;
+  height: 100px;
+  margin-top: -100px;
+  opacity: 0.85;
+  padding-top: 40px;
+  position: absolute;
+  text-align: center;
+  width: 100px;
+}
+
 .postsBtn {
   cursor: pointer;
 }
@@ -52,6 +67,7 @@
 }
 
 #userMainProfileImage{
+  height: 100px;
   width: 100px;
 }
 

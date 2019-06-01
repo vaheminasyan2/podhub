@@ -8,7 +8,7 @@ import API from "../utils/API";
 import "./Listen.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Slide, Zoom, Flip, Bounce } from 'react-toastify';
+import { Zoom } from 'react-toastify';
 
 
 // LISTEN TO PODCAST PAGE

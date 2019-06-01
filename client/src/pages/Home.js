@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart, faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import "./Home.css";
-import { func } from "prop-types";
+// import { func } from "prop-types";
 
 library.add(faComment, faHeart, faArrowUp);
 
@@ -117,22 +117,20 @@ class Home extends Component {
 
     // Handle SCROLLING to specific post
     scrollToElement = () => {
-        {
-            setTimeout(() => {
-                var id = this.state.scrollToPostId;
-                var element = document.getElementById(id);
-                element.scrollIntoView(true);
-                window.scrollBy(0, -100)
-                this.setScrollToPostFalse();
-            }, 1000)
-        }
+        setTimeout(() => {
+            var id = this.state.scrollToPostId;
+            var element = document.getElementById(id);
+            element.scrollIntoView(true);
+            window.scrollBy(0, -100)
+            this.setScrollToPostFalse();
+        }, 1000);
     }
 
     setScrollToPostFalse = () => {
         this.setState({
             scrollToPost: false,
             scrollToPostId: ""
-        })
+        });
     }
 
     scrollToTop = () => {
@@ -178,6 +176,7 @@ class Home extends Component {
                                             userId={post.postedBy}
                                             userName={post.userName}
                                             userImage={post.userImage}
+                                            awsImageUrl={this.props.user.awsImageUrl}
                                             date={moment(post.createdAt).format("LLL")}
                                             podcastId={post.podcastId}
                                             podcastName={post.podcastName}

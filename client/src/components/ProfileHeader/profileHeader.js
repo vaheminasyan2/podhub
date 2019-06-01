@@ -30,7 +30,9 @@ class ProfileHeader extends Component {
             showFollowersModal: false,
             showFollowingModal: false,
             numFavs: 0,
-            // awsImageurl: ""
+            awsImageurl: null,
+            showEditImgModal: false,
+            showEditImgBtn: false,
         }
     }
 
@@ -49,7 +51,7 @@ class ProfileHeader extends Component {
             user: this.props.user,
             buttonTheme: buttonTheme,
             numFavs: this.props.numFavs,
-            //awsImageurl: this.props.awsImageUrl
+            awsImageurl: this.props.user.awsImageUrl
         }, () => { this.getProfileHeader() });
     }
 
@@ -81,11 +83,11 @@ class ProfileHeader extends Component {
             this.getNumFollowing();
         }
 
-        // if (prevProps.awsImageUrl != this.props.awsImageUrl) {
-        //     this.setState({
-        //         awsImageurl: this.props.awsImageUrl
-        //     });
-        // }
+        if (prevProps.user.awsImageUrl != this.props.user.awsImageUrl) {
+            this.setState({
+                awsImageurl: this.props.awsImageUrl
+            });
+        }
     }
 
 
@@ -200,14 +202,14 @@ class ProfileHeader extends Component {
     // Show modal that displays followers
     showFollowersModal = () => {
         this.setState({
-            showFollowersModal: true
+            showFollowersModal: true,
         });
     }
 
     // Show modal that displays other users being followed
     showFollowingModal = () => {
         this.setState({
-            showFollowingModal: true
+            showFollowingModal: true,
         });
     }
 
@@ -299,36 +301,63 @@ class ProfileHeader extends Component {
     }
 
     // AWS S3 Image upload
-    //     handleFileUpload = event => {
-    //         this.setState({ file: event.target.files });
-    //     };
+    handleFileUpload = event => {
+        this.setState({ file: event.target.files });
+    };
 
-    //     submitFile = event => {
-    //     event.preventDefault();
+    submitFile = () => {
 
-    //     const formData = new FormData();
-    //     formData.append("file", this.state.file[0]);
-    //     let header = {
-    //       headers: {
-    //         "Content-Type": "multipart/form-data"
-    //       }
-    //     };
-    //     // let that = this;
-    //     // console.log(that);
-    //     API.uploadImageAWS(this.props.user.id, formData, header)
-    //       .then((response) => {
-    //         console.log(response);
-    //         console.log(this);
-    //         this.setState({
-    //           awsImageurl: response.data.Location
-    //         });
-    //         console.log("image",this.state.awsImageurl);
-    //       })
-    //       .catch(err => {
-    //         console.log(err);
-    //       });
-    //   };
+        const formData = new FormData();
+        formData.append("file", this.state.file[0]);
+        let header = {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        };
 
+        API.awsImageUpload(this.props.user.id, formData, header)
+            .then((res) => {
+                this.setState({
+                    awsImageurl: res.data.Location
+                });
+
+                API.updateUser(this.props.user.id, {
+                    awsImageUrl: res.data.Location,
+                })
+                .then(() => {
+                    this.props.refreshUserData();
+                });
+
+                window.location.reload();
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    };
+
+    showEditImgBtn = () => {
+        this.setState({
+            showEditImgBtn: true,
+        });
+    }
+
+    hideEditImgBtn = () => {
+        this.setState({
+            showEditImgBtn: false,
+        });
+    }
+
+    showEditImgModal = () => {
+        this.setState({
+            showEditImgModal: true,
+        });
+    }
+
+    hideEditImgModal = () => {
+        this.setState({
+            showEditImgModal: false,
+        });
+    }
 
     render() {
 
@@ -336,13 +365,58 @@ class ProfileHeader extends Component {
             <span>
                 <div className={`row userProfile rounded bg-${this.props.theme}`}>
                     <div className="col-3">
+
+                        {/* PROFILE IMAGE */}
+
                         <img
-                            src={this.props.user.profileImage}
+                            src={this.props.user.awsImageUrl || this.state.awsImageUrl || this.props.user.profileImage}
                             alt="User"
                             id="userMainProfileImage"
                             className={`rounded image-${this.props.theme}`}
+                            onMouseEnter={this.showEditImgBtn}
                         />
+
+                        {/* EDIT PROFILE IMAGE BUTTON */}
+
+                        {this.state.showEditImgBtn ? (
+                            <div
+                                id="editImgBtn"
+                                onClick={this.showEditImgModal}
+                                onMouseEnter={this.showEditImgBtn}
+                                onMouseLeave={this.hideEditImgBtn}
+                            >
+                                Change Photo
+                            </div>
+                        ) : (
+                                <></>
+                            )}
                     </div>
+
+                    {/* EDIT PROFILE IMAGE MODAL */}
+
+                    <Modal
+                        open={this.state.showEditImgModal}
+                        onClose={this.hideEditImgModal}
+                        className="editImgModal"
+                    >
+                        <form>
+                            <input
+                                label="upload file"
+                                type="file"
+                                onChange={this.handleFileUpload}
+                            />
+                            <button
+                                type="submit"
+                                onClick={(event) => {
+                                    event.preventDefault();
+                                    this.submitFile();
+                                    this.hideEditImgModal();
+                                }}
+                            >
+                                Upload
+                            </button>
+                        </form>
+                    </Modal>
 
                     <div className="col">
 
@@ -350,7 +424,6 @@ class ProfileHeader extends Component {
 
                         <Row>
                             {!this.state.editProfile ? (
-                                //   <div>
                                 <h2 className={`paddingTop userName profile-${this.props.theme}`}>
                                     {JSON.parse(localStorage.getItem("user")).id === this.state.user.id ? (
                                         this.state.newUsername || this.state.userName || JSON.parse(localStorage.getItem("user")).name
@@ -358,15 +431,6 @@ class ProfileHeader extends Component {
                                             this.props.user.name
                                         )}
                                 </h2>
-                                //     <form onSubmit={this.submitFile}>
-                                //     <input
-                                //       label="upload file"
-                                //       type="file"
-                                //       onChange={this.handleFileUpload}
-                                //     />
-                                //     <button type="submit">Confirm</button>
-                                //   </form>
-                                //   </div>
                             ) : (
                                     <form>
                                         <textarea
