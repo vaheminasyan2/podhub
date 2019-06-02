@@ -4,7 +4,7 @@ module.exports = {
     return queryInterface.sequelize.transaction((t) => {
         return Promise.all([
             queryInterface.addColumn('users', 'awsImageUrl', {
-                type: Sequelize.DATE
+                type: Sequelize.STRING
             }, { transaction: t })
         ])
     })
