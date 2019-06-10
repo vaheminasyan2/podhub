@@ -278,6 +278,7 @@ class UserController {
     var postId2Comments = {};
     var postId2UserNames = {};
     var postId2UserImages = {};
+    var postId2awsImagesUrl = {};
     db.user.findByPk(req.params.id).then(function(user) {
       postPromises.push(user.getPosts());
       user.getFollowedBy().then(function(users) {
@@ -314,6 +315,7 @@ class UserController {
             userPromise.then(function(user){
               postId2UserNames[post.id] = user.name;
               postId2UserImages[post.id] = user.profileImage;
+              postId2awsImagesUrl[post.id] = user.awsImageUrl;
             })
           });
 
@@ -323,8 +325,10 @@ class UserController {
               post.numberOfComments = postId2Comments[post.id];
               post.userName = postId2UserNames[post.id];
               post.userImage = postId2UserImages[post.id];
+              post.dataValues.awsImageUrl = postId2awsImagesUrl[post.id];
             });
-  
+            console.log("****usercontroller****")
+            console.log(sortedPosts)
             res.json(sortedPosts);
           })
         }).catch(function(error) {
