@@ -108,8 +108,13 @@ class PostController {
         });
         userPromise.then(function(user) {
           postId2UserNames[post.id] = user.name;
-          postId2UserImages[post.id] = user.profileImage;
-          postId2awsImageUrl[post.id] = user.profileImage;
+          if(!user.awsImageUrl){
+            postId2UserImages[post.id] = user.profileImage;
+          }
+          else{
+            postId2UserImages[post.id] = user.awsImageUrl;
+          }
+          // postId2awsImageUrl[post.id] = user.profileImage;
         });
       });
 
@@ -120,7 +125,7 @@ class PostController {
             post.numberOfComments = postId2Comments[post.id];
             post.userName = postId2UserNames[post.id];
             post.userImage = postId2UserImages[post.id];
-            post.dataValues.awsImageUrl = postId2awsImageUrl[post.id];
+            // post.dataValues.awsImageUrl = postId2awsImageUrl[post.id];
           });
           console.log("----postPromises-----")
           console.log(postPromises)

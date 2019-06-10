@@ -95,8 +95,13 @@ class CommentController {
           
           userDetailsPromise.then(function(user){
             commentuserName[comment.id] = user.name;
-            commentuserImage[comment.id] = user.profileImage;
-            commentuserawsImageUrl[comment.id] = user.awsImageUrl;
+            if(!user.awsImageUrl){
+              commentuserImage[comment.id] = user.profileImage;
+            }
+            else{
+              commentuserImage[comment.id] = user.awsImageUrl;
+            }
+            // commentuserawsImageUrl[comment.id] = user.awsImageUrl;
           })
           commentLikePromise.then(function(likes) {
             commentLikes[comment.id] = likes.length;
@@ -108,7 +113,7 @@ class CommentController {
             comment.dataValues.numberOfLikes = commentLikes[comment.id];
             comment.dataValues.userName = commentuserName[comment.id];
             comment.dataValues.userImage = commentuserImage[comment.id];
-            comment.dataValues.awsImageUrl = commentuserawsImageUrl[comment.id];
+            // comment.dataValues.awsImageUrl = commentuserawsImageUrl[comment.id];
           });
           
           console.log("********* sortedComments *******")
