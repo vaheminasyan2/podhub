@@ -237,7 +237,7 @@ class Post extends Component {
                                         id: this.state.userId,
                                         name: this.state.userName,
                                         profileImage: this.state.userImage,
-                                        awsImageUrl: this.state.awsImageUrl,
+                                        // awsImageUrl: this.state.awsImageUrl,
                                     }
                                 }
                             }}

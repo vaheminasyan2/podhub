@@ -176,7 +176,7 @@ class Home extends Component {
                                             userId={post.postedBy}
                                             userName={post.userName}
                                             userImage={post.userImage}
-                                            awsImageUrl={this.props.user.awsImageUrl}
+                                            // awsImageUrl={this.props.user.awsImageUrl}
                                             date={moment(post.createdAt).format("LLL")}
                                             podcastId={post.podcastId}
                                             podcastName={post.podcastName}

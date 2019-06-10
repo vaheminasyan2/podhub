@@ -66,6 +66,8 @@ class Profile extends Component {
   // Get user data and set it in state
   getOrCreateUser = () => {
     API.getOrCreateUser(this.props.location.state.user.id).then(res => {
+      console.log("user")
+      console.log(res.data)
       this.setState({
         user: res.data
       });
