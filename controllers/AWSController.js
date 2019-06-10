@@ -47,7 +47,7 @@ class AWSController {
         const image = `IMG${userId}`;
         const fileName = `podhubBucket/${image}`;
         const data = await uploadFile(buffer, fileName, type);
-        
+
         return res.status(200).send(data);
       } catch (error) {
         return res.status(400).send(error);
@@ -81,14 +81,15 @@ class AWSController {
       // Key: `podhubBucket/1.png`
     };
     s3.getObject(params, function(err, data) {
-      if(data){
-        console.log(data)
+      if (data) {
+        console.log(data);
         // let type = data.ContentType
-        
-        let url = `https://podhub-user-images.s3.amazonaws.com/podhubBucket/IMG${req.params.userId}.png`
+        // console.log("type", type);
+        let url = `https://podhub-user-images.s3.amazonaws.com/podhubBucket/IMG${
+          req.params.userId
+        }.png`;
         res.json({ url: url });
-      }
-      else{
+      } else {
         res.json({ url: data });
       }
     });
