@@ -313,9 +313,14 @@ class UserController {
               postId2Comments[post.id] = comments.length;
             });
             userPromise.then(function(user){
+              console.log(user)
               postId2UserNames[post.id] = user.name;
-              postId2UserImages[post.id] = user.profileImage;
-              postId2awsImagesUrl[post.id] = user.awsImageUrl;
+              if(!user.awsImageUrl){
+                postId2UserImages[post.id] = user.profileImage;
+              }
+              else{
+                postId2UserImages[post.id] = user.awsImageUrl;
+              }
             })
           });
 
@@ -325,7 +330,6 @@ class UserController {
               post.numberOfComments = postId2Comments[post.id];
               post.userName = postId2UserNames[post.id];
               post.userImage = postId2UserImages[post.id];
-              post.dataValues.awsImageUrl = postId2awsImagesUrl[post.id];
             });
             console.log("****usercontroller****")
             console.log(sortedPosts)
