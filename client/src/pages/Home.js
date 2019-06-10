@@ -84,7 +84,7 @@ class Home extends Component {
                 if (res.data.length === 0) {
                     message = "No posts found.";
                 }
-
+                console.log(res.data)
                 this.setState({
                     message: message,
                     posts: res.data
