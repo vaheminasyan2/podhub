@@ -84,7 +84,7 @@ class Home extends Component {
                 if (res.data.length === 0) {
                     message = "No posts found.";
                 }
-
+                console.log(res.data)
                 this.setState({
                     message: message,
                     posts: res.data
@@ -176,7 +176,7 @@ class Home extends Component {
                                             userId={post.postedBy}
                                             userName={post.userName}
                                             userImage={post.userImage}
-                                            awsImageUrl={this.props.user.awsImageUrl}
+                                            // awsImageUrl={this.props.user.awsImageUrl}
                                             date={moment(post.createdAt).format("LLL")}
                                             podcastId={post.podcastId}
                                             podcastName={post.podcastName}
