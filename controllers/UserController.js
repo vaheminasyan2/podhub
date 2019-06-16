@@ -371,8 +371,12 @@ class UserController {
     db.user.findByPk(req.params.id).then(function(user){
       db.notification.findAndCountAll({
         where: {
-          createdAt: {
-            [Op.gte]: user.notificationsSeen}
+          $and: [
+            {userId: user.id}, 
+            {createdAt: {
+              [Op.gte]: user.notificationsSeen}
+            }
+          ]          
         }
       }).then(function(latest){
         res.json(latest.count);
