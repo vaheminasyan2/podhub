@@ -360,7 +360,8 @@ class UserController {
 
   isNewNotification(req, res)
   {
-    db.user.findByPk(req.params.id).then(function(user){
+    db.user.findByPk(req.params.id).then(
+      function(user){
       db.notification.findAndCountAll({
         where: {
           createdAt: {
