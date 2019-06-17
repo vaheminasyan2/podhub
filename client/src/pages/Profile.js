@@ -34,13 +34,13 @@ class Profile extends Component {
       postMessage: "",
       favMessage: "",
       scrollLeft: 0,
-      awsImageUrl: ""
+      // awsImageUrl: ""
     };
   }
 
   // Load user profile information
   componentDidMount() {
-    this.getAwsImageUrl()
+    // this.getAwsImageUrl()
     this.getFavorites();
     this.getPostsOnlyByUser();
     this.setState({
@@ -66,22 +66,24 @@ class Profile extends Component {
   // Get user data and set it in state
   getOrCreateUser = () => {
     API.getOrCreateUser(this.props.location.state.user.id).then(res => {
+      console.log("user")
+      console.log(res.data)
       this.setState({
         user: res.data
       });
     });
   };
-  getAwsImageUrl = () => {
-    API.getAwsImageUrl(this.props.location.state.user.id)
-      .then(res => {
-        //console.log(res.data.url)
-        // console.log(this)
-        this.setState({
-          awsImageUrl: res.data.url,
-        });
-        //console.log(this.state.awsImageUrl)
-      })
-  }
+  // getAwsImageUrl = () => {
+  //   API.getAwsImageUrl(this.props.location.state.user.id)
+  //     .then(res => {
+  //       //console.log(res.data.url)
+  //       // console.log(this)
+  //       this.setState({
+  //         awsImageUrl: res.data.url,
+  //       });
+  //       //console.log(this.state.awsImageUrl)
+  //     })
+  // }
   // Get user's FAVORITES
   getFavorites = () => {
     API.getFavorites(this.props.location.state.user.id)
@@ -117,6 +119,7 @@ class Profile extends Component {
             postMessage: "No posts found."
           });
         } else {
+          console.log("posts",res.data)
           this.setState({
             posts: res.data
           });
@@ -239,7 +242,7 @@ class Profile extends Component {
 
               <ProfileHeader
                 user={this.props.location.state.user}
-                awsImageUrl={this.state.awsImageUrl}
+                // awsImageUrl={this.state.awsImageUrl}
                 numPosts={this.state.posts.length}
                 numFavs={this.state.favorites.length}
                 theme={this.props.theme}

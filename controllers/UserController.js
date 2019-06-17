@@ -278,6 +278,7 @@ class UserController {
     var postId2Comments = {};
     var postId2UserNames = {};
     var postId2UserImages = {};
+    var postId2awsImagesUrl = {};
     db.user.findByPk(req.params.id).then(function(user) {
       postPromises.push(user.getPosts());
       user.getFollowedBy().then(function(users) {
@@ -312,8 +313,14 @@ class UserController {
               postId2Comments[post.id] = comments.length;
             });
             userPromise.then(function(user){
+              console.log(user)
               postId2UserNames[post.id] = user.name;
-              postId2UserImages[post.id] = user.profileImage;
+              if(!user.awsImageUrl){
+                postId2UserImages[post.id] = user.profileImage;
+              }
+              else{
+                postId2UserImages[post.id] = user.awsImageUrl;
+              }
             })
           });
 
@@ -324,7 +331,8 @@ class UserController {
               post.userName = postId2UserNames[post.id];
               post.userImage = postId2UserImages[post.id];
             });
-  
+            console.log("****usercontroller****")
+            console.log(sortedPosts)
             res.json(sortedPosts);
           })
         }).catch(function(error) {
@@ -364,8 +372,12 @@ class UserController {
       function(user){
       db.notification.findAndCountAll({
         where: {
-          createdAt: {
-            [Op.gte]: user.notificationsSeen}
+          $and: [
+            {userId: user.id}, 
+            {createdAt: {
+              [Op.gte]: user.notificationsSeen}
+            }
+          ]          
         }
       }).then(function(latest){
         res.json(latest.count);

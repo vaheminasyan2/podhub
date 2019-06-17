@@ -83,6 +83,7 @@ class PostController {
     var postId2Comments = {};
     var postId2UserNames = {};
     var postId2UserImages = {};
+    var postId2awsImageUrl = {};
     db.post.findAll({ where: { postedBy: req.params.id } }).then(dbPost => {
       const sortedPosts = dbPost.sort(function(a, b) {
         if (a.updatedAt < b.updatedAt) return 1;
@@ -107,7 +108,13 @@ class PostController {
         });
         userPromise.then(function(user) {
           postId2UserNames[post.id] = user.name;
-          postId2UserImages[post.id] = user.profileImage;
+          if(!user.awsImageUrl){
+            postId2UserImages[post.id] = user.profileImage;
+          }
+          else{
+            postId2UserImages[post.id] = user.awsImageUrl;
+          }
+          // postId2awsImageUrl[post.id] = user.profileImage;
         });
       });
 
@@ -118,7 +125,10 @@ class PostController {
             post.numberOfComments = postId2Comments[post.id];
             post.userName = postId2UserNames[post.id];
             post.userImage = postId2UserImages[post.id];
+            // post.dataValues.awsImageUrl = postId2awsImageUrl[post.id];
           });
+          console.log("----postPromises-----")
+          console.log(postPromises)
           res.json(postPromises);
         })
         .catch(function(error) {
