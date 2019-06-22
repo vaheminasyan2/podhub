@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router";
-import Container from "../Container/container";
+// import Container from "../Container/container";
 import onClickOutside from "react-onclickoutside";
-import API from "../../utils/API";
+// import API from "../../utils/API";
 import "./optionsMenu.css";
 
 class OptionsMenu extends Component {
