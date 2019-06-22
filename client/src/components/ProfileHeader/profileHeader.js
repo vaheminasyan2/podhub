@@ -83,7 +83,7 @@ class ProfileHeader extends Component {
             this.getNumFollowing();
         }
 
-        if (prevProps.user.awsImageUrl != this.props.user.awsImageUrl) {
+        if (prevProps.user.awsImageUrl !== this.props.user.awsImageUrl) {
             this.setState({
                 awsImageurl: this.props.awsImageUrl
             });
@@ -378,7 +378,7 @@ class ProfileHeader extends Component {
 
                         {/* EDIT PROFILE IMAGE BUTTON */}
 
-                        {this.state.showEditImgBtn ? (
+                        {this.state.showEditImgBtn && this.state.user.id === JSON.parse(localStorage.getItem("user")).id ? (
                             <div
                                 id="editImgBtn"
                                 onClick={this.showEditImgModal}
