@@ -51,7 +51,7 @@ class Profile extends Component {
   // Update profile information if subject user changes
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.location.state.user.id !== this.props.location.state.user.id) {
-      this.getAwsImageUrl()
+//       this.getAwsImageUrl();
       this.getFavorites();
       this.getPostsOnlyByUser();
       this.setState({
