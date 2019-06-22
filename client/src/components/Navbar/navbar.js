@@ -301,6 +301,7 @@ class Navbar extends Component {
                     )}
                   <img
                     className="navbarUserImg"
+                    alt="user"
                     src={this.props.user.awsImageUrl || this.props.user.profileImage} />
                 </div>
 
