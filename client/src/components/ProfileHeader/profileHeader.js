@@ -83,7 +83,7 @@ class ProfileHeader extends Component {
             this.getNumFollowing();
         }
 
-        if (prevProps.user.awsImageUrl != this.props.user.awsImageUrl) {
+        if (prevProps.user.awsImageUrl !== this.props.user.awsImageUrl) {
             this.setState({
                 awsImageurl: this.props.awsImageUrl
             });

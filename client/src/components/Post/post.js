@@ -323,7 +323,7 @@ class Post extends Component {
                                 <h4 className={`post-${this.props.theme} podcast-name-home`}>{this.state.podcastName}</h4>
                                 <p className={`post-${this.props.theme} episode-name-home`}>{this.state.episodeName}
                                 </p>
-                                <p className={`post-${this.props.theme} episode-description-home`} className={`post-${this.props.theme} ellipses`}>{this.state.description}</p>
+                                <p className={`post-${this.props.theme} episode-description-home ellipses`}>{this.state.description}</p>
                             </div>
                         </Link>
 
