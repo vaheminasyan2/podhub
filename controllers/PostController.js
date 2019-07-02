@@ -159,7 +159,8 @@ class PostController {
             }
           })
           .then(dbUser => {
-            let userDetails = dbUser.map(user=>{ return {id: user.id, name: user.name, image: user.profileImage}})
+
+            let userDetails = dbUser.map(user=>{ return {id: user.id, name: user.name, image: user.awsImageUrl || user.profileImage}})
             res.json(userDetails);
           });
         }

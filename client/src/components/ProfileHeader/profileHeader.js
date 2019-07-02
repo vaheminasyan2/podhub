@@ -583,7 +583,7 @@ class ProfileHeader extends Component {
                                     <User
                                         userId={user.id}
                                         userName={user.name}
-                                        userImage={user.image}
+                                        userImage={user.awsImageUrl || user.profileImage || user.image}
                                         handler={this.hideFollowersModal}
                                     />
                                 </div>
@@ -617,7 +617,7 @@ class ProfileHeader extends Component {
                                     <User
                                         userId={user.id}
                                         userName={user.name}
-                                        userImage={user.profileImage}
+                                        userImage={user.awsImageUrl || user.profileImage}
                                         handler={this.hideFollowersModal}
                                     />
                                 </div>
