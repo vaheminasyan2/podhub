@@ -34,7 +34,8 @@ class Profile extends Component {
       postMessage: "",
       favMessage: "",
       scrollLeft: 0,
-      // awsImageUrl: ""
+      // awsImageUrl: "",
+      defaultImage: "https://designdroide.com/images/abstract-user-icon-3.svg",
     };
   }
 
@@ -374,7 +375,7 @@ class Profile extends Component {
                         key={post.id}
                         userId={post.postedBy}
                         userName={this.props.location.state.user.name}
-                        userImage={post.userImage}
+                        userImage={post.userImage || this.state.defaultImage}
                         date={moment(post.createdAt).format("LLL")}
                         podcastId={post.podcastId}
                         podcastName={post.podcastName}
