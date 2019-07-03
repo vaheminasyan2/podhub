@@ -236,13 +236,12 @@ class Post extends Component {
                                     user: {
                                         id: this.state.userId,
                                         name: this.state.userName,
-                                        profileImage: this.state.userImage,
-                                        // awsImageUrl: this.state.awsImageUrl,
+                                        profileImage: this.props.awsImageUrl || this.props.userImage,
                                     }
                                 }
                             }}
                         >
-                            <img id="profileImage" src={this.state.awsImageUrl || this.state.userImage} alt="User" />
+                            <img id="profileImage" src={this.props.awsImageUrl || this.props.userImage} alt="User" />
                         </Link>
 
                     </div>
