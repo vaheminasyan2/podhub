@@ -24,7 +24,8 @@ class Home extends Component {
             user: null,
             scrollToPost: false,
             scrollToPostId: "",
-            uploadNewPost: false
+            uploadNewPost: false,
+            defaultImage: "https://designdroide.com/images/abstract-user-icon-3.svg",
         }
     }
 
@@ -175,7 +176,7 @@ class Home extends Component {
                                             key={post.id}
                                             userId={post.postedBy}
                                             userName={post.userName}
-                                            userImage={post.userImage}
+                                            userImage={post.userImage || this.state.defaultImage}
                                             date={moment(post.createdAt).format("LLL")}
                                             podcastId={post.podcastId}
                                             podcastName={post.podcastName}
