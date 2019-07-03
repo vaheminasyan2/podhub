@@ -168,7 +168,7 @@ class UserSearch extends Component {
                                 <User
                                     userId={user.id}
                                     userName={user.name}
-                                    userImage={user.profileImage}
+                                    userImage={user.awsImageUrl || user.profileImage}
                                     theme={this.props.theme}
                                     handler={null}
                                 />
