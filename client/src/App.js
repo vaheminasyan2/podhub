@@ -432,7 +432,7 @@ class App extends Component {
 
   render() {
     //console.log(this.state.socket)
-    //console.log(this.state.user)
+    console.log(this.state.user)
     //console.log(this.state.notificationAlert)
 
     return (
