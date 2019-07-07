@@ -41,7 +41,7 @@ class Profile extends Component {
 
   // Load user profile information
   componentDidMount() {
-    // this.getAwsImageUrl()
+    this.getAwsImageUrl()
     this.getFavorites();
     this.getPostsOnlyByUser();
     this.setState({
@@ -52,7 +52,7 @@ class Profile extends Component {
   // Update profile information if subject user changes
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.location.state.user.id !== this.props.location.state.user.id) {
-//       this.getAwsImageUrl();
+      this.getAwsImageUrl();
       this.getFavorites();
       this.getPostsOnlyByUser();
       this.setState({
@@ -74,17 +74,19 @@ class Profile extends Component {
       });
     });
   };
-  // getAwsImageUrl = () => {
-  //   API.getAwsImageUrl(this.props.location.state.user.id)
-  //     .then(res => {
-  //       //console.log(res.data.url)
-  //       // console.log(this)
-  //       this.setState({
-  //         awsImageUrl: res.data.url,
-  //       });
-  //       //console.log(this.state.awsImageUrl)
-  //     })
-  // }
+
+  getAwsImageUrl = () => {
+    API.getAwsImageUrl(this.props.location.state.user.id)
+      .then(res => {
+        //console.log(res.data.url)
+        // console.log(this)
+        this.setState({
+          awsImageUrl: res.data.url,
+        });
+        //console.log(this.state.awsImageUrl)
+      })
+  }
+
   // Get user's FAVORITES
   getFavorites = () => {
     API.getFavorites(this.props.location.state.user.id)
@@ -120,7 +122,7 @@ class Profile extends Component {
             postMessage: "No posts found."
           });
         } else {
-          console.log("posts",res.data)
+          //console.log("posts",res.data)
           this.setState({
             posts: res.data
           });

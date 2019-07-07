@@ -305,6 +305,7 @@ export default {
 
     // Gets the date & time of the latest notification in this user notification history
     isNewNotification: function (userId) {
+        //console.log(userId)
         return axios.get("api/users/" + userId + "/isNewnotification")
     },
 
