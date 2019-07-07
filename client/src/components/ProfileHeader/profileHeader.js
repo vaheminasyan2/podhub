@@ -54,6 +54,7 @@ class ProfileHeader extends Component {
             numFavs: this.props.numFavs,
             awsImageurl: this.props.user.awsImageUrl
         }, () => { this.getProfileHeader() });
+        console.log(this.state.user)
     }
 
     getProfileHeader = () => {
@@ -318,19 +319,25 @@ class ProfileHeader extends Component {
 
         API.awsImageUpload(this.props.user.id, formData, header)
             .then((res) => {
+                console.log("This is AWS image" + res.data.Location)
                 this.setState({
-                    awsImageurl: res.data.Location
-                });
-
-                API.updateUser(this.props.user.id, {
                     awsImageUrl: res.data.Location,
-                })
-                .then(() => {
-                    this.props.refreshUserData();
-                });
+                }, () => {
+                    let localUser = JSON.parse(localStorage.getItem("user"));
 
-                window.location.reload();
+                    if (this.state.user.googleId === localUser.googleId) {
+                        localUser.awsImageUrl = this.state.awsImageUrl;
+                        localStorage.setItem("user", JSON.stringify(localUser));
+                    }
+
+                    API.updateUser(this.props.user.id,
+                        {
+                            awsImageUrl: this.state.awsImageUrl
+                        });
+                    window.location.reload();
+                });
             })
+
             .catch(err => {
                 console.log(err);
             });
