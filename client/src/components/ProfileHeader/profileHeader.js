@@ -377,7 +377,10 @@ class ProfileHeader extends Component {
                         {/* PROFILE IMAGE */}
 
                         <img
-                            src={JSON.parse(localStorage.getItem("user")).awsImageUrl || this.props.user.awsImageUrl || this.state.awsImageUrl || this.props.user.profileImage}
+                            src={ JSON.parse(localStorage.getItem("user")).awsImageUrl || 
+                            this.props.user.awsImageUrl || 
+                            //this.state.awsImageUrl || 
+                            this.props.user.profileImage}
                             alt="User"
                             id="userMainProfileImage"
                             className={`rounded image-${this.props.theme}`}
