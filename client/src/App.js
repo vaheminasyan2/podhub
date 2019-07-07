@@ -109,7 +109,7 @@ class App extends Component {
     API.isNewNotification(this.state.user.id)
       .then(res => {
         if (res.data > 0) {
-          console.log(res.data)
+          //console.log(res.data)
           this.setNotificationAlertOn();
           if (id === "toast") {
             if (res.data === 1) {

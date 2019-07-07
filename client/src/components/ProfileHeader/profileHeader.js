@@ -54,7 +54,7 @@ class ProfileHeader extends Component {
             numFavs: this.props.numFavs,
             awsImageurl: this.props.user.awsImageUrl
         }, () => { this.getProfileHeader() });
-        console.log(this.state.user)
+        //console.log(this.state.user)
     }
 
     getProfileHeader = () => {
@@ -319,7 +319,7 @@ class ProfileHeader extends Component {
 
         API.awsImageUpload(this.props.user.id, formData, header)
             .then((res) => {
-                console.log("This is AWS image" + res.data.Location)
+                //console.log("This is AWS image" + res.data.Location)
                 this.setState({
                     awsImageUrl: res.data.Location,
                 }, () => {
