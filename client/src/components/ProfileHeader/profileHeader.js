@@ -323,12 +323,12 @@ class ProfileHeader extends Component {
                 this.setState({
                     awsImageUrl: res.data.Location,
                 }, () => {
-                    let localUser = JSON.parse(localStorage.getItem("user"));
+                    // let localUser = JSON.parse(localStorage.getItem("user"));
 
-                    if (this.state.user.googleId === localUser.googleId) {
-                        localUser.awsImageUrl = this.state.awsImageUrl;
-                        localStorage.setItem("user", JSON.stringify(localUser));
-                    }
+                    // if (this.state.user.googleId === localUser.googleId) {
+                    //     localUser.awsImageUrl = this.state.awsImageUrl;
+                    //     localStorage.setItem("user", JSON.stringify(localUser));
+                    // }
 
                     API.updateUser(this.props.user.id,
                         {
