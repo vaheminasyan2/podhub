@@ -323,12 +323,12 @@ class ProfileHeader extends Component {
                 this.setState({
                     awsImageUrl: res.data.Location,
                 }, () => {
-                    // let localUser = JSON.parse(localStorage.getItem("user"));
+                    let localUser = JSON.parse(localStorage.getItem("user"));
 
-                    // if (this.state.user.googleId === localUser.googleId) {
-                    //     localUser.awsImageUrl = this.state.awsImageUrl;
-                    //     localStorage.setItem("user", JSON.stringify(localUser));
-                    // }
+                    if (this.state.user.googleId === localUser.googleId) {
+                        localUser.awsImageUrl = this.state.awsImageUrl;
+                        localStorage.setItem("user", JSON.stringify(localUser));
+                    }
 
                     API.updateUser(this.props.user.id,
                         {
@@ -377,7 +377,7 @@ class ProfileHeader extends Component {
                         {/* PROFILE IMAGE */}
 
                         <img
-                            src={this.props.user.awsImageUrl || this.state.awsImageUrl || this.props.user.profileImage}
+                            src={JSON.parse(localStorage.getItem("user")).awsImageUrl || this.props.user.awsImageUrl || this.state.awsImageUrl || this.props.user.profileImage}
                             alt="User"
                             id="userMainProfileImage"
                             className={`rounded image-${this.props.theme}`}
