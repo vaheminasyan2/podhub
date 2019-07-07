@@ -33,6 +33,7 @@ class ProfileHeader extends Component {
             awsImageurl: null,
             showEditImgModal: false,
             showEditImgBtn: false,
+            defaultImage: "https://designdroide.com/images/abstract-user-icon-3.svg",
         }
     }
 
@@ -583,7 +584,7 @@ class ProfileHeader extends Component {
                                     <User
                                         userId={user.id}
                                         userName={user.name}
-                                        userImage={user.awsImageUrl || user.profileImage || user.image}
+                                        userImage={user.awsImageUrl || user.profileImage || user.image || this.state.defaultImage}
                                         handler={this.hideFollowersModal}
                                     />
                                 </div>
@@ -617,7 +618,7 @@ class ProfileHeader extends Component {
                                     <User
                                         userId={user.id}
                                         userName={user.name}
-                                        userImage={user.awsImageUrl || user.profileImage}
+                                        userImage={user.awsImageUrl || user.profileImage || user.image || this.state.defaultImage}
                                         handler={this.hideFollowersModal}
                                     />
                                 </div>
