@@ -34,7 +34,8 @@ class Profile extends Component {
       postMessage: "",
       favMessage: "",
       scrollLeft: 0,
-      // awsImageUrl: ""
+      // awsImageUrl: "",
+      defaultImage: "https://designdroide.com/images/abstract-user-icon-3.svg",
     };
   }
 
@@ -51,7 +52,7 @@ class Profile extends Component {
   // Update profile information if subject user changes
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.location.state.user.id !== this.props.location.state.user.id) {
-      this.getAwsImageUrl()
+//       this.getAwsImageUrl();
       this.getFavorites();
       this.getPostsOnlyByUser();
       this.setState({
@@ -374,8 +375,7 @@ class Profile extends Component {
                         key={post.id}
                         userId={post.postedBy}
                         userName={this.props.location.state.user.name}
-                        userImage={this.props.location.state.user.profileImage}
-                        awsImageUrl={this.props.location.state.user.awsImageUrl}
+                        userImage={post.userImage || this.state.defaultImage}
                         date={moment(post.createdAt).format("LLL")}
                         podcastId={post.podcastId}
                         podcastName={post.podcastName}

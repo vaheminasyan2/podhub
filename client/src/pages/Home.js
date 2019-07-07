@@ -24,7 +24,8 @@ class Home extends Component {
             user: null,
             scrollToPost: false,
             scrollToPostId: "",
-            uploadNewPost: false
+            uploadNewPost: false,
+            defaultImage: "https://designdroide.com/images/abstract-user-icon-3.svg",
         }
     }
 
@@ -84,7 +85,7 @@ class Home extends Component {
                 if (res.data.length === 0) {
                     message = "No posts found.";
                 }
-                console.log(res.data)
+                console.log("Posts", res.data)
                 this.setState({
                     message: message,
                     posts: res.data
@@ -175,8 +176,7 @@ class Home extends Component {
                                             key={post.id}
                                             userId={post.postedBy}
                                             userName={post.userName}
-                                            userImage={post.userImage}
-                                            // awsImageUrl={this.props.user.awsImageUrl}
+                                            userImage={post.userImage || this.state.defaultImage}
                                             date={moment(post.createdAt).format("LLL")}
                                             podcastId={post.podcastId}
                                             podcastName={post.podcastName}

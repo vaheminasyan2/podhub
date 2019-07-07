@@ -33,6 +33,7 @@ class ProfileHeader extends Component {
             awsImageurl: null,
             showEditImgModal: false,
             showEditImgBtn: false,
+            defaultImage: "https://designdroide.com/images/abstract-user-icon-3.svg",
         }
     }
 
@@ -83,7 +84,7 @@ class ProfileHeader extends Component {
             this.getNumFollowing();
         }
 
-        if (prevProps.user.awsImageUrl != this.props.user.awsImageUrl) {
+        if (prevProps.user.awsImageUrl !== this.props.user.awsImageUrl) {
             this.setState({
                 awsImageurl: this.props.awsImageUrl
             });
@@ -378,7 +379,7 @@ class ProfileHeader extends Component {
 
                         {/* EDIT PROFILE IMAGE BUTTON */}
 
-                        {this.state.showEditImgBtn ? (
+                        {this.state.showEditImgBtn && this.state.user.id === JSON.parse(localStorage.getItem("user")).id ? (
                             <div
                                 id="editImgBtn"
                                 onClick={this.showEditImgModal}
@@ -583,7 +584,7 @@ class ProfileHeader extends Component {
                                     <User
                                         userId={user.id}
                                         userName={user.name}
-                                        userImage={user.image}
+                                        userImage={user.awsImageUrl || user.profileImage || user.image || this.state.defaultImage}
                                         handler={this.hideFollowersModal}
                                     />
                                 </div>
@@ -617,7 +618,7 @@ class ProfileHeader extends Component {
                                     <User
                                         userId={user.id}
                                         userName={user.name}
-                                        userImage={user.profileImage}
+                                        userImage={user.awsImageUrl || user.profileImage || user.image || this.state.defaultImage}
                                         handler={this.hideFollowersModal}
                                     />
                                 </div>
