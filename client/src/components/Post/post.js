@@ -468,7 +468,7 @@ class Post extends Component {
                             className="btn btn-light btn-sm mb-2"
                             onClick={(event) => {
                                 event.preventDefault();
-                                if(this.state.currentComment.trim() !== "") {
+                                if (this.state.currentComment.trim() !== "") {
                                     this.addComment();
                                 }
                             }}

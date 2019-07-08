@@ -138,7 +138,7 @@ export default {
     // =====================================
 
     // Gets individual user's data
-    getUser: function(userId) {
+    getUser: function (userId) {
         return axios.get("/api/users/getUser/" + userId);
     },
 
