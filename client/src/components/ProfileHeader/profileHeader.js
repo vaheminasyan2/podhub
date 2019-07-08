@@ -5,6 +5,9 @@ import Modal from "react-responsive-modal";
 import User from "../User/user";
 import List from "../List/list";
 import API from "../../utils/API";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Zoom } from 'react-toastify';
 import "./profileHeader.css";
 
 class ProfileHeader extends Component {
@@ -30,7 +33,7 @@ class ProfileHeader extends Component {
             showFollowersModal: false,
             showFollowingModal: false,
             numFavs: 0,
-            awsImageurl: null,
+            awsImageUrl: null,
             showEditImgModal: false,
             showEditImgBtn: false,
             defaultImage: "https://designdroide.com/images/abstract-user-icon-3.svg",
@@ -52,7 +55,7 @@ class ProfileHeader extends Component {
             user: this.props.user,
             buttonTheme: buttonTheme,
             numFavs: this.props.numFavs,
-            awsImageurl: this.props.user.awsImageUrl
+            awsImageUrl: this.props.user.awsImageUrl
         }, () => { this.getProfileHeader() });
         //console.log(this.state.user)
     }
@@ -87,7 +90,7 @@ class ProfileHeader extends Component {
 
         if (prevProps.user.awsImageUrl !== this.props.user.awsImageUrl) {
             this.setState({
-                awsImageurl: this.props.awsImageUrl
+                awsImageUrl: this.props.awsImageUrl
             });
         }
     }
@@ -309,39 +312,53 @@ class ProfileHeader extends Component {
 
     submitFile = () => {
 
-        const formData = new FormData();
-        formData.append("file", this.state.file[0]);
-        let header = {
-            headers: {
-                "Content-Type": "multipart/form-data"
-            }
-        };
+        if (this.state.file) {
+            const formData = new FormData();
+            formData.append("file", this.state.file[0]);
 
-        API.awsImageUpload(this.props.user.id, formData, header)
-            .then((res) => {
-                //console.log("This is AWS image" + res.data.Location)
-                this.setState({
-                    awsImageUrl: res.data.Location,
-                }, () => {
-                    let localUser = JSON.parse(localStorage.getItem("user"));
+            let header = {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            };
 
-                    if (this.state.user.googleId === localUser.googleId) {
-                        localUser.awsImageUrl = this.state.awsImageUrl;
-                        localStorage.setItem("user", JSON.stringify(localUser));
-                    }
-
-                    API.updateUser(this.props.user.id,
-                        {
-                            awsImageUrl: this.state.awsImageUrl
-                        });
-                    window.location.reload();
-                });
+            API.awsImageUpload(this.props.user.id, formData, header)
+                .then((res) => {
+                    //console.log("This is AWS image" + res.data.Location)
+                    this.setState({
+                        awsImageUrl: res.data.Location,
+                    }, () => {
+                        this.updateUser(res.data.Location)
+                    })
+                })
+            this.hideEditImgModal();
+        }
+        else {
+            toast("Please choose a file", {
+                className: 'toast-container',
+                bodyClassName: "toast-test"
             })
+        }
+    }
+
+    updateUser = imageUrl => {
+        let localUser = JSON.parse(localStorage.getItem("user"));
+
+        if (this.state.user.googleId === localUser.googleId) {
+            localUser.awsImageUrl = imageUrl;
+            localStorage.setItem("user", JSON.stringify(localUser));
+        }
+        API.updateUser(this.props.user.id,
+            {
+                awsImageUrl: imageUrl
+            }, window.location.reload())
 
             .catch(err => {
                 console.log(err);
             });
-    };
+
+
+    }
 
     showEditImgBtn = () => {
         this.setState({
@@ -370,17 +387,31 @@ class ProfileHeader extends Component {
     render() {
 
         return (
+
+
             <span>
+                <ToastContainer
+                    autoClose={2000}
+                    closeButton={false}
+                    transition={Zoom}
+                    hideProgressBar={true}
+                />
                 <div className={`row userProfile rounded bg-${this.props.theme}`}>
                     <div className="col-3">
 
                         {/* PROFILE IMAGE */}
 
                         <img
-                            src={ JSON.parse(localStorage.getItem("user")).awsImageUrl || 
-                            this.props.user.awsImageUrl || 
-                            //this.state.awsImageUrl || 
-                            this.props.user.profileImage}
+                            src={this.props.user.id === JSON.parse(localStorage.getItem("user")).id ?
+
+                                JSON.parse(localStorage.getItem("user")).awsImageUrl ||
+                                this.props.user.awsImageUrl ||
+                                this.props.user.profileImage :
+                                (
+                                    this.props.user.profileImage
+                                )
+
+                            }
                             alt="User"
                             id="userMainProfileImage"
                             className={`rounded image-${this.props.theme}`}
@@ -421,7 +452,7 @@ class ProfileHeader extends Component {
                                 onClick={(event) => {
                                     event.preventDefault();
                                     this.submitFile();
-                                    this.hideEditImgModal();
+
                                 }}
                             >
                                 Upload

@@ -80,14 +80,14 @@ class AWSController {
       Key: `podhubBucket/IMG${req.params.userId}.png`
       // Key: `podhubBucket/1.png`
     };
-    s3.getObject(params, function(err, data) {
+    s3.getObject(params, function (err, data) {
       if (data) {
         console.log(data);
         // let type = data.ContentType
         // console.log("type", type);
         let url = `https://podhub-user-images.s3.amazonaws.com/podhubBucket/IMG${
           req.params.userId
-        }.png`;
+          }.png`;
         res.json({ url: url });
       } else {
         res.json({ url: data });
