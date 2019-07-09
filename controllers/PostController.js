@@ -12,7 +12,7 @@ class PostController {
    * @param {*} res
    */
   create(req, res) {
-    console.log("posts", req.body);
+    //console.log("posts", req.body);
     db.post.create(req.body).then(function(post) {
       res.json(post);
       server.notification.notifyShare(req.body.postedBy, req.body.podcastId);
@@ -78,7 +78,7 @@ class PostController {
    * @param {*} res
    */
   getPostByUser(req, res) {
-    console.log(req.params.id);
+    //console.log(req.params.id);
     var postPromises = [];
     var postId2Likes = {};
     var postId2Comments = {};
@@ -128,8 +128,8 @@ class PostController {
             post.userImage = postId2UserImages[post.id];
             // post.dataValues.awsImageUrl = postId2awsImageUrl[post.id];
           });
-          console.log("----postPromises-----")
-          console.log(postPromises)
+          //console.log("----postPromises-----")
+          //console.log(postPromises)
           res.json(postPromises);
         })
         .catch(function(error) {
@@ -144,12 +144,12 @@ class PostController {
    * @param {*} res
    */
   getUsersLikedPost(req, res) {
-    console.log(req.params.id);
+    //console.log(req.params.id);
     db.postLike
       .findAll({ where: { postId: req.params.id } })
       .then(dbPostLike => {
         let userIds = dbPostLike.map(like => like.userId);
-        console.log(userIds);
+        //console.log(userIds);
         if(userIds.length){
         db.user
           .findAll({

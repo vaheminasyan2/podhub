@@ -118,8 +118,8 @@ class CommentController {
             // comment.dataValues.awsImageUrl = commentuserawsImageUrl[comment.id];
           });
           
-          console.log("********* sortedComments *******")
-          console.log(sortedComments)
+          //console.log("********* sortedComments *******")
+          //console.log(sortedComments)
           res.json(sortedComments);
         })
       }).catch(function(error) {
@@ -135,12 +135,12 @@ class CommentController {
    * @param {*} res
    */
   getUsersLikedComment(req, res) {
-    console.log(req.params.id);
+    //console.log(req.params.id);
     db.commentLike
       .findAll({ where: { commentId: req.params.id } })
       .then(dbCommentLike => {
         let userIds = dbCommentLike.map(like => like.userId);
-        console.log(userIds);
+        //console.log(userIds);
         if(userIds.length){
         db.user
           .findAll({

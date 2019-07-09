@@ -17,7 +17,7 @@ router.get("/:id", (req, res) => {
  * @param {*} res
  */
 router.post("/", (req, res) => {
-    console.log("[Route] User : GET", req.query.id_token);
+    //console.log("[Route] User : GET", req.query.id_token);
     controller.getOrCreate(req, res);
 });
 
@@ -45,7 +45,7 @@ router.get("/getProfileHeader/:googleId", (req, res) => {
  * @param {*} res
  */
 router.get("/isFollowing/:id", (req, res) => {
-    console.log(req.params)
+    //console.log(req.params)
     controller.findIsFollowing(req, res)
 });
 
@@ -63,7 +63,7 @@ router.get("/followedBy/:id", (req, res) => controller.findFollowedBy(req, res))
  * @param {*} res
  */
 router.get("/isFollowingUsers/:id", (req, res) => {
-    console.log(req.params)
+    //console.log(req.params)
     controller.findIsFollowingUser(req, res)
 });
 
