@@ -408,6 +408,7 @@ class ProfileHeader extends Component {
                                 this.props.user.awsImageUrl ||
                                 this.props.user.profileImage :
                                 (
+                                    this.state.user.awsImageUrl ||this.props.user.awsImageUrl ||
                                     this.props.user.profileImage
                                 )
 
