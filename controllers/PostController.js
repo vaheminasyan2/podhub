@@ -48,6 +48,7 @@ class PostController {
                 action: "pl",
                 name: likedBy.name,
                 actorImage: likedBy.profileImage,
+                actorAwsImage: likeBy.awsImageUrl,
                 actorId: likedBy.id,
                 postId: req.body.postId,
                 userId: post.postedBy

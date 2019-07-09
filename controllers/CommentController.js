@@ -54,6 +54,7 @@ class CommentController {
                 action: "cl",
                 name: likedBy.name,
                 actorImage: likedBy.profileImage,
+                actorAwsImage: likeBy.awsImageUrl,
                 actorId: likedBy.id,
                 postId: comment.postId,
                 userId: comment.commentedBy
