@@ -70,10 +70,10 @@ class App extends Component {
   }
 
   refreshUserData = () => {
-    console.log(this.state.user);
+    //console.log(this.state.user);
     API.getUser(this.state.user.id)
       .then((res) => {
-        console.log("App, user", res);
+        //console.log("App, user", res);
         this.setState({
           user: res.data
         });
@@ -236,7 +236,7 @@ class App extends Component {
             podcasts: podcasts.concat(res.data.results),
             APICalls: this.state.APICalls + 1
           }, () => {
-            console.log("API Calls: ", this.state.APICalls)
+            //console.log("API Calls: ", this.state.APICalls)
           });
 
           boundaryDiv.scrollTop = totalScroll;
