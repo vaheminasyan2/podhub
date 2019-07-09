@@ -152,7 +152,7 @@ class Home extends Component {
 
 
     render() {
-        
+
         return (
             <div className={`container bg-${this.props.theme} rounded`} id="post-container" >
                 {
