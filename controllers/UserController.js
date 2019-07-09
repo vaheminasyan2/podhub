@@ -40,6 +40,7 @@ class UserController {
             action: "f",
             name: by.name,
             actorImage: by.profileImage,
+            actorAwsImage: by.awsImageUrl,
             actorId: by.id,
             userId: req.body.isFollowing
           }

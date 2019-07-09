@@ -43,6 +43,7 @@ class Notification extends Component {
                     this.setState({
                         notifications: res.data
                     });
+                    console.log(res.data)
                 }
             })
             .catch(error => {
@@ -69,6 +70,7 @@ class Notification extends Component {
                                             userId={notification.actorId}
                                             userName={notification.name}
                                             userImage={notification.actorImage}
+                                            awsImageUrl={notification.actorAwsImage}
                                             postId={notification.postId}
                                             date={notification.updatedAt}
                                             type={notification.action}
