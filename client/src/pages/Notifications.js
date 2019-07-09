@@ -43,7 +43,7 @@ class Notification extends Component {
                     this.setState({
                         notifications: res.data
                     });
-                    console.log(res.data)
+                    //console.log(res.data)
                 }
             })
             .catch(error => {
