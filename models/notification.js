@@ -17,7 +17,12 @@ module.exports = function(sequelize, DataTypes) {
 
       actorImage: {
         type: DataTypes.STRING
+      },
+
+      actorAwsImage: {
+        type: DataTypes.STRING
       }
+
     });
   
     return notification;
