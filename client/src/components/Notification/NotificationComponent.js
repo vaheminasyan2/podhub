@@ -17,12 +17,13 @@ class NotificationComponent extends Component {
                                 user: {
                                     id: this.props.userId,
                                     name: this.props.userName,
-                                    profileImage: this.props.userImage
+                                    profileImage: this.props.userImage,
+                                    awsImageUrl: this.props.awsImageUrl
                                 }
                             },
                         }}
                     >
-                        <img id="profileImage" src={this.props.userImage} alt="User" />
+                        <img id="profileImage" src={this.props.awsImageUrl || this.props.profileImage} alt="User" />
                     </Link>
                 </div>
 
@@ -38,7 +39,8 @@ class NotificationComponent extends Component {
                                             user: {
                                                 id: this.props.userId,
                                                 name: this.props.userName,
-                                                profileImage: this.props.userImage
+                                                profileImage: this.props.userImage,
+                                                awsImageUrl: this.props.awsImageUrl
                                             }
                                         },
                                     }}
