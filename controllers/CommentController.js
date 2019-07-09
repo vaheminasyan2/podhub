@@ -151,7 +151,7 @@ class CommentController {
             }
           })
           .then(dbUser => {
-            let userDetails = dbUser.map(user=>{ return {id: user.id, name: user.name, image: user.profileImage}})
+            let userDetails = dbUser.map(user=>{ return {id: user.id, name: user.name, profileImage: user.profileImage, awsImageUrl: user.awsImageUrl}})
             res.json(userDetails);
           });
         }

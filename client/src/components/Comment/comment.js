@@ -165,7 +165,8 @@ class Comment extends Component {
                                                     user: {
                                                         id: user.id,
                                                         name: user.name,
-                                                        profileImage: user.image,
+                                                        profileImage: user.profileImage,
+                                                        awsImageUrl: user.awsImageUrl
                                                     }
                                                 }
                                             }}
@@ -174,7 +175,7 @@ class Comment extends Component {
                                         >
                                             <div className="col-3 m-0">
                                                 <img
-                                                    src={user.image}
+                                                    src={user.awsImageUrl || user.profileImage}
                                                     alt="User Icon"
                                                     className="userIconPopup rounded border-white"
                                                 />
