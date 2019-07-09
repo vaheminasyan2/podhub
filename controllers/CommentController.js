@@ -24,6 +24,7 @@ class CommentController {
                 action: "c",
                 name: user.name,
                 actorImage: user.profileImage,
+                actorAwsImage: user.awsImageUrl,
                 actorId: user.id,
                 postId: req.body.postId,
                 userId: post.postedBy
