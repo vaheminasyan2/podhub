@@ -43,7 +43,7 @@ class FavoriteController {
    * @param {*} res
    */
   findAll(req, res) {
-    console.log(req.params.id)
+    //console.log(req.params.id)
     db.favorite.findAll({where: {userId: req.params.id}})
       .then(dbfavorite => {
         const sortedFavorite = dbfavorite.sort(function(a, b) {

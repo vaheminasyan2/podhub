@@ -58,7 +58,7 @@ class UserController {
    * @param {*} res
    */
   unFollow(req, res){
-    console.log(req.body);
+    //console.log(req.body);
     db.follow.destroy({ 
       where: req.body
     }).then(following => res.json(following));
@@ -71,7 +71,7 @@ class UserController {
    * @param {*} res
    */
   findIsFollowing(req, res) {
-    console.log(req.params.id);
+    //console.log(req.params.id);
 
     db.follow
       .findAll({
@@ -86,7 +86,7 @@ class UserController {
    * @param {*} res
    */
   findFollowedBy(req, res) {
-    console.log(req.params.id);
+    //console.log(req.params.id);
     db.follow
       .findAll({ where: { isFollowing: req.params.id } })
       .then(dbfollow => res.json([{ count: dbfollow.length }]));
@@ -99,7 +99,7 @@ class UserController {
    * @param {*} res
    */
   findIsFollowingUser(req, res) {
-    console.log(req.params.id);
+    //console.log(req.params.id);
 
     db.follow
       .findAll({
@@ -133,7 +133,7 @@ class UserController {
    * @param {*} res
    */
   findFollowedByUser(req, res) {
-    console.log(req.params.id);
+    //console.log(req.params.id);
     db.follow
       .findAll({
         where: { isFollowing: req.params.id }
@@ -314,7 +314,7 @@ class UserController {
               postId2Comments[post.id] = comments.length;
             });
             userPromise.then(function(user){
-              console.log(user)
+             //console.log(user)
               postId2UserNames[post.id] = user.name;
               if(!user.awsImageUrl){
                 postId2UserImages[post.id] = user.profileImage;
@@ -332,8 +332,8 @@ class UserController {
               post.userName = postId2UserNames[post.id];
               post.userImage = postId2UserImages[post.id];
             });
-            console.log("****usercontroller****")
-            console.log(sortedPosts)
+            //console.log("****usercontroller****")
+            //console.log(sortedPosts)
             res.json(sortedPosts);
           })
         }).catch(function(error) {

@@ -61,7 +61,7 @@ class AWSController {
    * @param {*} res
    */
   awsGetImageUrl(req, res) {
-    console.log("test url");
+    //console.log("test url");
     // configure the keys for accessing AWS
     AWS.config.update({
       accessKeyId: process.env.AWS_ACCESS_KEY,
@@ -82,7 +82,7 @@ class AWSController {
     };
     s3.getObject(params, function (err, data) {
       if (data) {
-        console.log(data);
+        //console.log(data);
         // let type = data.ContentType
         // console.log("type", type);
         let url = `https://podhub-user-images.s3.amazonaws.com/podhubBucket/IMG${
