@@ -373,7 +373,7 @@ class UserController {
       function(user){
       db.notification.findAndCountAll({
         where: {
-          $and: [
+          [Op.and]: [
             {userId: user.id}, 
             {createdAt: {
               [Op.gte]: user.notificationsSeen}
