@@ -56,6 +56,8 @@ class Notification extends Component {
     }
 
     render() {
+        //console.log(this.state.notifications)
+
         return (
             <div className={`container bg-${this.props.theme} rounded`} id="post-container">
                 <Row>

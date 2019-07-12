@@ -5,6 +5,8 @@ import "./notification.css";
 
 class NotificationComponent extends Component {
     render() {
+        //console.log(this.props.userImage)
+        //console.log(this.props.awsImageUrl)
 
         return (
             <div className="row" id={`notification-${this.props.theme}`}>
@@ -23,7 +25,7 @@ class NotificationComponent extends Component {
                             },
                         }}
                     >
-                        <img id="profileImage" src={this.props.awsImageUrl || this.props.profileImage} alt="User" />
+                        <img id="profileImage" src={this.props.awsImageUrl || this.props.userImage} alt="User" />
                     </Link>
                 </div>
 
