@@ -41,7 +41,7 @@ Social media site for Podcast listeners. **Check it out** [**here**](https://pod
 - Contributors: 
   - Curtis & Vahe: Front-end, React, user authentication
   - Meri & Lia: Back-end, Node, MySql
-  - Carson & Joseph: UI desgin, APIs
+  - Carson & Joseph: UI design, APIs, Audio-layer
 
 ## GitHub best practices and guidance:
 1.  Checkout the master branch using `git checkout master`
