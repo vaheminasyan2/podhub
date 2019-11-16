@@ -1,0 +1,7 @@
+{
+    "appService.zipIgnorePattern": [
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/f9928d24-2134-4bf7-b3d6-dcd65809de1a/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/podhub",
+    "appService.deploySubpath": ""
+}
