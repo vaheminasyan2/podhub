@@ -39,7 +39,7 @@
     "react-responsive-modal": "^3.6.0",
     "react-router": "4.3.1",
     "react-router-dom": "4.3.1",
-    "sequelize": ">=5.15.1",
+    "sequelize": "^5.15.1",
     "sequelize-cli": "^5.4.0",
     "socket.io": "^2.2.0"
   }
