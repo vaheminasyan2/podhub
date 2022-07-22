@@ -27,7 +27,7 @@
     "bootstrap": "^4.3.1",
     "dotenv": "^6.2.0",
     "express": "^4.16.3",
-    "file-type": "^11.1.0",
+    "file-type": "^16.5.4",
     "if-env": "^1.0.4",
     "moment": "^2.24.0",
     "multiparty": "^4.2.1",
